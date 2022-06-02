@@ -3,8 +3,7 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-pool:
-  vmImage: mac-mini-pool
+pool: mac-mini-pool
 
 steps:
 - task: StagePreJobTask@0
