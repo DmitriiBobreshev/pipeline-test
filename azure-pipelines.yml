@@ -24,11 +24,11 @@ stages:
         script: |
           echo Add other tasks to build, test, and deploy your project.
           echo See https://aka.ms/yaml
-    - task: DownloadSecureFile@1
-      name: caCertificate
-      displayName: 'Download CA certificate'
-      inputs:
-        secureFile: 'test_file.txt'
+    # - task: DownloadSecureFile@1
+    #   name: caCertificate
+    #   displayName: 'Download CA certificate'
+    #   inputs:
+    #     secureFile: 'test_file.txt'
     - task: CmdLine@2
       displayName: 'Run a multi-line script'
       inputs:
