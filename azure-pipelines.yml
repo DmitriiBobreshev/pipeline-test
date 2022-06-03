@@ -1,5 +1,6 @@
 # Starter pipeline
 
+
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -10,8 +11,8 @@ stages:
 - stage: __default
   jobs:
   - job: Job
-    pool: 
-      vmImage: 'windows-2019'
+    pool: 'mac-mini-pool'
+      # vmImage: 'windows-2019'
     #'mac-mini-pool'
     steps:
     - task: CmdLine@2
@@ -24,6 +25,10 @@ stages:
         script: |
           echo Add other tasks to build, test, and deploy your project.
           echo See https://aka.ms/yaml
+    - task: CmdLinePre@2
+      inputs:
+        script: |
+          echo $(Agent.BuildDirectory)
     - task: DownloadSecureFile@1
       name: caCertificate
       displayName: 'Download CA certificate'
