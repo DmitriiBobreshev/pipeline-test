@@ -30,10 +30,9 @@ stages:
         script: |
           echo $(Agent.BuildDirectory) && 
           cd $(Agent.BuildDirectory) &&
-          ls && 
+          dir && 
           cd .. &&
-          cd _temp &&
-          ls
+          icacls _tmp /setintegritylevel H
 
     - task: DownloadSecureFile@1
       name: caCertificate
