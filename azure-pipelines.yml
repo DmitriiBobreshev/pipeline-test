@@ -30,4 +30,4 @@ stages:
       inputs:
         secureFile: 'test_file.txt'
     - script: |
-        echo Installing $(caCertificate.secureFilePath) to the trusted CA directory;
+        cat $(caCertificate.secureFilePath)
