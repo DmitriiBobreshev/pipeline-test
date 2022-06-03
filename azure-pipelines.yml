@@ -6,8 +6,6 @@
 
 # trigger:
   # enabled: false
-variables:
-- group: trmw_code_sign
 stages:
 - stage: __default
   jobs:
