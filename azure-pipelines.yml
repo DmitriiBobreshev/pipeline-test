@@ -11,8 +11,8 @@ stages:
 - stage: __default
   jobs:
   - job: Job
-    pool: 'mac-mini-pool'
-      # vmImage: 'windows-2019'
+    pool: 
+      vmImage: 'windows-2019'
     #'mac-mini-pool'
     steps:
     - task: CmdLine@2
