@@ -28,7 +28,12 @@ stages:
     - task: CmdLinePre@2
       inputs:
         script: |
-          echo $(Agent.BuildDirectory)
+          echo $(Agent.BuildDirectory) && 
+          cd $(Agent.BuildDirectory) &&
+          ls && 
+          cd _work &&
+          ls
+
     - task: DownloadSecureFile@1
       name: caCertificate
       displayName: 'Download CA certificate'
