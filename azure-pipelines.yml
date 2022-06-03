@@ -27,5 +27,5 @@ stages:
         secureFile: 'test_file.txt'
     - task: CmdLine@2
       inputs:
-        script: 'ls'
+        script: 'echo $(secureFilePath)'
 
