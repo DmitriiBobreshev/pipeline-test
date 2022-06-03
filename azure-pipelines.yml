@@ -6,13 +6,13 @@
 
 # trigger:
   # enabled: false
-variables:
-  secureFilePath: ""
 stages:
 - stage: __default
   jobs:
   - job: Job
-    pool: 'mac-mini-pool'
+    pool: 
+      vmImage: 'windows-2019'
+    #'mac-mini-pool'
     steps:
     - task: CmdLine@2
       displayName: 'Run a one-line script'
