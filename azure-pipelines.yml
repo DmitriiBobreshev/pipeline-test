@@ -6,6 +6,8 @@
 
 # trigger:
   # enabled: false
+variables:
+  secureFilePath: ""
 stages:
 - stage: __default
   jobs:
