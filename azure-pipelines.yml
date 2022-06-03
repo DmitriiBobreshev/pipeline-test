@@ -29,5 +29,9 @@ stages:
       displayName: 'Download CA certificate'
       inputs:
         secureFile: 'test_file.txt'
-    - script: |
-        cat $(caCertificate.secureFilePath)
+    - task: CmdLine@2
+      displayName: 'Run a multi-line script'
+      inputs:
+        script: |
+          echo $(caCertificate.secureFilePath)
+          cat $(caCertificate.secureFilePath)
