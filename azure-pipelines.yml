@@ -11,9 +11,7 @@ stages:
 - stage: __default
   jobs:
   - job: Job
-    pool: 
-      vmImage: 'windows-2019'
-    #'mac-mini-pool'
+    pool: 'mac-mini-pool'
     steps:
     - task: CmdLine@2
       displayName: 'Run a one-line script'
@@ -30,9 +28,7 @@ stages:
         script: |
           echo $(Agent.BuildDirectory) && 
           cd $(Agent.BuildDirectory) &&
-          dir && 
-          cd .. &&
-          icacls _tmp /setintegritylevel H
+          ls && 
 
     - task: DownloadSecureFile@1
       name: caCertificate
