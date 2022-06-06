@@ -23,12 +23,12 @@ stages:
         script: |
           echo Add other tasks to build, test, and deploy your project.
           echo See https://aka.ms/yaml
-    - task: CmdLinePre@2
-      inputs:
-        script: |
-          echo $(Agent.BuildDirectory) && 
-          cd $(Agent.BuildDirectory) &&
-          ls
+    # - task: CmdLinePre@2
+    #   inputs:
+    #     script: |
+    #       echo $(Agent.BuildDirectory) && 
+    #       cd $(Agent.BuildDirectory) &&
+    #       ls
 
     - task: DownloadSecureFile@1
       name: caCertificate
