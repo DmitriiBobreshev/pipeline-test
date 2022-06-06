@@ -28,7 +28,7 @@ stages:
         script: |
           echo $(Agent.BuildDirectory) && 
           cd $(Agent.BuildDirectory) &&
-          ls && 
+          ls
 
     - task: DownloadSecureFile@1
       name: caCertificate
