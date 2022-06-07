@@ -8,9 +8,28 @@ parameters:
   - name: branchOptions
     displayName: Source branch options
     type: object
-    default:
-      - refs/heads/main
-      - refs/heads/test
+    default: refs/heads/main
+    values:
+      - asd
+      - dasdasd
+      - asgsadfasf
+      - asdfasdf 
+      - asd
+      - dasdasd
+      - asgsadfasf
+      - asdfasdf 
+      - asd
+      - dasdasd
+      - asgsadfasf
+      - asdfasdf 
+      - asd
+      - dasdasd
+      - asgsadfasf
+      - asdfasdf 
+      - asd
+      - dasdasd
+      - asgsadfasf
+      - asdfasdf 
 
 # trigger:
   # enabled: false
@@ -22,7 +41,7 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - ${{ each value in parameters.branchOptions }}:
+    - ${{ each value in parameters.values }}:
       - task: NodeTool@0
         displayName: Set node version to 12.x
         inputs:
