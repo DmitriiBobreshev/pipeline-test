@@ -4,32 +4,40 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
-parameters:
-  - name: branchOptions
-    displayName: Source branch options
-    type: object
-    default: refs/heads/main
-    values:
-      - asd
-      - dasdasd
-      - asgsadfasf
-      - asdfasdf 
-      - asd
-      - dasdasd
-      - asgsadfasf
-      - asdfasdf 
-      - asd
-      - dasdasd
-      - asgsadfasf
-      - asdfasdf 
-      - asd
-      - dasdasd
-      - asgsadfasf
-      - asdfasdf 
-      - asd
-      - dasdasd
-      - asgsadfasf
-      - asdfasdf 
+variables:
+  myyamlvar: 1000
+  asddsa: 123
+  tmyyamlvar: 1000
+  rasddsa: 123
+  emyyamlvar: 1000
+  wasddsa: 123
+  qmyyamlvar: 1000
+  lasddsa: 123
+  kmyyamlvar: 1000
+  jasddsa: 123
+  hmyyamlvar: 1000
+  sgasddsa: 123
+  fmyyamlvar: 1000
+  dasddsa: 123
+  smyyamlvar: 1000
+  aasddsa: 123
+  yemyyamlvar: 1000
+  gasddsa: 123
+  ftmyyamlvar: 1000
+  grasddsa: 123
+  femyyamlvar: 1000
+  dwasddsa: 123
+  sqmyyamlvar: 1000
+  alasddsa: 123
+  qkmyyamlvar: 1000
+  mjasddsa: 123
+  nhmyyamlvar: 1000
+  bgasddsa: 123
+  vfmyyamlvar: 1000
+  cdasddsa: 123
+  xsmyyamlvar: 1000
+  zaasddsa: 123
+  
 
 # trigger:
   # enabled: false
@@ -41,7 +49,7 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - ${{ each value in parameters.values }}:
+    - ${{ each var in variables }}:
       - task: NodeTool@0
         displayName: Set node version to 12.x
         inputs:
