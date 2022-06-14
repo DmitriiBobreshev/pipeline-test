@@ -49,4 +49,4 @@ octokit.repos.getLatestRelease({
     tl.setResult(tl.TaskResult.Failed, e.message);
 });
 
-tl.setResult(tl.TaskResult.Failed, e.message);
+tl.setResult(tl.TaskResult.Failed,'123123123');
