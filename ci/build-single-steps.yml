@@ -23,11 +23,9 @@ steps:
 - script: |
     cd ci
     cd verifyMinAgentDemands
-    dir
     npm install
-    dir
     node index.js
-  displayName: install node Verify all min agent demands are valid
+  displayName: Install packages for verify all min agent demands are valid
 
 - script: |
     cd ci
