@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "8LkBjpjaOoV6qWdB/uQ/RWNNklMv/y3y2Hq5/fFWbIwVHqlTB7vVlCWFplxGYwe5ApUzvC7+a+/lFCQv6RIa5g==",
+  "success": true,
+  "projectFilePath": "/home/ms-agent/Agent/_work/2/s/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3/SimpleConsoleAppCore3.csproj",
+  "expectedPackageFiles": [
+    "/home/ms-agent/.nuget/packages/microsoft.netcore.app.ref/3.1.0/microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "/home/ms-agent/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.10/microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "/home/ms-agent/.nuget/packages/microsoft.netcore.app.host.linux-x64/3.1.25/microsoft.netcore.app.host.linux-x64.3.1.25.nupkg.sha512"
+  ],
+  "logs": []
+}
