@@ -1,0 +1,39 @@
+jobs:
+# - job: 'Win2016'
+#   displayName: Windows VS2017
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'vs2017-win2016'
+#   steps:
+#     - template: src/msbuild/msbuild-steps.yml
+#       parameters:
+#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
+
+# - job: 'Win2019'
+#   displayName: Windows VS2019
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'windows-2019'
+#   steps:
+#     - template: src/msbuild/msbuild-steps.yml
+#       parameters:
+#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+
+# - job: 'Win2022'
+#   displayName: Windows VS2022
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'windows-2022'
+#   steps:
+#     - template: src/msbuild/msbuild-steps.yml
+#       parameters:
+#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+
+- job: 'Debian'
+  pool:
+    name: 'win-11-pool'
+    agent: 'debian-agent'
+  steps:
+    - template: src/msbuild/msbuild-steps.yml
+      parameters:
+        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
