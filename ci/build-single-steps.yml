@@ -27,6 +27,13 @@ steps:
     npm install
     dir
     node index.js
+  displayName: install node Verify all min agent demands are valid
+
+- script: |
+    cd ci
+    cd verifyMinAgentDemands
+    dir
+    node index.js
   displayName: Verify all min agent demands are valid
 
 # Build
