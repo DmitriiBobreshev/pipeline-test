@@ -1,3 +1,7 @@
+variables:
+ - name: task
+   value: MSBuildV1
+
 jobs:
 
 # All tasks on Windows
