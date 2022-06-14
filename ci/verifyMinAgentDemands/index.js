@@ -32,7 +32,7 @@ octokit.repos.getLatestRelease({
         }
 
         // Load the task.json
-        var taskJsonPath = path.join(taskPath, 'task.json');А
+        var taskJsonPath = path.join(taskPath, 'task.json');
         if (fs.existsSync(taskJsonPath)) {
             var taskDef = fileToJson(taskJsonPath);
             if (taskDef.minimumAgentVersion && 
