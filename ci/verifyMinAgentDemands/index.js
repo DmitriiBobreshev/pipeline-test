@@ -17,6 +17,7 @@ octokit.repos.getLatestRelease({
     repo: "azure-pipelines-agent"
 })
 .then(({data}) => {
+    console.log(`then then`);
     // Find the version of the agent that is fully rolled out
     var agentVersion = data.name.substr(1);
     console.log(`Latest version of the Agent that's fully rolled out is ${agentVersion}.`);
@@ -48,4 +49,4 @@ octokit.repos.getLatestRelease({
     tl.setResult(tl.TaskResult.Failed, e.message);
 });
 
-console.log(`then then`);
+tl.setResult(tl.TaskResult.Failed, e.message);
