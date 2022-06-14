@@ -29,6 +29,7 @@ jobs:
 - job: buildSingle
   displayName: Build single task
   condition: and(succeeded(), variables.task)
-  pool: win-11-pool
+  pool: 
+    vmImage: windows-latest
   steps:
   - template: ci/build-single-steps.yml
