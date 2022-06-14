@@ -1,39 +1,30 @@
 jobs:
-# - job: 'Win2016'
-#   displayName: Windows VS2017
-#   pool:
-#     name: 'Azure Pipelines'
-#     vmImage: 'vs2017-win2016'
-#   steps:
-#     - template: src/msbuild/msbuild-steps.yml
-#       parameters:
-#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
 
-# - job: 'Win2019'
-#   displayName: Windows VS2019
-#   pool:
-#     name: 'Azure Pipelines'
-#     vmImage: 'windows-2019'
-#   steps:
-#     - template: src/msbuild/msbuild-steps.yml
-#       parameters:
-#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-
-# - job: 'Win2022'
-#   displayName: Windows VS2022
-#   pool:
-#     name: 'Azure Pipelines'
-#     vmImage: 'windows-2022'
-#   steps:
-#     - template: src/msbuild/msbuild-steps.yml
-#       parameters:
-#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-
-- job: 'Debian'
-  pool:
-    name: 'win-11-pool'
-    agent: 'debian-agent'
+# All tasks on Windows
+- job: build_all_windows
+  displayName: Build all tasks (Windows)
+  condition: and(succeeded(), not(variables.task), eq(variables.os, 'Windows_NT'))
+  pool: win-11-pool
+  timeoutInMinutes: 120
   steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+  - template: ci/build-all-steps.yml
+    parameters:
+      os: Windows_NT
+
+# All tasks on Linux
+- job: build_all_linux
+  displayName: Build all tasks (Linux)
+  condition: and(succeeded(), not(variables.task), eq(variables.os, 'Linux'))
+  pool:  win-11-pool
+  steps:
+  - template: ci/build-all-steps.yml
+    parameters:
+      os: Linux
+
+# Single task
+- job: buildSingle
+  displayName: Build single task
+  condition: and(succeeded(), variables.task)
+  pool: win-11-pool
+  steps:
+  - template: ci/build-single-steps.yml

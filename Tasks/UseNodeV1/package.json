@@ -1,0 +1,38 @@
+{
+  "name": "usenode",
+  "version": "1.0.0",
+  "description": "Use Node Eco-System",
+  "main": "usenode.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Microsoft/azure-pipelines-tasks.git"
+  },
+  "keywords": [
+    "Azure",
+    "Pipelines",
+    "Tasks",
+    "Node"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Microsoft/azure-pipelines-tasks/issues"
+  },
+  "homepage": "https://github.com/Microsoft/azure-pipelines-tasks#readme",
+  "dependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^10.17.0",
+    "@types/q": "^1.5.1",
+    "azure-pipelines-task-lib": "^3.0.6-preview.0",
+    "azure-pipelines-tasks-utility-common": "^3.0.0-preview.0",
+    "azure-pipelines-tool-lib": "^1.0.2",
+    "azure-pipelines-tasks-packaging-common": "2.1.0",
+    "typed-rest-client": "^1.8.4"
+  },
+  "devDependencies": {
+    "typescript": "4.0.2"
+  }
+}

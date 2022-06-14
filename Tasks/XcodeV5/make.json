@@ -1,0 +1,10 @@
+{
+    "rm": [
+        {
+            "items": [
+                "node_modules/azure-pipelines-tasks-ios-signing-common/node_modules/vsts-task-lib"
+            ],
+            "options": "-Rf"
+        }
+    ]
+}
