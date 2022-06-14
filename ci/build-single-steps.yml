@@ -23,7 +23,9 @@ steps:
 - script: |
     cd ci
     cd verifyMinAgentDemands
+    dir
     npm install
+    dir
     node index.js
   displayName: Verify all min agent demands are valid
 
@@ -37,7 +39,7 @@ steps:
   displayName: Stage tasks individually into the package directory
 
 # Test
-- script: node make.js test
-  displayName: Run tests
-- script: node make.js testLegacy --task "$(task)"
-  displayName: Legacy tests with node 6
+# - script: node make.js test
+#   displayName: Run tests
+# - script: node make.js testLegacy --task "$(task)"
+#   displayName: Legacy tests with node 6
