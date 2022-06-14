@@ -3,17 +3,17 @@ parameters:
     type: "string"
 
 steps:
-# - task: NuGetToolInstaller@1
-#   inputs:
-#     checkLatest: true
-#   retryCountOnTaskFailure: 3
+- task: NuGetToolInstaller@1
+  inputs:
+    checkLatest: true
+  retryCountOnTaskFailure: 3
 
-# - task: NuGetCommand@2
-#   inputs:
-#     command: 'restore'
-#     restoreSolution: ${{ parameters.solutionPath }} 
-#     feedsToUse: 'select'
-#   retryCountOnTaskFailure: 3
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: ${{ parameters.solutionPath }} 
+    feedsToUse: 'select'
+  retryCountOnTaskFailure: 3
 
 - task: MSBuild@1
   displayName: 'Build simple app'
