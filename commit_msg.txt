@@ -1,0 +1,4 @@
+bump azure-pipelines-task-lib version of MSBuildHelper package(#3054)
+
+-- Bump azure-pipelines-task-lib to version 3.3.1 because of shelljs 0.3.0 vulnerability
+-- Switch package to use nodejs 10

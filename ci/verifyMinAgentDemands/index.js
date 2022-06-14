@@ -35,7 +35,8 @@ octokit.repos.getLatestRelease({
         var taskJsonPath = path.join(taskPath, 'task.json');
         if (fs.existsSync(taskJsonPath)) {
             var taskDef = fileToJson(taskJsonPath);
-            
+            tl.warning(taskDef.minimumAgentVersion)
+            tl.warning(agentVersion)
             if (taskDef.minimumAgentVersion && 
                 semver.gt(taskDef.minimumAgentVersion, agentVersion))
             {
