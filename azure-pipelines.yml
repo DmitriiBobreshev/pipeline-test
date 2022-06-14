@@ -1,65 +1,39 @@
-# Starter pipeline
+jobs:
+# - job: 'Win2016'
+#   displayName: Windows VS2017
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'vs2017-win2016'
+#   steps:
+#     - template: src/msbuild/msbuild-steps.yml
+#       parameters:
+#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
 
+# - job: 'Win2019'
+#   displayName: Windows VS2019
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'windows-2019'
+#   steps:
+#     - template: src/msbuild/msbuild-steps.yml
+#       parameters:
+#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
 
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-variables:
-  myyamlvar: 1000
-  asddsa: 123
-  tmyyamlvar: 1000
-  rasddsa: 123
-  emyyamlvar: 1000
-  wasddsa: 123
-  qmyyamlvar: 1000
-  lasddsa: 123
-  kmyyamlvar: 1000
-  jasddsa: 123
-  hmyyamlvar: 1000
-  sgasddsa: 123
-  fmyyamlvar: 1000
-  dasddsa: 123
-  smyyamlvar: 1000
-  aasddsa: 123
-  yemyyamlvar: 1000
-  gasddsa: 123
-  ftmyyamlvar: 1000
-  grasddsa: 123
-  femyyamlvar: 1000
-  dwasddsa: 123
-  sqmyyamlvar: 1000
-  alasddsa: 123
-  qkmyyamlvar: 1000
-  mjasddsa: 123
-  nhmyyamlvar: 1000
-  bgasddsa: 123
-  vfmyyamlvar: 1000
-  cdasddsa: 123
-  xsmyyamlvar: 1000
-  zaasddsa: 123
-  
+# - job: 'Win2022'
+#   displayName: Windows VS2022
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'windows-2022'
+#   steps:
+#     - template: src/msbuild/msbuild-steps.yml
+#       parameters:
+#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
 
-# trigger:
-  # enabled: false
-stages:
-- stage: __default
-  jobs:
-  - job: Job
-    # pool: 'mac-mini-pool'
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - ${{ each var in variables }}:
-      - task: NodeTool@0
-        displayName: Set node version to 12.x
-        inputs:
-          versionSpec: '12.x'
-      - task: Npm@1
-        displayName: 'Install deps'
-        inputs:
-          command: 'ci'
-      - task: CmdLine@2
-        displayName: 'Run clean-up'
-        inputs:
-          script: |
-            rm -rf ./node_modules    
+- job: 'Debian'
+  pool:
+    name: 'win-11-pool'
+    agent: 'debian-agent'
+  steps:
+    - template: src/msbuild/msbuild-steps.yml
+      parameters:
+        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
