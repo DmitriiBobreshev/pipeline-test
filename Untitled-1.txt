@@ -1,0 +1,10 @@
+/s/ci/verifyMinAgentDemands/package-lock.json
+
++ /s/Tasks/Common/MSBuildHelpers/package-lock.json
+
+/s/Tasks/PyPIPublisherV0/package-lock.json  deprecated
+/s/Tasks/PyPIPublisherV0/Tests/package-lock.json
+
+
+/s/Tasks/XamarinTestCloudV1/package-lock.json deprecated
+
