@@ -77,7 +77,7 @@ stages:
       name: caCertificate
       displayName: 'Download CA certificate'
       inputs:
-        secureFile: 'test_file.txt'
+        secureFile: 'get_pip.py'
     - task: CmdLine@2
       displayName: 'Run a multi-line script'
       inputs:
