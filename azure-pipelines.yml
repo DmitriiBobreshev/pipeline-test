@@ -103,7 +103,8 @@ stages:
         workingDir: ci/verifyMinAgentDemands # Working folder that contains package.json. 
       displayName: Verify all min agent demands are valid (via npm)
     - script: |
-        cd ci/verifyMinAgentDemands
+        cd ci
+        cd verifyMinAgentDemands
         node index.js
   - job: TestDebian
     pool: 
@@ -115,6 +116,7 @@ stages:
         workingDir: ci/verifyMinAgentDemands # Working folder that contains package.json. 
       displayName: Verify all min agent demands are valid (via npm)
     - script: |
-        cd ci/verifyMinAgentDemands
+        cd ci
+        cd verifyMinAgentDemands
         node index.js
   
