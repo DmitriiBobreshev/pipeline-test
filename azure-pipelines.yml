@@ -93,7 +93,7 @@
 stages:
 - stage: __default
   jobs:
-  - job: Job
+  - job: Test windows
     pool: 
       name: win-11-pool
       vmImage: win-11-ms
@@ -112,7 +112,7 @@ stages:
     - script: |
         cd ci/verifyMinAgentDemands
         node index.js
-  - job: Job
+  - job: Test Debian
     pool: 
       name: win-11-pool
       vmImage: debian-agent
