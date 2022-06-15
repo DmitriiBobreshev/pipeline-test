@@ -94,7 +94,9 @@ stages:
 - stage: __default
   jobs:
   - job: Job
-    pool:  win-11-pool
+    pool: 
+      name: win-11-pool
+      vmImage: win-11-ms
     steps:
     - script: |
         cd ci
@@ -110,3 +112,23 @@ stages:
     - script: |
         cd ci/verifyMinAgentDemands
         node index.js
+  - job: Job
+    pool: 
+      name: win-11-pool
+      vmImage: debian-agent
+    steps:
+    - script: |
+        cd ci
+        cd verifyMinAgentDemands
+        call npm install
+        node index.js
+      displayName: Verify all min agent demands are valid
+    - task: Npm@1
+      inputs:
+        command: install # Required. Command. Default: install
+        workingDir: ci/verifyMinAgentDemands # Working folder that contains package.json. 
+      displayName: Verify all min agent demands are valid (via npm)
+    - script: |
+        cd ci/verifyMinAgentDemands
+        node index.js
+  
