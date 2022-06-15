@@ -122,6 +122,7 @@ PROCESS {
             Write-Verbose "Unable to determine exit code"
             Write-VstsTaskError -Message (Get-VstsLocString -Key 'PS_UnableToDetermineExitCode')
         } else {
+            Write-Verbose "Exit code: $($LASTEXITCODE)"
             if ($LASTEXITCODE -ne 0) {
                 $failed = $true
                 Write-VstsTaskError -Message (Get-VstsLocString -Key 'PS_ExitCode' -ArgumentList $LASTEXITCODE)
