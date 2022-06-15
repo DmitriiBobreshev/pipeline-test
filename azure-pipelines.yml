@@ -83,3 +83,9 @@ stages:
       inputs:
         script: |
           echo $(caCertificate.secureFilePath)
+    - script: |
+        cd ci
+        cd verifyMinAgentDemands
+        npm install
+        node index.js
+      displayName: Verify all min agent demands are valid
