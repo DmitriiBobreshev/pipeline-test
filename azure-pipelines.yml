@@ -95,8 +95,7 @@ stages:
   jobs:
   - job: TestWindows
     pool: 
-      name: win-11-pool
-      agent: 'win-11-agent'
+      vmImage: windows-2022
     steps:
     - script: |
         cd ci
@@ -114,8 +113,7 @@ stages:
         node index.js
   - job: TestDebian
     pool: 
-      name: win-11-pool
-      agent: 'debian-agent'
+      vmImage: ubuntu-18.04
     steps:
     - script: |
         cd ci
