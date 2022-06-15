@@ -101,11 +101,11 @@ stages:
       inputs:
         command: install # Required. Command. Default: install
         workingDir: ci/verifyMinAgentDemands # Working folder that contains package.json. 
+      displayName: npm install min agent demands 
+
+    - script: node ./ci/verifyMinAgentDemands/index.js
       displayName: Verify all min agent demands are valid (via npm)
-    - script: |
-        cd ci
-        cd verifyMinAgentDemands
-        node index.js
+
   - job: TestDebian
     pool: 
       vmImage: ubuntu-18.04
@@ -114,9 +114,8 @@ stages:
       inputs:
         command: install # Required. Command. Default: install
         workingDir: ci/verifyMinAgentDemands # Working folder that contains package.json. 
+      displayName: npm install min agent demands
+       
+    - script: node ./ci/verifyMinAgentDemands/index.js
       displayName: Verify all min agent demands are valid (via npm)
-    - script: |
-        cd ci
-        cd verifyMinAgentDemands
-        node index.js
   
