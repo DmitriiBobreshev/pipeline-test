@@ -96,6 +96,7 @@ stages:
   - job: TestWindows
     pool: 
       name: win-11-pool
+      agent: 'win-11-agent'
     steps:
     - script: |
         cd ci
@@ -114,6 +115,7 @@ stages:
   - job: TestDebian
     pool: 
       name: win-11-pool
+      agent: 'debian-agent'
     steps:
     - script: |
         cd ci
