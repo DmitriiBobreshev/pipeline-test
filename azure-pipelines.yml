@@ -111,4 +111,6 @@ stages:
         command: install # Required. Command. Default: install
         workingDir: ci/verifyMinAgentDemands # Working folder that contains package.json. 
       displayName: Verify all min agent demands are valid (via npm)
-    - script: node index.js
+    - script: |
+        cd ci/verifyMinAgentDemands
+        node index.js

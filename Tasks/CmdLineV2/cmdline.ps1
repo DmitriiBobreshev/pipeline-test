@@ -48,7 +48,9 @@ PROCESS {
             $filePath,
             $contents.ToString(),
             $fileEncoding)
-
+            
+        Write-Host $contents.ToString()
+        
         # Prepare the external command values.
         $cmdPath = $env:ComSpec
         Assert-VstsPath -LiteralPath $cmdPath -PathType Leaf
