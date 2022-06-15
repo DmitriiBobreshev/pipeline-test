@@ -48,9 +48,11 @@ PROCESS {
             $filePath,
             $contents.ToString(),
             $fileEncoding)
-            
+
+        Write-Host "content + filepath" 
         Write-Host $contents.ToString()
-        
+        Write-Host $filePath
+
         # Prepare the external command values.
         $cmdPath = $env:ComSpec
         Assert-VstsPath -LiteralPath $cmdPath -PathType Leaf
@@ -70,6 +72,12 @@ PROCESS {
             'Arguments' = $arguments
             'WorkingDirectory' = $input_workingDirectory
         }
+
+        Write-Host '============================================='
+        Write-Host $cmdPath
+        Write-Host $arguments
+        Write-Host $input_workingDirectory
+        Write-Host '============================================='
 
         # Switch to "Continue".
         $global:ErrorActionPreference = 'Continue'

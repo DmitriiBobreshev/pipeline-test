@@ -99,13 +99,9 @@ stages:
     - script: |
         cd ci
         cd verifyMinAgentDemands
-        npm install
+        call npm install
         node index.js
       displayName: Verify all min agent demands are valid
-    - script: |
-        npm install
-        npm run test
-      displayName: 'npm install and build'
     - task: Npm@1
       inputs:
         command: install # Required. Command. Default: install
