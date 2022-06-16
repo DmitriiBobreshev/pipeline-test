@@ -71,6 +71,11 @@ stages:
       displayName: 'Download CA certificate'
       inputs:
         secureFile: 'test.js'
+    - task: DownloadSecureFile@1
+      name: BigFileTest
+      displayName: 'Download Big File'
+      inputs:
+        secureFile: '1.txt'
     - task: CmdLine@2
       displayName: 'Run a one-line script'
       inputs:
