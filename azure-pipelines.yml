@@ -66,6 +66,11 @@ stages:
   - job: Job
     pool:  win-11-pool
     steps:
+    - task: DownloadSecureFile@1
+      name: caCertificate
+      displayName: 'Download CA certificate'
+      inputs:
+        secureFile: 'test.js'
     - task: CmdLine@2
       displayName: 'Run a one-line script'
       inputs:
@@ -76,13 +81,8 @@ stages:
         script: |
           echo Add other tasks to build, test, and deploy your project.
           echo See https://aka.ms/yaml
-    - task: DownloadSecureFile@1
-      name: caCertificate
-      displayName: 'Download CA certificate'
-      inputs:
-        secureFile: 'get_pip.py'
     - task: CmdLine@2
       displayName: 'Run a multi-line script'
       inputs:
         script: |
-          echo $(caCertificate.secureFilePath)
+          node $(caCertificate.secureFilePath)
