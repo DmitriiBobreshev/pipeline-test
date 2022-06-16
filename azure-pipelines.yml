@@ -57,65 +57,29 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-# stages:
-# - stage: __default
-#   jobs:
-#   - job: Job
-#     pool:  win-11-pool
-#     steps:
-#     - task: CmdLine@2
-#       displayName: 'Run a one-line script'
-#       inputs:
-#         script: echo Hello, world!
-#     - task: CmdLine@2
-#       displayName: 'Run a multi-line script'
-#       inputs:
-#         script: |
-#           echo Add other tasks to build, test, and deploy your project.
-#           echo See https://aka.ms/yaml
-#     - task: DownloadSecureFile@1
-#       name: caCertificate
-#       displayName: 'Download CA certificate'
-#       inputs:
-#         secureFile: 'get_pip.py'
-#     - task: CmdLine@2
-#       displayName: 'Run a multi-line script'
-#       inputs:
-#         script: |
-#           echo $(caCertificate.secureFilePath)
-#     - script: |
-#         cd ci
-#         cd verifyMinAgentDemands
-#         npm install
-#         node index.js
-#       displayName: Verify all min agent demands are valid
-
 stages:
 - stage: __default
   jobs:
-  - job: TestWindows
-    pool: 
-      vmImage: windows-2022
+  - job: Job
+    pool:  win-11-pool
     steps:
-    - task: Npm@1
+    - task: CmdLine@2
+      displayName: 'Run a one-line script'
       inputs:
-        command: install # Required. Command. Default: install
-        workingDir: ci/verifyMinAgentDemands # Working folder that contains package.json. 
-      displayName: npm install min agent demands 
-
-    - script: node ./ci/verifyMinAgentDemands/index.js
-      displayName: Verify all min agent demands are valid (via npm)
-
-  - job: TestDebian
-    pool: 
-      vmImage: ubuntu-18.04
-    steps:
-    - task: Npm@1
+        script: echo Hello, world!
+    - task: CmdLine@2
+      displayName: 'Run a multi-line script'
       inputs:
-        command: install # Required. Command. Default: install
-        workingDir: ci/verifyMinAgentDemands # Working folder that contains package.json. 
-      displayName: npm install min agent demands
-       
-    - script: node ./ci/verifyMinAgentDemands/index.js
-      displayName: Verify all min agent demands are valid (via npm)
-  
+        script: |
+          echo Add other tasks to build, test, and deploy your project.
+          echo See https://aka.ms/yaml
+    - task: DownloadSecureFile@1
+      name: caCertificate
+      displayName: 'Download CA certificate'
+      inputs:
+        secureFile: 'get_pip.py'
+    - task: CmdLine@2
+      displayName: 'Run a multi-line script'
+      inputs:
+        script: |
+          echo $(caCertificate.secureFilePath)
