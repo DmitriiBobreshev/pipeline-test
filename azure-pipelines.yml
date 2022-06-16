@@ -57,6 +57,9 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+variables:
+  NODE_OPTIONS: --max_old_space_size=32
+
 stages:
 - stage: __default
   jobs:
