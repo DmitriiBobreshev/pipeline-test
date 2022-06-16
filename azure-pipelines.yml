@@ -58,7 +58,7 @@
 # https://aka.ms/yaml
 
 variables:
-  NODE_OPTIONS: --max_old_space_size=128
+  NODE_OPTIONS: --max_old_space_size=125
 
 stages:
 - stage: __default
