@@ -86,11 +86,11 @@ stages:
         script: |
           echo Add other tasks to build, test, and deploy your project.
           echo See https://aka.ms/yaml
-    - task: CmdLine@2
-      displayName: 'Run a multi-line script'
-      inputs:
-        script: |
-          node $(caCertificate.secureFilePath)
+    # - task: CmdLine@2
+    #   displayName: 'Run a multi-line script'
+    #   inputs:
+    #     script: |
+    #       node $(caCertificate.secureFilePath)
     - task: CmdLine@2
       displayName: 'Check NodeJs HeapSize'
       inputs:
