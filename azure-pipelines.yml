@@ -99,11 +99,13 @@ stages:
       inputs:
         versionSpec: 'v14.17.1'
       displayName: 'Install Node.js v14.17.1'
-    - task: Npm@1
-      displayName: Install npm 7.21.1
-      inputs:
-        command: 'custom'
-        customCommand: 'install --global --force npm@7.21.1'
+    # - task: Npm@1
+    #   displayName: Install npm 7.21.1
+    #   inputs:
+    #     command: 'custom'
+    #     customCommand: 'install --global --force npm@7.21.1'
+    - script: npm i -g npm@7.21.1 --force
+      displayName: Use npm version 7.21.1
     - task: CmdLine@2
       displayName: 'Check NodeJs HeapSize(MB)'
       inputs:
