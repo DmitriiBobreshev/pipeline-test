@@ -8,7 +8,21 @@
 
 /s/Tasks/XamarinTestCloudV1/package-lock.json deprecated
 
-созвон с денисом
+созвон с денисом +
 написать ответ и отправить
 пинг мартин о пр
 анйти новую тасочку
+
+Hi team, yesterday i mostly was working on "Exit code" issue, 
+installed the same version of the agent, created a test pipeline 
+and googled a lot about this error code and what is it mean,
+as a result, it was possible to put forward two versions, first one 
+that the customer doesn't have enough disk space, which is probably wrong
+And the second one that the customer doesn't have enough RAM memory for process, that seems more perspective,
+so now i wanna ask customer check do they have NODE_OPTIONS variable such as --max_old_space_size
+and provide him some script to check how large his
+nodejs memory heap, also i want to ask him to check is other nodejs tasks running correctly. 
+Also today's morning Denis found that we have similar PR about MSBuild task so we decided to call after sync to discuss it.
+So today i'm going to write some questions to customer about "Exit code" issue and get approve of it from Alexander
+,call to denis 
+and after that i'll take another task
