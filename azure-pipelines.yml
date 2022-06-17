@@ -95,14 +95,15 @@ stages:
     #   displayName: Use node 8
     #   inputs:
     #     versionSpec: "8.x"
-    - script: mkdir test
+    - script: type null > test.txt
       displayName: 'Try to run commund under node10'
 
-    - task: ArchiveFiles@2
+    - task: CopyFiles@2
       inputs:
-        rootFolderOrFile: 'testFolder'
-        archiveType: zip
+        Contents: test.txt
+        TargetFolder: 'testFolder'
       displayName: 'Try to run commund under node10'
+    - script: dir
     - task: NodeTool@0
       inputs:
         versionSpec: 'v14.17.1'
