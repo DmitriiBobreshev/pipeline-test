@@ -91,8 +91,12 @@ stages:
     #   inputs:
     #     script: |
     #       node $(caCertificate.secureFilePath)
+    - task: NodeTool@0
+      displayName: Use node 8
+      inputs:
+        versionSpec: "8.x"
     - task: CmdLine@2
-      displayName: 'Check NodeJs HeapSize'
+      displayName: 'Check NodeJs HeapSize(MB)'
       inputs:
         script: |
           node -v
