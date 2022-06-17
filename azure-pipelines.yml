@@ -95,8 +95,8 @@ stages:
     #   displayName: Use node 8
     #   inputs:
     #     versionSpec: "8.x"
-    - script: type null > test.txt
-      displayName: 'Try to run commund under node10'
+    - script: echo null > test.txt
+      displayName: 'Creating file'
 
     - task: CopyFiles@2
       inputs:
