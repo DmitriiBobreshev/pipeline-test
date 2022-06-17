@@ -91,13 +91,24 @@ stages:
     #   inputs:
     #     script: |
     #       node $(caCertificate.secureFilePath)
+    # - task: NodeTool@0
+    #   displayName: Use node 8
+    #   inputs:
+    #     versionSpec: "8.x"
     - task: NodeTool@0
-      displayName: Use node 8
       inputs:
-        versionSpec: "8.x"
+        versionSpec: 'v14.17.1'
+      displayName: 'Install Node.js v14.17.1'
+    - task: Npm@1
+      displayName: Install npm 7.21.1
+      inputs:
+        command: 'custom'
+        customCommand: 'install --global --force npm@7.21.1'
     - task: CmdLine@2
       displayName: 'Check NodeJs HeapSize(MB)'
       inputs:
         script: |
+          npm -v
           node -v
           node -e "console.log(require('v8').getHeapStatistics().total_available_size / 1024 / 1024)"
+  
