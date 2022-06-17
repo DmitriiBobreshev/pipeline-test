@@ -13,16 +13,19 @@
 пинг мартин о пр
 анйти новую тасочку
 
-Hi team, yesterday i mostly was working on "Exit code" issue, 
-installed the same version of the agent, created a test pipeline 
-and googled a lot about this error code and what is it mean,
-as a result, it was possible to put forward two versions, first one 
-that the customer doesn't have enough disk space, which is probably wrong
-And the second one that the customer doesn't have enough RAM memory for process, that seems more perspective,
-so now i wanna ask customer check do they have NODE_OPTIONS variable such as --max_old_space_size
-and provide him some script to check how large his
-nodejs memory heap, also i want to ask him to check is other nodejs tasks running correctly. 
-Also today's morning Denis found that we have similar PR about MSBuild task so we decided to call after sync to discuss it.
-So today i'm going to write some questions to customer about "Exit code" issue and get approve of it from Alexander
-,call to denis 
-and after that i'll take another task
+Hello @adurangalvis and thank you for the detailed answer.
+As I can see, you have all permissions to _tml folder and probably not with that.
+To be sure that isn't a problem with the file system, could you please check is enough disk space for the agent.
+Also the other side, it might be a RAM problem, so could you please make sure that you don't have any NODE_OPTIONS variable such as --max_old_space_size 
+which possibly can affect on nodejs process, you can check it, for example by this task:
+- task: CmdLine@2
+  displayName: 'Check NodeJs HeapSize(MB)'
+  inputs:
+    script: |
+      node -v
+      node -e "console.log(require('v8').getHeapStatistics().total_available_size / 1024 / 1024)"
+and, to be sure, that is a problem with node, could you please other Task which using node10, such as NodeTool, for example, like this:
+- task: NodeTool@0
+  inputs:
+    versionSpec: 'v14.17.1'
+  displayName: 'Install Node.js v14.17.1'
