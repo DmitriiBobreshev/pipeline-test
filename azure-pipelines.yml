@@ -109,12 +109,12 @@ stages:
     #   inputs:
     #     versionSpec: 'v14.17.1'
     #   displayName: 'Install Node.js v14.17.1'
-
+    
     # Use node 8, npm 5
-    - task: NodeTool@0
-      displayName: Use node 8
-      inputs:
-        versionSpec: "8.x"
+    # - task: NodeTool@0
+    #   displayName: Use node 8
+    #   inputs:
+    #     versionSpec: "8.x"
     - script: 'npm -v'
       displayName: Show npm version Before
 
