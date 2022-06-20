@@ -107,12 +107,6 @@ stages:
     - script: dir
     - task: NodeTool@0
       inputs:
-        versionSpec: 'v8.17.0'
-      displayName: 'Install Node.js v8.17.0'
-    - script: 'npm -v'
-      displayName: Show npm Node.js v8.17.0
-    - task: NodeTool@0
-      inputs:
         versionSpec: 'v14.17.1'
       displayName: 'Install Node.js v14.17.1'
     - script: 'npm -v'
