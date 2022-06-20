@@ -117,6 +117,9 @@ stages:
     - powershell: |
         npm bin -g | pushd
         ls
-        
+        del npm, npm.cmd, npx, npx.cmd
+        move node_modules\npm node_modules\npm2
+        call node node_modules\npm2\bin\npm-cli.js i npm@7.21.1 -g
+        rmdir /S /Q node_modules\npm2
         popd
       displayName: Use npm version 7.21.1
