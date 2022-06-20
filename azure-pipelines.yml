@@ -114,5 +114,8 @@ stages:
     #   inputs:
     #     command: 'custom'
     #     customCommand: 'install --global --force npm@7.21.1'
-    - script: npm i -g npm@7.21.1 --force
-      displayName: Use npm version 7.21.1
+    - task: Npm@1
+      displayName: Install npm 7.21.1
+      inputs:
+        command: 'custom'
+        customCommand: 'install --global --force npm@7.21.1'
