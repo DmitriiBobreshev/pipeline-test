@@ -122,3 +122,6 @@ stages:
         rmdir node_modules\npm2
         popd
       displayName: Use npm version 7.21.1
+    - script: 'npm -v'
+      displayName: Show npm version
+      
