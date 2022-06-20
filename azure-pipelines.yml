@@ -109,6 +109,8 @@ stages:
       inputs:
         versionSpec: 'v14.17.1'
       displayName: 'Install Node.js v14.17.1'
+    - script: 'node -v'
+      displayName: Show node version
     - script: 'npm -v'
       displayName: Show npm version Before
     # - task: Npm@1
