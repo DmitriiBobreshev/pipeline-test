@@ -107,23 +107,29 @@ stages:
     - script: dir
     - task: NodeTool@0
       inputs:
+        versionSpec: 'v8.17.0'
+      displayName: 'Install Node.js v8.17.0'
+    - script: 'npm -v'
+      displayName: Show npm Node.js v8.17.0
+    - task: NodeTool@0
+      inputs:
         versionSpec: 'v14.17.1'
       displayName: 'Install Node.js v14.17.1'
     - script: 'npm -v'
       displayName: Show npm version Before
-    # - task: Npm@1
-    #   displayName: Install npm 7.21.1
-    #   inputs:
-    #     command: 'custom'
-    #     customCommand: 'install --global --force npm@7.21.1'
-    - powershell: |
-        npm bin -g | pushd
-        del npm, npm.cmd, npx, npx.cmd
-        move node_modules\npm node_modules\npm2
-        node node_modules\npm2\bin\npm-cli.js i npm@7.21.1 -g
-        Remove-Item 'node_modules\npm2' -Force -Recurse
-        popd
-      displayName: Use npm version 7.21.1
+    - task: Npm@1
+      displayName: Install npm 7.21.1
+      inputs:
+        command: 'custom'
+        customCommand: 'install --global --force npm@7.21.1'
+    # - powershell: |
+    #     npm bin -g | pushd
+    #     del npm, npm.cmd, npx, npx.cmd
+    #     move node_modules\npm node_modules\npm2
+    #     node node_modules\npm2\bin\npm-cli.js i npm@7.21.1 -g
+    #     Remove-Item 'node_modules\npm2' -Force -Recurse
+    #     popd
+    #   displayName: Use npm version 7.21.1
     - script: 'npm -v'
       displayName: Show npm version After
       
