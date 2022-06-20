@@ -112,7 +112,8 @@ stages:
     
     - script: 'npm -v'
       displayName: Show npm version Before
-
+    - script: 'echo %PATH%'
+      displayName: Show PATH
     - task: Npm@1
       displayName: Install npm 7.21.1
       inputs:
