@@ -104,7 +104,6 @@ stages:
         Contents: test.txt
         TargetFolder: 'testFolder'
       displayName: 'Try to run commund under node10'
-    - script: dir
     - task: NodeTool@0
       inputs:
         versionSpec: 'v14.17.1'
