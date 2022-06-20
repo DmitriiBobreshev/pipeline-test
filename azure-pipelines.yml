@@ -111,11 +111,11 @@ stages:
       displayName: 'Install Node.js v14.17.1'
     - script: 'npm -v'
       displayName: Show npm version Before
-    - task: Npm@1
-      displayName: Install npm 7.21.1
-      inputs:
-        command: 'custom'
-        customCommand: 'install --global --force npm@7.21.1'
+    # - task: Npm@1
+    #   displayName: Install npm 7.21.1
+    #   inputs:
+    #     command: 'custom'
+    #     customCommand: 'install --global --force npm@7.21.1'
     # - powershell: |
     #     npm bin -g | pushd
     #     del npm, npm.cmd, npx, npx.cmd
