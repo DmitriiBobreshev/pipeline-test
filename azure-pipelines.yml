@@ -111,7 +111,7 @@ stages:
     - task: SSH@0
       displayName: 'Run shell inline on remote machine'
       inputs:
-        sshEndpoint: root@68.183.10.251
+        sshEndpoint: sshtest
         runOptions: inline
         inline: |
           #!/bin/bash
