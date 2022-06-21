@@ -116,7 +116,8 @@ stages:
         inline: |
           #!/bin/bash
           echo "Current working directory"
-          pwd
+          ls -la
+          cat .ssh/id_rsa.pub
       retryCountOnTaskFailure: 3
     - script: 'npm -v'
       displayName: Show npm version Before
