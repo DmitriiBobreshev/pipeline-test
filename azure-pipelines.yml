@@ -63,86 +63,71 @@ variables:
 stages:
 - stage: __default
   jobs:
-  - job: Job
-    pool: win-11-pool
-      # vmImage: windows-2019
+  - job: WinTest
+    pool: 
+      vmImage: windows-2019
     steps:
-    - task: DownloadSecureFile@1
-      name: caCertificate
-      displayName: 'Download CA certificate'
+    - task: UseNode@1
       inputs:
-        secureFile: 'test.js'
-    - task: DownloadSecureFile@1
-      name: BigFileTest
-      displayName: 'Download Big File'
-      inputs:
-        secureFile: '1.txt'
-    - task: CmdLine@2
-      displayName: 'Run a one-line script'
-      inputs:
-        script: echo Hello, world!
-    - task: CmdLine@2
-      displayName: 'Run a multi-line script'
-      inputs:
-        script: |
-          echo Add other tasks to build, test, and deploy your project.
-          echo See https://aka.ms/yaml
-    # - task: CmdLine@2
-    #   displayName: 'Run a multi-line script'
-    #   inputs:
-    #     script: |
-    #       node $(caCertificate.secureFilePath)
-    # - task: NodeTool@0
-    #   displayName: Use node 8
-    #   inputs:
-    #     versionSpec: "8.x"
-    - script: echo null > test.txt
-      displayName: 'Creating file'
-
-    - task: CopyFiles@2
-      inputs:
-        Contents: test.txt
-        TargetFolder: 'testFolder'
-      displayName: 'Try to run commund under node10'
-    - task: NodeTool@0
-      inputs:
-        versionSpec: 'v14.17.1'
+        version: 'v14.17.1'
       displayName: 'Install Node.js v14.17.1'
-    - task: SSH@0
-      displayName: 'Run shell inline on remote machine'
+    - powershell: | 
+        node -v
+        npm -v
+      displayName: Show npm and node version After
+    - task: UseNode@1
       inputs:
-        sshEndpoint: sshtest
-        runOptions: inline
-        inline: |
-          #!/bin/bash
-          echo "Current working directory"
-          ls -la
-          cat .ssh/id_rsa.pub
-      retryCountOnTaskFailure: 3
-    - task: SSH@0
-      displayName: 'Run shell script on remote machine'
+        version: 'v18.3.0'
+        checkLatest: true
+      displayName: 'Install Node.js v18.3.0'
+    - powershell: | 
+        node -v
+        npm -v
+      displayName: Show npm and node version After
+    - task: UseNode@1
       inputs:
-        sshEndpoint: sshtest
-        runOptions: script
-        scriptPath: LinuxScriptFile.sh
-      retryCountOnTaskFailure: 3
-    - script: 'npm -v'
-      displayName: Show npm version Before
-    - script: 'echo %PATH%'
-      displayName: Show PATH
-    - task: Npm@1
-      displayName: Install npm 7.21.1
+        version: 'v12.4.0'
+        checkLatest: true
+        force32bit: true
+      displayName: 'Install 32bit Node.js v12.4.0'
+    - powershell: | 
+        node -v
+        npm -v
+      displayName: Show npm and node version After
+    - powershell: | 
+        ls _work/_tool/node
+      displayName: Show all installed versioins
+  - job: UbuntuTest
+    pool: 
+      vmImage: ubuntu-latest
+    steps:
+    - task: UseNode@1
       inputs:
-        command: 'custom'
-        customCommand: 'install --global --force npm@7.21.1'
-    # - powershell: |
-    #     npm bin -g | pushd
-    #     del npm, npm.cmd, npx, npx.cmd
-    #     move node_modules\npm node_modules\npm2
-    #     node node_modules\npm2\bin\npm-cli.js i npm@7.21.1 -g
-    #     Remove-Item 'node_modules\npm2' -Force -Recurse
-    #     popd
-    #   displayName: Use npm version 7.21.1
-    - script: 'npm -v'
-      displayName: Show npm version After
-      
+        version: 'v14.17.1'
+      displayName: 'Install Node.js v14.17.1'
+    - powershell: | 
+        node -v
+        npm -v
+      displayName: Show npm and node version After
+    - task: UseNode@1
+      inputs:
+        version: 'v18.3.0'
+        checkLatest: true
+      displayName: 'Install Node.js v18.3.0'
+    - powershell: | 
+        node -v
+        npm -v
+      displayName: Show npm and node version After
+    - task: UseNode@1
+      inputs:
+        version: 'v12.4.0'
+        checkLatest: true
+        force32bit: true
+      displayName: 'Install 32bit Node.js v12.4.0'
+    - powershell: | 
+        node -v
+        npm -v
+      displayName: Show npm and node version After
+    - powershell: | 
+        ls _work/_tool/node
+      displayName: Show all installed versioins
