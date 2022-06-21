@@ -40,9 +40,6 @@ function getSevenZipLocation(): string {
 
 function findFiles(): string[] {
     if (includeRootFolder) {
-        if(!fs.existsSync(rootFolderOrFile)) {
-            tl.warning(`No file or directory found - ${rootFolderOrFile}`)
-        }
         return [path.basename(rootFolderOrFile)];
     } else {
         var fullPaths: string[] = tl.ls('-A', [rootFolderOrFile]);

@@ -67,11 +67,10 @@ async function main(): Promise<void> {
         // Getting NuGet
         tl.debug('Getting NuGet');
         try {
-            nuGetPath = tl.getVariable(nuGetGetter.NUGET_EXE_TOOL_PATH_ENV_VAR);
+            nuGetPath = process.env[nuGetGetter.NUGET_EXE_TOOL_PATH_ENV_VAR];
             if (!nuGetPath){
                 nuGetPath = await nuGetGetter.getNuGet("4.0.0");
             }
-            tl.debug(`Using NuGet in path: ${nuGetPath}`);
         }
         catch (error) {
             tl.setResult(tl.TaskResult.Failed, error.message);

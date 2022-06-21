@@ -17,10 +17,10 @@
   "demands": [],
   "version": {
     "Major": 1,
-    "Minor": 206,
+    "Minor": 200,
     "Patch": 1
   },
-  "minimumAgentVersion": "2.144.0",
+  "minimumAgentVersion": "2.115.0",
   "instanceNameFormat": "ms-resource:loc.instanceNameFormat",
   "groups": [
     {
@@ -81,7 +81,7 @@
     }
   ],
   "execution": {
-    "Node10": {
+    "Node": {
       "target": "dotnetrestore.js",
       "argumentFormat": ""
     }

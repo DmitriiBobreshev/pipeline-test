@@ -17,8 +17,8 @@
   "minimumAgentVersion": "2.182.1",
   "version": {
     "Major": 0,
-    "Minor": 207,
-    "Patch": 0
+    "Minor": 201,
+    "Patch": 1
   },
   "groups": [
     {
@@ -76,7 +76,6 @@
   "messages": {
     "PodReturnCode": "ms-resource:loc.messages.PodReturnCode",
     "PodFailed": "ms-resource:loc.messages.PodFailed",
-    "CocoaPodsNotFound": "ms-resource:loc.messages.CocoaPodsNotFound",
-    "ProxyConfig": "ms-resource:loc.messages.ProxyConfig"
+    "CocoaPodsNotFound": "ms-resource:loc.messages.CocoaPodsNotFound"
   }
 }

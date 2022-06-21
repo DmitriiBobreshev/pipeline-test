@@ -1,6 +1,6 @@
 {
   "name": "vsts-tasks-mysql-deploy-on-machine-group",
-  "version": "1.0.4",
+  "version": "1.0.3",
   "description": "MySQL Deployment",
   "main": "mysqldeploy.js",
   "scripts": {
