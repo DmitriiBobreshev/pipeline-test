@@ -56,13 +56,3 @@ stages:
         node -v
         npm -v
       displayName: Show npm and node version After
-    - task: UseNode@1
-      inputs:
-        version: 'v12.4.0'
-        checkLatest: true
-        force32bit: true
-      displayName: 'Install 32bit Node.js v12.4.0'
-    - script: | 
-        node -v
-        npm -v
-      displayName: Show npm and node version After
