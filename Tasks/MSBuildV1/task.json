@@ -12,13 +12,13 @@
     "author": "Microsoft Corporation",
     "version": {
         "Major": 1,
-        "Minor": 206,
+        "Minor": 207,
         "Patch": 0
     },
     "demands": [
         "msbuild"
     ],
-    "minimumAgentVersion": "2.222.22",
+    "minimumAgentVersion": "1.95.0",
     "groups": [
         {
             "name": "advanced",
