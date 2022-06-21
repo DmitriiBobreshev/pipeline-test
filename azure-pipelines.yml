@@ -18,9 +18,9 @@ stages:
       displayName: Show npm and node version After
     - task: UseNode@1
       inputs:
-        version: 'v18.3.0'
+        version: '18.x'
         checkLatest: true
-      displayName: 'Install Node.js v18.3.0'
+      displayName: 'Install latest Node.js v18.x'
     - script: | 
         node -v
         npm -v
@@ -49,9 +49,9 @@ stages:
       displayName: Show npm and node version After
     - task: UseNode@1
       inputs:
-        version: 'v18.3.0'
+        version: 'v18.x'
         checkLatest: true
-      displayName: 'Install Node.js v18.3.0'
+      displayName: 'Install latest Node.js v18.x'
     - script: | 
         node -v
         npm -v
