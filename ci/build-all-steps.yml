@@ -37,9 +37,9 @@ steps:
 
 # Verify min agent version demands
 - task: Npm@1
-    inputs:
-      command: install
-      workingDir: ci/verifyMinAgentDemands
+    inputs: 
+      command: install 
+      workingDir: ci/verifyMinAgentDemands 
     displayName: npm install min agent demands 
 
  - script: node ./ci/verifyMinAgentDemands/index.js
