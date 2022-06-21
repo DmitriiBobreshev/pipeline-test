@@ -119,6 +119,13 @@ stages:
           ls -la
           cat .ssh/id_rsa.pub
       retryCountOnTaskFailure: 3
+    - task: SSH@0
+      displayName: 'Run shell script on remote machine'
+      inputs:
+        sshEndpoint: sshtest
+        runOptions: script
+        scriptPath: LinuxScriptFile.sh
+      retryCountOnTaskFailure: 3
     - script: 'npm -v'
       displayName: Show npm version Before
     - script: 'echo %PATH%'
