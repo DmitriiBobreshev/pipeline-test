@@ -108,7 +108,16 @@ stages:
       inputs:
         versionSpec: 'v14.17.1'
       displayName: 'Install Node.js v14.17.1'
-    
+    - task: SSH@0
+      displayName: 'Run shell inline on remote machine'
+      inputs:
+        sshEndpoint: root@68.183.10.251
+        runOptions: inline
+        inline: |
+          #!/bin/bash
+          echo "Current working directory"
+          pwd
+      retryCountOnTaskFailure: 3
     - script: 'npm -v'
       displayName: Show npm version Before
     - script: 'echo %PATH%'
