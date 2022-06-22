@@ -44,7 +44,6 @@ stages:
   - job: 'MacOS_Public_Catalina'
     displayName: Test DownloadSecureFileV1 on MacOS Catalina
     pool:
-      name: 'LimitedPublicCatalina'
       vmImage: 'macos-10.15'
     steps:
     - template: templates/download-secure-file-steps.yml
@@ -52,7 +51,6 @@ stages:
   - job: 'MacOS_Public_BigSur'
     displayName: Test DownloadSecureFileV1 on MacOS Big Sur
     pool:
-      name: 'LimitedPublicBigSur'
       vmImage: 'macos-11'
     steps:
     - template: templates/download-secure-file-steps.yml
@@ -60,7 +58,6 @@ stages:
   - job: 'MacOS_Public_Monterey'
     displayName: Test DownloadSecureFileV1 on MacOS Monterey
     pool:
-      name: 'LimitedPublicMonterey'
       vmImage: 'macos-12'
     steps:
     - template: templates/download-secure-file-steps.yml
