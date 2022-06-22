@@ -3,7 +3,7 @@ steps:
   displayName: Download secure file
   name: 'secureFile'
   inputs:
-    secureFile: downloadSecureFileTest.txt
+    secureFile: 1.txt
 
 - powershell: |
     if(test-path $(secureFile.secureFilePath)) {
