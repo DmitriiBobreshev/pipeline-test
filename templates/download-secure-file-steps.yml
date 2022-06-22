@@ -1,0 +1,15 @@
+steps:
+- task: DownloadSecureFile@1
+  displayName: Download secure file
+  name: 'secureFile'
+  inputs:
+    secureFile: downloadSecureFileTest.txt
+
+- powershell: |
+    if(test-path $(secureFile.secureFilePath)) {
+        Write-Host "$(secureFile.secureFilePath) exists"
+    } else {
+        Write-Error "File not found: $(secureFile.secureFilePath)"
+        exit 1
+    }
+  displayName: Check if secure file exists
