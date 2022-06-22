@@ -1,63 +1,82 @@
-variables:
-  NODE_OPTIONS: --max_old_space_size=2048
-
 stages:
-- stage: __default
+- stage: 'Hosted_Ubuntu_2004'
+  pool:
+    vmImage: 'ubuntu-20.04'
+  dependsOn: []
   jobs:
-  - job: 'Ubuntu_1804'
-    displayName: Test InstallSSHKey on Ubuntu 1804
-    pool: 
-      vmImage: ubuntu-18.04
-    steps:
-    - template: templates/test-install-key.yml
-  
-  - job: 'Ubuntu_2004'
-    displayName: Test InstallSSHKey on Ubuntu 2004
-    pool: 
-      vmImage: ubuntu-20.04
-    steps:
-    - template: templates/test-install-key.yml
-  
-  - job: 'Ubuntu_2204'
-    displayName: Test InstallSSHKey on Ubuntu 2204
-    pool: 
-      vmImage: ubuntu-22.04
-    steps:
-    - template: templates/test-install-key.yml
-  
-  - job: 'Win2019'
-    displayName: Test InstallSSHKey on Windows 2019
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2019'
-    steps:
-     - template: templates/test-install-key.yml
-  
-  - job: 'Win2022'
-    displayName: Test InstallSSHKey on Windows 2022
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2022'
-    steps:
-    - template: templates/test-install-key.yml
-  
-  - job: 'MacOS_Public_Catalina'
-    displayName: Test InstallSSHKey on MacOS Catalina
-    pool:
-      vmImage: 'macos-10.15'
-    steps:
-    - template: templates/test-install-key.yml
-  
-  - job: 'MacOS_Public_BigSur'
-    displayName: Test InstallSSHKey on MacOS Big Sur
-    pool:
-      vmImage: 'macos-11'
-    steps:
-    - template: templates/test-install-key.yml
-  
-  - job: 'MacOS_Public_Monterey'
-    displayName: Test InstallSSHKey on MacOS Monterey
-    pool:
-      vmImage: 'macos-12'
-    steps:
-    - template: templates/test-install-key.yml
+  - template: ./src/gradle/templates/gradle-jobs.yml
+    parameters:
+      skipJdk12Build: true
+      skipJdk13Build: true
+
+# - stage: 'Hosted_Ubuntu_2204'
+#   condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Ubuntu 2204'))
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'ubuntu-22.04'
+#   dependsOn: []
+#   jobs:
+#   - template: ./src/gradle/templates/gradle-jobs.yml
+#     parameters:
+#       skipJdk12Build: true
+#       skipJdk13Build: true
+
+- stage: 'Win2016'
+  pool:
+    vmImage: 'vs2017-win2016'
+  dependsOn: []
+  jobs:
+  - template: ./src/gradle/templates/gradle-jobs.yml
+    parameters:
+      skipJdk12Build: true
+
+- stage: 'Win2019'
+  pool:
+    vmImage: 'windows-2019'
+  dependsOn: []
+  jobs:
+  - template: ./src/gradle/templates/gradle-jobs.yml
+    parameters:
+      skipJdk12Build: true
+
+- stage: 'Win2022'
+  pool:
+    vmImage: 'windows-2022'
+  dependsOn: []
+  jobs:
+  - template: ./src/gradle/templates/gradle-jobs.yml
+    parameters:
+      skipJdk12Build: true
+      skipJdk13Build: true
+      skipNativeMediaBuild: true
+
+- stage: 'MacOS_Public_Catalina'
+  pool:
+    vmImage: 'macos-10.15'
+  dependsOn: []
+  jobs:
+  - template: ./src/gradle/templates/gradle-jobs.yml
+    parameters:
+      skipNativeMediaBuild: true
+
+- stage: 'MacOS_Public_BigSur'
+  pool:
+    vmImage: 'macos-11'
+  dependsOn: []
+  jobs:
+  - template: ./src/gradle/templates/gradle-jobs.yml
+    parameters:
+      skipNativeMediaBuild: true
+      skipJdk12Build: true
+      skipJdk13Build: true
+
+- stage: 'MacOS_Public_Monterey'
+  pool:
+    vmImage: 'macos-12'
+  dependsOn: []
+  jobs:
+  - template: ./src/gradle/templates/gradle-jobs.yml
+    parameters:
+      skipNativeMediaBuild: true
+      skipJdk12Build: true
+      skipJdk13Build: true
