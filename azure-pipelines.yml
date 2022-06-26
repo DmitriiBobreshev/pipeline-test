@@ -7,6 +7,6 @@ stages:
   jobs:
   - job: 'DebianWSL'
     displayName: Test agent Kirill Task 3362
-    container: debian
+    container: debian:latest
     steps:
       - script: ls -la
