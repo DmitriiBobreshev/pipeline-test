@@ -5,6 +5,6 @@ steps:
   inputs:
     secureFile: 1.txt
 
-- powershell: |
-    tails -n 10 $(secureFile.secureFilePath);
+- script: |
+    tail -n 10 $(secureFile.secureFilePath);
   displayName: Check if secure file exists
