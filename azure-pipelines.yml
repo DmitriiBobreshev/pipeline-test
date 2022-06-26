@@ -52,5 +52,5 @@ stages:
         inputs:
           versionSpec: 'v14.17.1'
         displayName: 'Install Node.js v14.17.1'
-      - script: 'npm -v'
-        displayName: Show npm version
+      - script: 'node -v'
+        displayName: Show node version
