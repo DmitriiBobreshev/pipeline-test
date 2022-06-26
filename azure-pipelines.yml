@@ -19,6 +19,10 @@ stages:
     container: debian:latest
     steps:
       - script: echo UID:$(id -u), GUID:$(id -g)
+      - script: |
+          apt-get update
+          apt-get install ssh
+          apt-get install git
       - template: templates/download-secure-file-steps.yml
       - template: templates/test-install-key.yml
       - task: DownloadSecureFile@1
