@@ -1,56 +1,52 @@
 variables:
-  NODE_OPTIONS: --max_old_space_size=2048
+  - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
+    value: true
 
 stages:
-- stage: __default
-  pool: win-11-pool
+- stage: 'Win2017'
+  dependsOn: []
   jobs:
-  - job: 'DebianWSL'
-    displayName: Show group and id inside WSL
-    steps:
-      - script: echo UID:$(id -u), GUID:$(id -g)
-  - job: 'DebianContiner'
-    displayName: Show group and id inside container
-    container: debian:latest
-    steps:
-      - script: echo UID:$(id -u), GUID:$(id -g)
-  - job: 'TaskTestViaContainer'
-    displayName: Test some tasks inside container
-    container: debian:latest
-    steps:
-      - script: echo UID:$(id -u), GUID:$(id -g)
-      - template: templates/download-secure-file-steps.yml
-      - task: DownloadSecureFile@1
-        name: caCertificate
-        displayName: 'Download CA certificate'
-        inputs:
-          secureFile: 'test.js'
-      - task: DownloadSecureFile@1
-        name: BigFileTest
-        displayName: 'Download Big File'
-        inputs:
-          secureFile: '1.txt'
-      - task: CmdLine@2
-        displayName: 'Run a one-line script'
-        inputs:
-          script: echo Hello, world!
-      - task: CmdLine@2
-        displayName: 'Run a multi-line script'
-        inputs:
-          script: |
-            echo Add other tasks to build, test, and deploy your project.
-            echo See https://aka.ms/yaml
-      - script: echo null > test.txt
-        displayName: 'Creating file'
-      - task: CopyFiles@2
-        inputs:
-          Contents: test.txt
-          TargetFolder: 'testFolder'
-        displayName: 'Try to run commund under node10'
-      - script: dir
-      - task: NodeTool@0
-        inputs:
-          versionSpec: 'v14.17.1'
-        displayName: 'Install Node.js v14.17.1'
-      - script: 'node -v'
-        displayName: Show node version
+  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
+    parameters:
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'vs2017-win2016'
+
+- stage: 'Win2019'
+  dependsOn: []
+  jobs:
+  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
+    parameters:
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'windows-2019'
+
+- stage: 'Win2022'
+  dependsOn: []
+  jobs:
+  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
+    parameters:
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'windows-2022'
+
+- stage: 'ubuntu1804'
+  dependsOn: []
+  jobs:
+  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
+    parameters:
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+      pool: $[ coalesce(variables.ubuntu1804, 'Hosted Ubuntu 1804') ]
+
+- ${{ if eq(variables.enableAzureResourcesDependentTests, true) }}:
+  - stage: 'MacOs'
+    dependsOn: []
+    jobs:
+    - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-macos.yml
+      parameters:
+        pool:
+          name: 'Azure Pipelines'
+          vmImage: 'macos-10.15'

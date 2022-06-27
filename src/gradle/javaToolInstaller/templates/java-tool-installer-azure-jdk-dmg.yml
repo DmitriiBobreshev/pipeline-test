@@ -1,0 +1,40 @@
+  steps:
+
+  - pwsh: | 
+      $archiveName = "jdk-8u251-macosx-x64.dmg"
+      Write-Host "##vso[task.setvariable variable=archiveName]$archiveName"
+    displayName: 'Set JDK archive name'
+
+  - task: JavaToolInstaller@0
+    displayName: 'Use Java 1.7'
+    inputs:
+      versionSpec: 8
+      jdkArchitectureOption: x64
+      jdkSourceOption: AzureStorage
+      azureResourceManagerEndpoint: 'ABTTStorageAccountConnection'
+      azureStorageAccountName: 'abttcanarystorageaccount'
+      azureContainerName: 'java-distribution'
+      azureCommonVirtualFile: $(archiveName)
+      jdkDestinationDirectory: ./tempAzure
+    retryCountOnTaskFailure: 3
+
+  - task: Maven@1
+    displayName: 'Maven JavaTestProject/pom.xml'
+    inputs:
+      mavenPomFile: '$(build.sourcesdirectory)/src/javaToolInstaller/JavaTestProject/pom.xml'
+      javaHomeOption: Path
+      jdkDirectory: '$(JAVA_HOME)'
+    retryCountOnTaskFailure: 3
+
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+    inputs:
+      SourceFolder: '$(build.sourcesdirectory)/src/javaToolInstaller/'
+      Contents: '**/*.jar'
+      TargetFolder: '$(build.artifactstagingdirectory)'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)'
+    retryCountOnTaskFailure: 3
