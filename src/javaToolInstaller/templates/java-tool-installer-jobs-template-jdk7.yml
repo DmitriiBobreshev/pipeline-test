@@ -11,16 +11,3 @@ jobs:
   condition: and(succeeded(),  contains(variables.targetPools, 'Hosted VS2017'))
   steps:
   - template: 'java-tool-installer-local-jdk7-steps.yml'
-
-- ${{ if eq(parameters.enableAzureResourcesDependentTests, true) }}:
-  - job: 'Azure_JDK'
-    pool: ${{ parameters.pool }}
-    condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Windows 2019 with VS2019'))
-    steps:
-    - template: 'java-tool-installer-azure-jdk7-steps.yml'
-
-  - job: 'Azure_JDK_subfolder'
-    pool: ${{ parameters.pool }}
-    condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Windows 2019 with VS2019'))
-    steps:
-    - template: 'java-tool-installer-azure-subfolder-jdk7-steps.yml'

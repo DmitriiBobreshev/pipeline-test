@@ -8,6 +8,7 @@ stages:
   jobs:
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
     parameters:
+      targetPools: 'Hosted VS2017'
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
       pool:
         name: 'Azure Pipelines'
@@ -18,16 +19,19 @@ stages:
   jobs:
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
     parameters:
+      targetPools: 'Hosted Windows 2019 with VS2019'
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
       pool:
         name: 'Azure Pipelines'
         vmImage: 'windows-2019'
 
 - stage: 'Win2022'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Windows Server 2022'))
   dependsOn: []
   jobs:
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
     parameters:
+      targetPools: 'Windows Server 2022'
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
       pool:
         name: 'Azure Pipelines'
@@ -38,8 +42,11 @@ stages:
   jobs:
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
     parameters:
+      targetPools: 'Hosted Ubuntu 1804'
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-      pool: $[ coalesce(variables.ubuntu1804, 'Hosted Ubuntu 1804') ]
+      pool: 
+        name: 'Azure Pipelines'
+        vmImage: 'ubuntu-1804'
 
 - ${{ if eq(variables.enableAzureResourcesDependentTests, true) }}:
   - stage: 'MacOs'
@@ -47,6 +54,7 @@ stages:
     jobs:
     - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-macos.yml
       parameters:
+        targetPools: 'Hosted macOS Catalina'
         pool:
           name: 'Azure Pipelines'
           vmImage: 'macos-10.15'

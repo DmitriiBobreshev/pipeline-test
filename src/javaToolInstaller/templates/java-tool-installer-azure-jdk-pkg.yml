@@ -1,21 +1,20 @@
   steps:
 
-  - pwsh: | 
-      $archiveName = "openlogic-openjdk-11.0.8+10-mac-x64.pkg"
-      Write-Host "##vso[task.setvariable variable=archiveName]$archiveName"
-    displayName: 'Set JDK archive name'
+  - bash: |
+      cd ./src/javaToolInstaller/JDK
+      curl https://download1483.mediafire.com/fzij7led42vg/ib2qs6k8bcm93r6/openlogic-openjdk-8u332-b09-mac-x64.pkg --output ./JDK7.pkg --retry 5 --retry-max-time 0
+    displayName: 'Downloading JDK archive'
+    retryCountOnTaskFailure: 3
 
   - task: JavaToolInstaller@0
     displayName: 'Use Java 1.7'
     inputs:
-      versionSpec: 11
+      versionSpec: 7
       jdkArchitectureOption: x64
-      jdkSourceOption: AzureStorage
-      azureResourceManagerEndpoint: 'ABTTStorageAccountConnection'
-      azureStorageAccountName: 'abttcanarystorageaccount'
-      azureContainerName: 'java-distribution'
-      azureCommonVirtualFile: $(archiveName)
-      jdkDestinationDirectory: ./tempAzure
+      jdkSourceOption: LocalDirectory
+      jdkFile: './src/javaToolInstaller/JDK/JDK7.pkg'
+      jdkDestinationDirectory: tempDir/
+      cleanDestinationDirectory: false
     retryCountOnTaskFailure: 3
 
   - task: Maven@1
