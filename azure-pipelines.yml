@@ -2,6 +2,18 @@ variables:
   - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
     value: true
 
+parameters:
+  - name: targetPools
+    displayName: Pool Image
+    type: string
+    default: 'Hosted VS2017'
+    values:
+    - 'Hosted VS2017'
+    - 'Hosted Windows 2019 with VS2019'
+    - 'Windows Server 2022'
+    - 'Hosted Ubuntu 1804'
+    - 'Hosted macOS Catalina'
+
 stages:
 - stage: 'Win2017'
   dependsOn: []
@@ -26,7 +38,6 @@ stages:
         vmImage: 'windows-2019'
 
 - stage: 'Win2022'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Windows Server 2022'))
   dependsOn: []
   jobs:
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
