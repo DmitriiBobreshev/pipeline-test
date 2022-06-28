@@ -3,7 +3,6 @@ parameters:
     type: object
 
 jobs:
-- job: 'Local_JDK'
 - job: 'TaskTestViaContainer'
     displayName: Test some tasks inside container
     pool: ${{ parameters.pool }}
