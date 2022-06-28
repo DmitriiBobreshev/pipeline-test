@@ -1,14 +1,13 @@
 parameters:
   - name: pool
     type: object
-
 jobs:
 
 - job: 'TaskTestViaContainer'
   pool: ${{ parameters.pool }}
   container: debian:latest
   steps:
-    - template: download-secure-file-steps.yml
+    - template: download-secure-file-steps-lin.yml
     - task: DownloadSecureFile@1
       name: caCertificate
       displayName: 'Download CA certificate'

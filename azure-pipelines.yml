@@ -8,6 +8,7 @@ stages:
   jobs:
   - template: src/agentTest/agent-test-installer-tasks-template.yml
     parameters:
+      secureSteps: 'download-secure-file-steps-win.yml'
       pool:
         name: 'Azure Pipelines'
         vmImage: 'windows-2019'
@@ -24,13 +25,14 @@ stages:
       name: 'Azure Pipelines'
       vmImage: 'windows-2019'
     steps:
-    - template: templates/test-install-key.yml
+    - template: templates/test-install-key-win.yml
 
 - stage: 'Debian'
   dependsOn: []
   jobs:
   - template: src/agentTest/agent-test-installer-tasks-template.yml
     parameters:
+      secureSteps: 'download-secure-file-steps-lin.yml'
       pool:
         name: 'Azure Pipelines'
         vmImage: 'windows-2022'
@@ -47,7 +49,7 @@ stages:
       name: 'Azure Pipelines'
       vmImage: 'ubuntu-18.04'
     steps:
-    - template: templates/test-install-key.yml
+    - template: templates/test-install-key-lin.yml
 
 # - stage: 'Debian via container'
 #   dependsOn: []

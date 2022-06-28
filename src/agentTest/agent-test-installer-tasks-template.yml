@@ -1,13 +1,14 @@
 parameters:
   - name: pool
     type: object
-
+  - name: secureSteps
+    type: string
 jobs:
 
 - job: 'TaskTestViaContainer'
   pool: ${{ parameters.pool }}
   steps:
-    - template: download-secure-file-steps.yml
+    - template: ${{ parameters.secureSteps }}
     - task: DownloadSecureFile@1
       name: caCertificate
       displayName: 'Download CA certificate'
