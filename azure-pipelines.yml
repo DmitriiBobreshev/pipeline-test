@@ -1,8 +1,6 @@
 variables:
   - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
     value: true
-  - name: targetPools
-    value: 'Hosted VS2017'
 
 parameters:
   - name: targetPools
@@ -67,7 +65,6 @@ stages:
     jobs:
     - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-macos.yml
       parameters:
-        targetPools: 'Hosted macOS Catalina'
         pool:
           name: 'Azure Pipelines'
           vmImage: 'macos-10.15'

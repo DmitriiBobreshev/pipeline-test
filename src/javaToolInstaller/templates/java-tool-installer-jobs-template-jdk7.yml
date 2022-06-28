@@ -4,10 +4,18 @@ parameters:
   - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
     type: boolean
     default: false
-
+  - name: targetPools
+    displayName: Pool Image
+    type: string
+    values:
+    - 'Hosted VS2017'
+    - 'Hosted Windows 2019 with VS2019'
+    - 'Windows Server 2022'
+    - 'Hosted Ubuntu 1804'
+    - 'Hosted macOS Catalina'
 jobs:
 - job: 'Local_JDK'
   pool: ${{ parameters.pool }}
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted VS2017'))
+  condition: and(succeeded(),  contains(parameters.targetPools, 'Hosted VS2017'))
   steps:
   - template: 'java-tool-installer-local-jdk7-steps.yml'
