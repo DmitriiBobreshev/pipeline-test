@@ -17,10 +17,10 @@ steps:
 - bash: git clone git@github.com:DmitriiBobreshev/azure-samples.git
   displayName: Clone Sample Repo
 - bash: |
-    if [ -d azure-samples then
-        echo "azure-samples exists";
+    if [ -d azure-samples]; then
+        echo "azure-samples exists"
     else
-        echo "Not found: azure-samples";
+        echo "Not found: azure-samples"
         exit 1;
     fi
   displayName: Check if git cloned

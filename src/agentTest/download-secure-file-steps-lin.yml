@@ -6,10 +6,10 @@ steps:
     secureFile: 1.txt
 
 - bash: |
-    if [ -f $(secureFile.secureFilePath)] then
-        echo "$(secureFile.secureFilePath) exists";
+    if [ -f $(secureFile.secureFilePath)]; then
+        echo "$(secureFile.secureFilePath) exists"
     else
-        echo "Not found: $(secureFile.secureFilePath)";
+        echo "Not found: $(secureFile.secureFilePath)"
         exit 1;
     fi
   displayName: Check if secure file exists
