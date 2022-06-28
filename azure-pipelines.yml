@@ -57,7 +57,7 @@ stages:
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
       pool: 
         name: 'Azure Pipelines'
-        vmImage: 'ubuntu-1804'
+        vmImage: 'ubuntu-18.04'
 
 - ${{ if eq(variables.enableAzureResourcesDependentTests, true) }}:
   - stage: 'MacOs'

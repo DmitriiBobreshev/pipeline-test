@@ -7,8 +7,3 @@ jobs:
   pool: ${{ parameters.pool }}
   steps:
   - template: 'java-tool-installer-azure-jdk-dmg.yml'
-
-- job: 'Azure_JDK_pkg'
-  pool: ${{ parameters.pool }}
-  steps:
-  - template: 'java-tool-installer-azure-jdk-pkg.yml'
