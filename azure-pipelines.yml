@@ -1,3 +1,7 @@
+variables:
+  - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
+    value: true
+
 stages:
 - stage: 'Win'
   dependsOn: []
