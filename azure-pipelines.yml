@@ -15,17 +15,6 @@ parameters:
     - 'Hosted macOS Catalina'
 
 stages:
-- stage: 'Win2017'
-  dependsOn: []
-  jobs:
-  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
-    parameters:
-      targetPools: 'Hosted VS2017'
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'vs2017-win2016'
-
 - stage: 'Win2019'
   dependsOn: []
   jobs:
