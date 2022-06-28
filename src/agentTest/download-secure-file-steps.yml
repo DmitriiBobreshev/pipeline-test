@@ -5,6 +5,6 @@ steps:
   inputs:
     secureFile: 1.txt
 
-- script: |
-    tail -n 10 $(secureFile.secureFilePath);
+- pws: |
+    cat $(secureFile.secureFilePath);
   displayName: Check if secure file exists
