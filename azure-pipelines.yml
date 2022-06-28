@@ -7,6 +7,13 @@ stages:
       pool:
         name: 'Azure Pipelines'
         vmImage: 'windows-2019'
+  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
+    parameters:
+      targetPools: 'Hosted Windows 2019 with VS2019'
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'windows-2019'
 
 - stage: 'Debian'
   dependsOn: []
@@ -16,6 +23,13 @@ stages:
       pool:
         name: 'Azure Pipelines'
         vmImage: 'windows-2022'
+  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
+    parameters:
+      targetPools: 'Hosted Ubuntu 1804'
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+      pool: 
+        name: 'Azure Pipelines'
+        vmImage: 'ubuntu-18.04'
 
 # - stage: 'Debian via container'
 #   dependsOn: []
@@ -26,3 +40,10 @@ stages:
 #         name: 'Azure Pipelines'
 #         vmImage: 'ubuntu-18.04'
 
+#   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
+#     parameters:
+#       targetPools: 'Hosted Ubuntu 1804'
+#       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+#       pool: 
+#         name: 'Azure Pipelines'
+#         vmImage: 'ubuntu-18.04'
