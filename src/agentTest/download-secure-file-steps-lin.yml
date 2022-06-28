@@ -5,13 +5,12 @@ steps:
   inputs:
     secureFile: 1.txt
 
-- powershell: |
-    test -d $(secureFile.secureFilePath && echo '1' || echo '2'
-    if(test -d $(secureFile.secureFilePath)) {
+- bash: |
+    if [ -f $(secureFile.secureFilePath)] then
         echo "$(secureFile.secureFilePath) exists"
-    } else {
+    else
         echo "Not found: $(secureFile.secureFilePath)"
         ls $(secureFile.secureFilePath)
         exit 1
-    }
+    fi
   displayName: Check if secure file exists

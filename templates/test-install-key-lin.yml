@@ -14,13 +14,13 @@ steps:
     sshPassphrase: '$(passphrase)'
     sshKeySecureFile: key2
   retryCountOnTaskFailure: 3
-- powershell: git clone git@github.com:DmitriiBobreshev/azure-samples.git
+- bash: git clone git@github.com:DmitriiBobreshev/azure-samples.git
   displayName: Clone Sample Repo
-- powershell: |
-    if(test -d azure-samples) {
+- bash: |
+    if [ -d azure-samples then
         echo "azure-samples exists"
-    } else {
+    else
         echo "Not found: azure-samples"
         exit 1
-    }
+    fi
   displayName: Check if git cloned
