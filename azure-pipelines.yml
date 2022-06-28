@@ -1,6 +1,8 @@
 variables:
   - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
     value: true
+  - name: targetPools
+    value: 'Hosted VS2017'
 
 parameters:
   - name: targetPools
@@ -20,6 +22,7 @@ stages:
   jobs:
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
     parameters:
+      targetPools: 'Hosted VS2017'
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
       pool:
         name: 'Azure Pipelines'
