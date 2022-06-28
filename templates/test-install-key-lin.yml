@@ -7,6 +7,13 @@ steps:
     sshPassphrase: '$(passphrase)'
     sshKeySecureFile: key
   retryCountOnTaskFailure: 3
+- task: InstallSSHKey@0
+  displayName: 'Install an SSH key with no public key specified'
+  inputs:
+    knownHostsEntry: 'github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg='
+    sshPassphrase: '$(passphrase)'
+    sshKeySecureFile: key2
+  retryCountOnTaskFailure: 3
 - powershell: git clone git@github.com:DmitriiBobreshev/azure-samples.git
   displayName: Clone Sample Repo
 - powershell: |
