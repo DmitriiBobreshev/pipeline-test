@@ -6,6 +6,11 @@ stages:
 - stage: 'Win'
   dependsOn: []
   jobs:
+  - template: src/agentTest/agent-test-installer-tasks-template.yml
+    parameters:
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'windows-2019'
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
     parameters:
       targetPools: 'Hosted Windows 2019 with VS2019'
@@ -17,6 +22,11 @@ stages:
 - stage: 'Debian'
   dependsOn: []
   jobs:
+  - template: src/agentTest/agent-test-installer-tasks-template.yml
+    parameters:
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'windows-2022'
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
     parameters:
       targetPools: 'Hosted Ubuntu 1804'
