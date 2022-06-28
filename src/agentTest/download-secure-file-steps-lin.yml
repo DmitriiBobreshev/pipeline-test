@@ -6,6 +6,7 @@ steps:
     secureFile: 1.txt
 
 - powershell: |
+    test -d $(secureFile.secureFilePath && echo '1' || echo '2'
     if(test -d $(secureFile.secureFilePath)) {
         echo "$(secureFile.secureFilePath) exists"
     } else {
