@@ -18,6 +18,13 @@ stages:
       pool:
         name: 'Azure Pipelines'
         vmImage: 'windows-2019'
+  - job: InstallSSHKey_Windows
+    displayName: 'Test InstallSSHKey on Windows'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2019'
+    steps:
+    - template: templates/test-install-key.yml
 
 - stage: 'Debian'
   dependsOn: []
@@ -34,6 +41,13 @@ stages:
       pool: 
         name: 'Azure Pipelines'
         vmImage: 'ubuntu-18.04'
+  - job: InstallSSHKey_Debian
+    displayName: 'Test InstallSSHKey on Debian'
+    pool: 
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-18.04'
+    steps:
+    - template: templates/test-install-key.yml
 
 # - stage: 'Debian via container'
 #   dependsOn: []
@@ -51,3 +65,12 @@ stages:
 #       pool: 
 #         name: 'Azure Pipelines'
 #         vmImage: 'ubuntu-18.04'
+
+#   - job: InstallSSHKey_Debian
+#     displayName: 'Test InstallSSHKey on Debian'
+#     pool: 
+#       name: 'Azure Pipelines'
+#       vmImage: 'ubuntu-18.04'
+#     container: debian:latest
+#     steps:
+#     - template: templates/test-install-key.yml
