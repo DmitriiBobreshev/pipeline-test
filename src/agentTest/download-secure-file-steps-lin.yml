@@ -10,7 +10,7 @@ steps:
         echo "$(secureFile.secureFilePath) exists"
     } else {
         echo "Not found: $(secureFile.secureFilePath)"
-        ls -la
+        ls $(secureFile.secureFilePath)
         exit 1
     }
   displayName: Check if secure file exists
