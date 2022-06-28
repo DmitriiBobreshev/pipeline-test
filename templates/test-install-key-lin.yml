@@ -10,11 +10,10 @@ steps:
 - powershell: git clone git@github.com:DmitriiBobreshev/azure-samples.git
   displayName: Clone Sample Repo
 - powershell: |
-    if [ -d test azure-samples ]
-    then
+    if(test -d azure-samples) {
         echo "azure-samples exists"
-    else
+    } else {
         echo "Not found: azure-samples"
         exit 1
-    fi
+    }
   displayName: Check if git cloned
