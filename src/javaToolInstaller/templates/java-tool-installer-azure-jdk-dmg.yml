@@ -2,7 +2,7 @@
 
   - bash: |
       cd ./src/javaToolInstaller/JDK
-      curl https://download1530.mediafire.com/i0r90cdmvaxg/ulk2e1nr16h1ltp/jdk-8u333-macosx-x64.dmg --output ./JDK7.dmg --retry 5 --retry-max-time 0
+      curl https://repos.azul.com/azure-only/zulu/packages/zulu-7/7u191/zulu-7-azure-jre_7.24.0.2-7.0.191-macosx_x64.dmg --output ./JDK7.dmg --retry 5 --retry-max-time 0
     displayName: 'Downloading JDK archive'
     retryCountOnTaskFailure: 3
 
