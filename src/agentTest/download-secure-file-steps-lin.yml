@@ -6,10 +6,11 @@ steps:
     secureFile: 1.txt
 
 - powershell: |
-    if(test $(secureFile.secureFilePath)) {
+    if [ -d  $(secureFile.secureFilePath)] 
+    then 
         echo "$(secureFile.secureFilePath) exists"
-    } else {
+    else
         echo "Not found: $(secureFile.secureFilePath)"
         exit 1
-    }
+    fi
   displayName: Check if secure file exists
