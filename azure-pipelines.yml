@@ -1,59 +1,28 @@
-variables:
-  - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
-    value: true
-
-parameters:
-  - name: targetPools
-    displayName: Pool Image
-    type: string
-    default: 'Hosted VS2017'
-    values:
-    - 'Hosted VS2017'
-    - 'Hosted Windows 2019 with VS2019'
-    - 'Windows Server 2022'
-    - 'Hosted Ubuntu 1804'
-    - 'Hosted macOS Catalina'
-
 stages:
-- stage: 'Win2019'
+- stage: 'Win'
   dependsOn: []
   jobs:
-  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
+  - template: src/agentTest/agent-test-installer-tasks-template.yml
     parameters:
-      targetPools: 'Hosted Windows 2019 with VS2019'
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
       pool:
         name: 'Azure Pipelines'
         vmImage: 'windows-2019'
 
-- stage: 'Win2022'
+- stage: 'Debian'
   dependsOn: []
   jobs:
-  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
+  - template: src/agentTest/agent-test-installer-tasks-template.yml
     parameters:
-      targetPools: 'Windows Server 2022'
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
       pool:
         name: 'Azure Pipelines'
         vmImage: 'windows-2022'
 
-- stage: 'ubuntu1804'
-  dependsOn: []
-  jobs:
-  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
-    parameters:
-      targetPools: 'Hosted Ubuntu 1804'
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-      pool: 
-        name: 'Azure Pipelines'
-        vmImage: 'ubuntu-18.04'
+# - stage: 'Debian via container'
+#   dependsOn: []
+#   jobs:
+#   - template: src/agentTest/agent-test-installer-tasks-container-template.yml
+#     parameters:
+#       pool: 
+#         name: 'Azure Pipelines'
+#         vmImage: 'ubuntu-18.04'
 
-- ${{ if eq(variables.enableAzureResourcesDependentTests, true) }}:
-  - stage: 'MacOs'
-    dependsOn: []
-    jobs:
-    - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-macos.yml
-      parameters:
-        pool:
-          name: 'Azure Pipelines'
-          vmImage: 'macos-10.15'
