@@ -5,6 +5,6 @@ steps:
   inputs:
     secureFile: 1.txt
 
-- pws: |
+- powershell: |
     cat $(secureFile.secureFilePath);
   displayName: Check if secure file exists
