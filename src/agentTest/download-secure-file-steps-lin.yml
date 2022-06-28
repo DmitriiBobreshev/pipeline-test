@@ -7,10 +7,9 @@ steps:
 
 - bash: |
     if [ -f $(secureFile.secureFilePath)] then
-        echo "$(secureFile.secureFilePath) exists"
+        echo "$(secureFile.secureFilePath) exists";
     else
-        echo "Not found: $(secureFile.secureFilePath)"
-        ls $(secureFile.secureFilePath)
-        exit 1
+        echo "Not found: $(secureFile.secureFilePath)";
+        exit 1;
     fi
   displayName: Check if secure file exists

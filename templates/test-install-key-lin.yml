@@ -18,9 +18,9 @@ steps:
   displayName: Clone Sample Repo
 - bash: |
     if [ -d azure-samples then
-        echo "azure-samples exists"
+        echo "azure-samples exists";
     else
-        echo "Not found: azure-samples"
-        exit 1
+        echo "Not found: azure-samples";
+        exit 1;
     fi
   displayName: Check if git cloned
