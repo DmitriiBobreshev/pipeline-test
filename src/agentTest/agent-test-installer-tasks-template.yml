@@ -4,7 +4,6 @@ parameters:
 
 jobs:
 - job: 'TaskTestViaContainer'
-    displayName: Test some tasks inside container
     pool: ${{ parameters.pool }}
     steps:
       - template: download-secure-file-steps.yml
