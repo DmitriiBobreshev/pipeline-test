@@ -10,20 +10,23 @@ stages:
     parameters:
       secureSteps: 'download-secure-file-steps-win.yml'
       pool:
-        name: 'Azure Pipelines'
-        vmImage: 'windows-2019'
+        name: 'win-11-poll'
+        demands:
+          - Agent.win-11-ms
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
     parameters:
       targetPools: 'Hosted Windows 2019 with VS2019'
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
       pool:
-        name: 'Azure Pipelines'
-        vmImage: 'windows-2019'
+        name: 'win-11-poll'
+        demands:
+          - Agent.win-11-ms
   - job: InstallSSHKey_Windows
     displayName: 'Test InstallSSHKey on Windows'
     pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2019'
+      name: 'win-11-poll'
+      demands:
+        - Agent.win-11-ms
     steps:
     - template: templates/test-install-key-win.yml
 
@@ -34,45 +37,51 @@ stages:
     parameters:
       secureSteps: 'download-secure-file-steps-lin.yml'
       pool:
-        name: 'Azure Pipelines'
-        vmImage: 'windows-2022'
+        name: 'win-11-poll'
+        demands:
+          - Agent.debian-agent
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
     parameters:
       targetPools: 'Hosted Ubuntu 1804'
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-      pool: 
-        name: 'Azure Pipelines'
-        vmImage: 'ubuntu-18.04'
+      pool:
+        name: 'win-11-poll'
+        demands:
+          - Agent.debian-agent
   - job: InstallSSHKey_Debian
     displayName: 'Test InstallSSHKey on Debian'
-    pool: 
-      name: 'Azure Pipelines'
-      vmImage: 'ubuntu-18.04'
+    pool:
+      name: 'win-11-poll'
+      demands:
+        - Agent.debian-agent
     steps:
     - template: templates/test-install-key-lin.yml
 
-# - stage: 'Debian via container'
-#   dependsOn: []
-#   jobs:
-#   - template: src/agentTest/agent-test-installer-tasks-container-template.yml
-#     parameters:
-#       pool: 
-#         name: 'Azure Pipelines'
-#         vmImage: 'ubuntu-18.04'
+- stage: 'Debian via container'
+  dependsOn: []
+  jobs:
+  - template: src/agentTest/agent-test-installer-tasks-container-template.yml
+    parameters:
+      pool:
+        name: 'win-11-poll'
+        demands:
+          - Agent.debian-agent
 
-#   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
-#     parameters:
-#       targetPools: 'Hosted Ubuntu 1804'
-#       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-#       pool: 
-#         name: 'Azure Pipelines'
-#         vmImage: 'ubuntu-18.04'
+  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-container-jdk7.yml
+    parameters:
+      targetPools: 'Hosted Ubuntu 1804'
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+      pool:
+        name: 'win-11-poll'
+        demands:
+          - Agent.debian-agent
 
-#   - job: InstallSSHKey_Debian
-#     displayName: 'Test InstallSSHKey on Debian'
-#     pool: 
-#       name: 'Azure Pipelines'
-#       vmImage: 'ubuntu-18.04'
-#     container: debian:latest
-#     steps:
-#     - template: templates/test-install-key.yml
+  - job: InstallSSHKey_Debian
+    displayName: 'Test InstallSSHKey on Debian'
+    pool:
+      name: 'win-11-poll'
+      demands:
+        - Agent.debian-agent
+    container: debian:latest
+    steps:
+    - template: templates/test-install-key.yml
