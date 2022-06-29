@@ -10,7 +10,7 @@ stages:
     parameters:
       secureSteps: 'download-secure-file-steps-win.yml'
       pool:
-        name: 'win-11-poll'
+        name: 'win-11-pool'
         demands:
           - Agent.win-11-ms
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
@@ -18,13 +18,13 @@ stages:
       targetPools: 'Hosted Windows 2019 with VS2019'
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
       pool:
-        name: 'win-11-poll'
+        name: 'win-11-pool'
         demands:
           - Agent.win-11-ms
   - job: InstallSSHKey_Windows
     displayName: 'Test InstallSSHKey on Windows'
     pool:
-      name: 'win-11-poll'
+      name: 'win-11-pool'
       demands:
         - Agent.win-11-ms
     steps:
@@ -37,7 +37,7 @@ stages:
     parameters:
       secureSteps: 'download-secure-file-steps-lin.yml'
       pool:
-        name: 'win-11-poll'
+        name: 'win-11-pool'
         demands:
           - Agent.debian-agent
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
@@ -45,13 +45,13 @@ stages:
       targetPools: 'Hosted Ubuntu 1804'
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
       pool:
-        name: 'win-11-poll'
+        name: 'win-11-pool'
         demands:
           - Agent.debian-agent
   - job: InstallSSHKey_Debian
     displayName: 'Test InstallSSHKey on Debian'
     pool:
-      name: 'win-11-poll'
+      name: 'win-11-pool'
       demands:
         - Agent.debian-agent
     steps:
@@ -63,7 +63,7 @@ stages:
   - template: src/agentTest/agent-test-installer-tasks-container-template.yml
     parameters:
       pool:
-        name: 'win-11-poll'
+        name: 'win-11-pool'
         demands:
           - Agent.debian-agent
 
@@ -72,14 +72,14 @@ stages:
       targetPools: 'Hosted Ubuntu 1804'
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
       pool:
-        name: 'win-11-poll'
+        name: 'win-11-pool'
         demands:
           - Agent.debian-agent
 
   - job: InstallSSHKey_Debian
     displayName: 'Test InstallSSHKey on Debian'
     pool:
-      name: 'win-11-poll'
+      name: 'win-11-pool'
       demands:
         - Agent.debian-agent
     container: debian:latest
