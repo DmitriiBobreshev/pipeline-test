@@ -57,7 +57,7 @@ stages:
     steps:
     - template: templates/test-install-key-lin.yml
 
-- stage: 'Debian via container'
+- stage: 'DebianViaContainer'
   dependsOn: []
   jobs:
   - template: src/agentTest/agent-test-installer-tasks-container-template.yml
