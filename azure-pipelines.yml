@@ -12,7 +12,7 @@ stages:
       pool:
         name: 'win-11-pool'
         demands:
-          - Agent.win-11-ms
+          - Agent.Name -equals win-11-ms
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
     parameters:
       targetPools: 'Hosted Windows 2019 with VS2019'
@@ -20,13 +20,13 @@ stages:
       pool:
         name: 'win-11-pool'
         demands:
-          - Agent.win-11-ms
+          - Agent.Name -equals win-11-ms
   - job: InstallSSHKey_Windows
     displayName: 'Test InstallSSHKey on Windows'
     pool:
       name: 'win-11-pool'
       demands:
-        - Agent.win-11-ms
+        - Agent.Name -equals win-11-ms
     steps:
     - template: templates/test-install-key-win.yml
 
@@ -39,7 +39,7 @@ stages:
       pool:
         name: 'win-11-pool'
         demands:
-          - Agent.debian-agent
+          - Agent.Name -equals debian-agent
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
     parameters:
       targetPools: 'Hosted Ubuntu 1804'
@@ -47,13 +47,13 @@ stages:
       pool:
         name: 'win-11-pool'
         demands:
-          - Agent.debian-agent
+          - Agent.Name -equals debian-agent
   - job: InstallSSHKey_Debian
     displayName: 'Test InstallSSHKey on Debian'
     pool:
       name: 'win-11-pool'
       demands:
-        - Agent.debian-agent
+        - Agent.Name -equals debian-agent
     steps:
     - template: templates/test-install-key-lin.yml
 
@@ -65,7 +65,7 @@ stages:
       pool:
         name: 'win-11-pool'
         demands:
-          - Agent.debian-agent
+          - Agent.Name -equals debian-agent
 
   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-container-jdk7.yml
     parameters:
@@ -74,14 +74,14 @@ stages:
       pool:
         name: 'win-11-pool'
         demands:
-          - Agent.debian-agent
+          - Agent.Name -equals debian-agent
 
   - job: InstallSSHKey_Debian
     displayName: 'Test InstallSSHKey on Debian'
     pool:
       name: 'win-11-pool'
       demands:
-        - Agent.debian-agent
+        - Agent.Name -equals debian-agent
     container: debian:latest
     steps:
     - template: templates/test-install-key.yml
