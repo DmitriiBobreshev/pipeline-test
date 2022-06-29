@@ -75,13 +75,3 @@ stages:
         name: 'win-11-pool'
         demands:
           - Agent.Name -equals debian-agent
-
-  - job: InstallSSHKey_Debian
-    displayName: 'Test InstallSSHKey on Debian'
-    pool:
-      name: 'win-11-pool'
-      demands:
-        - Agent.Name -equals debian-agent
-    container: debian:latest
-    steps:
-    - template: templates/test-install-key.yml
