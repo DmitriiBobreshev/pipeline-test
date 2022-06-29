@@ -58,12 +58,3 @@ stages:
         name: 'win-11-pool'
         demands:
           - Agent.Name -equals debian-agent
-
-  - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-container-jdk7.yml
-    parameters:
-      targetPools: 'Hosted Ubuntu 1804'
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-      pool:
-        name: 'win-11-pool'
-        demands:
-          - Agent.Name -equals debian-agent
