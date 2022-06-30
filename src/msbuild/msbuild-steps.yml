@@ -20,10 +20,3 @@ steps:
   inputs:
     solution: ${{ parameters.solutionPath }}
     msbuildLocationMethod: 'version'
-
-- task: MSBuild@1
-  displayName: 'Build simple app with x64 arch'
-  inputs:
-    solution: ${{ parameters.solutionPath }}
-    msbuildArchitecture: 'x64'
-    msbuildLocationMethod: 'version'

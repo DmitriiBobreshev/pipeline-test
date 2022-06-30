@@ -1,17 +1,4 @@
 jobs:
-- job: 'Win2016'
-  displayName: Windows VS2017
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'vs2017-win2016'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
-    - template: src/msbuild/msbuild-steps-2.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
-
 - job: 'Win2019'
   displayName: Windows VS2019
   pool:
