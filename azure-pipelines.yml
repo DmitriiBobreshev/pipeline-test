@@ -14,8 +14,8 @@ jobs:
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Windows 2019 with VS2019'))
   steps:
+    - template: src/msbuild/msbuild-steps.yml
       parameters:
         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
 
