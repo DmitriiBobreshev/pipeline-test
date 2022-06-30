@@ -3,7 +3,7 @@ parameters:
     type: "string"
 
 steps:
-- task: NuGetToolInstaller@0
+- task: NuGetToolInstaller@1
   displayName: 'Use NuGet 6.0.2'
   inputs:
     versionSpec: 6.0.2
