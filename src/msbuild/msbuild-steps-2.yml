@@ -4,8 +4,9 @@ parameters:
 
 steps:
 - task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 4.4.1'
   inputs:
-    checkLatest: true
+    versionSpec: 4.4.1
   retryCountOnTaskFailure: 3
 
 - task: NuGetRestore@1
