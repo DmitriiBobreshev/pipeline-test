@@ -1,7 +1,7 @@
 jobs:
 
 - job: 'Win2019'
-  displayName: Windows VS2019
+  displayName: Windows VS2019 Hosted
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
@@ -9,8 +9,27 @@ jobs:
     - powershell: wget https://releases.hashicorp.com/terraform/1.1.7/terraform_1.1.7_linux_amd64.zip  
 
 - job: 'Win2022'
-  displayName: Windows VS2022
+  displayName: Windows VS2022 local
   pool:
     name: 'win-11-pool'
+    demands:
+      - Agent.Name -equals win-11-ms
   steps:
     - powershell: wget https://releases.hashicorp.com/terraform/1.1.7/terraform_1.1.7_linux_amd64.zip  
+
+- job: 'DebianLocal'
+  displayName: Debian Local
+  pool:
+    name: 'win-11-pool'
+    demands:
+      - Agent.Name -equals debian-agent
+  steps:
+    - script: wget https://releases.hashicorp.com/terraform/1.1.7/terraform_1.1.7_linux_amd64.zip  
+
+- job: 'Ubuntu'
+  displayName: Ubuntu Hosted
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-22.04'
+  steps:
+    - script: wget https://releases.hashicorp.com/terraform/1.1.7/terraform_1.1.7_linux_amd64.zip  
