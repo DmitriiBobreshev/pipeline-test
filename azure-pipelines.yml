@@ -6,43 +6,11 @@ jobs:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
   steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+    - pwsh: wget https://releases.hashicorp.com/terraform/1.1.7/terraform_1.1.7_linux_amd64.zip  
 
 - job: 'Win2022'
   displayName: Windows VS2022
   pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2022'
+    name: 'win-11-pool'
   steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-
-- job: 'MacOS_Catalina'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-10.15'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-
-- job: 'MacOS_BigSur'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-11'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-
-- job: 'MacOS_Public_Monterey'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-12'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+    - pwsh: wget https://releases.hashicorp.com/terraform/1.1.7/terraform_1.1.7_linux_amd64.zip  
