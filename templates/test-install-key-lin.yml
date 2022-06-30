@@ -14,7 +14,7 @@ steps:
     sshPassphrase: '$(passphrase)'
     sshKeySecureFile: key2
   retryCountOnTaskFailure: 3
-- bash: git clone git@github.com:DmitriiBobreshev/azure-samples.git
+- powershell: git clone git@github.com:DmitriiBobreshev/azure-samples.git
   displayName: Clone Sample Repo
 - bash: |
     if [[ -d azure-samples ]]
