@@ -6,19 +6,19 @@ jobs:
     name: 'Azure Pipelines'
     vmImage: 'windows-2022'
   steps:
-  - template: twine-authenticate-steps.yml
+  - template: src/TwineAuthenticate/twine-authenticate-steps.yml
 
 - job: 'TwineAuthenticateHosted2017'
   displayName: Windows2017
   pool: $[ coalesce(variables.vs2017, 'Hosted VS2017') ]
   steps:
-  - template: twine-authenticate-steps.yml
+  - template: src/TwineAuthenticate/twine-authenticate-steps.yml
 
 - job: 'TwineAuthenticate_Ubuntu_1804'
   displayName: Ubuntu_1804
   pool: $[ coalesce(variables.ubuntu1804, 'Hosted Ubuntu 1804') ]
   steps:
-  - template: twine-authenticate-steps.yml
+  - template: src/TwineAuthenticate/twine-authenticate-steps.yml
 
 - job: 'TwineAuthenticate_Ubuntu_2004'
   displayName: Ubuntu_2004
@@ -26,24 +26,24 @@ jobs:
     name: 'Azure Pipelines'
     vmImage: 'ubuntu-20.04'
   steps:
-  - template: twine-authenticate-steps.yml
+  - template: src/TwineAuthenticate/twine-authenticate-steps.yml
 
 - job: 'TwineAuthenticate_Windows2019'
   displayName: Windows2019
   pool: $[ coalesce(variables.windows2019withvs2019, 'Hosted Windows 2019 with VS2019') ]
   steps:
-  - template: twine-authenticate-steps.yml
+  - template: src/TwineAuthenticate/twine-authenticate-steps.yml
 
 - job: 'MacOS_Public_Catalina'
   pool:
     name: 'Azure Pipelines'
     vmImage: 'macos-10.15'
   steps:
-  - template: twine-authenticate-steps.yml
+  - template: src/TwineAuthenticate/twine-authenticate-steps.yml
 
 - job: 'MacOS_Public_BigSur'
   pool:
     name: 'Azure Pipelines'
     vmImage: 'macos-11'
   steps:
-  - template: twine-authenticate-steps.yml
+  - template: src/TwineAuthenticate/twine-authenticate-steps.yml
