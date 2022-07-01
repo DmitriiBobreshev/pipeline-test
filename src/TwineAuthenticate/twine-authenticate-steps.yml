@@ -3,7 +3,6 @@ steps:
   displayName: 'Twine Authenticate V0'
   inputs:
     artifactFeeds: 'tasks/TwineAuthenticate'
-    externalFeeds: 'tasks@TwineAuthenticate2'
 
 - script: |
    pip install twine
@@ -16,15 +15,10 @@ steps:
    python -m twine upload -r tasks/TwineAuthenticate--config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PublicCanary/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PublicCanary/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz"
   displayName: 'twine upload same-org public with retries'
 
-- script: |
-   python -m twine upload -r TwineAuthenticate2/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz"
-  displayName: 'twine upload cross-org public with retries'
-
 - task: TwineAuthenticate@1
   displayName: 'Twine Authenticate V1'
   inputs:
     artifactFeed: 'tasks/TwineAuthenticate'
-    pythonUploadServiceConnection: 'tasks@TwineAuthenticate2'
 
 - script: |
    pip install twine
@@ -33,7 +27,3 @@ steps:
    python setup.py bdist_wheel
    python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl"
   displayName: 'twine upload v1 same-org with retries'
-
-- script: |
-   python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl"
-  displayName: 'twine upload v1 cross-org public with retries'
