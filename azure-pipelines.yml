@@ -1,39 +1,49 @@
-steps:
-  - task: TwineAuthenticate@0
-    displayName: 'Twine Authenticate V0'
-    inputs:
-      artifactFeeds: 'tasks/TwineAuthenticate',
-      externalFeeds: 'tasks@TwineAuthenticate2'
-  
-  - script: |
-     pip install twine
-     cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
-     python setup.py sdist
-     python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz"
-    displayName: 'twine upload same-org with retries'
-  
-  - script: |
-     python -m twine upload -r tasks/TwineAuthenticate--config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PublicCanary/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PublicCanary/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz"
-    displayName: 'twine upload same-org public with retries'
-  
-  - script: |
-     python -m twine upload -r TwineAuthenticate2/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz"
-    displayName: 'twine upload cross-org public with retries'
-  
-  - task: TwineAuthenticate@1
-    displayName: 'Twine Authenticate V1'
-    inputs:
-      artifactFeed: 'tasks/TwineAuthenticate'
-      pythonUploadServiceConnection: 'tasks@TwineAuthenticate2'
-  
-  - script: |
-     pip install twine
-     pip install wheel
-     cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
-     python setup.py bdist_wheel
-     python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl"
-    displayName: 'twine upload v1 same-org with retries'
-  
-  - script: |
-     python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl"
-    displayName: 'twine upload v1 cross-org public with retries'
+name: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)00'
+
+jobs:
+- job: 'TwineAuthenticateWin2022'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2022'
+  steps:
+  - template: twine-authenticate-steps.yml
+
+- job: 'TwineAuthenticateHosted2017'
+  displayName: Windows2017
+  pool: $[ coalesce(variables.vs2017, 'Hosted VS2017') ]
+  steps:
+  - template: twine-authenticate-steps.yml
+
+- job: 'TwineAuthenticate_Ubuntu_1804'
+  displayName: Ubuntu_1804
+  pool: $[ coalesce(variables.ubuntu1804, 'Hosted Ubuntu 1804') ]
+  steps:
+  - template: twine-authenticate-steps.yml
+
+- job: 'TwineAuthenticate_Ubuntu_2004'
+  displayName: Ubuntu_2004
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-20.04'
+  steps:
+  - template: twine-authenticate-steps.yml
+
+- job: 'TwineAuthenticate_Windows2019'
+  displayName: Windows2019
+  pool: $[ coalesce(variables.windows2019withvs2019, 'Hosted Windows 2019 with VS2019') ]
+  steps:
+  - template: twine-authenticate-steps.yml
+
+- job: 'MacOS_Public_Catalina'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'macos-10.15'
+  steps:
+  - template: twine-authenticate-steps.yml
+
+- job: 'MacOS_Public_BigSur'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'macos-11'
+  steps:
+  - template: twine-authenticate-steps.yml
