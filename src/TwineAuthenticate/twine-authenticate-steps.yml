@@ -2,7 +2,7 @@ steps:
 - task: TwineAuthenticate@0
   displayName: 'Twine Authenticate V0'
   inputs:
-    artifactFeeds: 'tasks/TwineAuthenticate',
+    artifactFeeds: 'tasks/TwineAuthenticate'
     externalFeeds: 'tasks@TwineAuthenticate2'
 
 - script: |
