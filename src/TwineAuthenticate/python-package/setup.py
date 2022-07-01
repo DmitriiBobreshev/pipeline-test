@@ -3,7 +3,7 @@ import datetime
 minor = datetime.datetime.now().strftime("%y%m%d")
 patch = datetime.datetime.now().strftime("%H%M%f")
 setup(
-    name='pipelinecanary-twineauthenticate-publishtest',
+    name='twineAuthenticate-twineauthenticate-publishtest',
     version='1.' + minor + '.' + patch,
     author='smd',
     author_email='example@example.com',

@@ -11,12 +11,9 @@ steps:
    pip install twine
    cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
    python setup.py sdist
-   python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/TwineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/TwineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/TwineAuthenticate-twineauthenticate-publishtest-*.tar.gz"
+   python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz"
   displayName: 'twine upload same-org with retries'
 
-- script: |
-   python -m twine upload -r tasks/TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/TwineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r tasks/TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/TwineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r tasks/TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/TwineAuthenticate-twineauthenticate-publishtest-*.tar.gz"
-  displayName: 'twine upload same-org public with retries'
 
 - task: TwineAuthenticate@1
   displayName: 'Twine Authenticate V1'
