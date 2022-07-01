@@ -11,7 +11,7 @@ steps:
    pip install twine
    cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
    python setup.py sdist
-   python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz"
+   python -m twine upload -r tasks/TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz"
   displayName: 'twine upload same-org with retries'
 
 
@@ -25,5 +25,5 @@ steps:
    pip install wheel
    cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
    python setup.py bdist_wheel
-   python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl"
+   python -m twine upload -r tasks/TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl"
   displayName: 'twine upload v1 same-org with retries'
