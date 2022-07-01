@@ -1,65 +1,39 @@
-jobs:
-- job: 'Win2019'
-  displayName: Windows VS2019
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2019'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-    - template: src/msbuild/msbuild-steps-2.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
-
-- job: 'Win2022'
-  displayName: Windows VS2022
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2022'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-    - template: src/msbuild/msbuild-steps-2.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
-
-- job: 'MacOS_Catalina'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-10.15'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-    - template: src/msbuild/msbuild-steps-2.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
+steps:
+  - task: TwineAuthenticate@0
+    displayName: 'Twine Authenticate V0'
+    inputs:
+      artifactFeeds: 'tasks/TwineAuthenticate',
+      externalFeeds: 'tasks@TwineAuthenticate2'
   
-
-- job: 'MacOS_BigSur'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-11'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-    - template: src/msbuild/msbuild-steps-2.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
-    
-
-- job: 'MacOS_Public_Monterey'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-12'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-    - template: src/msbuild/msbuild-steps-2.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
+  - script: |
+     pip install twine
+     cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
+     python setup.py sdist
+     python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz"
+    displayName: 'twine upload same-org with retries'
   
+  - script: |
+     python -m twine upload -r tasks/TwineAuthenticate--config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PublicCanary/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PublicCanary/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz"
+    displayName: 'twine upload same-org public with retries'
+  
+  - script: |
+     python -m twine upload -r TwineAuthenticate2/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz"
+    displayName: 'twine upload cross-org public with retries'
+  
+  - task: TwineAuthenticate@1
+    displayName: 'Twine Authenticate V1'
+    inputs:
+      artifactFeed: 'tasks/TwineAuthenticate'
+      pythonUploadServiceConnection: 'tasks@TwineAuthenticate2'
+  
+  - script: |
+     pip install twine
+     pip install wheel
+     cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
+     python setup.py bdist_wheel
+     python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl"
+    displayName: 'twine upload v1 same-org with retries'
+  
+  - script: |
+     python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/*.whl"
+    displayName: 'twine upload v1 cross-org public with retries'

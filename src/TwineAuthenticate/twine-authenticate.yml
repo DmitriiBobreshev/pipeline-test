@@ -5,21 +5,18 @@ jobs:
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2022'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Windows Server 2022'))
   steps:
   - template: twine-authenticate-steps.yml
 
 - job: 'TwineAuthenticateHosted2017'
   displayName: Windows2017
   pool: $[ coalesce(variables.vs2017, 'Hosted VS2017') ]
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted VS2017'))
   steps:
   - template: twine-authenticate-steps.yml
 
 - job: 'TwineAuthenticate_Ubuntu_1804'
   displayName: Ubuntu_1804
   pool: $[ coalesce(variables.ubuntu1804, 'Hosted Ubuntu 1804') ]
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Ubuntu 1804'))
   steps:
   - template: twine-authenticate-steps.yml
 
@@ -28,29 +25,25 @@ jobs:
   pool:
     name: 'Azure Pipelines'
     vmImage: 'ubuntu-20.04'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Ubuntu 2004'))
   steps:
   - template: twine-authenticate-steps.yml
 
 - job: 'TwineAuthenticate_Windows2019'
   displayName: Windows2019
   pool: $[ coalesce(variables.windows2019withvs2019, 'Hosted Windows 2019 with VS2019') ]
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Windows 2019 with VS2019'))
   steps:
   - template: twine-authenticate-steps.yml
 
 - job: 'MacOS_Public_Catalina'
   pool:
-    name: 'LimitedPublicCatalina'
+    name: 'Azure Pipelines'
     vmImage: 'macos-10.15'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS Catalina'))
   steps:
   - template: twine-authenticate-steps.yml
 
 - job: 'MacOS_Public_BigSur'
   pool:
-    name: 'LimitedPublicBigSur'
+    name: 'Azure Pipelines'
     vmImage: 'macos-11'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS BigSur'))
   steps:
   - template: twine-authenticate-steps.yml
