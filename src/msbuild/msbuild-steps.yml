@@ -8,11 +8,11 @@ steps:
     checkLatest: true
   retryCountOnTaskFailure: 3
 
-- task: NuGetRestore@1
+- task: NuGetCommand@2
   inputs:
-    filePath: ${{ parameters.solutionPath }} 
-    selectOrConfig: 'select'
-    includeNuGetOrg: true
+    command: 'restore'
+    restoreSolution: ${{ parameters.solutionPath }} 
+    feedsToUse: 'select'
   retryCountOnTaskFailure: 3
 
 - task: MSBuild@1
