@@ -5,6 +5,11 @@ steps:
   inputs:
     secureFile: 1.txt
 
-- script: |
-    tail -n 10 $(secureFile.secureFilePath);
+- powershell: |
+    if(test-path $(secureFile.secureFilePath)) {
+        Write-Host "$(secureFile.secureFilePath) exists"
+    } else {
+        Write-Error "Not found: $(secureFile.secureFilePath)"
+        exit 1
+    }
   displayName: Check if secure file exists
