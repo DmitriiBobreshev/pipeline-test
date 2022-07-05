@@ -71,6 +71,8 @@
       jdkDestinationDirectory: tempDir/
       cleanDestinationDirectory: false
 
+  - script: echo $(JAVA_HOME)
+
   - task: Maven@3
     displayName: 'Maven JavaTestProject/pom.xml'
     inputs:
