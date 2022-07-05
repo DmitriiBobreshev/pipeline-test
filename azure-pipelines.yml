@@ -5,7 +5,7 @@ stages:
 - stage: __default
   jobs:
   - job: 'Ubuntu_1804'
-    displayName: Test InstallSSHKey on Ubuntu 1804
+    displayName: Test InstallSSHKey and DownloadSecureFile on Ubuntu 1804
     pool: 
       vmImage: ubuntu-18.04
     steps:
@@ -13,7 +13,7 @@ stages:
     - template: templates/download-secure-file-steps.yml
   
   - job: 'Ubuntu_2004'
-    displayName: Test InstallSSHKey on Ubuntu 2004
+    displayName: Test InstallSSHKey and DownloadSecureFile on Ubuntu 2004
     pool: 
       vmImage: ubuntu-20.04
     steps:
@@ -21,7 +21,7 @@ stages:
     - template: templates/download-secure-file-steps.yml
   
   - job: 'Ubuntu_2204'
-    displayName: Test InstallSSHKey on Ubuntu 2204
+    displayName: Test InstallSSHKey and DownloadSecureFile on Ubuntu 2204
     pool: 
       vmImage: ubuntu-22.04
     steps:
@@ -29,7 +29,7 @@ stages:
     - template: templates/download-secure-file-steps.yml
   
   - job: 'Win2019'
-    displayName: Test InstallSSHKey on Windows 2019
+    displayName: Test InstallSSHKey and DownloadSecureFile on Windows 2019
     pool:
       name: 'Azure Pipelines'
       vmImage: 'windows-2019'
@@ -38,7 +38,7 @@ stages:
      - template: templates/download-secure-file-steps.yml
   
   - job: 'Win2022'
-    displayName: Test InstallSSHKey on Windows 2022
+    displayName: Test InstallSSHKey and DownloadSecureFile on Windows 2022
     pool:
       name: 'Azure Pipelines'
       vmImage: 'windows-2022'
@@ -47,7 +47,7 @@ stages:
     - template: templates/download-secure-file-steps.yml
   
   - job: 'MacOS_Public_Catalina'
-    displayName: Test InstallSSHKey on MacOS Catalina
+    displayName: Test InstallSSHKey and DownloadSecureFile on MacOS Catalina
     pool:
       vmImage: 'macos-10.15'
     steps:
@@ -55,7 +55,7 @@ stages:
     - template: templates/download-secure-file-steps.yml
   
   - job: 'MacOS_Public_BigSur'
-    displayName: Test InstallSSHKey on MacOS Big Sur
+    displayName: Test InstallSSHKey and DownloadSecureFile on MacOS Big Sur
     pool:
       vmImage: 'macos-11'
     steps:
@@ -63,7 +63,7 @@ stages:
     - template: templates/download-secure-file-steps.yml
   
   - job: 'MacOS_Public_Monterey'
-    displayName: Test InstallSSHKey on MacOS Monterey
+    displayName: Test InstallSSHKey and DownloadSecureFile on MacOS Monterey
     pool:
       vmImage: 'macos-12'
     steps:

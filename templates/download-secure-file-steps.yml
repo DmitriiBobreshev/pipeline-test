@@ -1,5 +1,5 @@
 steps:
-- task: DownloadSecureFile@1.200.0
+- task: DownloadSecureFile@1
   displayName: Download secure file
   name: 'secureFile'
   inputs:
