@@ -4,12 +4,14 @@ parameters:
 
 steps:
 - task: NuGetToolInstaller@1
+  displayName: Nuget Tool Install version 1
   inputs:
     checkLatest: true
     versionSpec: '*'
   retryCountOnTaskFailure: 3
 
 - task: NuGetCommand@2
+  displayName: Restore Nuget Packages
   inputs:
     command: 'restore'
     restoreSolution: ${{ parameters.solutionPath }} 

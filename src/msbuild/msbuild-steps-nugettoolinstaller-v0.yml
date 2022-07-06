@@ -3,13 +3,15 @@ parameters:
     type: "string"
 
 steps:
-- task: NuGetToolInstaller@1
-  displayName: 'Use NuGet 6.0.2'
+- task: NuGetToolInstaller@0
+  displayName: Nuget Tool Install version 0
   inputs:
-    versionSpec: 6.0.2
+    checkLatest: true
+    versionSpec: '*'
   retryCountOnTaskFailure: 3
 
 - task: NuGetCommand@2
+  displayName: Restore Nuget Packages
   inputs:
     command: 'restore'
     restoreSolution: ${{ parameters.solutionPath }} 
