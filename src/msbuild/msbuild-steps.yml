@@ -6,6 +6,7 @@ steps:
 - task: NuGetToolInstaller@1
   inputs:
     checkLatest: true
+    versionSpec: '*'
   retryCountOnTaskFailure: 3
 
 - task: NuGetCommand@2
