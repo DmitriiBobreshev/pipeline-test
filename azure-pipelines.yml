@@ -9,12 +9,4 @@ jobs:
     steps:
       - template: templates/use-python-version.yml
         parameters:
-          pythonVersion: 'pypy3'
-
-      - template: templates/use-python-version.yml
-        parameters:
-          pythonVersion: 'pypy2'
-
-      - template: templates/use-python-version.yml
-        parameters:
           pythonVersion: '3.10.5'
