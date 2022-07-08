@@ -10,3 +10,11 @@ jobs:
       - template: templates/use-python-version.yml
         parameters:
           pythonVersion: '3.10.5'
+      
+      - template: templates/use-python-version.yml
+        parameters:
+          pythonVersion: '3.5.1'
+
+      - template: templates/use-python-version.yml
+        parameters:
+          pythonVersion: '3.10.5'
