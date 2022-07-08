@@ -9,4 +9,4 @@ jobs:
     steps:
       - template: templates/use-python-version.yml
         parameters:
-          pythonVersion: '3.10.1'
+          pythonVersion: '3.8'
