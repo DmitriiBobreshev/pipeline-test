@@ -3,8 +3,9 @@ jobs:
   - job: 'Win2019'
     displayName: Self Hosted Debian
     pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2019'
+      name: 'win-11-pool'
+      demands:
+        - Agent.Name -equals debian-agent
     steps:
       - template: templates/use-python-version.yml
         parameters:
