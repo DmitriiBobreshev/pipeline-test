@@ -22,6 +22,17 @@ stages:
     steps:
     - template: templates/test-install-key-win.yml
 
+- stage: 'Win'
+  dependsOn: []
+  jobs:
+  - template: src/agentTest/agent-test-installer-tasks-container-template.yml
+    parameters:
+      secureSteps: 'download-secure-file-steps-win.yml'
+      pool:
+        name: 'win-11-pool'
+        demands:
+          - Agent.Name -equals win-server-2016
+
 # - stage: 'Debian'
 #   dependsOn: []
 #   jobs:
