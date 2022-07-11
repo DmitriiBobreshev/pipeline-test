@@ -10,7 +10,7 @@ jobs:
         inputs:
           versionSpec: '10.x' 
       
-      - script: echo $PATH
+      - script: echo $LD_LIBRARY_PATH
 
       - template: templates/use-python-version.yml
         parameters:
