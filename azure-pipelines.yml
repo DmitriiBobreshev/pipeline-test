@@ -3,9 +3,8 @@ jobs:
   - job: 'Win2019'
     displayName: Self Hosted Debian
     pool:
-      name: 'win-11-pool'
-      demands:
-        - Agent.Name -equals debian-agent
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-18.04'
     steps:
       - task: NodeTool@0
         inputs:
