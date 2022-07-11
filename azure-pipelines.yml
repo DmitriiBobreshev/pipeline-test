@@ -16,9 +16,13 @@ jobs:
         parameters:
           pythonVersion: '3.10.5'
       
+      - script: echo $LD_LIBRARY_PATH
+
       - template: templates/use-python-version.yml
         parameters:
           pythonVersion: '3.5.10'
+
+      - script: echo $LD_LIBRARY_PATH
 
       - template: templates/use-python-version.yml
         parameters:
