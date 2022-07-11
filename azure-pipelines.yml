@@ -27,7 +27,6 @@ stages:
   jobs:
   - template: src/agentTest/agent-test-installer-tasks-container-template.yml
     parameters:
-      secureSteps: 'download-secure-file-steps-win.yml'
       pool:
         name: 'win-11-pool'
         demands:
