@@ -5,7 +5,8 @@ parameters:
     type: string
 jobs:
 
-- job: 'Check Powershell and some tasks via Git'
+- job: 'CheckPowershellAndTasks'
+  displayName: 'Check Powershell and some tasks via Git'
   pool: ${{ parameters.pool }}
   steps:
     - template: ${{ parameters.secureSteps }}
