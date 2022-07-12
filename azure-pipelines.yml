@@ -17,32 +17,32 @@ stages:
         name: 'win-11-pool'
         demands:
           - Agent.Name -equals $(agentName)
-  - job: InstallSSHKey_Windows
-    displayName: 'Test InstallSSHKey and powershell'
-    pool:
-      name: 'win-11-pool'
-      demands:
-        - Agent.Name -equals $(agentName)
-    steps:
-    - template: templates/test-install-key-win.yml
+  # - job: InstallSSHKey_Windows
+  #   displayName: 'Test InstallSSHKey and powershell'
+  #   pool:
+  #     name: 'win-11-pool'
+  #     demands:
+  #       - Agent.Name -equals $(agentName)
+  #   steps:
+  #   - template: templates/test-install-key-win.yml
 
-  - job: 'TwineAuthenticateWin'
-    displayName: 'Test Publishing to Artifacts'
-    pool:
-      name: 'win-11-pool'
-      demands:
-        - Agent.Name -equals $(agentName)
-    steps:
-    - template: src/TwineAuthenticate/twine-authenticate-steps.yml
+  # - job: 'TwineAuthenticateWin'
+  #   displayName: 'Test Publishing to Artifacts'
+  #   pool:
+  #     name: 'win-11-pool'
+  #     demands:
+  #       - Agent.Name -equals $(agentName)
+  #   steps:
+  #   - template: src/TwineAuthenticate/twine-authenticate-steps.yml
 
-  - job: 'PublishTestResults'
-    displayName: 'Test Publishing test Results'
-    pool:
-      name: 'win-11-pool'
-      demands:
-        - Agent.Name -equals $(agentName)
-    steps:
-    - template: src/maven/test-publish-test-results.yml
+  # - job: 'PublishTestResults'
+  #   displayName: 'Test Publishing test Results'
+  #   pool:
+  #     name: 'win-11-pool'
+  #     demands:
+  #       - Agent.Name -equals $(agentName)
+  #   steps:
+  #   - template: src/maven/test-publish-test-results.yml
 
 - stage: 'WinContainer'
   dependsOn: []
