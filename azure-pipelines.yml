@@ -18,7 +18,7 @@ stages:
         demands:
           - Agent.Name -equals $(agentName)
   - job: InstallSSHKey_Windows
-    displayName: 'Test InstallSSHKey & powershell'
+    displayName: 'Test InstallSSHKey and powershell'
     pool:
       name: 'win-11-pool'
       demands:
