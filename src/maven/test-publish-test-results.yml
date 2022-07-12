@@ -1,4 +1,7 @@
 steps:
+- powershell: $Env:JAVA_HOME_8_X64
+  displayName: "Show JAVA_HOME_8_X64"
+  
 - task: Maven@3
   inputs:
     mavenPomFile: 'src/maven/pom.xml'

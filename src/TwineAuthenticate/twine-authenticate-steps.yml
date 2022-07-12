@@ -4,7 +4,7 @@ steps:
   inputs:
     artifactFeeds: 'tasks/TwineAuthenticate'
 
-- powershell: $Env:Path
+- powershell: $Env:JAVA_HOME_8_X64
 
 - powershell: |
    pip install twine
