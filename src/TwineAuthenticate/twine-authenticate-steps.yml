@@ -4,9 +4,6 @@ steps:
   inputs:
     artifactFeeds: 'tasks/TwineAuthenticate'
 
-- script: cat $(PYPIRC_PATH) 
-- script: echo $(PYPIRC_PATH) 
-
 - script: |
    pip install twine
    cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"

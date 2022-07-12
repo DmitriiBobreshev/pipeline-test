@@ -1,6 +1,10 @@
 variables:
   - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
     value: true
+  - name: passphrase
+    value: 4eba4y
+  - name: agentName
+    value: win-server-2016
 
 stages:
 - stage: 'Win'
@@ -12,15 +16,33 @@ stages:
       pool:
         name: 'win-11-pool'
         demands:
-          - Agent.Name -equals win-server-2016
+          - Agent.Name -equals $(agentName)
   - job: InstallSSHKey_Windows
-    displayName: 'Test InstallSSHKey on Windows'
+    displayName: 'Test InstallSSHKey & powershell'
     pool:
       name: 'win-11-pool'
       demands:
-        - Agent.Name -equals win-server-2016
+        - Agent.Name -equals $(agentName)
     steps:
     - template: templates/test-install-key-win.yml
+
+  - job: 'TwineAuthenticateWin'
+    displayName: 'Test Publishing to Artifacts'
+    pool:
+      name: 'win-11-pool'
+      demands:
+        - Agent.Name -equals $(agentName)
+    steps:
+    - template: src/TwineAuthenticate/twine-authenticate-steps.yml
+
+  - job: 'PublishTestResults'
+    displayName: 'Test Publishing test Results'
+    pool:
+      name: 'win-11-pool'
+      demands:
+        - Agent.Name -equals $(agentName)
+    steps:
+    - template: src/maven/test-publish-test-results.yml
 
 - stage: 'WinContainer'
   dependsOn: []
@@ -30,33 +52,4 @@ stages:
       pool:
         name: 'win-11-pool'
         demands:
-          - Agent.Name -equals win-server-2016
-
-# - stage: 'Debian'
-#   dependsOn: []
-#   jobs:
-#   - template: src/agentTest/agent-test-installer-tasks-template.yml
-#     parameters:
-#       secureSteps: 'download-secure-file-steps-lin.yml'
-#       pool:
-#         name: 'win-11-pool'
-#         demands:
-#           - Agent.Name -equals debian-agent
-#   - template: src/javaToolInstaller/templates/java-tool-installer-jobs-template-jdk7.yml
-#     parameters:
-#       targetPools: 'Hosted Ubuntu 1804'
-#       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-#       pool:
-#         name: 'win-11-pool'
-#         demands:
-#           - Agent.Name -equals debian-agent
-
-# - stage: 'DebianViaContainer'
-#   dependsOn: []
-#   jobs:
-#   - template: src/agentTest/agent-test-installer-tasks-container-template.yml
-#     parameters:
-#       pool:
-#         name: 'win-11-pool'
-#         demands:
-#           - Agent.Name -equals debian-agent
+          - Agent.Name -equals $(agentName)
