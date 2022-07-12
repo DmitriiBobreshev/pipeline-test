@@ -4,7 +4,7 @@ steps:
   inputs:
     artifactFeeds: 'tasks/TwineAuthenticate'
 
-- pws: |
+- powershell: |
    pip install twine
    cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
    python setup.py sdist
@@ -17,7 +17,7 @@ steps:
   inputs:
     artifactFeed: 'tasks/TwineAuthenticate'
 
-- pws: |
+- powershell: |
    pip install twine
    pip install wheel
    cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
