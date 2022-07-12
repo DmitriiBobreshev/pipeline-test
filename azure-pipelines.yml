@@ -45,6 +45,7 @@ stages:
     - template: src/maven/test-publish-test-results.yml
 
 - stage: 'WinContainer'
+  condition: and(succeeded(), eq(variables.needContainer, 'true'))
   dependsOn: []
   jobs:
   - template: src/agentTest/agent-test-installer-tasks-container-template.yml
