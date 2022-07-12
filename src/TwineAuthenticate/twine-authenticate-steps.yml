@@ -4,6 +4,8 @@ steps:
   inputs:
     artifactFeeds: 'tasks/TwineAuthenticate'
 
+- powershell: $Env:Path
+
 - powershell: |
    pip install twine
    cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
