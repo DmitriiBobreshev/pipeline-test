@@ -4,7 +4,7 @@ variables:
   - name: passphrase
     value: 4eba4y
   - name: agentName
-    value: win-7-x64-agent
+    value: win-8.1-x64-agent
 
 stages:
 - stage: 'Win'
