@@ -5,7 +5,7 @@ jobs:
 
 - job: 'TaskTestViaContainer'
   pool: ${{ parameters.pool }}
-  container: debian:latest
+  container: node
   steps:
     - template: download-secure-file-steps-lin.yml
     - task: DownloadSecureFile@1
