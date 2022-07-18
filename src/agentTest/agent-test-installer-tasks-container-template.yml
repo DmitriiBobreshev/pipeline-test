@@ -18,11 +18,11 @@ jobs:
       displayName: 'Download Big File'
       inputs:
         secureFile: '1.txt'
-    - task: CmdLine@2
+    - task: Bash@3
       displayName: 'Run a one-line script'
       inputs:
         script: echo Hello, world!
-    - task: CmdLine@2
+    - task: Bash@3
       displayName: 'Run a multi-line script'
       inputs:
         script: |
