@@ -18,16 +18,6 @@ jobs:
       displayName: 'Download Big File'
       inputs:
         secureFile: '1.txt'
-    - task: Bash@3
-      displayName: 'Run a one-line script'
-      inputs:
-        script: echo Hello, world!
-    - task: Bash@3
-      displayName: 'Run a multi-line script'
-      inputs:
-        script: |
-          echo Add other tasks to build, test, and deploy your project.
-          echo See https://aka.ms/yaml
     - script: echo null > test.txt
       displayName: 'Creating file'
     - task: CopyFiles@2
