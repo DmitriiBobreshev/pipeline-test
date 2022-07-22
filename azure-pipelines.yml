@@ -1,5 +1,5 @@
 variables:
-  - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
+  - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources 
     value: true
   - name: passphrase
     value: 4eba4y
