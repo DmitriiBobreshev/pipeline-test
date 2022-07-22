@@ -4,7 +4,7 @@ variables:
   - name: passphrase
     value: 4eba4y
   - name: agentName
-    value: ubuntu-server-22.04-agent
+    value: fedora-33-x64-agent
 
 stages:
 - stage: 'Win'
