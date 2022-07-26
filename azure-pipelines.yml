@@ -4,7 +4,9 @@ variables:
   - name: passphrase
     value: 4eba4y
   - name: agentName
-    value: centos-8-agent
+    value: rhel-9-agent
+  - name: poolName
+    value: win-11-pool
 
 stages:
 - stage: 'Win'
@@ -14,13 +16,13 @@ stages:
     parameters:
       secureSteps: 'download-secure-file-steps-win.yml'
       pool:
-        name: 'win-11-pool'
+        name: $(poolName)
         demands:
           - Agent.Name -equals $(agentName)
   - job: InstallSSHKey_Windows
     displayName: 'Test InstallSSHKey and powershell'
     pool:
-      name: 'win-11-pool'
+      name: $(poolName)
       demands:
         - Agent.Name -equals $(agentName)
     steps:
@@ -29,7 +31,7 @@ stages:
   - job: 'TwineAuthenticateWin'
     displayName: 'Test Publishing to Artifacts'
     pool:
-      name: 'win-11-pool'
+      name: $(poolName)
       demands:
         - Agent.Name -equals $(agentName)
     steps:
@@ -38,7 +40,7 @@ stages:
   - job: 'PublishTestResults'
     displayName: 'Test Publishing test Results'
     pool:
-      name: 'win-11-pool'
+      name: $(poolName)
       demands:
         - Agent.Name -equals $(agentName)
     steps:
@@ -51,6 +53,6 @@ stages:
   - template: src/agentTest/agent-test-installer-tasks-container-template.yml
     parameters:
       pool:
-        name: 'win-11-pool'
+        name: $(poolName)
         demands:
           - Agent.Name -equals $(agentName)
