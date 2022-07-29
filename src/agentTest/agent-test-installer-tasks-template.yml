@@ -40,7 +40,7 @@ jobs:
     - script: dir
     - task: NodeTool@0
       inputs:
-        versionSpec: 'v13.6.0'
+        versionSpec: 'v10.14.0'
       displayName: 'Install Node.js v13.6.0'
     - script: 'npm -v'
       displayName: Show npm version
