@@ -4,7 +4,7 @@ variables:
   - name: passphrase
     value: 4eba4y
   - name: agentName
-    value: rhel-9-agent
+    value: ubuntu-22-arm64-agent
   - name: poolName
     value: win-11-pool
 
