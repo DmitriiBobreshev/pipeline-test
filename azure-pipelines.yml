@@ -4,7 +4,7 @@ variables:
   - name: passphrase
     value: 4eba4y
   - name: agentName
-    value: debian-10-arm32-agent
+    value: mac-mini-arm64
   - name: poolName
     value: win-11-pool
 
