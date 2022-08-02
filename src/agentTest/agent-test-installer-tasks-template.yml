@@ -37,4 +37,3 @@ jobs:
         Contents: test.txt
         TargetFolder: 'testFolder'
       displayName: 'Try to run commund under node10'
-    - script: dir
