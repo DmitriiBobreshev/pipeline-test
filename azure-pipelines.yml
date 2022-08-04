@@ -4,7 +4,7 @@ variables:
   - name: passphrase
     value: 4eba4y
   - name: agentName
-    value: mac-mini-arm64
+    value: ubuntu-arm-32-aget
   - name: poolName
     value: win-11-pool
 
