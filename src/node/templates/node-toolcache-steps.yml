@@ -4,6 +4,12 @@ steps:
     versionSpec: ${{ parameters.nodeVersion }}
   displayName: 'Install Node.js'
 
+- script: node -v
+  displayName: 'node -v'
+
+- script: npm -v
+  displayName: 'npm -v'
+
 # using cli
 - script: npm install
   displayName: 'npm install'
