@@ -64,4 +64,32 @@ stages:
     - template: src/python/templates/test-toolcache.yml
       parameters:
         pythonVersion: $(python.version)
-
+  - job: UseDotnet
+    displayName: 'Test UseDotnet Task'
+    pool:
+      name: $(poolName)
+      demands:
+        - Agent.Name -equals $(agentName)
+    strategy:
+      matrix:
+        Dotnet6:
+          dotnet.version: '6.x'
+        Dotnet5:
+          dotnet.version: '5.x'
+        Dotnet4:
+          dotnet.version: '4.x'
+        Dotnet3:
+          dotnet.version: '3.x'
+        Dotnet2:
+          dotnet.version: '2.x'
+    steps:
+      - task: UseDotNet@2
+        displayName: Use .NET 6 SDK
+        inputs:
+          packageType: sdk
+          version: $(dotnet.version)
+      - task: UseDotNet@2
+        displayName: Use .NET 6 Runtime
+        inputs:
+          packageType: runtime
+          version: $(dotnet.version)
