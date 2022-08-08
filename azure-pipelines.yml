@@ -1,6 +1,14 @@
 variables:
   - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources 
     value: true
+  - name: DisableCFSDetector
+    value: true 
+  - name: DisableDockerDetector
+    value: true 
+  - name: NugetSecurityAnalysisWarningLevel
+    value: 'none'
+  - name: PythonMultiFeedWarnLevel
+    value: 'none'
   - name: passphrase
     value: 4eba4y
   - name: agentName
@@ -13,7 +21,7 @@ stages:
   dependsOn: []
   jobs:
   - job: UseNodeV1
-    displayName: 'Test UseNodeV1 Taskw'
+    displayName: 'Test UseNodeV1 Task'
     pool:
       name: $(poolName)
       demands:
@@ -32,4 +40,28 @@ stages:
     - template: src/node/templates/node-toolcache-steps.yml
       parameters:
         nodeVersion: $(node.version)
+  - job: UsePython
+    displayName: 'Test UsePython Task'
+    pool:
+      name: $(poolName)
+      demands:
+        - Agent.Name -equals $(agentName)
+    strategy:
+      matrix:
+        Python27:
+          python.version: '2.7'
+        Python36:
+          python.version: '3.6'
+        Python37:
+          python.version: '3.7'
+        Python38:
+          python.version: '3.8'
+        Python39:
+          python.version: '3.9'
+        Python310:
+          python.version: '3.10'
+    steps:
+    - template: src/python/templates/test-toolcache.yml
+      parameters:
+        pythonVersion: $(python.version)
 
