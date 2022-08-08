@@ -1,0 +1,48 @@
+steps:
+
+- template: node-tool-step.yml
+  parameters:
+    displayName: 'Install explicit Node version'
+    nodeVersionPattern: '15.0.0'
+    expectedNodeVersion: 'v15.0.0'
+    checkLatest: true
+
+- template: node-tool-step.yml
+  parameters:
+    displayName: "Install explicit Node version with 'v' prefix"
+    nodeVersionPattern: 'v15.0.0'
+    expectedNodeVersion: 'v15.0.0'
+    checkLatest: true
+
+# This step needs to download the right version (v0.8.24), and no other step should download any 0.8.x version
+# for more in-depth explanation see comment above 'Install previously used Node version (from cache)' step
+- template: node-tool-step.yml
+  parameters:
+    displayName: 'Install older Node version'
+    nodeVersionPattern: '0.8.24'
+    expectedNodeVersion: 'v0.8.24'
+    checkLatest: true
+
+- template: node-tool-step.yml
+  parameters:
+    displayName: "Install Node version using 'x' in place of patch version"
+    nodeVersionPattern: '5.4.x'
+    expectedNodeVersion: 'v5.4.1'
+    checkLatest: true
+
+- template: node-tool-step.yml
+  parameters:
+    displayName: "Install Node version using 'x' in place of minor version"
+    nodeVersionPattern: '5.x'
+    expectedNodeVersion: 'v5.12.0'
+    checkLatest: true
+
+# For this step to work the 'Install older Node version' step needs to download the right version (v0.8.24), and no other step should download any 0.8.x version:
+# if we pass '0.8.x' as pattern and set checkLatest to false the task should try to install the version that's already been cached
+# since by default agent doesn't have any 0.8.x versions cached it's going to use the only 0.8.x version that's been downloaded previously: v0.8.24
+- template: node-tool-step.yml
+  parameters:
+    displayName: 'Install previously used Node version (from cache)'
+    nodeVersionPattern: '0.8.x'
+    expectedNodeVersion: 'v0.8.24'
+    checkLatest: false

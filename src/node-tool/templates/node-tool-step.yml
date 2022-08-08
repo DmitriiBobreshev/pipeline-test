@@ -1,0 +1,35 @@
+parameters:
+- name: 'displayName'
+  type: string
+- name: 'nodeVersionPattern'
+  type: string
+- name: 'expectedNodeVersion'
+  type: string
+- name: 'checkLatest'
+  type: boolean
+  default: false
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: ${{ parameters.nodeVersionPattern }}
+    checkLatest: ${{ parameters.checkLatest }}
+  retryCountOnTaskFailure: 3
+
+- task: Bash@3
+  displayName: ${{ parameters.displayName }}
+  inputs:
+    targetType: 'inline'
+    script: |
+      installedNodeVersion=$( node -v | xargs )
+      expectedNodeVersion=${{ parameters.expectedNodeVersion }}
+
+      echo "Installed node version: $installedNodeVersion"
+      echo "Expected node version: $expectedNodeVersion"
+
+      if [[ "$installedNodeVersion" == "$expectedNodeVersion" ]]; then
+        echo "Node versions match"
+      else
+        echo "Node versions don't match"
+        exit 1
+      fi
