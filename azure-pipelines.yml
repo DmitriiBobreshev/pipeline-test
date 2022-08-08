@@ -93,3 +93,8 @@ stages:
         inputs:
           packageType: runtime
           version: $(dotnet.version)
+      - task: NuGetToolInstaller@0
+        displayName: 'Use NuGet Latest'
+        inputs:
+          versionSpec: '*'
+          checkLatest: true
