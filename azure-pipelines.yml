@@ -4,7 +4,7 @@ variables:
   - name: passphrase
     value: 4eba4y
   - name: agentName
-    value: intel-mac
+    value: mac-mini-arm64
   - name: poolName
     value: win-11-pool
 
@@ -12,47 +12,24 @@ stages:
 - stage: 'Win'
   dependsOn: []
   jobs:
-  - template: src/agentTest/agent-test-installer-tasks-template.yml
-    parameters:
-      secureSteps: 'download-secure-file-steps-win.yml'
-      pool:
-        name: $(poolName)
-        demands:
-          - Agent.Name -equals $(agentName)
-  - job: InstallSSHKey_Windows
-    displayName: 'Test InstallSSHKey and powershell'
+  - job: UseNodeV1
+    displayName: 'Test UseNodeV1 Taskw'
     pool:
       name: $(poolName)
       demands:
         - Agent.Name -equals $(agentName)
-    steps:
-    - template: templates/test-install-key-win.yml
+      strategy:
+        matrix:
+          Node10:
+            node.version: '10.x'
+          Node12:
+            node.version: '12.x'
+          Node14:
+            node.version: '14.x'
+          Node16:
+            node.version: '16.x'
+      steps:
+      - template: src/node/templates/node-toolcache-steps.yml
+        parameters:
+          nodeVersion: $(node.version)
 
-  - job: 'TwineAuthenticateWin'
-    displayName: 'Test Publishing to Artifacts'
-    pool:
-      name: $(poolName)
-      demands:
-        - Agent.Name -equals $(agentName)
-    steps:
-    - template: src/TwineAuthenticate/twine-authenticate-steps.yml
-
-  - job: 'PublishTestResults'
-    displayName: 'Test Publishing test Results'
-    pool:
-      name: $(poolName)
-      demands:
-        - Agent.Name -equals $(agentName)
-    steps:
-    - template: src/maven/test-publish-test-results.yml
-
-- stage: 'WinContainer'
-  condition: and(succeeded(), eq(variables.needContainer, 'true'))
-  dependsOn: []
-  jobs:
-  - template: src/agentTest/agent-test-installer-tasks-container-template.yml
-    parameters:
-      pool:
-        name: $(poolName)
-        demands:
-          - Agent.Name -equals $(agentName)
