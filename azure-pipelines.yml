@@ -43,7 +43,7 @@ stages:
         matrix:
           ios_15.8_mono_6.12_xcode_13.2.1:
             XAMARIN_SYMLINK: 6_12_16
-            XCODE_VERSION: 13.2.1
+            XCODE_VERSION: 13.3.1
             NETCORE_VERSION: 5.0.408
       steps:
       - template: src/xamarin-ios/templates/test-xamarin-ios-using-ui-test.yml
