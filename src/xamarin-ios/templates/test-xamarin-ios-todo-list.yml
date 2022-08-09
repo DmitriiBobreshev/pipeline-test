@@ -35,6 +35,5 @@ steps:
     packageApp: False
     buildForSimulator: True
     runNugetRestore: false
-    args: '/t:Rebuild '
     buildToolOption: msbuild
   retryCountOnTaskFailure: 3
