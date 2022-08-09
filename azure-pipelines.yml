@@ -359,7 +359,6 @@ stages:
           XCODE_VERSION: $(XCODE_VERSION)
     - job: 'App2'
       pool:
-        name: 'LimitedPublicMonterey'
         vmImage: 'macos-12'
       strategy:
         matrix:
