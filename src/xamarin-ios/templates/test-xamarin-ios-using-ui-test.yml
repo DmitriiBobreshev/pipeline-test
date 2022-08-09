@@ -25,7 +25,7 @@ steps:
   inputs:
     solutionFile: '$(build.sourcesdirectory)/src/xamarin-ios/UsingUITest/UsingUITest.sln'
     configuration: Release
-     packageApp: False
+    packageApp: False
     buildForSimulator: True
     runNugetRestore: false
     buildToolOption: msbuild
