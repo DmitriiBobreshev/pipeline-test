@@ -38,7 +38,7 @@ stages:
     jobs:
     - job: 'App1'
       pool:
-        vmImage: 'macos-11'
+        vmImage: 'macos-12'
       strategy:
         matrix:
           ios_15.8_mono_6.12_xcode_13.2.1:
@@ -52,7 +52,7 @@ stages:
           XCODE_VERSION: $(XCODE_VERSION)
     - job: 'App2'
       pool:
-        vmImage: 'macos-11'
+        vmImage: 'macos-12'
       strategy:
         matrix:
           ios_15.8_mono_6.12_xcode_13.2.1:
