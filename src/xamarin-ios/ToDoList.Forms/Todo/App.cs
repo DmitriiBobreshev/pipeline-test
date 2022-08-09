@@ -3,6 +3,7 @@ using System.IO;
 using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microsoft.Extensions.Caching.Memory;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Todo
@@ -15,7 +16,10 @@ namespace Todo
 		{
 			Resources = new ResourceDictionary();
 			Resources.Add("primaryGreen", Color.FromHex("91CA47"));
-			Resources.Add("primaryDarkGreen", Color.FromHex("6FA22E"));
+			IMemoryCache cache = new MemoryCache(new MemoryCacheOptions());
+			object result = cache.Set("Key", "6FA22E");
+			object key = cache.Get("Key");
+			Resources.Add("primaryDarkGreen", Color.FromHex((string)key));
 
 			var nav = new NavigationPage(new TodoListPage());
 			nav.BarBackgroundColor = (Color)App.Current.Resources["primaryGreen"];
