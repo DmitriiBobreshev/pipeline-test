@@ -20,26 +20,26 @@ stages:
 - stage: 'Win'
   dependsOn: []
   jobs:
-  - job: UseNodeV1
-    displayName: 'Test UseNodeV1 Task'
-    pool:
-      name: $(poolName)
-      demands:
-        - Agent.Name -equals $(agentName)
-    strategy:
-      matrix:
-        Node10:
-          node.version: '10.x'
-        Node12:
-          node.version: '12.x'
-        Node14:
-          node.version: '14.x'
-        Node16:
-          node.version: '16.x'
-    steps:
-    - template: src/node/templates/node-toolcache-steps.yml
-      parameters:
-        nodeVersion: $(node.version)
+  # - job: UseNodeV1
+  #   displayName: 'Test UseNodeV1 Task'
+  #   pool:
+  #     name: $(poolName)
+  #     demands:
+  #       - Agent.Name -equals $(agentName)
+  #   strategy:
+  #     matrix:
+  #       Node10:
+  #         node.version: '10.x'
+  #       Node12:
+  #         node.version: '12.x'
+  #       Node14:
+  #         node.version: '14.x'
+  #       Node16:
+  #         node.version: '16.x'
+  #   steps:
+  #   - template: src/node/templates/node-toolcache-steps.yml
+  #     parameters:
+  #       nodeVersion: $(node.version)
   - job: NodeTools
     displayName: 'Test NodeTools Task'
     pool:
@@ -50,12 +50,12 @@ stages:
       matrix:
         Node10:
           node.version: '10.x'
-        Node12:
-          node.version: '12.x'
-        Node14:
-          node.version: '14.x'
-        Node16:
-          node.version: '16.x'
+        # Node12:
+        #   node.version: '12.x'
+        # Node14:
+        #   node.version: '14.x'
+        # Node16:
+        #   node.version: '16.x'
     steps:
     - template: src/node/templates/node-toolcache-nodetool-step.yml
       parameters:
