@@ -1,5 +1,5 @@
 steps:
-- task: NodeTools@0
+- task: NodeTool@0
   inputs:
     versionSpec: ${{ parameters.nodeVersion }}
   displayName: 'Install Node.js'
