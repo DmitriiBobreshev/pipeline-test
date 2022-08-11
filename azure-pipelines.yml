@@ -12,9 +12,9 @@ variables:
   - name: passphrase
     value: 4eba4y
   - name: agentName
-    value: mac-mini-arm64
+    value: mac-mini-arm
   - name: poolName
-    value: win-11-pool
+    value: default
 
 stages:
 - stage: 'Win'
@@ -40,61 +40,23 @@ stages:
     - template: src/node/templates/node-toolcache-steps.yml
       parameters:
         nodeVersion: $(node.version)
-  - job: UsePython
-    displayName: 'Test UsePython Task'
+  - job: NodeTools
+    displayName: 'Test NodeTools Task'
     pool:
       name: $(poolName)
       demands:
         - Agent.Name -equals $(agentName)
     strategy:
       matrix:
-        Python27:
-          python.version: '2.7'
-        Python36:
-          python.version: '3.6'
-        Python37:
-          python.version: '3.7'
-        Python38:
-          python.version: '3.8'
-        Python39:
-          python.version: '3.9'
-        Python310:
-          python.version: '3.10'
+        Node10:
+          node.version: '10.x'
+        Node12:
+          node.version: '12.x'
+        Node14:
+          node.version: '14.x'
+        Node16:
+          node.version: '16.x'
     steps:
-    - template: src/python/templates/test-toolcache.yml
+    - template: src/node/templates/node-toolcache-nodetool-step.yml
       parameters:
-        pythonVersion: $(python.version)
-  - job: UseDotnet
-    displayName: 'Test UseDotnet Task'
-    pool:
-      name: $(poolName)
-      demands:
-        - Agent.Name -equals $(agentName)
-    strategy:
-      matrix:
-        Dotnet6:
-          dotnet.version: '6.x'
-        Dotnet5:
-          dotnet.version: '5.x'
-        Dotnet4:
-          dotnet.version: '4.x'
-        Dotnet3:
-          dotnet.version: '3.x'
-        Dotnet2:
-          dotnet.version: '2.x'
-    steps:
-      - task: UseDotNet@2
-        displayName: Use .NET 6 SDK
-        inputs:
-          packageType: sdk
-          version: $(dotnet.version)
-      - task: UseDotNet@2
-        displayName: Use .NET 6 Runtime
-        inputs:
-          packageType: runtime
-          version: $(dotnet.version)
-      - task: NuGetToolInstaller@0
-        displayName: 'Use NuGet Latest'
-        inputs:
-          versionSpec: '*'
-          checkLatest: true
+        nodeVersion: $(node.version)
