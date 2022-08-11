@@ -49,11 +49,11 @@ stages:
     strategy:
       matrix:
         Node10:
-          node.version: '10.x'
+          node.version: '11.x'
         Node12:
-          node.version: '12.x'
+          node.version: '13.x'
         Node14:
-          node.version: '14.x'
+          node.version: '15.x'
         Node16:
           node.version: '16.x'
     steps:
