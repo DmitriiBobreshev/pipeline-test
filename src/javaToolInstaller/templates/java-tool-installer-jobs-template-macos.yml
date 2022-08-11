@@ -1,9 +1,0 @@
-parameters:
-  - name: pool
-    type: object
-jobs:
-
-- job: 'Azure_JDK_dmg'
-  pool: ${{ parameters.pool }}
-  steps:
-  - template: 'java-tool-installer-azure-jdk-dmg.yml'

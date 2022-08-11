@@ -1,2 +1,0 @@
-steps:
-  - script: python src/python/python-default/simple_app.py
