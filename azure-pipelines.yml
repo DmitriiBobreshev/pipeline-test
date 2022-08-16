@@ -1,48 +1,56 @@
-jobs:
+variables:
+  NODE_OPTIONS: --max_old_space_size=2048
 
-  - job: 'Win2019'
-    displayName: Windows VS2019
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2019'
+stages:
+- stage: __default
+  pool: default
+  jobs:
+  - job: 'DebianWSL'
+    displayName: Show group and id inside WSL
     steps:
-      - template: src/msbuild/msbuild-steps.yml
-        parameters:
-          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-  
-  - job: 'Win2022'
-    displayName: Windows VS2022
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2022'
+      - script: echo UID:$(id -u), GUID:$(id -g)
+  - job: 'DebianContiner'
+    displayName: Show group and id inside container
+    container: debian:latest
     steps:
-      - template: src/msbuild/msbuild-steps.yml
-        parameters:
-          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-  
-  - job: 'MacOS_Catalina'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'macos-10.15'
+      - script: echo UID:$(id -u), GUID:$(id -g)
+  - job: 'TaskTestViaContainer'
+    displayName: Test some tasks inside container
+    container: debian:latest
     steps:
-      - template: src/msbuild/msbuild-steps.yml
-        parameters:
-          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-  
-  - job: 'MacOS_BigSur'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'macos-11'
-    steps:
-      - template: src/msbuild/msbuild-steps.yml
-        parameters:
-          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-  
-  - job: 'MacOS_Public_Monterey'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'macos-12'
-    steps:
-      - template: src/msbuild/msbuild-steps.yml
-        parameters:
-          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+      - script: echo UID:$(id -u), GUID:$(id -g)
+      - template: templates/download-secure-file-steps.yml
+      - task: DownloadSecureFile@1
+        name: caCertificate
+        displayName: 'Download CA certificate'
+        inputs:
+          secureFile: 'test.js'
+      - task: DownloadSecureFile@1
+        name: BigFileTest
+        displayName: 'Download Big File'
+        inputs:
+          secureFile: '1.txt'
+      - task: CmdLine@2
+        displayName: 'Run a one-line script'
+        inputs:
+          script: echo Hello, world!
+      - task: CmdLine@2
+        displayName: 'Run a multi-line script'
+        inputs:
+          script: |
+            echo Add other tasks to build, test, and deploy your project.
+            echo See https://aka.ms/yaml
+      - script: echo null > test.txt
+        displayName: 'Creating file'
+      - task: CopyFiles@2
+        inputs:
+          Contents: test.txt
+          TargetFolder: 'testFolder'
+        displayName: 'Try to run commund under node10'
+      - script: dir
+      - task: NodeTool@0
+        inputs:
+          versionSpec: 'v14.17.1'
+        displayName: 'Install Node.js v14.17.1'
+      - script: 'npm -v'
+        displayName: Show npm version
