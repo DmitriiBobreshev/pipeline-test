@@ -43,13 +43,6 @@ jobs:
   - powershell: |
       Write-Output $PSVersionTable | Select-Object -Property OS, Platform | Format-List
     displayName: Get PowerShell version
-  - task: PowerShell@2
-    displayName: Default
-    inputs:
-      filePath: '$(scriptDirectory)/powershell-progress-preference.ps1'
-      arguments: '-TempDirectory $(Build.ArtifactStagingDirectory)'
-      progressPreference: 'default'
-      workingDirectory: '$(scriptDirectory)'
   - powershell: |
       .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
     displayName: Default for task (SilentlyContinue)
@@ -60,6 +53,13 @@ jobs:
       filePath: '$(scriptDirectory)/powershell-progress-preference.ps1'
       arguments: '-TempDirectory $(Build.ArtifactStagingDirectory)'
       progressPreference: 'silentlyContinue'
+      workingDirectory: '$(scriptDirectory)'
+  - task: PowerShell@2
+    displayName: Default
+    inputs:
+      filePath: '$(scriptDirectory)/powershell-progress-preference.ps1'
+      arguments: '-TempDirectory $(Build.ArtifactStagingDirectory)'
+      progressPreference: 'default'
       workingDirectory: '$(scriptDirectory)'
   - task: PowerShell@2
     displayName: Continue
