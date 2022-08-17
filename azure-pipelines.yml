@@ -45,26 +45,26 @@ jobs:
     displayName: Get PowerShell version
   - task: PowerShell@2
     displayName: Default
-    workingDirectory: '$(scriptDirectory)'
     inputs:
-      filePath: '.\powershell-progress-preference.ps1'
+      filePath: 'powershell-progress-preference.ps1'
       arguments: '-TempDirectory $(Build.ArtifactStagingDirectory)'
       progressPreference: 'default'
+      workingDirectory: '$(scriptDirectory)'
   - powershell: |
       .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
     displayName: Default for task (SilentlyContinue)
     workingDirectory: '$(scriptDirectory)'
   - task: PowerShell@2
     displayName: SilentlyContinue
-    workingDirectory: '$(scriptDirectory)'
     inputs:
-      filePath: '.\powershell-progress-preference.ps1'
+      filePath: 'powershell-progress-preference.ps1'
       arguments: '-TempDirectory $(Build.ArtifactStagingDirectory)'
       progressPreference: 'silentlyContinue'
+      workingDirectory: '$(scriptDirectory)'
   - task: PowerShell@2
     displayName: Continue
-    workingDirectory: '$(scriptDirectory)'
     inputs:
-      filePath: '.\powershell-progress-preference.ps1'
+      filePath: 'powershell-progress-preference.ps1'
       arguments: '-TempDirectory $(Build.ArtifactStagingDirectory)'
       progressPreference: 'continue'
+      workingDirectory: '$(scriptDirectory)'
