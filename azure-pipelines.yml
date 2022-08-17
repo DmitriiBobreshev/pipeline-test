@@ -46,6 +46,7 @@ jobs:
   - powershell: |
       .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
     progressPreference: 'Default'
+    debugPreference: 'Continue'
     displayName: Default
     workingDirectory: '$(scriptDirectory)'
   - powershell: |
