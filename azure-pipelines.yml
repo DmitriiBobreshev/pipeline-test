@@ -45,7 +45,7 @@ jobs:
     displayName: Get PowerShell version
   - powershell: |
       .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
-    progressPreference: Default
+    progressPreference: default
     displayName: Default
     workingDirectory: '$(scriptDirectory)'
   - powershell: |
@@ -54,11 +54,11 @@ jobs:
     workingDirectory: '$(scriptDirectory)'
   - powershell: |
       .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
-    progressPreference: SilentlyContinue
+    progressPreference: silentlyContinue
     displayName: SilentlyContinue
     workingDirectory: '$(scriptDirectory)'
   - powershell: |
       .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
-    progressPreference: Continue
+    progressPreference: continue
     displayName: Continue
     workingDirectory: '$(scriptDirectory)'
