@@ -1,45 +1,134 @@
-variables:
-  NODE_OPTIONS: --max_old_space_size=2048
+trigger: none
+pr: none
+schedules:
+- cron: '0 1 * * *'
+  displayName: 'Nightly build (UTC)'
+  always: 'true'
+  branches:
+    include:
+    - main
 
-stages:
-- stage: __default
-  pool: default
-  jobs:
-  - job: 'DebianWSL'
-    displayName: Show group and id inside WSL
-    steps:
-      - script: echo UID:$(id -u), GUID:$(id -g)
-  - job: 'DebianContiner'
-    displayName: Show group and id inside container
-    container: debian:latest
-    steps:
-      - script: echo UID:$(id -u), GUID:$(id -g)
-  - job: 'TaskTestViaContainer'
-    displayName: Test some tasks inside container
-    container: debian:latest
-    steps:
-      - script: echo UID:$(id -u), GUID:$(id -g)
-      - task: CmdLine@2
-        displayName: 'Run a one-line script'
-        inputs:
-          script: echo Hello, world!
-      - task: CmdLine@2
-        displayName: 'Run a multi-line script'
-        inputs:
-          script: |
-            echo Add other tasks to build, test, and deploy your project.
-            echo See https://aka.ms/yaml
-      - script: echo null > test.txt
-        displayName: 'Creating file'
-      - task: CopyFiles@2
-        inputs:
-          Contents: test.txt
-          TargetFolder: 'testFolder'
-        displayName: 'Try to run commund under node10'
-      - script: dir
-      - task: NodeTool@0
-        inputs:
-          versionSpec: 'v14.17.1'
-        displayName: 'Install Node.js v14.17.1'
-      - script: 'npm -v'
-        displayName: Show npm version
+variables:
+- name: 'scriptDirectory'
+  value: '$(Build.SourcesDirectory)/windows'
+
+jobs:
+- job: powerShellCore
+  displayName: 'PowerShell Core Progress Preference'
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - pwsh: |
+      Write-Output $PSVersionTable | Select-Object -Property OS, Platform | Format-List
+    displayName: Get PowerShell version
+  - pwsh: |
+      .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+    displayName: Default
+    workingDirectory: '$(scriptDirectory)'
+  - pwsh: |
+      $ProgressPreference = 'SilentlyContinue'
+      .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+    displayName: SilentlyContinue
+    workingDirectory: '$(scriptDirectory)'
+  - pwsh: |
+      $ProgressPreference = 'Continue'
+      .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+    displayName: Continue
+    workingDirectory: '$(scriptDirectory)'
+- job: windowsPowerShell
+  displayName: 'Windows PowerShell Progress Preference'
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - powershell: |
+      Write-Output $PSVersionTable | Select-Object -Property OS, Platform | Format-List
+    displayName: Get PowerShell version
+  - powershell: |
+      .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+    displayName: Default
+    workingDirectory: '$(scriptDirectory)'
+  - powershell: |
+      $ProgressPreference = 'SilentlyContinue'
+      .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+    displayName: SilentlyContinue
+    workingDirectory: '$(scriptDirectory)'
+  - powershell: |
+      $ProgressPreference = 'Continue'
+      .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+    displayName: Continue
+    workingDirectory: '$(scriptDirectory)'
+- job: azurePowerShellCore
+  displayName: 'Azure PowerShell Core Progress Preference'
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - task: AzurePowerShell@5
+    displayName: 'Default'
+    inputs:
+      azureSubscription: my-azure-subscription
+      scriptType: inlineScript
+      inline: |
+        .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+      azurePowerShellVersion: 'latestVersion'
+      pwsh: true
+      workingDirectory: '$(scriptDirectory)'
+  - task: AzurePowerShell@5
+    displayName: 'SilentlyContinue'
+    inputs:
+      azureSubscription: my-azure-subscription
+      scriptType: inlineScript
+      inline: |
+        $ProgressPreference = 'SilentlyContinue'
+        .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+      azurePowerShellVersion: 'latestVersion'
+      pwsh: true
+      workingDirectory: '$(scriptDirectory)'
+  - task: AzurePowerShell@5
+    displayName: 'Continue'
+    inputs:
+      azureSubscription: my-azure-subscription
+      scriptType: inlineScript
+      inline: |
+        $ProgressPreference = 'Continue'
+        .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+      azurePowerShellVersion: 'latestVersion'
+      pwsh: true
+      workingDirectory: '$(scriptDirectory)'
+
+- job: azureWindowsPowerShell
+  displayName: 'Azure Windows PowerShell Progress Preference'
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - task: AzurePowerShell@5
+    displayName: 'SilentlyContinue'
+    inputs:
+      azureSubscription: my-azure-subscription
+      scriptType: inlineScript
+      inline: |
+        $ProgressPreference = 'SilentlyContinue'
+        .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+      azurePowerShellVersion: 'latestVersion'
+      pwsh: false
+      workingDirectory: '$(scriptDirectory)'
+  - task: AzurePowerShell@5
+    displayName: 'Default'
+    inputs:
+      azureSubscription: my-azure-subscription
+      scriptType: inlineScript
+      inline: |
+        .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+      azurePowerShellVersion: 'latestVersion'
+      pwsh: false
+      workingDirectory: '$(scriptDirectory)'
+  - task: AzurePowerShell@5
+    displayName: 'Continue'
+    inputs:
+      azureSubscription: my-azure-subscription
+      scriptType: inlineScript
+      inline: |
+        $ProgressPreference = 'Continue'
+        .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+      azurePowerShellVersion: 'latestVersion'
+      pwsh: false
+      workingDirectory: '$(scriptDirectory)'
