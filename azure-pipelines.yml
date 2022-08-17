@@ -13,28 +13,28 @@ variables:
   value: '$(Build.SourcesDirectory)/windows'
 
 jobs:
-- job: powerShellCore
-  displayName: 'PowerShell Core Progress Preference'
-  pool:
-    vmImage: 'windows-latest'
-  steps:
-  - pwsh: |
-      Write-Output $PSVersionTable | Select-Object -Property OS, Platform | Format-List
-    displayName: Get PowerShell version
-  - pwsh: |
-      .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
-    displayName: Default
-    workingDirectory: '$(scriptDirectory)'
-  - pwsh: |
-      $ProgressPreference = 'SilentlyContinue'
-      .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
-    displayName: SilentlyContinue
-    workingDirectory: '$(scriptDirectory)'
-  - pwsh: |
-      $ProgressPreference = 'Continue'
-      .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
-    displayName: Continue
-    workingDirectory: '$(scriptDirectory)'
+# - job: powerShellCore
+#   displayName: 'PowerShell Core Progress Preference'
+#   pool:
+#     vmImage: 'windows-latest'
+#   steps:
+#   - pwsh: |
+#       Write-Output $PSVersionTable | Select-Object -Property OS, Platform | Format-List
+#     displayName: Get PowerShell version
+#   - pwsh: |
+#       .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+#     displayName: Default
+#     workingDirectory: '$(scriptDirectory)'
+#   - pwsh: |
+#       $ProgressPreference = 'SilentlyContinue'
+#       .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+#     displayName: SilentlyContinue
+#     workingDirectory: '$(scriptDirectory)'
+#   - pwsh: |
+#       $ProgressPreference = 'Continue'
+#       .\powershell-progress-preference.ps1 -TempDirectory $(Build.ArtifactStagingDirectory)
+#     displayName: Continue
+#     workingDirectory: '$(scriptDirectory)'
 - job: windowsPowerShell
   displayName: 'Windows PowerShell Progress Preference'
   pool:
@@ -46,7 +46,7 @@ jobs:
   - task: PowerShell@2
     displayName: Default
     inputs:
-      filePath: 'powershell-progress-preference.ps1'
+      filePath: '$(scriptDirectory)/powershell-progress-preference.ps1'
       arguments: '-TempDirectory $(Build.ArtifactStagingDirectory)'
       progressPreference: 'default'
       workingDirectory: '$(scriptDirectory)'
@@ -57,14 +57,14 @@ jobs:
   - task: PowerShell@2
     displayName: SilentlyContinue
     inputs:
-      filePath: 'powershell-progress-preference.ps1'
+      filePath: '$(scriptDirectory)/powershell-progress-preference.ps1'
       arguments: '-TempDirectory $(Build.ArtifactStagingDirectory)'
       progressPreference: 'silentlyContinue'
       workingDirectory: '$(scriptDirectory)'
   - task: PowerShell@2
     displayName: Continue
     inputs:
-      filePath: 'powershell-progress-preference.ps1'
+      filePath: '$(scriptDirectory)/powershell-progress-preference.ps1'
       arguments: '-TempDirectory $(Build.ArtifactStagingDirectory)'
       progressPreference: 'continue'
       workingDirectory: '$(scriptDirectory)'
