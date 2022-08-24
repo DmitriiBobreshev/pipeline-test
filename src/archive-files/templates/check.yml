@@ -1,0 +1,35 @@
+parameters:
+- name: 'filesCount'
+  type: number
+#folders count includes root folder
+- name: 'foldersCount'
+  type: number
+- name: 'archiveFilePattern'
+  type: string
+- name: destinationFolder
+  type: string
+
+steps:
+
+- task: ExtractFiles@1
+  inputs:
+    destinationFolder: ${{ parameters.destinationFolder }}
+    archiveFilePatterns: ${{ parameters.archiveFilePattern }}
+    cleanDestinationFolder: true
+
+- task: Bash@3
+  displayName: 'Check archive contents'
+  inputs:
+    targetType: 'inline'
+    failOnStderr: true
+    script: |
+      cd src/archive-files/output/check
+      folders=$(find . -type d | wc -l | xargs)
+      files=$(find . -type f | wc -l | xargs)
+      echo "Found $folders folders (${{parameters.foldersCount}} expected)"
+      echo "Found $files files (${{parameters.filesCount}} expected)"
+      if [[ "$folders" != "${{parameters.foldersCount}}" ]] || [[ "$files" != "${{parameters.filesCount}}" ]]; then
+          echo "Test failed"; exit 1;
+      fi
+      echo "Test passed"
+      exit 0

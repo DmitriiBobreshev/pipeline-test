@@ -1,0 +1,105 @@
+jobs:
+- job: 'ArchiveFiles'
+  displayName: 'Creating archive with files'
+  strategy:
+    matrix:
+      zip:
+        archType: 'zip'
+      tar:
+        archType: 'tar'
+      7z:
+        archType: '7z'
+  steps:
+  - task: ArchiveFiles@2
+    displayName: 'Creating archive with files'
+    inputs:
+      rootFolderOrFile: 'src/archive-files/input/test_files'
+      includeRootFolder: false 
+      archiveType: $(archType)
+      tarCompression: 'gz'
+      archiveFile: 'src/archive-files/output/test1.$(archType).gz'
+      replaceExistingArchive: true 
+      verbose: true
+
+  - template: 'check.yml'
+    parameters:
+      destinationFolder: src/archive-files/output/check
+      archiveFilePattern: src/archive-files/output/test1.$(archType).gz
+      filescount: 5
+      foldersCount: 1
+
+- job: 'CreateZipAndAddfiles'
+  displayName: 'Creating archive preserving root folder and add files'
+  strategy:
+    matrix:
+      zip:
+        archType: 'zip'
+      tar:
+        archType: 'tar'
+      7z:
+        archType: '7z'
+  steps:
+  - task: ArchiveFiles@2
+    displayName: 'Creating archive with files (include root folder)'
+    inputs:
+      rootFolderOrFile: 'src/archive-files/input/test_files'
+      includeRootFolder: true
+      archiveType: $(archType)
+      tarCompression: 'none'
+      archiveFile: 'src/archive-files/output/test2.$(archType)'
+      replaceExistingArchive: true 
+      verbose: true
+
+  - template: 'check.yml'
+    parameters:
+      destinationFolder: src/archive-files/output/check
+      archiveFilePattern: src/archive-files/output/test2.$(archType)
+      filescount: 5
+      foldersCount: 2
+
+  - task: ArchiveFiles@2
+    displayName: 'Add files to existing archive archive'
+    inputs:
+      rootFolderOrFile: 'src/archive-files/input/test_files'
+      includeRootFolder: false
+      archiveType: $(archType)
+      tarCompression: 'none'
+      archiveFile: 'src/archive-files/output/test2.$(archType)'
+      replaceExistingArchive: false 
+      verbose: true
+
+  - template: 'check.yml'
+    parameters:
+      destinationFolder: src/archive-files/output/check
+      archiveFilePattern: src/archive-files/output/test2.$(archType)
+      filescount: 10
+      foldersCount: 2
+
+- job: 'PreserveFileStructure'
+  displayName: 'Creating archive preserving file structure'
+  strategy:
+    matrix:
+      zip:
+        archType: 'zip'
+      tar:
+        archType: 'tar'
+      7z:
+        archType: '7z'
+  steps:
+  - task: ArchiveFiles@2
+    displayName: 'Creating archive with subfolders'
+    inputs:
+      rootFolderOrFile: 'src/archive-files/input/test_folders'
+      includeRootFolder: false
+      archiveType: $(archType)
+      tarCompression: 'xz'
+      archiveFile: 'src/archive-files/output/test3.$(archType).xz'
+      replaceExistingArchive: true 
+      verbose: true
+
+  - template: 'check.yml'
+    parameters:
+      destinationFolder: src/archive-files/output/check
+      archiveFilePattern: src/archive-files/output/test3.$(archType).xz
+      filescount: 3
+      foldersCount: 3

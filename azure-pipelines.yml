@@ -1,45 +1,47 @@
-variables:
-  NODE_OPTIONS: --max_old_space_size=2048
+name: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)00'
 
-stages:
-- stage: __default
-  pool: default
-  jobs:
-  - job: 'DebianWSL'
-    displayName: Show group and id inside WSL
-    steps:
-      - script: echo UID:$(id -u), GUID:$(id -g)
-  - job: 'DebianContiner'
-    displayName: Show group and id inside container
-    container: debian:latest
-    steps:
-      - script: echo UID:$(id -u), GUID:$(id -g)
-  - job: 'TaskTestViaContainer'
-    displayName: Test some tasks inside container
-    container: debian:latest
-    steps:
-      - script: echo UID:$(id -u), GUID:$(id -g)
-      - task: CmdLine@2
-        displayName: 'Run a one-line script'
-        inputs:
-          script: echo Hello, world!
-      - task: CmdLine@2
-        displayName: 'Run a multi-line script'
-        inputs:
-          script: |
-            echo Add other tasks to build, test, and deploy your project.
-            echo See https://aka.ms/yaml
-      - script: echo null > test.txt
-        displayName: 'Creating file'
-      - task: CopyFiles@2
-        inputs:
-          Contents: test.txt
-          TargetFolder: 'testFolder'
-        displayName: 'Try to run commund under node10'
-      - script: dir
-      - task: NodeTool@0
-        inputs:
-          versionSpec: 'v14.17.1'
-        displayName: 'Install Node.js v14.17.1'
-      - script: 'npm -v'
-        displayName: Show npm version
+jobs:
+- job: 'ArciveFilesWin2022'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2022'
+  steps:
+  - template: src\archive-files\templates\jobs-template.yml
+
+- job: 'ArciveFilesHosted2017'
+  displayName: Windows2019
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2019'
+  steps:
+  - template: src\archive-files\templates\jobs-template.yml
+
+- job: 'ArciveFiles_Ubuntu_1804'
+  displayName: Ubuntu_1804
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-18.04'
+  steps:
+  - template: src\archive-files\templates\jobs-template.yml
+
+- job: 'ArciveFiles_Ubuntu_2004'
+  displayName: Ubuntu_2004
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-20.04'
+  steps:
+  - template: src\archive-files\templates\jobs-template.yml
+
+- job: 'MacOS_Public_Catalina'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'macos-10.15'
+  steps:
+  - template: src\archive-files\templates\jobs-template.yml
+
+- job: 'MacOS_Public_BigSur'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'macos-11'
+  steps:
+  - template: src\archive-files\templates\jobs-template.yml
