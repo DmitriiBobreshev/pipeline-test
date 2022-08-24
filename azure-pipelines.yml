@@ -1,22 +1,22 @@
 name: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)00'
 
-jobs:
-- job: 'ArciveFilesWin2022'
+stages:
+- stage: 'ArchiveFilesWin2022'
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2022'
-  steps:
+  jobs:
   - template: src\archive-files\templates\jobs-template.yml
 
-- job: 'ArciveFilesHosted2017'
+- stage: 'ArchiveFilesHosted2017'
   displayName: Windows2019
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
-  steps:
+  jobs:
   - template: src\archive-files\templates\jobs-template.yml
 
-- job: 'ArciveFiles_Ubuntu_1804'
+- stage: 'ArchiveFiles_Ubuntu_1804'
   displayName: Ubuntu_1804
   pool:
     name: 'Azure Pipelines'
@@ -24,24 +24,24 @@ jobs:
   steps:
   - template: src\archive-files\templates\jobs-template.yml
 
-- job: 'ArciveFiles_Ubuntu_2004'
+- stage: 'ArchiveFiles_Ubuntu_2004'
   displayName: Ubuntu_2004
   pool:
     name: 'Azure Pipelines'
     vmImage: 'ubuntu-20.04'
-  steps:
+  jobs:
   - template: src\archive-files\templates\jobs-template.yml
 
-- job: 'MacOS_Public_Catalina'
+- stage: 'MacOS_Public_Catalina'
   pool:
     name: 'Azure Pipelines'
     vmImage: 'macos-10.15'
-  steps:
+  jobs:
   - template: src\archive-files\templates\jobs-template.yml
 
-- job: 'MacOS_Public_BigSur'
+- stage: 'MacOS_Public_BigSur'
   pool:
     name: 'Azure Pipelines'
     vmImage: 'macos-11'
-  steps:
+  jobs:
   - template: src\archive-files\templates\jobs-template.yml
