@@ -3,9 +3,8 @@ name: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)00'
 jobs:
 - job: 'TwineAuthenticateWin2022'
   pool:
-    name: 'win-11-pool'
-    demands:
-      - Agent.Name -equals win-server-2016
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2019'
   steps:
   - template: src/TwineAuthenticate/twine-authenticate-steps.yml
 
