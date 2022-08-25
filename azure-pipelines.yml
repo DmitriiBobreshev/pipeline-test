@@ -3,43 +3,18 @@ variables:
 
 stages:
 - stage: __default
-  pool: default
+  pool:
+    vmImage: ubuntu-latest
   jobs:
   - job: 'DebianWSL'
     displayName: Show group and id inside WSL
     steps:
       - script: echo UID:$(id -u), GUID:$(id -g)
-  - job: 'DebianContiner'
-    displayName: Show group and id inside container
-    container: debian:latest
-    steps:
-      - script: echo UID:$(id -u), GUID:$(id -g)
-  - job: 'TaskTestViaContainer'
-    displayName: Test some tasks inside container
-    container: debian:latest
-    steps:
-      - script: echo UID:$(id -u), GUID:$(id -g)
-      - task: CmdLine@2
-        displayName: 'Run a one-line script'
+      - task: DownloadPackage@1
         inputs:
-          script: echo Hello, world!
-      - task: CmdLine@2
-        displayName: 'Run a multi-line script'
-        inputs:
-          script: |
-            echo Add other tasks to build, test, and deploy your project.
-            echo See https://aka.ms/yaml
-      - script: echo null > test.txt
-        displayName: 'Creating file'
-      - task: CopyFiles@2
-        inputs:
-          Contents: test.txt
-          TargetFolder: 'testFolder'
-        displayName: 'Try to run commund under node10'
-      - script: dir
-      - task: NodeTool@0
-        inputs:
-          versionSpec: 'v14.17.1'
-        displayName: 'Install Node.js v14.17.1'
-      - script: 'npm -v'
-        displayName: Show npm version
+          packageType: maven
+          feed: testFeed
+          #view: ' ' # Optional
+          definition: myPackage
+          version: '1.0.0'
+          downloadPath: ./test
