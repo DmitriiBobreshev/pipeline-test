@@ -12,9 +12,9 @@ stages:
       - script: echo UID:$(id -u), GUID:$(id -g)
       - task: DownloadPackage@1
         inputs:
-          packageType: maven
-          feed: testFeed
+          packageType: npm
+          feed: 4098af9f-9bef-4a67-8087-64b5d95a7597/2da201f0-f31e-4084-851f-bb8babd17e4e
           #view: ' ' # Optional
-          definition: myPackage
+          definition: is-odd
           version: '1.0.0'
           downloadPath: ./test
