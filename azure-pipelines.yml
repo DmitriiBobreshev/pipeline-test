@@ -15,6 +15,6 @@ stages:
           packageType: npm
           feed: 4098af9f-9bef-4a67-8087-64b5d95a7597/2da201f0-f31e-4084-851f-bb8babd17e4e
           #view: ' ' # Optional
-          definition: is-odd
+          definition: test
           version: '1.0.0'
           downloadPath: ./test
