@@ -1,18 +1,18 @@
 steps:
-- task: TwineAuthenticate@0
-  displayName: 'Twine Authenticate V0'
-  inputs:
-    artifactFeeds: 'playground/TwineAuthenticate'
+# - task: TwineAuthenticate@0
+#   displayName: 'Twine Authenticate V0'
+#   inputs:
+#     artifactFeeds: 'playground/TwineAuthenticate'
 
 - script: cat $(PYPIRC_PATH) 
 - script: echo $(PYPIRC_PATH) 
 
-- script: |
-   pip install twine
-   cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
-   python setup.py sdist
-   python -m twine upload -r playground/TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz"
-  displayName: 'twine upload same-org with retries'
+# - script: |
+#    pip install twine
+#    cd "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package"
+#    python setup.py sdist
+#    python -m twine upload -r playground/TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r TwineAuthenticate --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/TwineAuthenticate/python-package/dist/twineAuthenticate-twineauthenticate-publishtest-*.tar.gz"
+#   displayName: 'twine upload same-org with retries'
 
 
 - task: TwineAuthenticate@1
