@@ -4,8 +4,8 @@ steps:
 #   inputs:
 #     artifactFeeds: 'playground/TwineAuthenticate'
 
-- script: cat $(PYPIRC_PATH) 
-- script: echo $(PYPIRC_PATH) 
+# - script: cat $(PYPIRC_PATH) 
+# - script: echo $(PYPIRC_PATH) 
 
 # - script: |
 #    pip install twine
