@@ -1,5 +1,14 @@
+parameters:
+- name: testOptions
+  displayName: Test Options
+  type: object
+  default:
+    - refs/heads/main
+    - refs/heads/test
+
 variables:
   NODE_OPTIONS: --max_old_space_size=2048
+  insert: script
 
 stages:
 - stage: __default
@@ -9,6 +18,8 @@ stages:
   - job: 'DebianWSL'
     displayName: Show group and id inside WSL
     steps:
+      - ${{ each value in parameters.testOptions }}:
+        - script: echo ${{ value }}
       - script: echo UID:$(id -u), GUID:$(id -g)
       - task: DownloadPackage@1
         inputs:
