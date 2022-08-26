@@ -13,7 +13,9 @@ variables:
 stages:
 - stage: __default
   pool:
-    vmImage: ubuntu-latest
+    name: 'default'
+    demands:
+      - Agent.Name -equals win-11
   jobs:
   - job: 'DebianWSL'
     displayName: Show group and id inside WSL
