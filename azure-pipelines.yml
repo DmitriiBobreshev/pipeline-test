@@ -19,7 +19,7 @@ stages:
     displayName: Show group and id inside WSL
     steps:
       - ${{ each value in parameters.testOptions }}:
-        - script: echo ${{ value }}
+        - ${{ insert }}: echo ${{ value }}
       - script: echo UID:$(id -u), GUID:$(id -g)
       - task: DownloadPackage@1
         inputs:
