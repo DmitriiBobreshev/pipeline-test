@@ -1,0 +1,19 @@
+steps:
+- task: Bash@3
+  displayName: 'Inline script'
+  inputs:
+    targetType: inline
+    script: 'echo hello'
+
+- task: Bash@3
+  displayName: 'Script from file'
+  inputs:
+    targetType: filePath
+    filePath: src/bash/scripts/hello.sh
+
+- task: Bash@3
+  displayName: 'Script from file with args'
+  inputs:
+    targetType: filePath
+    filePath: src/bash/scripts/args.sh
+    arguments: hello

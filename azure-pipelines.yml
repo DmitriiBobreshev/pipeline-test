@@ -1,47 +1,49 @@
 name: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)00'
 
-stages:
-- stage: 'ArchiveFilesWin2022'
+jobs:
+- job: 'ArciveFilesWin2022'
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2022'
-  jobs:
-  - template: src\archive-files\templates\jobs-template.yml
+  steps:
+  - template: src\bash\templates\basic-execution.yml
 
-- stage: 'ArchiveFilesHosted2017'
+- job: 'ArciveFilesHosted2017'
   displayName: Windows2019
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
-  jobs:
-  - template: src\archive-files\templates\jobs-template.yml
+  steps:
+  - template: src\bash\templates\basic-execution.yml
 
-- stage: 'ArchiveFiles_Ubuntu_1804'
+- job: 'ArciveFiles_Ubuntu_1804'
   displayName: Ubuntu_1804
   pool:
     name: 'Azure Pipelines'
     vmImage: 'ubuntu-18.04'
-  jobs:
-  - template: src\archive-files\templates\jobs-template.yml
+  steps:
+  - template: src\bash\templates\basic-execution.yml
+  - template: src\bash\templates\ubuntu-specific-case.yml 
 
-- stage: 'ArchiveFiles_Ubuntu_2004'
+- job: 'ArciveFiles_Ubuntu_2004'
   displayName: Ubuntu_2004
   pool:
     name: 'Azure Pipelines'
     vmImage: 'ubuntu-20.04'
-  jobs:
-  - template: src\archive-files\templates\jobs-template.yml
+  steps:
+  - template: src\bash\templates\basic-execution.yml
+  - template: src\bash\templates\ubuntu-specific-case.yml 
 
-- stage: 'MacOS_Public_Catalina'
+- job: 'MacOS_Public_Catalina'
   pool:
     name: 'Azure Pipelines'
     vmImage: 'macos-10.15'
-  jobs:
-  - template: src\archive-files\templates\jobs-template.yml
+  steps:
+  - template: src\bash\templates\basic-execution.yml
 
-- stage: 'MacOS_Public_BigSur'
+- job: 'MacOS_Public_BigSur'
   pool:
     name: 'Azure Pipelines'
     vmImage: 'macos-11'
-  jobs:
-  - template: src\archive-files\templates\jobs-template.yml
+  steps:
+  - template: src\bash\templates\basic-execution.yml

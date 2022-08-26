@@ -1,0 +1,6 @@
+steps:
+  - task: Bash@3
+    displayName: 'Check sending signals to child process'
+    inputs:
+      targetType: filePath
+      filePath: src/bash/scripts/send-signal.sh
