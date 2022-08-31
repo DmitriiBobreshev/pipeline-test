@@ -11,14 +11,14 @@ stages:
       steps:
         - checkout: self
           path: s/
-        - checkout: git://playground/XamarinTest
+        - checkout: git://playground/playground
           path: s/roles/logstash
           clean: false
 
     - job: 'TestCorrect'
       displayName: 'Test correct checkout'
       steps:
-        - checkout: git://playground/XamarinTest
+        - checkout: git://playground/playground
           path: s/roles/logstash2
           clean: false
         - checkout: self
