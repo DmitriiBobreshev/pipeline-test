@@ -11,3 +11,4 @@ stages:
       steps:
         - powershell: echo $(get-process)
         - script: echo $(pwd)
+        - bash: echo $(pwd)
