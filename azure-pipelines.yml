@@ -9,4 +9,4 @@ stages:
     - job: 'TestInCorrect'
       displayName: 'Test incorrect checkout'
       steps:
-        - powershell: echo $(echo)
+        - powershell: echo $(get-process)
