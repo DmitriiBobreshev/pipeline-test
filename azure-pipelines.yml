@@ -6,42 +6,20 @@ stages:
     name: 'Azure Pipelines'
     vmImage: 'windows-2022'
   jobs:
-  - template: src\archive-files\templates\jobs-template.yml
+    - job: 'TestInCorrect'
+      displayName: 'Test incorrect checkout'
+      steps:
+        - checkout: self
+          path: s/
+        - checkout: git@github.com:elastic/logstash.git
+          path: s/roles/logstash
+          clean: false
 
-- stage: 'ArchiveFilesHosted2017'
-  displayName: Windows2019
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2019'
-  jobs:
-  - template: src\archive-files\templates\jobs-template.yml
-
-- stage: 'ArchiveFiles_Ubuntu_1804'
-  displayName: Ubuntu_1804
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'ubuntu-18.04'
-  jobs:
-  - template: src\archive-files\templates\jobs-template.yml
-
-- stage: 'ArchiveFiles_Ubuntu_2004'
-  displayName: Ubuntu_2004
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'ubuntu-20.04'
-  jobs:
-  - template: src\archive-files\templates\jobs-template.yml
-
-- stage: 'MacOS_Public_Catalina'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-10.15'
-  jobs:
-  - template: src\archive-files\templates\jobs-template.yml
-
-- stage: 'MacOS_Public_BigSur'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-11'
-  jobs:
-  - template: src\archive-files\templates\jobs-template.yml
+    - job: 'TestCorrect'
+      displayName: 'Test correct checkout'
+      steps:
+        - checkout: git@github.com:elastic/logstash.git
+          path: s/roles/logstash
+          clean: false
+        - checkout: self
+          path: s/
