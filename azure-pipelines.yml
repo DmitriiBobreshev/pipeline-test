@@ -17,4 +17,5 @@ stages:
               steps:
               - script: echo $(pwd)
               - bash: echo $(pwd)
+              - script: pwd
         
