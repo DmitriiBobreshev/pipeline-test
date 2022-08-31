@@ -15,10 +15,7 @@ stages:
         runOnce:
           deploy:   
               steps:
-              - script: echo "Hello world"
-    - job: 'TestInCorrect'
-      displayName: 'Test incorrect checkout'
-      steps:
-        - powershell: echo $(get-process)
-        - script: echo $(pwd)
-        - bash: echo $(pwd)
+              - powershell: echo $(get-process)
+              - script: echo $(pwd)
+              - bash: echo $(pwd)
+        
