@@ -9,12 +9,4 @@ stages:
     - job: 'TestInCorrect'
       displayName: 'Test incorrect checkout'
       steps:
-        - task: PowerShell@2
-          displayName: 'Check envs'
-          # env:
-          #   ANDROID_HOME: 'TEST_ANDROID_HOME'
-          #   NDK_ROOT: 'TEST_NDK_ROOT'
-          #   ANDROID_NDK_HOME: 'TEST_ANDROID_NDK_HOME'
-          inputs:
-            targetType:  'inline'
-            script: $env:NDK_ROOT; $env:ANDROID_NDK_HOME; $env:ANDROID_HOME
+        - powershell: echo $(echo)
