@@ -23,3 +23,10 @@ stages:
           clean: false
         - checkout: self
           path: s/
+
+    - job: 'TestIsCorrect'
+      displayName: 'Test is correct checkout'
+      steps:
+        - checkout: git://playground/playground
+          path: s/roles/logstash2
+          clean: false
