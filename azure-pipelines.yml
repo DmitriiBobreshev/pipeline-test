@@ -9,24 +9,12 @@ stages:
     - job: 'TestInCorrect'
       displayName: 'Test incorrect checkout'
       steps:
-        - checkout: self
-          path: s/
-        - checkout: git://playground/playground
-          path: s/roles/logstash
-          clean: false
-
-    - job: 'TestCorrect'
-      displayName: 'Test correct checkout'
-      steps:
-        - checkout: git://playground/playground
-          path: s/roles/logstash2
-          clean: false
-        - checkout: self
-          path: s/
-
-    - job: 'TestIsCorrect'
-      displayName: 'Test is correct checkout'
-      steps:
-        - checkout: git://playground/playground
-          path: s/roles/logstash2
-          clean: false
+        - task: PowerShell@2
+          displayName: 'Check envs'
+          env:
+            ANDROID_HOME: 'TEST_ANDROID_HOME'
+            NDK_ROOT: 'TEST_NDK_ROOT'
+            ANDROID_NDK_HOME: 'TEST_ANDROID_NDK_HOME'
+          inputs:
+            targetType:  'inline'
+            script: echo $NDK_ROOT; echo $ANDROID_NDK_HOME; echo $ANDROID_HOME
