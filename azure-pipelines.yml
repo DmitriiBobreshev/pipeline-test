@@ -17,4 +17,4 @@ stages:
             ANDROID_NDK_HOME: 'TEST_ANDROID_NDK_HOME'
           inputs:
             targetType:  'inline'
-            script: echo $NDK_ROOT; echo $ANDROID_NDK_HOME; echo $ANDROID_HOME
+            script: $env:NDK_ROOT; $env:ANDROID_NDK_HOME; $env:ANDROID_HOME
