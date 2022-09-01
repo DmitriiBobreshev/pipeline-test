@@ -5,9 +5,15 @@ jobs:
       name: 'Azure Pipelines'
       vmImage: 'windows-2022'
     steps:
-      - template: src/msbuild/msbuild-steps.yml
-        parameters:
-          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-      - template: src/msbuild/msbuild-steps.yml
-        parameters:
-          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
+      # - template: src/msbuild/msbuild-steps.yml
+      #   parameters:
+      #     solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+      # - template: src/msbuild/msbuild-steps.yml
+      #   parameters:
+      #     solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: 
+            Write-Error 'This should go to hell. No one should care' 2>$null
+          failOnStderr: false
