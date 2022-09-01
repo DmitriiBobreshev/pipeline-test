@@ -20,8 +20,12 @@ steps:
 
 - task: MSBuild@1
   displayName: 'Build simple app'
+  env:
+    ANDROID_HOME: 'TEST_ANDROID_HOME'
+    NDK_ROOT: 'TEST_NDK_ROOT'
+    ANDROID_NDK_HOME: 'TEST_ANDROID_NDK_HOME'
   inputs:
     solution: ${{ parameters.solutionPath }}
     msbuildLocationMethod: 'version'
     logFileVerbosity: detailed
-    msbuildArgs: '/p:AndroidNdkDirectory="$(ndkPath)"'
+    msbuildArgs: '/p:AndroidNdkDirectory="$(parameters.solutionPath)"'
