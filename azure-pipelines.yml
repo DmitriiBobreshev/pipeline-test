@@ -14,6 +14,6 @@ jobs:
         inputs:
           targetType: 'inline'
           script: |
-              Write-Error 'This should go to hell. No one should care';
-          failOnStderr: false
+            Write-Error 'Error'
+            Write-Host 'Still going'
           errorActionPreference: 'continue'
