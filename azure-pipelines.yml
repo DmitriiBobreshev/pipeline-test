@@ -14,7 +14,6 @@ jobs:
         inputs:
           targetType: 'inline'
           script: |
-            try {
               Write-Error 'This should go to hell. No one should care' 2>$null;
-            } finally {}
           failOnStderr: false
+          errorActionPreference: 'continue'
