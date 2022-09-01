@@ -24,3 +24,4 @@ steps:
     solution: ${{ parameters.solutionPath }}
     msbuildLocationMethod: 'version'
     logFileVerbosity: detailed
+    msbuildArgs: '/p:AndroidNdkDirectory="$(ndkPath)"'
