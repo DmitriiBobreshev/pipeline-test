@@ -1,3 +1,9 @@
+variables:
+  - name: ndkPath
+    value: TEST_NDK_PATH
+  - name: androidSdkPath
+    value: TEST_SDK_PATH
+
 jobs:
   - job: 'Win2022s'
     displayName: Windows VS2022
@@ -5,5 +11,11 @@ jobs:
       vmImage: windows-2022
     steps:
       - powershell: echo $env:NDK_ROOT
-      - bash: echo "##vso[task.setvariable variable=NDK_ROOT]TEST_NDK_ROOT"
-      - powershell: echo $env:NDK_ROOT
+      - bash: |
+          echo "##vso[task.setvariable variable=NDK_ROOT]$(ndkPath)"
+          echo "##vso[task.setvariable variable=ANDROID_NDK_HOME]$(ndkPath)"
+          echo "##vso[task.setvariable variable=ANDROID_HOME]$(ndkPath)"
+      - powershell: |
+          echo $env:NDK_ROOT
+          echo $env:ANDROID_NDK_HOME
+          echo $env:ANDROID_HOME
