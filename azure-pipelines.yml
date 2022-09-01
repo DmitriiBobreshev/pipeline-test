@@ -14,6 +14,6 @@ jobs:
         inputs:
           targetType: 'inline'
           script: |
-              Write-Error 'This should go to hell. No one should care';
+              Write-Error 'This should go to hell. No one should care' 2>$null;
           failOnStderr: false
           errorActionPreference: 'silentlyContinue'
