@@ -16,4 +16,4 @@ jobs:
           script: |
               Write-Error 'This should go to hell. No one should care';
           failOnStderr: false
-          errorActionPreference: 'silentlyContinue'
+          errorActionPreference: 'continue'
