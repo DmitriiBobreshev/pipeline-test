@@ -5,10 +5,5 @@ jobs:
       vmImage: windows-2022
     steps:
       - powershell: echo $env:NDK_ROOT
-      - task: PowerShell@2
-        env:
-          NDK_ROOT: 'TEST_NDK_ROOT'
-        inputs:
-          targetType: 'inline'
-          script: echo $env:NDK_ROOT
+      - bash: echo "##vso[task.setvariable variable=NDK_ROOT]TEST_NDK_ROOT"
       - powershell: echo $env:NDK_ROOT
