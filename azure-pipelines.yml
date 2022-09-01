@@ -2,8 +2,7 @@ jobs:
   - job: 'Win2022s'
     displayName: Windows VS2022
     pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2022'
+      name: 'Default'
     steps:
       # - template: src/msbuild/msbuild-steps.yml
       #   parameters:
