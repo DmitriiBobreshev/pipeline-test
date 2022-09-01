@@ -4,9 +4,9 @@ jobs:
     pool:
       vmImage: windows-2022
     steps:
-      - template: src/msbuild/msbuild-steps.yml
-        parameters:
-          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-      - template: src/msbuild/msbuild-steps.yml
-        parameters:
-          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
+      - task: PowerShell@2
+        env:
+          NDK_ROOT: 'TEST_NDK_ROOT'
+        inputs:
+          targetType: 'inline'
+          script: echo $env:NDK_ROOT
