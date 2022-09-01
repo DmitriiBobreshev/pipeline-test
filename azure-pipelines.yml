@@ -15,4 +15,5 @@ jobs:
           targetType: 'inline'
           script: 
             Write-Error 'This should go to hell. No one should care' 2>$null
+            echo 123
           failOnStderr: false
