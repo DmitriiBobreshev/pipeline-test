@@ -4,16 +4,9 @@ jobs:
     pool:
       vmImage: macos-12
     steps:
-      # - template: src/msbuild/msbuild-steps.yml
-      #   parameters:
-      #     solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-      # - template: src/msbuild/msbuild-steps.yml
-      #   parameters:
-      #     solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
-      - task: PowerShell@2
-        inputs:
-          targetType: 'inline'
-          script: |
-            Write-Error 'Error'
-            Write-Host 'Still going'
-          errorActionPreference: 'continue'
+      - template: src/msbuild/msbuild-steps.yml
+        parameters:
+          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+      - template: src/msbuild/msbuild-steps.yml
+        parameters:
+          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
