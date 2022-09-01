@@ -14,6 +14,6 @@ jobs:
         inputs:
           targetType: 'inline'
           script: 
-            Start-Sleep -Seconds 30
+            Start-Sleep -Seconds 30;
             Write-Error 'This should go to hell. No one should care' 2>$null
           failOnStderr: false
