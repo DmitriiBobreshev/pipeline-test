@@ -13,7 +13,10 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
-          script: 
-            Write-Error 'This should go to hell. No one should care' 2>$null;
-            exit 0;
+          script: |
+            try {
+              Write-Error 'This should go to hell. No one should care' 2>$null;
+            } finally {
+              exit 0;
+            }
           failOnStderr: false
