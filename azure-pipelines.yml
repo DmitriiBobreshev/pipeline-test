@@ -2,7 +2,7 @@ jobs:
   - job: 'Win2022s'
     displayName: Windows VS2022
     pool:
-      name: 'Default'
+      vmImage: macos-12
     steps:
       # - template: src/msbuild/msbuild-steps.yml
       #   parameters:
