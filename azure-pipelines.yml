@@ -14,6 +14,11 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
+          script: ecgh
+          failOnStderr: false
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
           script: 
-            Write-Error 'This should go to hell. No one should care'
+            Write-Error 'This should go to hell. No one should care' 2>$null
           failOnStderr: false
