@@ -22,7 +22,7 @@ jobs:
       #     echo $env:ANDROID_NDK_HOME
       #     echo $env:ANDROID_HOME
       - powershell:  ls C:\Microsoft\AndroidNDK\android-ndk-r21e  
-      - powershell: ls C:\Android\android-sdk\ndk\23.2.8568313
+      - powershell: ls C:\Android\android-sdk\ndk\23.2.8568313\toolchains\llvm\prebuilt\windows-x86_64\bin
       - powershell: ls env:\
       # - template: src/xamarin-android/templates/xamarin-android-test-ndk-default.yml
       #   parameters:
