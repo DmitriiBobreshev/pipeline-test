@@ -20,7 +20,7 @@ jobs:
       #     echo $env:ANDROID_NDK_HOME
       #     echo $env:ANDROID_HOME
       - powershell:  ls C:\Microsoft\AndroidNDK
-      - powershell: ls C:\Android
+      - powershell: ls C:\Android\android-sdk\ndk
       - powershell: ls env:\
   - job: 'Win2019s'
     displayName: Windows VS2019
@@ -37,5 +37,5 @@ jobs:
       #     echo $env:ANDROID_NDK_HOME
       #     echo $env:ANDROID_HOME
       - powershell:  ls C:\Microsoft\AndroidNDK
-      - powershell: ls C:\Android
+      - powershell: ls C:\Android\android-sdk\ndk
       - powershell: ls env:\
