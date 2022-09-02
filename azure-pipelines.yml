@@ -32,5 +32,5 @@ jobs:
           solution: 'msbuildtest\msbuildtest.NativeActivity\msbuildtest.NativeActivity.vcxproj'
           msBuildArguments: '/p:AndroidNdkDirectory="$(ndkPath)"'
           platform: 'ARM'
-          configuration: 'BuildOfficial'
+          configuration: 'Release'
           logFileVerbosity: diagnostic
