@@ -17,6 +17,7 @@ jobs:
           echo "##vso[task.setvariable variable=ANDROID_NDK_LATEST_HOME]$(ndkPath)"
           echo "##vso[task.setvariable variable=ANDROID_NDK_HOME]$(ndkPath)"
           echo "##vso[task.setvariable variable=ANDROID_NDK]$(ndkPath)"
+          echo "##vso[task.setvariable variable=ANDROID_NDK]TEST_ANDROID_HOME"
       # - powershell: |
       #     echo $env:NDK_ROOT
       #     echo $env:ANDROID_NDK_HOME
