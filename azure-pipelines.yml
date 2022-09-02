@@ -1,6 +1,6 @@
 variables:
   - name: ndkPath
-    value: TEST_NDK_PATH
+    value: C:\Android\android-sdk\ndk\23.2.8568313
   - name: androidSdkPath
     value: TEST_SDK_PATH
 
@@ -11,17 +11,30 @@ jobs:
       vmImage: windows-2022
     steps:
       - powershell: echo $env:NDK_ROOT
-      # - bash: |
-      #     echo "##vso[task.setvariable variable=NDK_ROOT]$(ndkPath)"
-      #     echo "##vso[task.setvariable variable=ANDROID_NDK_HOME]$(ndkPath)"
-      #     echo "##vso[task.setvariable variable=ANDROID_HOME]$(androidSdkPath)"
+      - bash: |
+          echo "##vso[task.setvariable variable=ANDROID_NDK_ROOT]$(ndkPath)"
+          echo "##vso[task.setvariable variable=ANDROID_NDK_LATEST_HOME]$(ndkPath)"
+          echo "##vso[task.setvariable variable=ANDROID_NDK_HOME]$(ndkPath)"
+          echo "##vso[task.setvariable variable=ANDROID_NDK]$(ndkPath)"
       # - powershell: |
       #     echo $env:NDK_ROOT
       #     echo $env:ANDROID_NDK_HOME
       #     echo $env:ANDROID_HOME
       - powershell:  ls C:\Microsoft\AndroidNDK
-      - powershell: ls C:\Android\android-sdk\ndk\23.2.8568313
+      - powershell: ls C:\Android\android-sdk\ndk\23.2.8568313\toolchains\llvm\prebuilt
       - powershell: ls env:\
       - template: src/xamarin-android/templates/xamarin-android-test-ndk-default.yml
         parameters:
           NDK_VERSION: 23.2.8568313
+      - task: MSBuild@1
+        displayName: 'Project build - ARM'
+        env:
+          ANDROID_HOME: $(androidSdkPath)
+          NDK_ROOT: $(ndkPath)
+          ANDROID_NDK_HOME: $(ndkPath)
+        inputs:
+          solution: 'src\xamarin-android\android-ndk\AviaExplorer\AviaExplorer\AviaExplorer.csproj'
+          msBuildArguments: '/p:AndroidNdkDirectory="$(ndkPath)"'
+          platform: 'ARM'
+          configuration: 'BuildOfficial'
+          logFileVerbosity: detailed
