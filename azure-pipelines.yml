@@ -20,8 +20,8 @@ jobs:
       #     echo $env:ANDROID_NDK_HOME
       #     echo $env:ANDROID_HOME
       - powershell:  ls C:\Microsoft\AndroidNDK
-      - powershell: ls C:\Android\android-sdk\ndk
+      - powershell: ls C:\Android\android-sdk\ndk\23.2.8568313
       - powershell: ls env:\
-      - template: src/xamarin-android/templates/xamarin-android-test-ndk.yml
+      - template: src/xamarin-android/templates/xamarin-android-test-ndk-default.yml
         parameters:
           NDK_VERSION: 23.2.8568313
