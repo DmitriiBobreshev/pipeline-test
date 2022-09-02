@@ -28,10 +28,6 @@ jobs:
           NDK_VERSION: 23.2.8568313
       - task: MSBuild@1
         displayName: 'Project build - ARM'
-        env:
-          ANDROID_HOME: $(androidSdkPath)
-          NDK_ROOT: $(ndkPath)
-          ANDROID_NDK_HOME: $(ndkPath)
         inputs:
           solution: 'src\xamarin-android\android-ndk\AviaExplorer\AviaExplorer\AviaExplorer.csproj'
           msBuildArguments: '/p:AndroidNdkDirectory="$(ndkPath)"'
