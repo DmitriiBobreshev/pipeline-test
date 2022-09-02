@@ -23,9 +23,9 @@ jobs:
       - powershell:  ls C:\Microsoft\AndroidNDK
       - powershell: ls C:\Android\android-sdk\ndk\23.2.8568313\toolchains\llvm\prebuilt
       - powershell: ls env:\
-      - template: src/xamarin-android/templates/xamarin-android-test-ndk-default.yml
-        parameters:
-          NDK_VERSION: 23.2.8568313
+      # - template: src/xamarin-android/templates/xamarin-android-test-ndk-default.yml
+      #   parameters:
+      #     NDK_VERSION: 23.2.8568313
       - task: MSBuild@1
         displayName: 'Project build - ARM'
         inputs:
