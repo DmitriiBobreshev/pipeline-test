@@ -35,6 +35,7 @@ jobs:
           outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
           configuration: 'Release'
           msbuildArguments: '/p:AndroidNdkDirectory="$(ANDROID_NDK_HOME)"'
+          createAppPackage: false
       - task: MSBuild@1
         displayName: 'Project build - ARM'
         inputs:
