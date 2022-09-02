@@ -1,0 +1,314 @@
+stages:
+- stage: 'Win2016'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted VS2017'))
+  dependsOn: []
+  jobs:
+  - job: 'default'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'vs2017-win2016'
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-vs2017.yml
+
+- stage: 'Win2019'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Windows 2019 with VS2019'))
+  dependsOn: []
+  jobs:
+  - job: 'default'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2019'
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-vs2019.yml
+  - job: 'ndk_default'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2019'
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-ndk-default.yml
+
+- stage: 'Win2022'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Windows Server 2022'))
+  dependsOn: []
+  jobs:
+  - job: 'default'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2022'
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-vs2019.yml
+
+  - job: 'ndk_default'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2022'
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-ndk-default.yml
+  
+
+- stage: 'MacOS_Public_Catalina_NDK_default'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS Catalina'))
+  dependsOn: []
+  jobs:
+  - job: 'ndk_default'
+    pool:
+      name: 'LimitedPublicCatalina'
+      vmImage: 'macos-10.15'
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-ndk-default.yml
+
+- stage: 'MacOS_Public_Catalina'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS Catalina'))
+  dependsOn: []
+  jobs:
+  - job: 'App1'
+    pool:
+      name: 'LimitedPublicCatalina'
+      vmImage: 'macos-10.15'
+    strategy:
+      matrix:
+        default:
+          XAMARIN_SYMLINK:
+        android_11.2_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_7
+        android_11.1_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_3
+        android_11.0_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_0
+        android_10.3_mono_6.10:
+          XAMARIN_SYMLINK: 6_10_0
+        android_10.2_mono_6.8:
+          XAMARIN_SYMLINK: 6_8_0
+        android_10.1_mono_6.6:
+          XAMARIN_SYMLINK: 6_6_0
+        android_10.0_mono_6.4:
+          XAMARIN_SYMLINK: 6_4_0
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-macOS-app1.yml
+      parameters:
+        XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
+  - job: 'App2'
+    pool:
+      name: 'LimitedPublicCatalina'
+      vmImage: 'macos-10.15'
+    strategy:
+      matrix:
+        android_11.2_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_7
+          NETCORE_VERSION: 5.0.202
+        android_11.1_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_3
+          NETCORE_VERSION: 3.1.401
+        android_11.0_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_0
+          NETCORE_VERSION: 3.1.300
+        android_10.3_mono_6.10:
+          XAMARIN_SYMLINK: 6_10_0
+          NETCORE_VERSION: 3.1.300
+        android_10.2_mono_6.8:
+          XAMARIN_SYMLINK: 6_8_0
+          NETCORE_VERSION: 3.1.200
+        android_10.1_mono_6.6:
+          XAMARIN_SYMLINK: 6_6_0
+          NETCORE_VERSION: 3.1.100
+        android_10.0_mono_6.4:
+          XAMARIN_SYMLINK: 6_4_0
+          NETCORE_VERSION: 3.0.100
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-macOS-app2.yml
+      parameters:
+        XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
+        NETCORE_VERSION: $(NETCORE_VERSION)
+
+  - job: 'Android_ndk_test_app'
+    pool:
+      name: 'LimitedPublicCatalina'
+      vmImage: 'macos-10.15'
+    strategy:
+      matrix:
+        default:
+          XAMARIN_SYMLINK: ''
+          NDK_VERSION: ''
+        android_11.2_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_7
+          NDK_VERSION: ''
+        android_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_0
+          NDK_VERSION: ''
+        android_mono_6.10_default_ndk:
+          XAMARIN_SYMLINK: 6_10_0
+          NDK_VERSION: ''
+        android_mono_6.8_default_ndk:
+          XAMARIN_SYMLINK: 6_8_0
+          NDK_VERSION: ''
+        android_mono_6.8_ndk_18:
+          XAMARIN_SYMLINK: 6_8_0
+          NDK_VERSION: 18.1.5063045
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-ndk.yml
+      parameters:
+        XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
+        NDK_VERSION: $(NDK_VERSION)
+
+- stage: 'MacOS_Public_BigSur'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS BigSur'))
+  dependsOn: []
+  jobs:
+  - job: 'App1'
+    pool:
+      name: 'LimitedPublicBigSur'
+      vmImage: 'macos-11'
+    strategy:
+      matrix:
+        default:
+          XAMARIN_SYMLINK:
+        android_12.2_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_16
+        android_12.1_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_15
+        android_12.0_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_11
+        android_11.3_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_10
+        android_11.2_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_7
+        android_11.1_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_3
+        android_11.0_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_0
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-macOS-app1.yml
+      parameters:
+        XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
+  - job: 'App2'
+    pool:
+      name: 'LimitedPublicBigSur'
+      vmImage: 'macos-11'
+    strategy:
+      matrix:
+        android_12.2_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_16
+          NETCORE_VERSION: 5.0.408
+        android_12.1_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_15
+          NETCORE_VERSION: 5.0.408
+        android_12.0_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_11
+          NETCORE_VERSION: 5.0.402
+        android_11.3_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_10
+          NETCORE_VERSION: 5.0.401
+        android_11.2_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_7
+          NETCORE_VERSION: 5.0.202
+        android_11.1_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_3
+          NETCORE_VERSION: 3.1.401
+        android_11.0_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_0
+          NETCORE_VERSION: 3.1.300
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-macOS-app2.yml
+      parameters:
+        XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
+        NETCORE_VERSION: $(NETCORE_VERSION)
+  - job: 'Android_ndk_test_app'
+    pool:
+      name: 'LimitedPublicBigSur'
+      vmImage: 'macos-11'
+    strategy:
+      matrix:
+        default:
+          XAMARIN_SYMLINK: ''
+          NDK_VERSION: ''
+        android_12.2_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_16
+        android_12.1_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_15
+        android_12.0_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_11
+        android_11.3_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_10
+        android_11.2_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_7
+        android_11.1_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_3
+          NDK_VERSION: ''
+        android_11.0_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_0
+          NDK_VERSION: ''
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-ndk.yml
+      parameters:
+        XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
+        NDK_VERSION: $(NDK_VERSION)
+
+- stage: 'MacOS_Public_Monterey'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS Monterey'))
+  dependsOn: []
+  jobs:
+  - job: 'App1'
+    pool:
+      name: 'LimitedPublicMonterey'
+      vmImage: 'macos-12'
+    strategy:
+      matrix:
+        default:
+          XAMARIN_SYMLINK:
+        android_12.2_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_16
+        android_12.1_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_15
+        android_12.0_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_11
+        android_11.3_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_10
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-macOS-app1.yml
+      parameters:
+        XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
+  - job: 'App2'
+    pool:
+      name: 'LimitedPublicMonterey'
+      vmImage: 'macos-12'
+    strategy:
+      matrix:
+        android_12.2_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_16
+          NETCORE_VERSION: 5.0.408
+        android_12.1_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_15
+          NETCORE_VERSION: 5.0.408
+        android_12.0_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_11
+          NETCORE_VERSION: 5.0.402
+        android_11.3_mono_6.12:
+          XAMARIN_SYMLINK: 6_12_10
+          NETCORE_VERSION: 5.0.401
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-macOS-app2.yml
+      parameters:
+        XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
+        NETCORE_VERSION: $(NETCORE_VERSION)
+  - job: 'Android_ndk_test_app'
+    pool:
+      name: 'LimitedPublicMonterey'
+      vmImage: 'macos-12'
+    strategy:
+      matrix:
+        default:
+          XAMARIN_SYMLINK: ''
+          NDK_VERSION: ''
+        android_12.2_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_16
+        android_12.1_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_15
+        android_12.0_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_11
+        android_11.3_mono_6.12_default_ndk:
+          XAMARIN_SYMLINK: 6_12_10
+    steps:
+    - template: src/xamarin-android/templates/xamarin-android-test-ndk.yml
+      parameters:
+        XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
+        NDK_VERSION: $(NDK_VERSION)
