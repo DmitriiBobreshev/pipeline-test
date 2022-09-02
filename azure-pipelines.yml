@@ -19,3 +19,4 @@ jobs:
           echo $env:NDK_ROOT
           echo $env:ANDROID_NDK_HOME
           echo $env:ANDROID_HOME
+      - powershell:  ls C:\Microsoft\AndroidNDK
