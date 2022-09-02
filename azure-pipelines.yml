@@ -24,5 +24,4 @@ jobs:
       - powershell: ls env:\
       - template: src/xamarin-android/templates/xamarin-android-test-ndk.yml
         parameters:
-          XAMARIN_SYMLINK: 6_8_0
           NDK_VERSION: 23.2.8568313
