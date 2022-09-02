@@ -37,4 +37,4 @@ jobs:
           msBuildArguments: '/p:AndroidNdkDirectory="$(ndkPath)"'
           platform: 'ARM'
           configuration: 'BuildOfficial'
-          logFileVerbosity: detailed
+          logFileVerbosity: diagnostic
