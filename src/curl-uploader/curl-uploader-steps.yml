@@ -74,12 +74,12 @@ steps:
       fi
   retryCountOnTaskFailure: 3
 
-- task: SSH@0
-  displayName: 'Remove test files'
-  condition: always()
-  inputs:
-    sshEndpoint: ${{ parameters.sshEndpoint }}
-    runOptions: 'inline'
-    inline: |
-      rm -rf /home/canary/curl
-  retryCountOnTaskFailure: 3
+# - task: SSH@0
+#   displayName: 'Remove test files'
+#   condition: always()
+#   inputs:
+#     sshEndpoint: ${{ parameters.sshEndpoint }}
+#     runOptions: 'inline'
+#     inline: |
+#       rm -rf /home/canary/curl
+#   retryCountOnTaskFailure: 3
