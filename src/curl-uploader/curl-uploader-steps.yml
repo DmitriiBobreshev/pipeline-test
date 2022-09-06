@@ -18,7 +18,7 @@ steps:
     authType: 'UserAndPass'
     username: 'canary'
     password: '4eba4y'
-    url: 'ftp://172.130.154.180:21'
+    url: 'ftp://172.30.154.180:21'
     remotePath: curl/folder/
     options: '--insecure'
   retryCountOnTaskFailure: 3
