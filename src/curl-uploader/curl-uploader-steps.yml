@@ -6,6 +6,7 @@ steps:
     sshEndpoint: ${{ parameters.sshEndpoint }}
     runOptions: 'inline'
     inline: |
+      echo 4eba4y | su canary
       mkdir '/home/canary/curl'
       mkdir '/home/canary/curl/folder'
       mkdir '/home/canary/curl/folder space'
@@ -65,6 +66,7 @@ steps:
     sshEndpoint: ${{ parameters.sshEndpoint }}
     runOptions: 'inline'
     inline: |
+      echo 4eba4y | su canary
       count=$(find /home/canary/curl -type f | wc -l)
       echo "$count" files found
       if [[ $count != 6 ]] 
@@ -81,5 +83,6 @@ steps:
     sshEndpoint: ${{ parameters.sshEndpoint }}
     runOptions: 'inline'
     inline: |
+      echo 4eba4y | su canary
       rm -rf /home/canary/curl
   retryCountOnTaskFailure: 3
