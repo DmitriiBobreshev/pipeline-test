@@ -1,0 +1,82 @@
+steps:
+
+- task: SSH@0
+  displayName: 'Create test folders'
+  inputs:
+    sshEndpoint: ${{ parameters.sshEndpoint }}
+    runOptions: 'inline'
+    inline: |
+      mkdir '/home/canary/curl'
+      mkdir '/home/canary/curl/folder'
+      mkdir '/home/canary/curl/folder space'
+  retryCountOnTaskFailure: 3
+
+- task: cURLUploader@2
+  displayName: 'Normal file copy (UserAndPass auth)'
+  inputs:
+    files: './src/curl-uploader/test-files/file1.a'
+    sshEndpoint: ${{ parameters.sshEndpoint }}
+    remotePath: curl/folder/
+    options: '--insecure'
+  retryCountOnTaskFailure: 3
+
+- task: cURLUploader@2
+  displayName: 'Creating missing path (service connection)'
+  inputs:
+    files: './src/curl-uploader/test-files/file2.a'
+    serviceEndpoint: '${{ parameters.ftpEndpoint }}'
+    remotePath: curl/folder/subfolder/
+    options: '--insecure --ftp-create-dirs'
+  retryCountOnTaskFailure: 3
+
+- task: cURLUploader@2
+  displayName: 'Testing wildcards'
+  inputs:
+    files: './src/curl-uploader/test-files/*.b'
+    serviceEndpoint: '${{ parameters.ftpEndpoint }}'
+    remotePath: curl/folder/
+    options: '--insecure -v'
+  retryCountOnTaskFailure: 3
+
+- task: cURLUploader@2
+  displayName: 'Testing target path with spaces'
+  inputs:
+    files: './src/curl-uploader/test-files/file5.a'
+    serviceEndpoint: '${{ parameters.ftpEndpoint }}'
+    remotePath: 'curl/folder space/'
+    options: '--insecure'
+  retryCountOnTaskFailure: 3
+
+- task: cURLUploader@2
+  displayName: 'Testing source path with spaces'
+  inputs:
+    files: './src/curl-uploader/test-files/Folder with space/file6.b'
+    serviceEndpoint: '${{ parameters.ftpEndpoint }}'
+    remotePath: curl/folder/
+    options: '--insecure'    
+  retryCountOnTaskFailure: 3
+
+- task: SSH@0
+  displayName: 'Count uploaded files'
+  inputs:
+    sshEndpoint: ${{ parameters.sshEndpoint }}
+    runOptions: 'inline'
+    inline: |
+      count=$(find /home/canary/curl -type f | wc -l)
+      echo "$count" files found
+      if [[ $count != 6 ]] 
+      then
+          echo "6 files expected"
+          echo "Test failed"; exit 1;
+      fi
+  retryCountOnTaskFailure: 3
+
+- task: SSH@0
+  displayName: 'Remove test files'
+  condition: always()
+  inputs:
+    sshEndpoint: ${{ parameters.sshEndpoint }}
+    runOptions: 'inline'
+    inline: |
+      rm -rf /home/canary/curl
+  retryCountOnTaskFailure: 3

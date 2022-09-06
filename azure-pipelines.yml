@@ -5,43 +5,13 @@ variables:
     value: TEST_SDK_PATH
 
 jobs:
-  - job: 'Win2022s'
-    displayName: Windows VS2022
+  - job: 'Ubuntu'
+    displayName: Ubuntu Latest
     pool:
-      vmImage: windows-2022
+      name: 'default'
+      vmImage: debian
     steps:
-      - powershell: echo $env:NDK_ROOT
-      - bash: |
-          echo "##vso[task.setvariable variable=ANDROID_NDK_ROOT]$(ndkPath)"
-          echo "##vso[task.setvariable variable=NDK_ROOT]$(ndkPath)"
-          echo "##vso[task.setvariable variable=ANDROID_NDK_LATEST_HOME]$(ndkPath)"
-          echo "##vso[task.setvariable variable=ANDROID_NDK_HOME]$(ndkPath)"
-          echo "##vso[task.setvariable variable=ANDROID_NDK]$(ndkPath)"
-          echo "##vso[task.setvariable variable=ANDROID_NDK]TEST_ANDROID_HOME"
-          echo "##vso[task.setvariable variable=AndroidNdkDirectory]$(ndkPath)"
-      # - powershell: |
-      #     echo $env:NDK_ROOT
-      #     echo $env:ANDROID_NDK_HOME
-      #     echo $env:ANDROID_HOME
-      - powershell:  ls C:\Microsoft\AndroidNDK\android-ndk-r21e  
-      - powershell: ls C:\Android\android-sdk\ndk\23.2.8568313\toolchains\llvm\prebuilt\windows-x86_64\bin
-      - powershell: ls env:\
-      # - template: src/xamarin-android/templates/xamarin-android-test-ndk-default.yml
-      #   parameters:
-      #     NDK_VERSION: 23.2.8568313
-      - task: XamarinAndroid@1
-        displayName: 'Project build - ARM Xamarin'
-        inputs:
-          projectFile: 'msbuildtest\msbuildtest.NativeActivity\msbuildtest.NativeActivity.vcxproj'
-          outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
-          configuration: 'Release'
-          msbuildArguments: '/p:AndroidNdkDirectory="$(ndkPath)"'
-          createAppPackage: false
-      - task: MSBuild@1
-        displayName: 'Project build - ARM'
-        inputs:
-          solution: 'msbuildtest\msbuildtest.NativeActivity\msbuildtest.NativeActivity.vcxproj'
-          msBuildArguments: '/p:AndroidNdkDirectory="$(ndkPath)"'
-          platform: 'ARM'
-          configuration: 'Release'
-          logFileVerbosity: diagnostic
+      - template: src/curl-uploader/curl-uploader-steps.yml
+        parameters:
+          sshEndpoint: 'root@68.183.10.251'
+          ftpEndpoint: 'root@68.183.10.251'
