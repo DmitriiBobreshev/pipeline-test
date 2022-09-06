@@ -1,16 +1,16 @@
 steps:
 
-- task: SSH@0
-  displayName: 'Create test folders'
-  inputs:
-    sshEndpoint: ${{ parameters.sshEndpoint }}
-    runOptions: 'inline'
-    inline: |
-      echo 4eba4y | su canary
-      mkdir '/home/canary/curl'
-      mkdir '/home/canary/curl/folder'
-      mkdir '/home/canary/curl/folder space'
-  retryCountOnTaskFailure: 3
+# - task: SSH@0
+#   displayName: 'Create test folders'
+#   inputs:
+#     sshEndpoint: ${{ parameters.sshEndpoint }}
+#     runOptions: 'inline'
+#     inline: |
+#       echo 4eba4y | su canary
+#       mkdir '/home/canary/curl'
+#       mkdir '/home/canary/curl/folder'
+#       mkdir '/home/canary/curl/folder space'
+#   retryCountOnTaskFailure: 3
 
 - task: cURLUploader@2
   displayName: 'Normal file copy (UserAndPass auth)'
@@ -76,13 +76,13 @@ steps:
       fi
   retryCountOnTaskFailure: 3
 
-- task: SSH@0
-  displayName: 'Remove test files'
-  condition: always()
-  inputs:
-    sshEndpoint: ${{ parameters.sshEndpoint }}
-    runOptions: 'inline'
-    inline: |
-      echo 4eba4y | su canary
-      rm -rf /home/canary/curl
-  retryCountOnTaskFailure: 3
+# - task: SSH@0
+#   displayName: 'Remove test files'
+#   condition: always()
+#   inputs:
+#     sshEndpoint: ${{ parameters.sshEndpoint }}
+#     runOptions: 'inline'
+#     inline: |
+#       echo 4eba4y | su canary
+#       rm -rf /home/canary/curl
+#   retryCountOnTaskFailure: 3
