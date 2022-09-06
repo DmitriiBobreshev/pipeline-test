@@ -15,7 +15,10 @@ steps:
   displayName: 'Normal file copy (UserAndPass auth)'
   inputs:
     files: './src/curl-uploader/test-files/file1.a'
-    sshEndpoint: ${{ parameters.sshEndpoint }}
+    authType: 'UserAndPass'
+    username: 'canary'
+    password: '4eba4y'
+    url: 'ftp://68.183.10.251:20'
     remotePath: curl/folder/
     options: '--insecure'
   retryCountOnTaskFailure: 3
