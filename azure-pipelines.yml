@@ -13,5 +13,5 @@ jobs:
     steps:
       - template: src/curl-uploader/curl-uploader-steps.yml
         parameters:
-          sshEndpoint: 'root@68.183.10.251'
-          ftpEndpoint: 'root@68.183.10.251'
+          sshEndpoint: 'test_ssh'
+          ftpEndpoint: 'test_ftp'
