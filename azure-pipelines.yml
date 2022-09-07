@@ -5,46 +5,16 @@ variables:
     value: TEST_SDK_PATH
 
 jobs:
-- job: 'Win2019'
-  displayName: Windows VS2019
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2019'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+# - job: 'VS2019'
+#   pool: $[ coalesce(variables.vs2019, 'Hosted Windows 2019 with VS2019') ]
+#   steps:
+#   - template: src/ftp-upload/templates/ftp-upload-test.yml
+#     parameters:
+#       rootFolderPrefix: vs2019
 
-- job: 'Win2022'
-  displayName: Windows VS2022
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2022'
+- job: 'Ubuntu_1804'
+  pool: 'default'
   steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-
-- job: 'MacOS_Catalina'
-  pool:
-    vmImage: 'macos-10.15'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-
-- job: 'MacOS_BigSur'
-  pool:
-    vmImage: 'macos-11'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-
-- job: 'MacOS_Public_Monterey'
-  pool:
-    vmImage: 'macos-12'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+  - template: src/ftp-upload/templates/ftp-upload-test.yml
+    parameters:
+      rootFolderPrefix: ubuntu1804

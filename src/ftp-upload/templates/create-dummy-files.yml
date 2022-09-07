@@ -1,0 +1,21 @@
+parameters:
+- name: fileCount
+  type: number
+- name: fileName
+  type: string 
+- name: fileSize
+  type: number
+
+steps:
+- powershell: |
+    $fileCount = ${{ parameters.fileCount }}
+    $fileName = "${{ parameters.fileName }}"
+    $fileSize = ${{ parameters.fileSize }}
+    for ($i = 1; $i -le $fileCount; $i++) {
+        $outputFileName = "$fileName$i.txt"
+        $file = [System.IO.File]::Create($outputFileName)
+        $file.SetLength($fileSize)
+        $file.Close()
+        Write-Host "Files $outputFileName was created"
+    }
+  displayName: 'Run - Create ${{ parameters.fileCount }} files (${{ parameters.fileName }})'

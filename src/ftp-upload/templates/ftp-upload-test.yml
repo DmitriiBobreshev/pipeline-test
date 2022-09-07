@@ -1,0 +1,12 @@
+parameters:
+- name: 'rootFolderPrefix'
+  type: string
+
+steps:
+- template: ftp-upload-v1-steps.yml
+  parameters:
+    rootFolderPrefix: ${{ parameters.rootFolderPrefix }}
+
+# - template: ftp-upload-v2-steps.yml
+#   parameters:
+#     rootFolderPrefix: ${{ parameters.rootFolderPrefix }}

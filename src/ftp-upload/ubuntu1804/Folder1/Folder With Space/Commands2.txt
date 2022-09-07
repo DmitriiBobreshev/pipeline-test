@@ -1,0 +1,190 @@
+RedirectingToAuthProvider
+SessionToken.CreateSessionToken
+FrameworkBasicAuthenticationModule.CompleteRequest
+WebSessionToken.CreateSessionToken
+ConnectionData.GetConnectionData
+ApiResourceOptions.Options
+BackingStoreNamespace2.QuerySecurityDataNamespace
+BackingStoreAclStore.QuerySecurityDataAcl
+BackingStoreNamespace.QuerySecurityDataNamespace
+SecurityNamespaces.QuerySecurityNamespaces
+
+ApiIdentity.ReadGroupMembers
+Identities.ReadIdentities_Id_Few
+Identities.ReadIdentities_Id_Tens
+Identities.ReadIdentities_Id_Single
+Identities.ReadIdentities_Id_Single_Direct
+Identities.ReadIdentities_Sid_AAD
+Identities.ReadIdentities_Sid_AAD_Expanded
+Identities.ReadIdentities_Sid_AAD_ExpandedUp
+Identities.ReadIdentities_Sid_Few
+Identities.ReadIdentities_Sid_Group
+Identities.ReadIdentities_Sid_Group_Expanded
+Identities.ReadIdentities_Sid_EveryoneGroup
+Identities.ReadIdentities_Sid_EveryoneGroup_Expanded
+Identities.ReadIdentities_Sid_ServiceUsersGroup
+Identities.ReadIdentities_Sid_ServiceUsersGroup_Expanded
+Identities.ReadIdentities_Sid_ServicePrincipal
+Identities.ReadIdentities_Sid_ServicePrincipal_Expanded
+Identities.ReadIdentities_Sid_ServiceIdentity
+Identities.ReadIdentities_Sid_ServiceIdentity_Expanded
+Identities.ReadIdentities_Sid_SecurityServiceGroup
+Identities.ReadIdentities_Sid_NamespaceAdminGroup
+Identities.ReadIdentities_Sid_NamespaceAdminGroup_Expanded
+Identities.ReadIdentities_Search_AccountName
+Identities.ReadIdentities_Search_General
+Identities.ReadIdentities_Search_AdministratorsGroup
+FrameworkIdentities.CreateIdentity
+Identities.GetIdentityChanges
+Identities.UpdateIdentities
+
+ServiceDefinitions.GetServiceDefinition
+ServiceDefinitions.UpdateServiceDefinitions
+
+Organizations.GetOrganization
+OrganizationAccounts.GetAccount
+Projects.QueueCreateProject
+Projects.GetProject
+Groups.ListGroups
+Groups.CreateGroups
+Members.AddMember
+
+
+Availability1h
+Availability24h
+WaitingRequests
+OnlineMachineRatio
+BuildIsCurrentlyQueuedTooLong
+
+
+
+Version Control Version Control TfvcItems.GetItems	170
+Web Access	WITIQ   ApiWIT.allowedValues  170
+Commerce	Commerce	OfferSubscription.GetOfferSubscription 170
+Commerce	Commerce	OfferSubscription.EnableTrialOrPreviewOfferSubscription	170
+Web-Api	Unknown	SearchExtensionEvents.PreInstall	170
+DistributedTask Build      TaskAgents.AddAgent   164
+Identities	Identity Identities.ReadIdentities_Sid_UnrecognizedClaimsType 162
+Memberships    Enterprise Authorization	Identities.ReadIdentities_Sid_UnrecognizedClaimsType_Expanded		160
+TFS Build	Build      Qualities.GetQualities    159
+Web Access	Identity ApiIdentity.Display	157
+Web Access	Open ALM	AdminHome.index	156
+Test Management REST Test Execution   CodeCoverage.BuildCodeCoverage	155
+Build      Build      Builds2r3.GetBuild	152
+Web Access	Enterprise Authorization	ApiIdentity.ReadScopedApplicationGroupsJson  145
+Profile   Engagement      Profiles3.GetProfile	143
+Framework	Cloud Services Framework	BackingStoreAccessControlEntries.SetPermissions	139
+Identities	Identity Identities.ReadIdentities_Sid_ServicePrincipalGroup       137
+Build      Build      BuildChanges3.GetBuildChanges	133
+Memberships    Enterprise Authorization	Identities.ReadIdentities_Sid_ServicePrincipalGroup_Expanded 132
+Identities	Identity Identities.ReadIdentities_Sid_WindowsIdentity 131
+Build      Build      BuildTags.AddBuildTag  126
+Build      Build      BuildArtifacts2.GetArtifacts	122
+DistributedTask Build      TaskAgentJobRequests.GetAgentRequestsForAgents       121
+Web Access	Version Control CodeEditor.WorkerLoaderProxy 117
+Web Access	Open ALM	AdminSecurity.index      117
+Web-Api	Unknown	SecurityRoleAssignments.SetRoleAssignments   106
+Web Access	Open ALM	ApiCommon.GetTeamProjectMruList      103
+Identities	Enterprise Authorization	Identities.ReadIdentitiesByScope	100
+Authentication  Identity CompleteUnauthorizedRequest 99
+Memberships    Enterprise Authorization	Identities.ReadIdentities_Sid_Group_Direct	97
+DistributedTask Build      TaskAgentQueues.GetAgentQueues	93
+Web Access	Commerce	ApiCommon.GetResourceUsage 93
+Web Access	WIT PI   ApiChatRoom.GetTeamRoomMruList     93
+Build      Build      BuildChanges.GetBuildChanges 87
+Web Access	Modern WIT       ApiWIT.teamProjects     86
+Web Access	Engagement      Collection.Home.index  85
+SignalR  Build      TaskAgentPoolHub.Abort	81
+Web Access	Engagement      ApiCommon.identityImage	80
+Service Hooks    Open ALM	HooksSvcEvents.PostEvents	79
+DelegatedAuthorization Identity ClientRegistration2.Create	79
+Web Access	Open ALM	ApiCommon.GetNews   78
+DistributedTask Build      TaskGroups.GetTaskGroups	78
+Test Results	Test Results	TestResultsReportsForBuild.QueryTestResultsReportForBuild      77
+ReleaseManagement     Release Management    RmReleases4.GetReleases	75
+DistributedTask Build      TaskHubTimelineRecordAttachment.GetPlanAttachments	74
+Build      Build      BuildDeployments.GetBuildDeployments	74
+Web Platform    Open ALM	ScriptResource.Module 73
+ServiceEndpoint	Release Management    ServiceEndpoints2.GetServiceEndpoints 70
+Web Access	Dashboards	Project.Home.index	67
+Web Access	Work Item Tracking	ApiWIT.workItemTypeCategories	66
+Web Access	Work Item Tracking	ApiWIT.workItemTypes 66
+Web Access	WITIQ   ApiWIT.WorkItemColorData       63
+Web Access	Work Item Tracking	ApiWIT.nodes   63
+Web Access	WIT Workflows ApiTeams.members       61
+Build      Build      BuildSettings.GetBuildSettings   60
+Web Access	WIT Workflows AgileTile.sprintCapacitySummary	60
+Web Access	Dashboards	ApiWidgets.queryresultcount    59
+Web Access	WIT Workflows ApiProcessConfiguration.getProcessSettings       59
+Memberships    Enterprise Authorization	Identities.ReadIdentities_Sid_AAD_Direct	59
+Web Access	WITIQ   ApiWIT.GetLayoutProperties      57
+SignalR  Build      BuildDetailHub.Reconnect	55
+DistributedTask Build      TaskAgentJobRequests.GetAgentRequestsForPlan	55
+Web Access	Enterprise Authorization	ApiIdentity.CanAddMemberToGroup      54
+Build      Build      BuildLogs.GetBuildLogs 53
+Build      Build      BuildDefinitions2.GetDefinitions	53
+DistributedTask Build      TaskAgentPools.GetAgentPool   52
+Web Access	WITIQ   ApiWIT.GetLayoutUserSettings  52
+Build      Build      BuildLogs2.GetBuildLog 51
+Web Access	Enterprise Authorization	ApiIdentity.AddIdentities	50
+MruIdentities    Enterprise Authorization	MruIdentities.UpdateMruIdentities	50
+Build      Build      BuildInputValuesQuery.PostInputValuesQuery   47
+Web-Api	Enterprise Authorization	IdentityPickerIdentities.PatchMru	46
+Build      Build      BuildOptionDefinitions2.GetBuildOptionDefinitions	44
+Web Access	WITIQ   ApiWIT.query    43
+DistributedTask Build      TaskAgentJobRequests.GetAgentRequestsForAgent	41
+Web Access	Open ALM	Apps.hub	39
+Web-Api	Unknown	SecurityRoleDefintions.GetRoleDefinitions	39
+Build      Build      BuildWorkItems.GetBuildWorkItemsRefsFromCommits  38
+Web Access	Build      AdminAgentPool.index 38
+Web Access	Open ALM	ApiExtensions.Integrations	38
+Web-Api	Unknown	SecurityRoleAssignments.GetRoleAssignments   38
+Web Access	Open ALM	AdminHome.settings     36
+Web Access	Version Control CodeEditor.Edit 35
+Service Hooks    Open ALM	HooksPublisherPublishersQuery.PostPublishersQuery     35
+Framework	Cloud Services Framework	Permissions.HasPermission	34
+Build      Build      Builds2r3.UpdateBuild   34
+Web Access	Open ALM	PermaLink.RedirectRoute	33
+Web Access	Dashboards	Collection.Home.index  33
+Web Access	Dashboards	ApiFavorites.list 33
+Web Access	Build      Build.definitionEditor     33
+Web Access	Identity Signout.index    33
+Build      Build      BuildDefinitions3.GetDefinitions	32
+Service Hooks    Open ALM	HooksPublisherSubscriptionsQuery.PostSubscriptionsQuery	30
+Web Access	Open ALM	ApiBrowse.browse	30
+Web Access	Licensing and Accounts ApiAccount.GetAccountSettings 28
+Web Access	Identity PersonalAccessToken.List	27
+Web Access	Build      Build.explorer   27
+Web Access	Build      AdminAgentQueue.index	27
+Memberships    Enterprise Authorization	Identities.ReadIdentities_Sid_UnrecognizedIdentityType_ExpandedUp		26
+Web Access	Identity PersonalAccessToken.Index	26
+ServiceEndpoint	Release Management    ServiceEndpointTypes.GetServiceEndpointTypes	26
+Web Access	Open ALM	AdminServices.index      26
+Memberships    Enterprise Authorization	Identities.ReadIdentities_Sid_Group_ExpandedUp	25
+Recommendation	Engagement      Recommendations.GetRecommendations_Dashboards  24
+WorkItem Tracking	WITIQ   Wiql.QueryByWiql	24
+Memberships    Enterprise Authorization	Identities.ReadIdentities_Sid_ServiceIdentity_ExpandedUp	24
+Web-Api	Enterprise Authorization	IdentityPickerIdentities.GetConnections 23
+Build      Build      Folders.GetFolders	20
+Web Access	Open ALM	ApiBrowse.BrowseControl	20
+Web Access	Open ALM	ApiCommon.GetJumpList	20
+Web Access	Open ALM	ApiCommon.GetCollectionJumpList	20
+Web Access	Identity PersonalAccessToken.Edit	20
+Git	Version Control GitRepositories.GetRepository   17
+Service Hooks    Open ALM	HooksPublisherConsumers.GetConsumers	16
+Service Hooks    Open ALM	HooksSvcConsumers.GetConsumers       16
+SignalR  Build      TaskAgentPoolHub.Reconnect   16
+Web Access	Build      AdminBuildQueue.index	15
+Memberships    Enterprise Authorization	Identities.ReadIdentities_Id_Single_Expanded    15
+Web Access	Enterprise Authorization	ApiIdentity.ReadScopedTeamJson	15
+Identities	Enterprise Authorization	Members.RemoveMember	14
+Identities	Identity Identities.ReadIdentities_Search_Alias   14
+Web-Api	Unknown	RecommendationHistory.LogRecommendation  13
+Recommendation	Engagement      Recommendations.GetRecommendations	13
+Test Results	Test Results	TestResultTrendForBuild.QueryResultTrendForBuild	13
+Web Access	Open ALM	ApiWebSettings.readSetting       13
+Build      Build      BuildDefinitionRevisions2.GetDefinitionRevisions	13
+Web Access	Version Control CodeEditor.Diff 12
+Web Access	Enterprise Authorization	ApiIdentity.EditMembership       12
+Web-Api	Enterprise Authorization	IdentityPickerIdentities.GetMru 11
+Web Platform    Engagement      Profile.Avatar    11

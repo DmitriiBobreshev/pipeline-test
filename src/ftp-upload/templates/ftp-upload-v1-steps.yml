@@ -1,0 +1,124 @@
+parameters:
+- name: 'rootFolderPrefix'
+  type: string
+
+steps:
+- task: FtpUpload@1
+  displayName: 'Single file, backslashes, dirty (v1)'
+  inputs:
+    serverEndpoint: test_ftp
+    rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
+    filePatterns: 'Folder With Space\Commands1.txt'
+    remoteDirectory: '\site\wwwroot'
+  condition: and(succeeded(), contains(variables['Agent.Os'], 'Windows'))
+  retryCountOnTaskFailure: 8
+
+- task: FtpUpload@1
+  displayName: 'Single file, backslashes, clean (v1)'
+  inputs:
+    serverEndpoint: test_ftp
+    rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
+    filePatterns: 'Folder With Space\Commands1.txt'
+    remoteDirectory: '\site\wwwroot'
+    clean: true
+  condition: and(succeeded(), contains(variables['Agent.Os'], 'Windows'))
+  retryCountOnTaskFailure: 8
+
+- task: FtpUpload@1
+  displayName: 'Single file, forward slashes, dirty (v1)'
+  inputs:
+    serverEndpoint: test_ftp
+    rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
+    filePatterns: 'Folder With Space/Commands1.txt'
+    remoteDirectory: /site/wwwroot
+  retryCountOnTaskFailure: 8
+
+- task: FtpUpload@1
+  displayName: 'Single file, forward slashes, clean (v1)'
+  inputs:
+    serverEndpoint: test_ftp
+    rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
+    filePatterns: 'Folder With Space/Commands1.txt'
+    remoteDirectory: /site/wwwroot
+    clean: true
+  retryCountOnTaskFailure: 8
+
+- task: FtpUpload@1
+  displayName: 'File pattern, backslashes, dirty (v1)'
+  inputs:
+    serverEndpoint: test_ftp
+    rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
+    filePatterns: 'Folder With Space\*.txt'
+    remoteDirectory: '\site\wwwroot'
+  condition: and(succeeded(), contains(variables['Agent.Os'], 'Windows'))
+  retryCountOnTaskFailure: 8
+
+- task: FtpUpload@1
+  displayName: 'File pattern, backslashes, clean (v1)'
+  inputs:
+    serverEndpoint: test_ftp
+    rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
+    filePatterns: 'Folder With Space\*.txt'
+    remoteDirectory: '\site\wwwroot'
+    clean: true
+  condition: and(succeeded(), contains(variables['Agent.Os'], 'Windows'))
+  retryCountOnTaskFailure: 8
+
+- task: FtpUpload@1
+  displayName: 'File pattern, forward slashes, dirty (v1)'
+  inputs:
+    serverEndpoint: test_ftp
+    rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
+    filePatterns: 'Folder With Space/*.txt'
+    remoteDirectory: /site/wwwroot
+  retryCountOnTaskFailure: 8
+
+- task: FtpUpload@1
+  displayName: 'File pattern, forward slashes, clean (v1)'
+  inputs:
+    serverEndpoint: test_ftp
+    rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
+    filePatterns: 'Folder With Space/*.txt'
+    remoteDirectory: /site/wwwroot
+    clean: true
+  retryCountOnTaskFailure: 8
+
+- template: create-dummy-files.yml
+  parameters:
+    fileCount: 5
+    fileName: "largefile"
+    fileSize: 524288000
+
+- task: FtpUpload@1
+  displayName: 'FTP Upload: 5 large files (v1)'
+  inputs:
+    serverEndpoint: test_ftp
+    rootDirectory: ''
+    filePatterns: 'largefile*.txt'
+    remoteDirectory: '/upload/FtpUpload-${{ parameters.rootFolderPrefix }}/'
+  retryCountOnTaskFailure: 8
+
+- task: FtpUpload@1
+  displayName: 'FTP Upload: Hack to delete contents (v1)'
+  inputs:
+    serverEndpoint: test_ftp
+    rootDirectory: 'src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1/Folder With Space'
+    remoteDirectory: '/upload/FtpUpload-clone/'
+    clean: true
+  retryCountOnTaskFailure: 8
+
+- template: create-dummy-files.yml
+  parameters:
+    fileCount: 500
+    fileName: "small"
+    fileSize: 4096
+
+- task: FtpUpload@1
+  displayName: 'FTP Upload: 500 small files (v1)'
+  inputs:
+    serverEndpoint: 'FtpUpload'
+    rootDirectory: ''
+    filePatterns: 'small*.txt'
+    remoteDirectory: '/upload/FtpUpload-${{ parameters.rootFolderPrefix }}/'
+    clean: true
+  retryCountOnTaskFailure: 8
