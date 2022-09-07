@@ -109,7 +109,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'FTPS, multiple patterns, dirty, preserve paths'
   inputs:
-    serverEndpoint: 'FtpUpload_FTPS'
+    serverEndpoint: 'test_ftp'
     rootDirectory: '$(Build.SourcesDirectory)/src/ftp-upload/${{ parameters.rootFolderPrefix }}/'
     filePatterns: |
       **/*1.txt
@@ -121,7 +121,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'FTPS, multiple patterns, clean, preserve paths'
   inputs:
-    serverEndpoint: 'FtpUpload_FTPS'
+    serverEndpoint: 'test_ftp'
     rootDirectory: '$(Build.SourcesDirectory)/src/ftp-upload/${{ parameters.rootFolderPrefix }}/'
     filePatterns: |
       **/*1.txt
