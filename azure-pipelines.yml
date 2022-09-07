@@ -9,7 +9,7 @@ jobs:
   pool:
     name: default
     demands:
-      - Agent.Name -equals 'win-11'
+      - Agent.Name -equals win-11
   steps:
   - template: src/ftp-upload/templates/ftp-upload-test.yml
     parameters:
@@ -19,7 +19,7 @@ jobs:
   pool:
     name: default
     demands:
-      - Agent.Name -equals 'debian'
+      - Agent.Name -equals debian
   steps:
   - template: src/ftp-upload/templates/ftp-upload-test.yml
     parameters:
