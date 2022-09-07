@@ -10,7 +10,6 @@ jobs:
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Windows 2019 with VS2019'))
   steps:
     - template: src/msbuild/msbuild-steps.yml
       parameters:
@@ -21,7 +20,6 @@ jobs:
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2022'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Windows Server 2022'))
   steps:
     - template: src/msbuild/msbuild-steps.yml
       parameters:
@@ -30,7 +28,6 @@ jobs:
 - job: 'MacOS_Catalina'
   pool:
     vmImage: 'macos-10.15'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS Catalina'))
   steps:
     - template: src/msbuild/msbuild-steps.yml
       parameters:
@@ -39,7 +36,6 @@ jobs:
 - job: 'MacOS_BigSur'
   pool:
     vmImage: 'macos-11'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS BigSur'))
   steps:
     - template: src/msbuild/msbuild-steps.yml
       parameters:
@@ -48,7 +44,6 @@ jobs:
 - job: 'MacOS_Public_Monterey'
   pool:
     vmImage: 'macos-12'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS Monterey'))
   steps:
     - template: src/msbuild/msbuild-steps.yml
       parameters:
