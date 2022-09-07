@@ -6,7 +6,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'Single file, backslashes, dirty'
   inputs:
-    serverEndpoint: FtpUpload
+    serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space\Commands1.txt'
     remoteDirectory: '\site\wwwroot'
@@ -16,7 +16,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'Single file, backslashes, clean'
   inputs:
-    serverEndpoint: FtpUpload
+    serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space\Commands1.txt'
     remoteDirectory: '\site\wwwroot'
@@ -27,7 +27,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'Single file, forward slashes, dirty'
   inputs:
-    serverEndpoint: FtpUpload
+    serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space/Commands1.txt'
     remoteDirectory: /site/wwwroot
@@ -36,7 +36,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'Single file, forward slashes, clean'
   inputs:
-    serverEndpoint: FtpUpload
+    serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space/Commands1.txt'
     remoteDirectory: /site/wwwroot
@@ -46,7 +46,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'File pattern, backslashes, dirty'
   inputs:
-    serverEndpoint: FtpUpload
+    serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space\*.txt'
     remoteDirectory: '\site\wwwroot'
@@ -56,7 +56,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'File pattern, backslashes, clean'
   inputs:
-    serverEndpoint: FtpUpload
+    serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space\*.txt'
     remoteDirectory: '\site\wwwroot'
@@ -67,7 +67,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'File pattern, forward slashes, dirty'
   inputs:
-    serverEndpoint: FtpUpload
+    serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space/*.txt'
     remoteDirectory: /site/wwwroot
@@ -76,7 +76,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'File pattern, forward slashes, clean'
   inputs:
-    serverEndpoint: FtpUpload
+    serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space/*.txt'
     remoteDirectory: /site/wwwroot
@@ -92,7 +92,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'FTP Upload: 10 large files'
   inputs:
-    serverEndpoint: FtpUpload
+    serverEndpoint: test_ftp
     rootDirectory: ''
     filePatterns: 'largefile*.txt'
     remoteDirectory: '/upload/FtpUpload-${{ parameters.rootFolderPrefix }}/'
@@ -100,7 +100,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'FTP Upload: Hack to delete contents'
   inputs:
-    serverEndpoint: FtpUpload
+    serverEndpoint: test_ftp
     rootDirectory: 'src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1/Folder With Space'
     remoteDirectory: '/upload/FtpUpload-clone/'
     clean: true
@@ -140,7 +140,7 @@ steps:
 - task: FtpUpload@2
   displayName: 'FTP Upload: 1000 small files'
   inputs:
-    serverEndpoint: 'FtpUpload_FTPS'
+    serverEndpoint: 'test_ftp'
     rootDirectory: ''
     filePatterns: 'small*.txt'
     remoteDirectory: '/upload/FtpUpload-${{ parameters.rootFolderPrefix }}/'
