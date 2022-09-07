@@ -116,7 +116,7 @@ steps:
 - task: FtpUpload@1
   displayName: 'FTP Upload: 500 small files (v1)'
   inputs:
-    serverEndpoint: 'FtpUpload'
+    serverEndpoint: 'test_ftp'
     rootDirectory: ''
     filePatterns: 'small*.txt'
     remoteDirectory: '/upload/FtpUpload-${{ parameters.rootFolderPrefix }}/'
