@@ -5,15 +5,21 @@ variables:
     value: TEST_SDK_PATH
 
 jobs:
-# - job: 'VS2019'
-#   pool: $[ coalesce(variables.vs2019, 'Hosted Windows 2019 with VS2019') ]
-#   steps:
-#   - template: src/ftp-upload/templates/ftp-upload-test.yml
-#     parameters:
-#       rootFolderPrefix: vs2019
+- job: 'VS2019'
+  pool:
+    name: default
+    demands:
+      - Agent.Name -equals 'win-11'
+  steps:
+  - template: src/ftp-upload/templates/ftp-upload-test.yml
+    parameters:
+      rootFolderPrefix: vs2019
 
 - job: 'Ubuntu_1804'
-  pool: 'default'
+  pool:
+    name: default
+    demands:
+      - Agent.Name -equals 'debian'
   steps:
   - template: src/ftp-upload/templates/ftp-upload-test.yml
     parameters:
