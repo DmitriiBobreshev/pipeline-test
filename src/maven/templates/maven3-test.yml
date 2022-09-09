@@ -8,7 +8,7 @@ steps:
   - task: Bash@3
     inputs:
       targetType: 'inline'
-      script: 'curl --output maven-bin.zip $(azureStorageLink)/apache-maven-${{ parameters.customMavenVersion }}-bin.zip'
+      script: 'curl --output maven-bin.zip https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/${{ parameters.customMavenVersion }}/apache-maven-${{ parameters.customMavenVersion }}-bin.zip'
     retryCountOnTaskFailure: 3
   - task: ExtractFiles@1
     inputs:
