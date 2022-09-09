@@ -1,0 +1,20 @@
+parameters:
+- name: 'pattern'
+  type: string
+- name: 'files'
+  type: string
+
+steps:
+- task: ExtractFiles@1
+  inputs:
+    archiveFilePatterns: ${{ parameters.pattern }}
+    destinationFolder: 'files/'
+    cleanDestinationFolder: true
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      extracted=$(ls files | xargs)
+      if [ "$extracted" != ${{ parameters.files }} ]; then
+        echo "Extracted fles: $extracted, expected: ${{ parameters.files }}"; exit 1;
+      fi

@@ -5,22 +5,4 @@ variables:
     value: TEST_SDK_PATH
 
 jobs:
-- job: 'VS2019'
-  pool:
-    name: default
-    demands:
-      - Agent.Name -equals win-11
-  steps:
-  - template: src/ftp-upload/templates/ftp-upload-test.yml
-    parameters:
-      rootFolderPrefix: vs2019
-
-- job: 'Ubuntu_1804'
-  pool:
-    name: default
-    demands:
-      - Agent.Name -equals debian
-  steps:
-  - template: src/ftp-upload/templates/ftp-upload-test.yml
-    parameters:
-      rootFolderPrefix: ubuntu1804
+- template: extract-files.yml

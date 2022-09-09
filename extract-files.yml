@@ -1,0 +1,88 @@
+jobs:
+- job: 'extractFiles_ubuntu1804'
+  displayName: Test ExtractFilesV1 on Ubuntu 1804
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-18.04'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Ubuntu 1804'))
+  steps:
+    - template: src/extract-files/templates/extract-files-steps.yml
+      parameters:
+        toolPath: /usr/bin/unzip
+
+- job: 'extractFiles_ubuntu2004'
+  displayName: Test ExtractFilesV1 on Ubuntu 2004
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-20.04'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Ubuntu 2004'))
+  steps:
+    - template: src/extract-files/templates/extract-files-steps.yml
+      parameters:
+        toolPath: /usr/bin/unzip
+
+- job: 'extractFiles_ubuntu2204'
+  displayName: Test ExtractFilesV1 on Ubuntu 2204
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-22.04'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Ubuntu 2204'))
+  steps:
+    - template: src/extract-files/templates/extract-files-steps.yml
+      parameters:
+        toolPath: /usr/bin/unzip
+
+- job: 'Win2019'
+  displayName: Test ExtractFilesV1 on Windows 2019
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2019'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Windows 2019 with VS2019'))
+  steps:
+    - template: src/extract-files/templates/extract-files-steps.yml
+      parameters:
+        toolPath: C:\ProgramData\Chocolatey\bin\7z.exe
+
+- job: 'Win2022'
+  displayName: Test ExtractFilesV1 on Windows 2022
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2022'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Windows Server 2022'))
+  steps:
+    - template: src/extract-files/templates/extract-files-steps.yml
+      parameters:
+        toolPath: C:\ProgramData\Chocolatey\bin\7z.exe
+
+- job: 'extractFiles_MacOSPublicCatalina'
+  displayName: Test ExtractFilesV1 on MacOS Catalina
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'macos-10.15'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS Catalina'))
+  steps:
+    - template: src/extract-files/templates/extract-files-steps.yml
+      parameters:
+        toolPath: /usr/bin/unzip
+
+- job: 'extractFiles_MacOSPublicBigSur'
+  displayName: Test ExtractFilesV1 on MacOS Big Sur
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'macos-11'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS BigSur'))
+  steps:
+    - template: src/extract-files/templates/extract-files-steps.yml
+      parameters:
+        toolPath: /usr/bin/unzip
+
+- job: 'extractFiles_MacOSPublicMonterey'
+  displayName: Test ExtractFilesV1 on MacOS Monterey
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'macos-12'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS Monterey'))
+  steps:
+    - template: src/extract-files/templates/extract-files-steps.yml
+      parameters:
+        toolPath: /usr/bin/unzip

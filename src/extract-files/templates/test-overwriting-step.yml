@@ -1,0 +1,46 @@
+parameters:
+  - name: 'pattern'
+    type: string
+  - name: 'files'
+    type: string
+  - name: 'displayName'
+    type: string
+  
+steps:
+- task: Bash@3
+  displayName: 'Generate files in output directory'
+  inputs:
+    targetType: 'inline'
+    script: |
+      rm -rf files
+      mkdir -p files && cd files
+      for fileName in ${{ parameters.files }}
+      do
+        touch $fileName
+      done
+- task: ExtractFiles@1
+  displayName: ${{ parameters.displayName }}
+  inputs:
+    archiveFilePatterns: ${{ parameters.pattern }}
+    destinationFolder: 'files/'
+    cleanDestinationFolder: false
+    overwriteExistingFiles: true
+- task: Bash@3
+  displayName: 'Check files in output directory'
+  inputs:
+    targetType: 'inline'
+    script: |
+      extracted=$(ls files | xargs)
+      if [ "$extracted" != ${{ parameters.files }} ];
+      then
+        echo "Extracted files: '$extracted', expected: ${{ parameters.files }}";
+        exit 1;
+      fi
+      for fileName in "$extracted"
+      do
+        if ! grep -q "Overwritten file should contain this string" "files/$fileName";
+        then
+          echo "files/$fileName weren't overwritten";
+          exit 1;
+        fi
+      done

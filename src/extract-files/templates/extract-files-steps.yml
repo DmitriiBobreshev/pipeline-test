@@ -1,0 +1,48 @@
+parameters:
+- name: 'toolPath'
+  type: string
+
+steps:
+- template: test-pattern-step.yml
+  parameters:
+    pattern: 'src/extract-files/archives/subfolder1/archive2.zip'
+    files: 'archive2.txt'
+  
+- template: test-pattern-step.yml
+  parameters:
+    pattern: 'src/extract-files/archives/*.zip'
+    files: 'archive1.txt'
+  
+- template: test-pattern-step.yml
+  parameters:
+    pattern: 'src/extract-files/archives/*/*.zip'
+    files: 'archive2.txt'
+
+- template: test-pattern-step.yml
+  parameters:
+    pattern: 'src/extract-files/archives/**/*.zip'
+    files: 'archive1.txt archive2.txt archive3.txt'
+
+- template: test-overwriting-step.yml
+  parameters:
+    displayName: 'Extract .zip archive with overwriting of existed files'
+    pattern: 'src/extract-files/archives/*.zip'
+    files: 'archive1.txt'
+
+- template: test-overwriting-step.yml
+  parameters:
+    displayName: 'Extract .tar archive with overwriting of existed files'
+    pattern: 'src/extract-files/archives/*.tar'
+    files: 'tarArchive.txt'
+
+- template: test-overwriting-step.yml
+  parameters:
+    displayName: 'Extract .7z archive with overwriting of existed files'
+    pattern: 'src/extract-files/archives/*.7z'
+    files: '7ziparchive.txt'
+
+- template: test-custom-tool-path.yml
+  parameters:
+    pattern: 'src/extract-files/archives/subfolder1/archive2.zip'
+    files: 'archive2.txt'
+    toolPath: ${{ parameters.toolPath }}
