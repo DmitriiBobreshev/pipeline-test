@@ -13,67 +13,67 @@ stages:
     parameters:
       mavenTaskVersion: 2
       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-  # - template: src/maven/templates/maven-test.yml
-  #   parameters:
-  #     mavenTaskVersion: 3
-  #     enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 3
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
 
-# - stage: 'Hosted_Ubuntu_2004'
-#   dependsOn: []
-#   pool:
-#     name: 'Azure Pipelines'
-#     vmImage: 'ubuntu-20.04'
-#   jobs:
-#   - template: src/maven/templates/maven-test.yml
-#     parameters:
-#       mavenTaskVersion: 2
-#       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-#   - template: src/maven/templates/maven-test.yml
-#     parameters:
-#       mavenTaskVersion: 3
-#       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+- stage: 'Hosted_Ubuntu_2004'
+  dependsOn: []
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-20.04'
+  jobs:
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 2
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 3
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
 
-# - stage: 'Hosted_Ubuntu_2204'
-#   dependsOn: []
-#   pool:
-#     name: 'Azure Pipelines'
-#     vmImage: 'ubuntu-22.04'
-#   jobs:
-#   - template: src/maven/templates/maven-test.yml
-#     parameters:
-#       mavenTaskVersion: 2
-#       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-#   - template: src/maven/templates/maven-test.yml
-#     parameters:
-#       mavenTaskVersion: 3
-#       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+- stage: 'Hosted_Ubuntu_2204'
+  dependsOn: []
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-22.04'
+  jobs:
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 2
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 3
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
 
-# - stage: 'Win2019'
-#   dependsOn: []
-#   pool:
-#     name: 'Azure Pipelines'
-#     vmImage: 'windows-2019'
-#   jobs:
-#   - template: src/maven/templates/maven-test.yml
-#     parameters:
-#       mavenTaskVersion: 2
-#       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-#   - template: src/maven/templates/maven-test.yml
-#     parameters:
-#       mavenTaskVersion: 3
-#       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+- stage: 'Win2019'
+  dependsOn: []
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2019'
+  jobs:
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 2
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 3
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
 
-# - stage: 'Win2022'
-#   dependsOn: []
-#   pool:
-#     name: 'Azure Pipelines'
-#     vmImage: 'windows-2022'
-#   jobs:
-#   - template: src/maven/templates/maven-test.yml
-#     parameters:
-#       mavenTaskVersion: 2
-#       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-#   - template: src/maven/templates/maven-test.yml
-#     parameters:
-#       mavenTaskVersion: 3
-#       enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+- stage: 'Win2022'
+  dependsOn: []
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2022'
+  jobs:
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 2
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 3
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}

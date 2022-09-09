@@ -32,52 +32,52 @@ steps:
     findBugsRunAnalysis: true
   retryCountOnTaskFailure: 3
 
-# - task: Maven@2
-#   displayName: 'Maven DeepSpace/pom.xml (JaCoCo)'
-#   inputs:
-#     mavenPomFile: src/maven/DeepSpace/pom.xml
-#     options: '-Dmaven.wagon.http.pool=false'
-#     codeCoverageToolOption: JaCoCo
-#     codeCoverageFailIfEmpty: true
-#     ${{ if ne(parameters.customMavenVersion, '') }}:
-#       mavenVersionOption: 'Path'
-#       mavenDirectory: '$(Agent.BuildDirectory)/mavenVersions/apache-maven-${{ parameters.customMavenVersion }}'
-#       mavenSetM2Home: true
-#     jdkVersionOption: 1.8
-#     checkStyleRunAnalysis: true
-#     pmdRunAnalysis: true
-#     findBugsRunAnalysis: true
-#   retryCountOnTaskFailure: 3
+- task: Maven@2
+  displayName: 'Maven DeepSpace/pom.xml (JaCoCo)'
+  inputs:
+    mavenPomFile: src/maven/DeepSpace/pom.xml
+    options: '-Dmaven.wagon.http.pool=false'
+    codeCoverageToolOption: JaCoCo
+    codeCoverageFailIfEmpty: true
+    ${{ if ne(parameters.customMavenVersion, '') }}:
+      mavenVersionOption: 'Path'
+      mavenDirectory: '$(Agent.BuildDirectory)/mavenVersions/apache-maven-${{ parameters.customMavenVersion }}'
+      mavenSetM2Home: true
+    jdkVersionOption: 1.8
+    checkStyleRunAnalysis: true
+    pmdRunAnalysis: true
+    findBugsRunAnalysis: true
+  retryCountOnTaskFailure: 3
 
-# - task: Maven@2
-#   displayName: 'Maven DeepSpace/pom.xml (Cobertura)'
-#   inputs:
-#     mavenPomFile: src/maven/DeepSpace/pom.xml
-#     options: '-Dmaven.wagon.http.pool=false'
-#     codeCoverageToolOption: Cobertura
-#     codeCoverageFailIfEmpty: true
-#     ${{ if ne(parameters.customMavenVersion, '') }}:
-#       mavenVersionOption: 'Path'
-#       mavenDirectory: '$(Agent.BuildDirectory)/mavenVersions/apache-maven-${{ parameters.customMavenVersion }}'
-#       mavenSetM2Home: true
-#     jdkVersionOption: 1.8
-#     checkStyleRunAnalysis: true
-#     pmdRunAnalysis: true
-#     findBugsRunAnalysis: true
-#   retryCountOnTaskFailure: 3
+- task: Maven@2
+  displayName: 'Maven DeepSpace/pom.xml (Cobertura)'
+  inputs:
+    mavenPomFile: src/maven/DeepSpace/pom.xml
+    options: '-Dmaven.wagon.http.pool=false'
+    codeCoverageToolOption: Cobertura
+    codeCoverageFailIfEmpty: true
+    ${{ if ne(parameters.customMavenVersion, '') }}:
+      mavenVersionOption: 'Path'
+      mavenDirectory: '$(Agent.BuildDirectory)/mavenVersions/apache-maven-${{ parameters.customMavenVersion }}'
+      mavenSetM2Home: true
+    jdkVersionOption: 1.8
+    checkStyleRunAnalysis: true
+    pmdRunAnalysis: true
+    findBugsRunAnalysis: true
+  retryCountOnTaskFailure: 3
 
-# - task: CopyFiles@2
-#   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-#   inputs:
-#     SourceFolder: '$(build.sourcesdirectory)'
-#     Contents: '**/*.jar'
-#     TargetFolder: '$(build.artifactstagingdirectory)'
-#   condition: succeededOrFailed()
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: '$(build.sourcesdirectory)'
+    Contents: '**/*.jar'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
 
-# - task: PublishBuildArtifacts@1
-#   displayName: 'Publish Artifact'
-#   inputs:
-#     PathtoPublish: '$(build.artifactstagingdirectory)'
-#     artifactName: 'drop-$(System.StageName)-MavenV2-maven${{ parameters.customMavenVersion }}'
-#   condition: succeededOrFailed()
-#   retryCountOnTaskFailure: 3
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    artifactName: 'drop-$(System.StageName)-MavenV2-maven${{ parameters.customMavenVersion }}'
+  condition: succeededOrFailed()
+  retryCountOnTaskFailure: 3
