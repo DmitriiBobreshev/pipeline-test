@@ -1,0 +1,27 @@
+parameters:
+- name: mavenTaskVersion
+  type: number
+- name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
+  type: boolean
+  default: false
+
+jobs:
+- ${{ if eq(parameters.enableAzureResourcesDependentTests, true) }}:
+  - job:
+    displayName: 'Maven@${{ parameters.mavenTaskVersion }} with maven version 3.2.5'
+    steps:
+    - template: maven${{ parameters.mavenTaskVersion }}-test.yml
+      parameters:
+        customMavenVersion: '3.2.5'
+
+  - job:
+    displayName: 'Maven@${{ parameters.mavenTaskVersion }} with maven version 3.5.4'
+    steps:
+    - template: maven${{ parameters.mavenTaskVersion }}-test.yml
+      parameters:
+        customMavenVersion: '3.5.4'
+
+- job:
+  displayName: 'Maven@${{ parameters.mavenTaskVersion }} with latest maven version'
+  steps:
+  - template: maven${{ parameters.mavenTaskVersion }}-test.yml

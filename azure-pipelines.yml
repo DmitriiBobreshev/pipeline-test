@@ -1,50 +1,79 @@
 variables:
-  - name: ndkPath
-    value: TEST_NDK_PATH
-  - name: androidSdkPath
-    value: TEST_SDK_PATH
+  - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
+    value: true
 
-jobs:
-- job: 'Win2019'
-  displayName: Windows VS2019
+stages:
+- stage: 'Hosted_Ubuntu_1804'
+  dependsOn: []
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-18.04'
+  jobs:
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 2
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 3
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+
+- stage: 'Hosted_Ubuntu_2004'
+  dependsOn: []
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-20.04'
+  jobs:
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 2
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 3
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+
+- stage: 'Hosted_Ubuntu_2204'
+  dependsOn: []
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-22.04'
+  jobs:
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 2
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 3
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+
+- stage: 'Win2019'
+  dependsOn: []
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+  jobs:
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 2
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 3
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
 
-- job: 'Win2022'
-  displayName: Windows VS2022
+- stage: 'Win2022'
+  dependsOn: []
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2022'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-
-- job: 'MacOS_Catalina'
-  pool:
-    vmImage: 'macos-10.15'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-
-- job: 'MacOS_BigSur'
-  pool:
-    vmImage: 'macos-11'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-
-- job: 'MacOS_Public_Monterey'
-  pool:
-    vmImage: 'macos-12'
-  steps:
-    - template: src/msbuild/msbuild-steps.yml
-      parameters:
-        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+  jobs:
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 2
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  - template: src/maven/templates/maven-test.yml
+    parameters:
+      mavenTaskVersion: 3
+      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
