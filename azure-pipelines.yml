@@ -2,78 +2,45 @@ variables:
   - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
     value: true
 
-stages:
-- stage: 'Hosted_Ubuntu_1804'
-  dependsOn: []
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'ubuntu-18.04'
-  jobs:
-  - template: src/maven/templates/maven-test.yml
-    parameters:
-      mavenTaskVersion: 2
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-  - template: src/maven/templates/maven-test.yml
-    parameters:
-      mavenTaskVersion: 3
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-
-- stage: 'Hosted_Ubuntu_2004'
-  dependsOn: []
+jobs:
+- job: 'Ubuntu_2004'
   pool:
     name: 'Azure Pipelines'
     vmImage: 'ubuntu-20.04'
-  jobs:
-  - template: src/maven/templates/maven-test.yml
-    parameters:
-      mavenTaskVersion: 2
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-  - template: src/maven/templates/maven-test.yml
-    parameters:
-      mavenTaskVersion: 3
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  steps:
+  - template: src/gulp/test-gulp.yml
 
-- stage: 'Hosted_Ubuntu_2204'
-  dependsOn: []
+- job: 'Ubuntu_2204'
   pool:
     name: 'Azure Pipelines'
     vmImage: 'ubuntu-22.04'
-  jobs:
-  - template: src/maven/templates/maven-test.yml
-    parameters:
-      mavenTaskVersion: 2
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-  - template: src/maven/templates/maven-test.yml
-    parameters:
-      mavenTaskVersion: 3
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  steps:
+  - template: src/gulp/test-gulp.yml
 
-- stage: 'Win2019'
-  dependsOn: []
+- job: 'Win2019'
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
-  jobs:
-  - template: src/maven/templates/maven-test.yml
-    parameters:
-      mavenTaskVersion: 2
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-  - template: src/maven/templates/maven-test.yml
-    parameters:
-      mavenTaskVersion: 3
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+  steps:
+  - template: src/gulp/test-gulp.yml
 
-- stage: 'Win2022'
-  dependsOn: []
+- job: 'Azure Pipelines'
   pool:
     name: 'Azure Pipelines'
-    vmImage: 'windows-2022'
-  jobs:
-  - template: src/maven/templates/maven-test.yml
-    parameters:
-      mavenTaskVersion: 2
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
-  - template: src/maven/templates/maven-test.yml
-    parameters:
-      mavenTaskVersion: 3
-      enableAzureResourcesDependentTests: ${{ variables.enableAzureResourcesDependentTests }}
+    vmImage: 'macos-10.15'
+  steps:
+  - template: src/gulp/test-gulp.yml
+
+- job: 'MacOS_Public_BigSur'
+  pool: 
+    name: 'Azure Pipelines'
+    vmImage: 'macos-11'
+  steps:
+  - template: src/gulp/test-gulp.yml
+
+- job: 'MacOS_Public_Monterey'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'macos-12'
+  steps:
+  - template: src/gulp/test-gulp.yml

@@ -1,0 +1,56 @@
+steps:
+
+# Install dependencies
+- script: 'npm install'
+  displayName: 'Install dependencies'
+  workingDirectory: 'src/gulp/gulp-simple-example'
+  retryCountOnTaskFailure: 3
+
+# Run default task
+- task: gulp@0
+  displayName: 'GulpV0: Run default task'
+  inputs:
+    workingDirectory: 'src/gulp/gulp-simple-example'
+    gulpFile: 'src/gulp/gulp-simple-example/gulpfile.js'
+
+# Run single task
+- task: gulp@0
+  displayName: 'GulpV0: Run single task'
+  inputs:
+    workingDirectory: 'src/gulp/gulp-simple-example'
+    gulpFile: 'src/gulp/gulp-simple-example/gulpfile.js' 
+    targets: 'html'
+
+# Print tasks dependency tree
+- task: gulp@0
+  displayName: 'GulpV0: Print tasks dependency tree'
+  inputs:
+    workingDirectory: 'src/gulp/gulp-simple-example'
+    gulpFile: 'src/gulp/gulp-simple-example/gulpfile.js' 
+    arguments: '--tasks'
+
+# Run default task
+- task: gulp@1
+  displayName: 'GulpV1: Run default task'
+  inputs:
+    workingDirectory: 'src/gulp/gulp-simple-example'
+    gulpjs: 'node_modules/gulp/bin/gulp.js'
+    gulpFile: 'src/gulp/gulp-simple-example/gulpfile.js' 
+
+# Run single task
+- task: gulp@1
+  displayName: 'GulpV1: Run single task'
+  inputs:
+    workingDirectory: 'src/gulp/gulp-simple-example'
+    gulpjs: 'node_modules/gulp/bin/gulp.js'
+    gulpFile: 'src/gulp/gulp-simple-example/gulpfile.js' 
+    targets: 'html'
+
+# Print tasks dependency tree
+- task: gulp@1
+  displayName: 'GulpV1: Print tasks dependency tree'
+  inputs:
+    workingDirectory: 'src/gulp/gulp-simple-example'
+    gulpjs: 'node_modules/gulp/bin/gulp.js'
+    gulpFile: 'src/gulp/gulp-simple-example/gulpfile.js' 
+    arguments: '--tasks'
