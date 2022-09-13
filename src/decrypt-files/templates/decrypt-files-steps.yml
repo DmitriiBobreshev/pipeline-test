@@ -1,0 +1,33 @@
+steps:
+  - task: Bash@3
+    displayName: 'Create temp directory and encrypt test file'
+    inputs:
+      targetType: 'inline'
+      script: |
+        cd src/decrypt-files; rm -rf temp;
+        mkdir temp && cd temp;
+        touch test-file.txt;
+        echo "Decrypted file should contain this string" >> test-file.txt;
+        openssl enc -des3 -in test-file.txt -out test-file-encrypted.txt -k very-secret-password;
+  - task: DecryptFile@1
+    inputs:
+      cipher: 'des3' 
+      inFile: src/decrypt-files/temp/test-file-encrypted.txt
+      passphrase: 'very-secret-password'
+      outFile: src/decrypt-files/temp/test-file-decrypted.txt
+  - task: Bash@3
+    displayName: 'Check decrypted file exists and contains right content'
+    inputs:
+      targetType: 'inline'
+      script: |
+        if [ ! -f src/decrypt-files/temp/test-file-decrypted.txt ];
+        then
+          echo "Decrypted file doesn't exist";
+          exit 1;
+        fi
+        if ! grep -q "Decrypted file should contain this string" "src/decrypt-files/temp/test-file-decrypted.txt";
+        then
+          echo "test-file-decrypted.txt was decrypted incorrectly";
+          exit 1;
+        fi
+        echo "Check succeeded";

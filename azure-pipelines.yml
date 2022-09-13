@@ -3,44 +3,50 @@ variables:
     value: true
 
 jobs:
-- job: 'Ubuntu_2004'
+- job: 'Ubuntu_1804'
+  displayName: Test DecryptFileV1 on Ubuntu 1804
   pool:
     name: 'Azure Pipelines'
-    vmImage: 'ubuntu-20.04'
+    vmImage: 'ubuntu-18.04'
   steps:
-  - template: src/gulp/test-gulp.yml
-
-- job: 'Ubuntu_2204'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'ubuntu-22.04'
-  steps:
-  - template: src/gulp/test-gulp.yml
+    - template: src/decrypt-files/templates/decrypt-files-steps.yml
 
 - job: 'Win2019'
+  displayName: Test DecryptFileV1 on Windows 2019
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
   steps:
-  - template: src/gulp/test-gulp.yml
+    - template: src/decrypt-files/templates/decrypt-files-steps.yml
 
-- job: 'MacOS_Public_1015'
+- job: 'Win2022'
+  displayName: Test DecryptFileV1 on Windows 2022
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2022'
+  steps:
+    - template: src/decrypt-files/templates/decrypt-files-steps.yml
+
+- job: 'MacOS_Catalina'
+  displayName: Test DecryptFileV1 on MacOS Catalina
   pool:
     name: 'Azure Pipelines'
     vmImage: 'macos-10.15'
   steps:
-  - template: src/gulp/test-gulp.yml
+    - template: src/decrypt-files/templates/decrypt-files-steps.yml
 
-- job: 'MacOS_Public_BigSur'
-  pool: 
+- job: 'MacOS_BigSur'
+  displayName: Test DecryptFileV1 on MacOS Big Sur
+  pool:
     name: 'Azure Pipelines'
     vmImage: 'macos-11'
   steps:
-  - template: src/gulp/test-gulp.yml
+    - template: src/decrypt-files/templates/decrypt-files-steps.yml
 
-- job: 'MacOS_Public_Monterey'
+- job: 'MacOS_Monterey'
+  displayName: Test DecryptFileV1 on MacOS Monterey
   pool:
     name: 'Azure Pipelines'
     vmImage: 'macos-12'
   steps:
-  - template: src/gulp/test-gulp.yml
+    - template: src/decrypt-files/templates/decrypt-files-steps.yml
