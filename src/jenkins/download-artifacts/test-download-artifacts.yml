@@ -1,0 +1,29 @@
+steps:
+- task: JenkinsQueueJob@2
+  displayName: 'Queue Jenkins Job: BuildCanary_NotParameterized'
+  inputs:
+    serverEndpoint: 'ABTT_JenkinsContainer'
+    jobName: 'BuildCanary_NotParameterized'
+  retryCountOnTaskFailure: 3
+
+- task: JenkinsDownloadArtifacts@1
+  displayName: 'Download artifacts produced by BuildCanary_NotParameterized'
+  inputs:
+    jenkinsServerConnection: 'ABTT_JenkinsContainer'
+    jobName: 'BuildCanary_NotParameterized'
+    downloadCommitsAndWorkItems: true
+  retryCountOnTaskFailure: 3
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: '$(build.sourcesdirectory)'
+    Contents: 'jenkinsArtifacts/target/canary-maven-sample-project-1.0.jar'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: JenkinsDownloadArtifacts'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: JenkinsDownloadArtifacts
+  retryCountOnTaskFailure: 3

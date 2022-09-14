@@ -1,0 +1,25 @@
+steps:
+- task: JenkinsQueueJob@2
+  displayName: 'Queue Jenkins Job: NotParameterized'
+  inputs:
+    serverEndpoint: 'ABTT_JenkinsContainer'
+    jobName: 'BuildCanary_NotParameterized'
+  retryCountOnTaskFailure: 3
+
+- task: JenkinsQueueJob@2
+  displayName: 'Queue Jenkins Job: Parameterized'
+  inputs:
+    serverEndpoint: 'ABTT_JenkinsContainer'
+    jobName: 'BuildCanary_Parameterized'
+    isParameterizedJob: true
+    jobParameters: |
+      MyBoolean=True
+      MyString=TestString123
+  retryCountOnTaskFailure: 3
+
+- task: JenkinsQueueJob@2
+  displayName: 'Queue Jenkins Job: Pipeline'
+  inputs:
+    serverEndpoint: 'ABTT_JenkinsContainer'
+    jobName: 'BuildCanary_Pipeline_Root'
+  retryCountOnTaskFailure: 3

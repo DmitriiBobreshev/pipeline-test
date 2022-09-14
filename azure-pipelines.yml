@@ -3,50 +3,11 @@ variables:
     value: true
 
 jobs:
-- job: 'Ubuntu_1804'
-  displayName: Test DecryptFileV1 on Ubuntu 1804
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'ubuntu-18.04'
+- job: 'AzureVM_Ubuntu_Queue'
+  displayName: AzureVM_Ubuntu_Queue
+  pool: 
+    name: 'Default'
+    demands:
+      - Agent.Name -equals debian
   steps:
-    - template: src/decrypt-files/templates/decrypt-files-steps.yml
-
-- job: 'Win2019'
-  displayName: Test DecryptFileV1 on Windows 2019
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2019'
-  steps:
-    - template: src/decrypt-files/templates/decrypt-files-steps.yml
-
-- job: 'Win2022'
-  displayName: Test DecryptFileV1 on Windows 2022
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2022'
-  steps:
-    - template: src/decrypt-files/templates/decrypt-files-steps.yml
-
-- job: 'MacOS_Catalina'
-  displayName: Test DecryptFileV1 on MacOS Catalina
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-10.15'
-  steps:
-    - template: src/decrypt-files/templates/decrypt-files-steps.yml
-
-- job: 'MacOS_BigSur'
-  displayName: Test DecryptFileV1 on MacOS Big Sur
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-11'
-  steps:
-    - template: src/decrypt-files/templates/decrypt-files-steps.yml
-
-- job: 'MacOS_Monterey'
-  displayName: Test DecryptFileV1 on MacOS Monterey
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-12'
-  steps:
-    - template: src/decrypt-files/templates/decrypt-files-steps.yml
+    - template: src/jenkins/queue-job/test-queue-job.yml
