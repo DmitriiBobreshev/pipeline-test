@@ -3,6 +3,8 @@ variables:
     value: TEST_NDK_PATH
   - name: androidSdkPath
     value: TEST_SDK_PATH
+  - name: System.Debug
+    value: true
 
 jobs:
 - job: 'Debian'
