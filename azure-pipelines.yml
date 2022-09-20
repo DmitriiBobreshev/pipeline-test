@@ -6,7 +6,9 @@ variables:
   - name: System.Debug
     value: true
   - name: build.clean
-    value: true
+    value: all
+  - name: agent.clean.buildDirectory
+    value: all
 
 jobs:
 - job: 'Debian'
