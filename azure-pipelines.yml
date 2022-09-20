@@ -10,6 +10,6 @@ jobs:
   pool:
     name: 'default'
   steps:
-    - script: |
+    - bash: |
         ls -la
         echo '123'
