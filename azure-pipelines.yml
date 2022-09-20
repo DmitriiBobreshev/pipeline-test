@@ -5,6 +5,8 @@ variables:
     value: TEST_SDK_PATH
   - name: System.Debug
     value: true
+  - name: build.clean
+    value: true
 
 jobs:
 - job: 'Debian'
