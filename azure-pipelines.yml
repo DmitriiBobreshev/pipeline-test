@@ -16,7 +16,7 @@ jobs:
   pool:
     name: 'default'
     demands: 
-      - Agent.Name -equals win200
+      - Agent.Name -equals test200
   steps:
     - task: JenkinsQueueJob@1
       displayName: 'Queue Jenkins Job: Parameterized'
