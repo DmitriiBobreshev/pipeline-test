@@ -18,6 +18,12 @@ jobs:
     demands: 
       - Agent.Name -equals win200
   steps:
-    - bash: |
-        ls -la
-        echo '123'
+    - task: JenkinsQueueJob@1
+      displayName: 'Queue Jenkins Job: Parameterized'
+      inputs:
+        serverEndpoint: 'ABTT_JenkinsContainer'
+        jobName: 'BuildCanary_Parameterized'
+        jobParameters: |
+          MyBoolean=True
+          MyString=TestString123
+      retryCountOnTaskFailure: 3 
