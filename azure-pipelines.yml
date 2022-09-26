@@ -4,79 +4,142 @@ stages:
       vmImage: 'ubuntu-20.04'
     dependsOn: []
     jobs:
-    - template: ./src/gradle/templates/gradle-jobs.yml
-      parameters:
-        skipJdk12Build: true
-        skipJdk13Build: true
+    - job:
+      steps:
+      - task: DownloadSecureFile@1
+        name: caCertificate
+        displayName: 'Download CA certificate'
+        inputs:
+          secureFile: 'test.js'
+      - task: DownloadSecureFile@1
+        name: BigFileTest
+        displayName: 'Download Big File'
+        inputs:
+          secureFile: '1.txt'
   
-  # - stage: 'Hosted_Ubuntu_2204'
-  #   condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Ubuntu 2204'))
-  #   pool:
-  #     name: 'Azure Pipelines'
-  #     vmImage: 'ubuntu-22.04'
-  #   dependsOn: []
-  #   jobs:
-  #   - template: ./src/gradle/templates/gradle-jobs.yml
-  #     parameters:
-  #       skipJdk12Build: true
-  #       skipJdk13Build: true
+  - stage: 'Hosted_Ubuntu_2204'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-22.04'
+    dependsOn: []
+    jobs:
+    - job:
+      steps:
+      - task: DownloadSecureFile@1
+        name: caCertificate
+        displayName: 'Download CA certificate'
+        inputs:
+          secureFile: 'test.js'
+      - task: DownloadSecureFile@1
+        name: BigFileTest
+        displayName: 'Download Big File'
+        inputs:
+          secureFile: '1.txt'
   
   - stage: 'Win2016'
     pool:
       vmImage: 'vs2017-win2016'
     dependsOn: []
     jobs:
-    - template: ./src/gradle/templates/gradle-jobs.yml
-      parameters:
-        skipJdk12Build: true
+    - job:
+      steps:
+      - task: DownloadSecureFile@1
+        name: caCertificate
+        displayName: 'Download CA certificate'
+        inputs:
+          secureFile: 'test.js'
+      - task: DownloadSecureFile@1
+        name: BigFileTest
+        displayName: 'Download Big File'
+        inputs:
+          secureFile: '1.txt'
   
   - stage: 'Win2019'
     pool:
       vmImage: 'windows-2019'
     dependsOn: []
     jobs:
-    - template: ./src/gradle/templates/gradle-jobs.yml
-      parameters:
-        skipJdk12Build: true
+    - job:
+      steps:
+      - task: DownloadSecureFile@1
+        name: caCertificate
+        displayName: 'Download CA certificate'
+        inputs:
+          secureFile: 'test.js'
+      - task: DownloadSecureFile@1
+        name: BigFileTest
+        displayName: 'Download Big File'
+        inputs:
+          secureFile: '1.txt'
   
   - stage: 'Win2022'
     pool:
       vmImage: 'windows-2022'
     dependsOn: []
     jobs:
-    - template: ./src/gradle/templates/gradle-jobs.yml
-      parameters:
-        skipJdk12Build: true
-        skipJdk13Build: true
-        skipNativeMediaBuild: true
+    - job:
+      steps:
+      - task: DownloadSecureFile@1
+        name: caCertificate
+        displayName: 'Download CA certificate'
+        inputs:
+          secureFile: 'test.js'
+      - task: DownloadSecureFile@1
+        name: BigFileTest
+        displayName: 'Download Big File'
+        inputs:
+          secureFile: '1.txt'
   
   - stage: 'MacOS_Public_Catalina'
     pool:
       vmImage: 'macos-10.15'
     dependsOn: []
     jobs:
-    - template: ./src/gradle/templates/gradle-jobs.yml
-      parameters:
-        skipNativeMediaBuild: true
+    - job:
+      steps:
+      - task: DownloadSecureFile@1
+        name: caCertificate
+        displayName: 'Download CA certificate'
+        inputs:
+          secureFile: 'test.js'
+      - task: DownloadSecureFile@1
+        name: BigFileTest
+        displayName: 'Download Big File'
+        inputs:
+          secureFile: '1.txt'
   
   - stage: 'MacOS_Public_BigSur'
     pool:
       vmImage: 'macos-11'
     dependsOn: []
     jobs:
-    - template: ./src/gradle/templates/gradle-jobs.yml
-      parameters:
-        skipNativeMediaBuild: true
-        skipJdk12Build: true
-        skipJdk13Build: true
+    - job:
+      steps:
+      - task: DownloadSecureFile@1
+        name: caCertificate
+        displayName: 'Download CA certificate'
+        inputs:
+          secureFile: 'test.js'
+      - task: DownloadSecureFile@1
+        name: BigFileTest
+        displayName: 'Download Big File'
+        inputs:
+          secureFile: '1.txt'
   
   - stage: 'MacOS_Public_Monterey'
     pool:
       vmImage: 'macos-12'
     dependsOn: []
     jobs:
-    - template: ./src/gradle/templates/gradle-jobs.yml
-      parameters:
-        skipNativeMediaBuild: true
-        skipJdk12Build: true
-        skipJdk13Build: true
+    - job:
+      steps:
+      - task: DownloadSecureFile@1
+        name: caCertificate
+        displayName: 'Download CA certificate'
+        inputs:
+          secureFile: 'test.js'
+      - task: DownloadSecureFile@1
+        name: BigFileTest
+        displayName: 'Download Big File'
+        inputs:
+          secureFile: '1.txt'
