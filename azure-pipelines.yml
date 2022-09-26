@@ -11,11 +11,38 @@ variables:
     value: all
 
 jobs:
-- job: 'Debian'
-  displayName: Debian
-  pool:
-    name: 'default'
+- job: 'Ubuntu_1804'
+  pool: 
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-18.04'
   steps:
-    - bash: |
-        ls -la
-        echo '123'
+  - template: src/ant/templates/ant-test.yml
+
+- job: 'Ubuntu_2004'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-20.04'
+  steps:
+  - template: src/ant/templates/ant-test.yml
+
+- job: 'Ubuntu_2204'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-22.04'
+  steps:
+  - template: src/ant/templates/ant-test.yml
+
+- job: 'Win2019'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2019'
+  steps:
+  - template: src/ant/templates/ant-test.yml
+
+- job: 'Win2022'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2022'
+  steps:
+  - template: src/ant/templates/ant-test.yml
+      
