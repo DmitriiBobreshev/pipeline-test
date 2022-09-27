@@ -11,11 +11,20 @@ variables:
     value: all
 
 jobs:
-- job: 'Debian'
-  displayName: Debian
-  pool:
-    name: 'default'
-  steps:
-    - bash: |
-        ls -la
-        echo '123'
+  - job: 'Hosted_Ubuntu_2004'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-20.04'
+    steps:
+      - template: src/copy-files-over-ssh/copy-files-over-ssh-steps.yml
+        parameters:
+          sshEndpoint: 'ABTT_Ubuntu_SSH_container'
+  
+  - job: 'Hosted_Ubuntu_2204'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: src/copy-files-over-ssh/copy-files-over-ssh-steps.yml
+        parameters:
+          sshEndpoint: 'ABTT_Ubuntu_SSH_container'

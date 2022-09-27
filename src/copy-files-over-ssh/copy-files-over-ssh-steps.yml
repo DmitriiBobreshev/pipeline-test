@@ -1,0 +1,107 @@
+steps:
+  - task: SSH@0
+    displayName: 'Cleaning server before tests launch'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      runOptions: 'commands'
+      commands: 'rm -rf *'
+    retryCountOnTaskFailure: 3
+
+  - task: CopyFilesOverSSH@0
+    displayName: 'To absolute path'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      sourceFolder: src/copy-files-over-ssh/Archives
+      targetFolder: '/home/dmybor/copyfilesoverssh-absolutepath'
+      cleanTargetFolder: true
+    continueOnError: true
+    retryCountOnTaskFailure: 3
+
+  - task: CopyFilesOverSSH@0
+    displayName: 'Securely copy files to $(variable1)'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      sourceFolder: src/copy-files-over-ssh/Archives
+      targetFolder: 'copyfilesoverssh-relativepath/copyfilesoverssh-relativesubfolder'
+      cleanTargetFolder: true
+    retryCountOnTaskFailure: 3
+
+  - task: CopyFilesOverSSH@0
+    displayName: 'To relative path from home - flatten - fail if not found'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      sourceFolder: src/copy-files-over-ssh/Archives
+      targetFolder: 'copyfilesoverssh-relativepath/copyfilesoverssh-relativesubfolder'
+      cleanTargetFolder: true
+      failOnEmptySource: true
+      flattenFolders: true
+    retryCountOnTaskFailure: 3
+
+  - task: CopyFilesOverSSH@0
+    displayName: 'To relative path from home - tilda in subfolders'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      sourceFolder: src/copy-files-over-ssh/Archives
+      targetFolder: 'subfolder1/~/subfolder2/~'
+      cleanTargetFolder: true
+    retryCountOnTaskFailure: 3
+
+  - task: CopyFilesOverSSH@0
+    displayName: 'To home - tilda'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      sourceFolder: src/copy-files-over-ssh/Archives
+      targetFolder: '~/'
+      cleanTargetFolder: true
+    retryCountOnTaskFailure: 3
+
+  - task: CopyFilesOverSSH@0
+    displayName: 'To home - tilda with subfolders'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      sourceFolder: src/copy-files-over-ssh/Archives
+      targetFolder: '~/subfolder1/subfolder2'
+      cleanTargetFolder: true
+    retryCountOnTaskFailure: 3
+
+  - task: CopyFilesOverSSH@0
+    displayName: 'To home - empty target folder'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      sourceFolder: src/copy-files-over-ssh/Archives
+    retryCountOnTaskFailure: 3
+
+  - task: CopyFilesOverSSH@0
+    displayName: 'To home - white space target folder'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      sourceFolder: src/copy-files-over-ssh/Archives
+      targetFolder: '               '
+    retryCountOnTaskFailure: 3
+
+  - task: CopyFilesOverSSH@0
+    displayName: 'Specific files - fail if not found'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      sourceFolder: src/copy-files-over-ssh/Archives
+      contents: '**/*.zip'
+      targetFolder: 'copyfilesoverssh-relativepath/copyfilesoverssh-relativesubfolder'
+      cleanTargetFolder: true
+      failOnEmptySource: true
+    retryCountOnTaskFailure: 3
+
+  - task: SSH@0
+    displayName: 'Creating target folder for next test'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      runOptions: 'commands'
+      commands: 'mkdir -p existing-folder'
+    retryCountOnTaskFailure: 3
+
+  - task: CopyFilesOverSSH@0
+    displayName: 'To home - handle existing target folder'
+    inputs:
+      sshEndpoint: ${{ parameters.sshEndpoint }}
+      sourceFolder: src/copy-files-over-ssh/Archives
+      targetFolder: 'existing-folder'
+    retryCountOnTaskFailure: 3
