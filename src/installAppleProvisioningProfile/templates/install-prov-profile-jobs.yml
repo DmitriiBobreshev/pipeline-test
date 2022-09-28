@@ -1,0 +1,27 @@
+parameters:
+- name: 'poolName'
+  type: 'string'
+- name: 'vmImageName'
+  type: 'string'
+
+jobs:
+  - job: 'Install_from_Secure_files'
+    displayName: 'Install from Secure files'
+    pool:
+      name: ${{ parameters.poolName }}
+      vmImage: ${{ parameters.vmImageName }}
+    steps: 
+    - template: 'install-prov-profile-steps.yml'
+      parameters:
+        profileLocation: 'secureFiles'
+        profilePathOrName: 'test.mobileprovision'
+  - job: 'Install_from_repository'
+    displayName: 'Install from repository'
+    pool:
+      name: ${{ parameters.poolName }}
+      vmImage: ${{ parameters.vmImageName }}
+    steps: 
+    - template: 'install-prov-profile-steps.yml'
+      parameters:
+        profileLocation: 'sourceRepository'
+        profilePathOrName: '$(build.sourcesDirectory)/src/installAppleProvisioningProfile/test.mobileprovision'

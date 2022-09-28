@@ -10,12 +10,27 @@ variables:
   - name: agent.clean.buildDirectory
     value: all
 
-jobs:
-- job: 'Debian'
-  displayName: Debian
-  pool:
-    name: 'default'
-  steps:
-    - bash: |
-        ls -la
-        echo '123'
+stages:
+  - stage: 'MacOS_Public_Catalina'
+    dependsOn: [] 
+    jobs:
+    - template: 'src/installAppleProvisioningProfile/templates/install-prov-profile-jobs.yml'
+      parameters:
+        poolName: 'Azure Pipelines'
+        vmImageName: 'macos-10.15'
+  
+  - stage: 'MacOS_Public_BigSur'
+    dependsOn: []
+    jobs:
+    - template: 'src/installAppleProvisioningProfile/templates/install-prov-profile-jobs.yml'
+      parameters:
+        poolName: 'Azure Pipelines'
+        vmImageName: 'macos-11'
+  
+  - stage: 'MacOS_Public_Monterey'
+    dependsOn: []
+    jobs:
+    - template: 'src/installAppleProvisioningProfile/templates/install-prov-profile-jobs.yml'
+      parameters:
+        poolName: 'Azure Pipelines'
+        vmImageName: 'macos-12'

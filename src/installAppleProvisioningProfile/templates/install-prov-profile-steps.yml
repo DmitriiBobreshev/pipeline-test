@@ -1,0 +1,28 @@
+parameters:
+- name: 'profileLocation'
+  type: string
+- name: 'profilePathOrName'
+  type: string
+
+steps:
+- task: InstallAppleProvisioningProfile@1
+  displayName: "Install provisioning profile from ${{ parameters.profileLocation }}"
+  inputs:
+    provisioningProfileLocation: ${{ parameters.profileLocation }}
+    ${{ if eq(parameters.profileLocation, 'secureFiles') }}:
+      provProfileSecureFile: ${{ parameters.profilePathOrName }}
+    ${{ if eq(parameters.profileLocation, 'sourceRepository') }}:
+      provProfileSourceRepository: ${{ parameters.profilePathOrName }}
+    removeProfile: true
+  retryCountOnTaskFailure: 3
+
+# Check if the provisioning profile is installed
+# File name contains the profile's UUID.
+- task: Bash@3
+  displayName: "Check if provisioning profile installed"
+  inputs:
+    targetType: 'inline'
+    script: |
+      cd "$HOME/Library/MobileDevice/Provisioning Profiles"
+      security cms -D -i B5C2906D-D6EE-476E-AF17-D99AE14644AA.mobileprovision
+    failOnStderr: true
