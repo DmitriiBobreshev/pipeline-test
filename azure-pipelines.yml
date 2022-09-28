@@ -11,11 +11,58 @@ variables:
     value: all
 
 jobs:
-- job: 'Debian'
-  displayName: Debian
-  pool:
-    name: 'default'
-  steps:
-    - bash: |
-        ls -la
-        echo '123'
+  - job: 'Win2019'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2019'
+    steps:
+    - template: src/cmake/templates/cmake-steps.yml
+  
+  - job: 'Win2022'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2022'
+    steps:
+    - template: src/cmake/templates/cmake-steps.yml
+  
+  - job: 'MacOS_Public_Catalina'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'macos-10.15'
+    steps:
+    - template: src/cmake/templates/cmake-steps.yml
+  
+  - job: 'MacOS_Public_BigSur'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'macos-11'
+    steps:
+    - template: src/cmake/templates/cmake-steps.yml
+  
+  - job: 'MacOS_Public_Monterey'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'macos-12'
+    steps:
+    - template: src/cmake/templates/cmake-steps.yml
+  
+  - job: 'Ubuntu1804'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-18.04'
+    steps:
+    - template: src/cmake/templates/cmake-steps.yml
+  
+  - job: 'Ubuntu2004'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-20.04'
+    steps:
+    - template: src/cmake/templates/cmake-steps.yml
+  
+  - job: 'Ubuntu2204'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-22.04'
+    steps:
+    - template: src/cmake/templates/cmake-steps.yml
