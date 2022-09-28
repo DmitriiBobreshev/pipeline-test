@@ -5,7 +5,7 @@ parameters:
   type: string
 
 steps:
-- task: InstallAppleProvisioningProfile@1
+- task: InstallAppleProvisioningProfile@2
   displayName: "Install provisioning profile from ${{ parameters.profileLocation }}"
   inputs:
     provisioningProfileLocation: ${{ parameters.profileLocation }}
