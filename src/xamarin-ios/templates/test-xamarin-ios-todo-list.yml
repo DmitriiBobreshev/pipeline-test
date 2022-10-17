@@ -20,12 +20,11 @@ steps:
     version: ${{ parameters.NETCORE_VERSION }}
   retryCountOnTaskFailure: 3
 
-
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: CmdLine@2
+  displayName: 'Restore Nuget'
   inputs:
-    restoreSolution: '$(build.sourcesdirectory)/src/xamarin-ios/ToDoList.Forms/Todo.sln'
+    script: nuget restore $(build.sourcesdirectory)/src/xamarin-ios/ToDoList.Forms/Todo.sln
+  retryCountOnTaskFailure: 3
 
 - task: XamariniOS@2
   displayName: 'Build Xamarin.iOS solution'
@@ -35,5 +34,6 @@ steps:
     packageApp: False
     buildForSimulator: True
     runNugetRestore: false
+    args: '/t:Rebuild '
     buildToolOption: msbuild
   retryCountOnTaskFailure: 3

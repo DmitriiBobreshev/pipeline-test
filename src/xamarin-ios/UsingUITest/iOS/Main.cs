@@ -5,8 +5,6 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-using Microsoft.Extensions.Caching.Memory;
-
 namespace UsingUITest.iOS
 {
 	public class Application
@@ -16,9 +14,6 @@ namespace UsingUITest.iOS
 		{
 			// if you want to use a different Application Delegate class from "AppDelegate"
 			// you can specify it here.
-			IMemoryCache cache = new MemoryCache(new MemoryCacheOptions());
-			object result = cache.Set("Key", new object());
-			bool found = cache.TryGetValue("Key", out result);
 			UIApplication.Main(args, null, "AppDelegate");
 		}
 	}
