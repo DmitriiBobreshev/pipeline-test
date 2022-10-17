@@ -14,32 +14,19 @@ steps:
     filePath: src/xamarin-ios/select-xcode.sh
     arguments: ${{ parameters.XCODE_VERSION }}
 
-- task: InstallAppleCertificate@2
-  displayName: 'Install an Apple certificate'
-  inputs:
-    certSecureFile: '$(apple_certificate_name)'
-    certPwd: '$(P12password)'
-  retryCountOnTaskFailure: 4
+- task: NuGetToolInstaller@1
 
-- task: InstallAppleProvisioningProfile@1
-  displayName: 'Install an Apple provisioning profile'
+- task: NuGetCommand@2
   inputs:
-    provProfileSecureFile: '$(provisioning_profile_name)'
-  retryCountOnTaskFailure: 4
-
-- task: CmdLine@2
-  displayName: 'Restore Nuget'
-  inputs:
-    script: nuget restore $(build.sourcesdirectory)/src/xamarin-ios/UsingUITest/UsingUITest.sln
-  retryCountOnTaskFailure: 3
+    restoreSolution: '$(build.sourcesdirectory)/src/xamarin-ios/UsingUITest/UsingUITest.sln'
 
 - task: XamariniOS@2
   displayName: 'Build Xamarin.iOS solution UsingUITest.sln'
   inputs:
     solutionFile: '$(build.sourcesdirectory)/src/xamarin-ios/UsingUITest/UsingUITest.sln'
-    configuration: '$(BuildConfiguration)'
+    configuration: Release
+    packageApp: False
+    buildForSimulator: True
+    runNugetRestore: false
     buildToolOption: msbuild
-    signingOption: id
-    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
-    signingProvisioningProfileID: '$(APPLE_PROV_PROFILE_UUID)'
   retryCountOnTaskFailure: 3
