@@ -10,7 +10,7 @@ stages:
     jobs:
     - job: 'App1'
       pool:
-        name: 'LimitedPublicCatalina'
+        name: 'Azure Pipelines'
         vmImage: 'macos-10.15'
       strategy:
         matrix:
@@ -102,7 +102,7 @@ stages:
           XCODE_VERSION: $(XCODE_VERSION)
     - job: 'App2'
       pool:
-        name: 'LimitedPublicCatalina'
+        name: 'Azure Pipelines'
         vmImage: 'macos-10.15'
       strategy:
         matrix:
@@ -206,7 +206,7 @@ stages:
     jobs:
     - job: 'App1'
       pool:
-        name: 'LimitedPublicBigSur'
+        name: 'Azure Pipelines'
         vmImage: 'macos-11'
       strategy:
         matrix:
@@ -264,7 +264,7 @@ stages:
           XCODE_VERSION: $(XCODE_VERSION)
     - job: 'App2'
       pool:
-        name: 'LimitedPublicBigSur'
+        name: 'Azure Pipelines'
         vmImage: 'macos-11'
       strategy:
         matrix:
