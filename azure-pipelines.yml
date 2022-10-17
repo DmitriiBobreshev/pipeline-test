@@ -8,20 +8,6 @@ stages:
   - stage: 'MacOS_Public_Catalina'
     dependsOn: []
     jobs:
-    - job: 'App1'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-10.15'
-      strategy:
-        matrix:
-          default:
-            XAMARIN_SYMLINK: ''
-            XCODE_VERSION: ''
-      steps:
-      - template: src/xamarin-ios/templates/test-xamarin-ios-using-ui-test.yml
-        parameters:
-          XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
-          XCODE_VERSION: $(XCODE_VERSION)
     - job: 'App2'
       pool:
         name: 'Azure Pipelines'
@@ -42,20 +28,6 @@ stages:
   - stage: 'MacOS_Public_BigSur'
     dependsOn: []
     jobs:
-    - job: 'App1'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-11'
-      strategy:
-        matrix:
-          default:
-            XAMARIN_SYMLINK: ''
-            XCODE_VERSION: ''
-      steps:
-      - template: src/xamarin-ios/templates/test-xamarin-ios-using-ui-test.yml
-        parameters:
-          XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
-          XCODE_VERSION: $(XCODE_VERSION)
     - job: 'App2'
       pool:
         name: 'Azure Pipelines'
@@ -76,20 +48,6 @@ stages:
   - stage: 'MacOS_Public_Monterey'
     dependsOn: []
     jobs:
-    - job: 'App1'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-12'
-      strategy:
-        matrix:
-          default:
-            XAMARIN_SYMLINK: ''
-            XCODE_VERSION: ''
-      steps:
-      - template: src/xamarin-ios/templates/test-xamarin-ios-using-ui-test.yml
-        parameters:
-          XAMARIN_SYMLINK: $(XAMARIN_SYMLINK)
-          XCODE_VERSION: $(XCODE_VERSION)
     - job: 'App2'
       pool:
         name: 'Azure Pipelines'
