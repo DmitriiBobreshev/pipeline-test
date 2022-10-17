@@ -17,84 +17,6 @@ stages:
           default:
             XAMARIN_SYMLINK: ''
             XCODE_VERSION: ''
-          ios_14.14_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_7
-            XCODE_VERSION: 12.4
-            NETCORE_VERSION: 5.0.202
-          ios_14.14_mono_6.12_xcode_12.3:
-            XAMARIN_SYMLINK: 6_12_7
-            XCODE_VERSION: 12.3
-            NETCORE_VERSION: 5.0.202
-          ios_14.10_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_6
-            XCODE_VERSION: 12.4
-            NETCORE_VERSION: 5.0.202
-          ios_14.10_mono_6.12_xcode_12.3:
-            XAMARIN_SYMLINK: 6_12_6
-            XCODE_VERSION: 12.3
-            NETCORE_VERSION: 5.0.202
-          ios_14.8_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_5
-            XCODE_VERSION: 12.4
-            NETCORE_VERSION: 5.0.100
-          ios_14.8_mono_6.12_xcode_12.3:
-            XAMARIN_SYMLINK: 6_12_5
-            XCODE_VERSION: 12.3
-            NETCORE_VERSION: 5.0.100
-          ios_14.6_mono_6.12_xcode_12.3:
-            XAMARIN_SYMLINK: 6_12_4
-            XCODE_VERSION: 12.3
-            NETCORE_VERSION: 5.0.100
-          ios_14.6_mono_6.12_xcode_12.2:
-            XAMARIN_SYMLINK: 6_12_4
-            XCODE_VERSION: 12.2
-            NETCORE_VERSION: 5.0.100
-          ios_14.4_mono_6.12_xcode_12.2:
-            XAMARIN_SYMLINK: 6_12_3
-            XCODE_VERSION: 12.2
-            NETCORE_VERSION: 3.1.401
-          ios_14.4_mono_6.12_xcode_12.1:
-            XAMARIN_SYMLINK: 6_12_3
-            XCODE_VERSION: 12.1
-            NETCORE_VERSION: 3.1.401
-          ios_14.2_mono_6.12_xcode_12.2:
-            XAMARIN_SYMLINK: 6_12_2
-            XCODE_VERSION: 12.2
-            NETCORE_VERSION: 3.1.401
-          ios_14.2_mono_6.12_xcode_12.1:
-            XAMARIN_SYMLINK: 6_12_2
-            XCODE_VERSION: 12.1
-            NETCORE_VERSION: 3.1.401
-          ios_14.0_mono_6.12_xcode_12.0:
-            XAMARIN_SYMLINK: 6_12_1
-            XCODE_VERSION: 12
-          ios_13.20_mono_6.12_xcode_12.0:
-            XAMARIN_SYMLINK: 6_12_0
-            XCODE_VERSION: 12
-          ios_13.20_mono_6.12_xcode_11.7:
-            XAMARIN_SYMLINK: 6_12_0
-            XCODE_VERSION: 11.7
-          ios_13.20_mono_6.12_xcode_11.6:
-            XAMARIN_SYMLINK: 6_12_0
-            XCODE_VERSION: 11.6
-          ios_13.18_mono_6.10_xcode_11.6:
-            XAMARIN_SYMLINK: 6_10_0
-            XCODE_VERSION: 11.6
-          ios_13.16_mono_6.8_xcode_11.5:
-            XAMARIN_SYMLINK: 6_8_1
-            XCODE_VERSION: 11.5
-          ios_13.8_mono_6.6_xcode_11.3.1:
-            XAMARIN_SYMLINK: 6_6_0
-            XCODE_VERSION: 11.3.1
-          ios_13.6_mono_6.4_xcode_11.3.1:
-            XAMARIN_SYMLINK: 6_4_2
-            XCODE_VERSION: 11.3.1
-          ios_13.4_mono_6.4_xcode_11.2.1:
-            XAMARIN_SYMLINK: 6_4_1
-            XCODE_VERSION: 11.2.1
-          ios_13.2_mono_6.4_xcode_11.2.1:
-            XAMARIN_SYMLINK: 6_4_0
-            XCODE_VERSION: 11.2.1
       steps:
       - template: src/xamarin-ios/templates/test-xamarin-ios-using-ui-test.yml
         parameters:
@@ -110,90 +32,6 @@ stages:
             XAMARIN_SYMLINK: 6_12_7
             XCODE_VERSION: 12.4
             NETCORE_VERSION: 5.0.202
-          ios_14.14_mono_6.12_xcode_12.3:
-            XAMARIN_SYMLINK: 6_12_7
-            XCODE_VERSION: 12.3
-            NETCORE_VERSION: 5.0.202
-          ios_14.10_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_6
-            XCODE_VERSION: 12.4
-            NETCORE_VERSION: 5.0.202
-          ios_14.10_mono_6.12_xcode_12.3:
-            XAMARIN_SYMLINK: 6_12_6
-            XCODE_VERSION: 12.3
-            NETCORE_VERSION: 5.0.202
-          ios_14.8_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_5
-            XCODE_VERSION: 12.4
-            NETCORE_VERSION: 5.0.100
-          ios_14.8_mono_6.12_xcode_12.3:
-            XAMARIN_SYMLINK: 6_12_5
-            XCODE_VERSION: 12.3
-            NETCORE_VERSION: 5.0.100
-          ios_14.6_mono_6.12_xcode_12.3:
-            XAMARIN_SYMLINK: 6_12_4
-            XCODE_VERSION: 12.3
-            NETCORE_VERSION: 5.0.100
-          ios_14.6_mono_6.12_xcode_12.2:
-            XAMARIN_SYMLINK: 6_12_4
-            XCODE_VERSION: 12.2
-            NETCORE_VERSION: 5.0.100
-          ios_14.4_mono_6.12_xcode_12.2:
-            XAMARIN_SYMLINK: 6_12_3
-            XCODE_VERSION: 12.2
-            NETCORE_VERSION: 3.1.401
-          ios_14.4_mono_6.12_xcode_12.1:
-            XAMARIN_SYMLINK: 6_12_3
-            XCODE_VERSION: 12.1
-            NETCORE_VERSION: 3.1.401
-          ios_14.2_mono_6.12_xcode_12.2:
-            XAMARIN_SYMLINK: 6_12_2
-            XCODE_VERSION: 12.2
-            NETCORE_VERSION: 3.1.401
-          ios_14.2_mono_6.12_xcode_12.1:
-            XAMARIN_SYMLINK: 6_12_2
-            XCODE_VERSION: 12.1
-            NETCORE_VERSION: 3.1.401
-          ios_14.0_mono_6.12_xcode_12.0:
-            XAMARIN_SYMLINK: 6_12_1
-            XCODE_VERSION: 12
-            NETCORE_VERSION: 3.1.401
-          ios_13.20_mono_6.12_xcode_12.0:
-            XAMARIN_SYMLINK: 6_12_0
-            XCODE_VERSION: 12
-            NETCORE_VERSION: 3.1.300
-          ios_13.20_mono_6.12_xcode_11.7:
-            XAMARIN_SYMLINK: 6_12_0
-            XCODE_VERSION: 11.7
-            NETCORE_VERSION: 3.1.300
-          ios_13.20_mono_6.12_xcode_11.6:
-            XAMARIN_SYMLINK: 6_12_0
-            XCODE_VERSION: 11.6
-            NETCORE_VERSION: 3.1.300
-          ios_13.18_mono_6.10_xcode_11.6:
-            XAMARIN_SYMLINK: 6_10_0
-            XCODE_VERSION: 11.6
-            NETCORE_VERSION: 3.1.300
-          ios_13.16_mono_6.8_xcode_11.5:
-            XAMARIN_SYMLINK: 6_8_1
-            XCODE_VERSION: 11.5
-            NETCORE_VERSION: 3.1.200
-          ios_13.8_mono_6.6_xcode_11.3.1:
-            XAMARIN_SYMLINK: 6_6_0
-            XCODE_VERSION: 11.3.1
-            NETCORE_VERSION: 3.1.100
-          ios_13.6_mono_6.4_xcode_11.3.1:
-            XAMARIN_SYMLINK: 6_4_2
-            XCODE_VERSION: 11.3.1
-            NETCORE_VERSION: 3.0.100
-          ios_13.4_mono_6.4_xcode_11.2.1:
-            XAMARIN_SYMLINK: 6_4_1
-            XCODE_VERSION: 11.2.1
-            NETCORE_VERSION: 3.0.100
-          ios_13.2_mono_6.4_xcode_11.2.1:
-            XAMARIN_SYMLINK: 6_4_0
-            XCODE_VERSION: 11.2.1
-            NETCORE_VERSION: 3.0.100
       steps:
       - template: src/xamarin-ios/templates/test-xamarin-ios-todo-list.yml
         parameters:
@@ -213,50 +51,6 @@ stages:
           default:
             XAMARIN_SYMLINK: ''
             XCODE_VERSION: ''
-          ios_15.8_mono_6.12_xcode_13.2.1:
-            XAMARIN_SYMLINK: 6_12_16
-            XCODE_VERSION: 13.2.1
-            NETCORE_VERSION: 5.0.408
-          ios_15.6_mono_6.12_xcode_13.2.1:
-            XAMARIN_SYMLINK: 6_12_13
-            XCODE_VERSION: 13.2.1
-            NETCORE_VERSION: 5.0.402
-          ios_15.4_mono_6.12_xcode_13.2.1:
-            XAMARIN_SYMLINK: 6_12_12
-            XCODE_VERSION: 13.2.1
-          ios_15.2_mono_6.12_xcode_13.2:
-            XAMARIN_SYMLINK: 6_12_11
-            XCODE_VERSION: 13.2.1
-          ios_15.2_mono_6.12_xcode_13.1:
-            XAMARIN_SYMLINK: 6_12_11
-            XCODE_VERSION: 13.1
-          ios_15.0_mono_6.12_xcode_13.1:
-            XAMARIN_SYMLINK: 6_12_10
-            XCODE_VERSION: 13.1
-          ios_15.0_mono_6.12_xcode_13.0:
-            XAMARIN_SYMLINK: 6_12_10
-            XCODE_VERSION: 13.0
-          ios_14.20_mono_6.12_xcode_12.5.1:
-            XAMARIN_SYMLINK: 6_12_9
-            XCODE_VERSION: 12.5.1
-          ios_14.20_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_9
-            XCODE_VERSION: 12.4
-          ios_14.16_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_8
-            XCODE_VERSION: 12.4
-          ios_14.14_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_7
-            XCODE_VERSION: 12.4
-          ios_14.10_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_6
-            XCODE_VERSION: 12.4
-          ios_14.8_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_5
-            XCODE_VERSION: 12.4
-          ios_13.20_mono_6.12_xcode_11.7:
-            XAMARIN_SYMLINK: 6_12_0
-            XCODE_VERSION: 11.7
       steps:
       - template: src/xamarin-ios/templates/test-xamarin-ios-using-ui-test.yml
         parameters:
@@ -272,58 +66,6 @@ stages:
             XAMARIN_SYMLINK: 6_12_16
             XCODE_VERSION: 13.2.1
             NETCORE_VERSION: 5.0.408
-          ios_15.6_mono_6.12_xcode_13.2.1:
-            XAMARIN_SYMLINK: 6_12_13
-            XCODE_VERSION: 13.2.1
-            NETCORE_VERSION: 5.0.402
-          ios_15.4_mono_6.12_xcode_13.2.1:
-            XAMARIN_SYMLINK: 6_12_12
-            XCODE_VERSION: 13.2.1
-            NETCORE_VERSION: 5.0.402
-          ios_15.2_mono_6.12_xcode_13.2:
-            XAMARIN_SYMLINK: 6_12_11
-            XCODE_VERSION: 13.2.1
-            NETCORE_VERSION: 5.0.402
-          ios_15.2_mono_6.12_xcode_13.1:
-            XAMARIN_SYMLINK: 6_12_11
-            XCODE_VERSION: 13.1
-            NETCORE_VERSION: 5.0.402
-          ios_15.0_mono_6.12_xcode_13.1:
-            XAMARIN_SYMLINK: 6_12_10
-            XCODE_VERSION: 13.1
-            NETCORE_VERSION: 5.0.202
-          ios_15.0_mono_6.12_xcode_13.0:
-            XAMARIN_SYMLINK: 6_12_10
-            XCODE_VERSION: 13.0
-            NETCORE_VERSION: 5.0.202
-          ios_14.20_mono_6.12_xcode_12.5.1:
-            XAMARIN_SYMLINK: 6_12_9
-            XCODE_VERSION: 12.5.1
-            NETCORE_VERSION: 5.0.202
-          ios_14.20_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_9
-            XCODE_VERSION: 12.4
-            NETCORE_VERSION: 5.0.202
-          ios_14.16_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_8
-            XCODE_VERSION: 12.4
-            NETCORE_VERSION: 5.0.202
-          ios_14.14_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_7
-            XCODE_VERSION: 12.4
-            NETCORE_VERSION: 5.0.202
-          ios_14.10_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_6
-            XCODE_VERSION: 12.4
-            NETCORE_VERSION: 5.0.202
-          ios_14.8_mono_6.12_xcode_12.4:
-            XAMARIN_SYMLINK: 6_12_5
-            XCODE_VERSION: 12.4
-            NETCORE_VERSION: 5.0.100
-          ios_13.20_mono_6.12_xcode_11.7:
-            XAMARIN_SYMLINK: 6_12_0
-            XCODE_VERSION: 11.7
-            NETCORE_VERSION: 3.1.300
       steps:
       - template: src/xamarin-ios/templates/test-xamarin-ios-todo-list.yml
         parameters:
@@ -343,26 +85,6 @@ stages:
           default:
             XAMARIN_SYMLINK: ''
             XCODE_VERSION: ''
-          ios_15.8_mono_6.12_xcode_13.3.1:
-            XAMARIN_SYMLINK: 6_12_16
-            XCODE_VERSION: 13.3.1
-            NETCORE_VERSION: 5.0.408
-          ios_15.6_mono_6.12_xcode_13.3.1:
-            XAMARIN_SYMLINK: 6_12_13
-            XCODE_VERSION: 13.3.1
-            NETCORE_VERSION: 5.0.402
-          ios_15.4_mono_6.12_xcode_13.2.1:
-            XAMARIN_SYMLINK: 6_12_12
-            XCODE_VERSION: 13.2.1
-          ios_15.2_mono_6.12_xcode_13.2:
-            XAMARIN_SYMLINK: 6_12_11
-            XCODE_VERSION: 13.2.1
-          ios_15.2_mono_6.12_xcode_13.1:
-            XAMARIN_SYMLINK: 6_12_11
-            XCODE_VERSION: 13.1
-          ios_15.0_mono_6.12_xcode_13.1:
-            XAMARIN_SYMLINK: 6_12_10
-            XCODE_VERSION: 13.1
       steps:
       - template: src/xamarin-ios/templates/test-xamarin-ios-using-ui-test.yml
         parameters:
@@ -374,26 +96,6 @@ stages:
         vmImage: 'macos-12'
       strategy:
         matrix:
-          ios_15.8_mono_6.12_xcode_13.3.1:
-            XAMARIN_SYMLINK: 6_12_16
-            XCODE_VERSION: 13.3.1
-            NETCORE_VERSION: 5.0.408
-          ios_15.6_mono_6.12_xcode_13.3.1:
-            XAMARIN_SYMLINK: 6_12_13
-            XCODE_VERSION: 13.3.1
-            NETCORE_VERSION: 5.0.402
-          ios_15.4_mono_6.12_xcode_13.2.1:
-            XAMARIN_SYMLINK: 6_12_12
-            XCODE_VERSION: 13.2.1
-            NETCORE_VERSION: 5.0.402
-          ios_15.2_mono_6.12_xcode_13.2:
-            XAMARIN_SYMLINK: 6_12_11
-            XCODE_VERSION: 13.2.1
-            NETCORE_VERSION: 5.0.402
-          ios_15.2_mono_6.12_xcode_13.1:
-            XAMARIN_SYMLINK: 6_12_11
-            XCODE_VERSION: 13.1
-            NETCORE_VERSION: 5.0.402
           ios_15.0_mono_6.12_xcode_13.1:
             XAMARIN_SYMLINK: 6_12_10
             XCODE_VERSION: 13.1
