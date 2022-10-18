@@ -164,7 +164,7 @@
       <Version>1.6.1</Version>
     </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" Condition="Exists('$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets')" />
   <ItemGroup>
     <ProjectReference Include="..\AviaExplorer\AviaExplorer.csproj">
       <Project>{E1C416E6-BCCF-434B-B44B-E7106F4209F9}</Project>
