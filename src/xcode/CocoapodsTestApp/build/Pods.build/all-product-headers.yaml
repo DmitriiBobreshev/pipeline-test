@@ -1,0 +1,33 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/meiravfeiler/Documents/Development/Tests projects/Pirate-SpaceShip-user/xcode9-cocoaPods/build/Debug-iphoneos/Pods_New.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "Pods-New-umbrella.h",
+          'external-contents': "/Users/meiravfeiler/Documents/Development/Tests projects/Pirate-SpaceShip-user/xcode9-cocoaPods/Pods/Target Support Files/Pods-New/Pods-New-umbrella.h"
+        },
+        {
+          'type': 'file',
+          'name': "Pods_New-Swift.h",
+          'external-contents': "/Users/meiravfeiler/Documents/Development/Tests projects/Pirate-SpaceShip-user/xcode9-cocoaPods/build/Debug-iphoneos/Pods_New.framework/Headers/Pods_New-Swift.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/meiravfeiler/Documents/Development/Tests projects/Pirate-SpaceShip-user/xcode9-cocoaPods/build/Debug-iphoneos/Pods_New.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/meiravfeiler/Documents/Development/Tests projects/Pirate-SpaceShip-user/xcode9-cocoaPods/build/Pods.build/Debug-iphoneos/Pods-New.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}

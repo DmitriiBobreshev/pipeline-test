@@ -1,0 +1,42 @@
+steps:
+- checkout: self
+  clean: true
+
+- bash: '/bin/bash -c "sudo xcode-select -s /Applications/Xcode_${{ parameters.xcode_version }}.app/Contents/Developer"'
+  displayName: 'Set Xcode ${{ parameters.xcode_version }} as default'
+
+- task: InstallAppleCertificate@2
+  displayName: 'Install an Apple certificate'
+  inputs:
+    certSecureFile: '${{ parameters.apple_certificate_name }}'
+    certPwd: '${{ parameters.p12pass }}'
+
+- task: InstallAppleProvisioningProfile@1
+  displayName: 'Install an Apple provisioning profile'
+  inputs:
+    provProfileSecureFile: '${{ parameters.provisioning_profile_name }}'
+
+- task: Xcode@5
+  displayName: 'Xcode build - automatic signing'
+  inputs:
+    xcWorkspacePath: '$(System.DefaultWorkingDirectory)/src/xcode/${{ parameters.repo }}/**/*.xcodeproj/project.xcworkspace'
+    scheme: ${{ parameters.project_scheme }}
+    sdk: 'iphoneos'
+    configuration: 'Release'
+    packageApp: true
+    exportPath: '$(agent.builddirectory)/output/iphoneos/Release'
+    signingOption: auto
+    useXcpretty: false
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: '$(agent.builddirectory)/output/iphoneos/Release'
+    Contents: '**/*.ipa'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+

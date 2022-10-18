@@ -1,0 +1,21 @@
+steps:
+  - bash: '/bin/bash -c "sudo xcode-select -s /Applications/Xcode_${{ parameters.xcode_version }}.app/Contents/Developer"'
+    displayName: 'Set Xcode ${{ parameters.xcode_version }} as default'
+
+  - script: |
+      # temporary workaround for Carthage and Xcode >= 12
+      # Carthage issue: https://github.com/Carthage/Carthage/issues/3019
+      requiredVer=12
+      if [ "$(echo -e "$requiredVer\n${{ parameters.xcode_version }}" | sort -V | head -n1)" = $requiredVer ]; then
+        export XCODE_XCCONFIG_FILE=$PWD/tmp.xcconfig
+      fi
+      /usr/local/bin/carthage bootstrap --platform iOS && echo ''*** Resolved dependencies:'' && cat ''Cartfile.resolved''
+    displayName: 'Install Carthage frameworks'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/src/xcode/${{ parameters.repo }}'
+
+  - task: Xcode@4
+    inputs:
+      xcWorkspacePath: |
+        $(System.DefaultWorkingDirectory)/src/xcode/${{ parameters.repo }}/${{ parameters.project }}.xcodeproj/project.xcworkspace
+      scheme: ${{ parameters.project_scheme }}
+      sdk: 'iphoneos'

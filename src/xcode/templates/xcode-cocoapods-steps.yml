@@ -1,0 +1,22 @@
+steps:
+- checkout: self
+  clean: true
+  
+- bash: '/bin/bash -c "sudo xcode-select -s /Applications/Xcode_${{ parameters.xcode_version }}.app/Contents/Developer"'
+  displayName: 'Set Xcode ${{ parameters.xcode_version }} as default'
+
+- task: CocoaPods@0
+  displayName: 'pod install'
+  inputs:
+    workingDirectory: '$(System.DefaultWorkingDirectory)/src/xcode/${{ parameters.repo }}'
+
+- task: Xcode@5
+  displayName: 'Xcode build (not signed)'
+  inputs:
+    xcWorkspacePath: '$(System.DefaultWorkingDirectory)/src/xcode/${{ parameters.repo }}/${{ parameters.project_scheme }}.xcworkspace'
+    scheme: ${{ parameters.project_scheme }}
+    sdk: 'iphoneos'
+    configuration: 'Release'
+    packageApp: False
+    args: '-archivePath "$(agent.builddirectory)/output/build/archive/New.xcarchive"'
+    outputPattern: '$(agent.builddirectory)/output/build'
