@@ -65,14 +65,6 @@ stages:
             xcode.version: '12.4'
             xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
             xcode.scheme: 'ChitChat'
-          Xcode-11.2.1-Screentendo:
-            xcode.version: '11.2.1'
-            xcworkspace.path: 'Screentendo/Screentendo.xcworkspace'
-            xcode.scheme: 'Screentendo'
-          Xcode-12.4-Screentendo:
-            xcode.version: '12.4'
-            xcworkspace.path: 'Screentendo/Screentendo.xcworkspace'
-            xcode.scheme: 'Screentendo'
       steps:
       - template: src/xcode/templates/xcode-macos-steps.yml
         parameters:
@@ -162,14 +154,6 @@ stages:
             xcode.version: '13.1'
             xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
             xcode.scheme: 'ChitChat'
-          Xcode-11.7-Screentendo:
-            xcode.version: '11.7'
-            xcworkspace.path: 'Screentendo/Screentendo.xcworkspace'
-            xcode.scheme: 'Screentendo'
-          Xcode-13.1-Screentendo:
-            xcode.version: '13.1'
-            xcworkspace.path: 'Screentendo/Screentendo.xcworkspace'
-            xcode.scheme: 'Screentendo'
       steps:
       - template: src/xcode/templates/xcode-macos-steps.yml
         parameters:
@@ -257,10 +241,6 @@ stages:
             xcode.version: '13.1'
             xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
             xcode.scheme: 'ChitChat'
-          Xcode-13.1-Screentendo:
-            xcode.version: '13.1'
-            xcworkspace.path: 'Screentendo/Screentendo.xcworkspace'
-            xcode.scheme: 'Screentendo'
       steps:
       - template: src/xcode/templates/xcode-macos-steps.yml
         parameters:
