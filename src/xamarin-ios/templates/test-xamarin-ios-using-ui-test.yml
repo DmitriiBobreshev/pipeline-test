@@ -14,8 +14,7 @@ steps:
     filePath: src/xamarin-ios/select-xcode.sh
     arguments: ${{ parameters.XCODE_VERSION }}
 
-- task: NuGetToolInstaller@1
-
+- task: NuGetToolInstaller@1 
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(build.sourcesdirectory)/src/xamarin-ios/UsingUITest/UsingUITest.sln'

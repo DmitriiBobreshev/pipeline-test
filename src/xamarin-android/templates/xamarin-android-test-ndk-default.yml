@@ -6,6 +6,8 @@ steps:
     echo "##vso[task.setvariable variable=ANDROID_NDK_HOME;]$ANDROID_NDK_HOME"
 
 - task: NuGetToolInstaller@1
+  inputs:
+      versionSpec: '5.11'
   retryCountOnTaskFailure: 3
 
 - task: NuGetCommand@2

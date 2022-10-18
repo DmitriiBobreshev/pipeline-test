@@ -2,8 +2,7 @@ steps:
 - task: NuGetToolInstaller@1
   displayName: 'Use NuGet Latest'
   inputs:
-    versionSpec: '*'
-    checkLatest: true
+    versionSpec: '5.11'
   retryCountOnTaskFailure: 3
     
 - task: NuGetCommand@2
