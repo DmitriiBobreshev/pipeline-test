@@ -20,6 +20,7 @@ stages:
         vmImage: 'windows-2019'
       steps:
       - template: templates/azure-cli-steps.yml
+      - template: templates/azure-cli-steps-v2.yml
   
   - stage: 'Win2022'
     dependsOn: []
@@ -30,63 +31,64 @@ stages:
         vmImage: 'windows-2022'
       steps:
       - template: templates/azure-cli-steps.yml
+      - template: templates/azure-cli-steps-v2.yml
   
-  - stage: 'Ubuntu_1804'
-    dependsOn: []
-    jobs:
-    - job: 'azurecli'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'ubuntu-18.04'
-      steps:
-      - template: templates/azure-cli-steps.yml
+  # - stage: 'Ubuntu_1804'
+  #   dependsOn: []
+  #   jobs:
+  #   - job: 'azurecli'
+  #     pool:
+  #       name: 'Azure Pipelines'
+  #       vmImage: 'ubuntu-18.04'
+  #     steps:
+  #     - template: templates/azure-cli-steps-v2.yml
   
-  - stage: 'Ubuntu_2004'
-    dependsOn: []
-    jobs:
-    - job: 'azurecli'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'ubuntu-20.04'
-      steps:
-      - template: templates/azure-cli-steps.yml
+  # - stage: 'Ubuntu_2004'
+  #   dependsOn: []
+  #   jobs:
+  #   - job: 'azurecli'
+  #     pool:
+  #       name: 'Azure Pipelines'
+  #       vmImage: 'ubuntu-20.04'
+  #     steps:
+  #     - template: templates/azure-cli-steps-v2.yml
   
-  - stage: 'Ubuntu_2204'
-    dependsOn: []
-    jobs:
-    - job: 'azurecli'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'ubuntu-22.04'
-      steps:
-      - template: templates/azure-cli-steps.yml
+  # - stage: 'Ubuntu_2204'
+  #   dependsOn: []
+  #   jobs:
+  #   - job: 'azurecli'
+  #     pool:
+  #       name: 'Azure Pipelines'
+  #       vmImage: 'ubuntu-22.04'
+  #     steps:
+  #     - template: templates/azure-cli-steps-v2.yml
   
-  - stage: 'MacOS_Public_Catalina'
-    dependsOn: []
-    jobs:
-    - job: 'azurecli_MacOS_Public_Catalina'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-10.15'
-      steps:
-      - template: templates/azure-cli-steps.yml
+  # - stage: 'MacOS_Public_Catalina'
+  #   dependsOn: []
+  #   jobs:
+  #   - job: 'azurecli_MacOS_Public_Catalina'
+  #     pool:
+  #       name: 'Azure Pipelines'
+  #       vmImage: 'macos-10.15'
+  #     steps:
+  #     - template: templates/azure-cli-steps-v2.yml
   
-  - stage: 'MacOS_Public_BigSur'
-    dependsOn: []
-    jobs:
-    - job: 'azurecli_MacOS_Public_BigSur'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-11'
-      steps:
-      - template: templates/azure-cli-steps.yml
+  # - stage: 'MacOS_Public_BigSur'
+  #   dependsOn: []
+  #   jobs:
+  #   - job: 'azurecli_MacOS_Public_BigSur'
+  #     pool:
+  #       name: 'Azure Pipelines'
+  #       vmImage: 'macos-11'
+  #     steps:
+  #     - template: templates/azure-cli-steps-v2.yml
   
-  - stage: 'MacOS_Public_Monterey'
-    dependsOn: []
-    jobs:
-    - job: 'azurecli_MacOS_Public_Monterey'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-12'
-      steps:
-      - template: templates/azure-cli-steps.yml
+  # - stage: 'MacOS_Public_Monterey'
+  #   dependsOn: []
+  #   jobs:
+  #   - job: 'azurecli_MacOS_Public_Monterey'
+  #     pool:
+  #       name: 'Azure Pipelines'
+  #       vmImage: 'macos-12'
+  #     steps:
+  #     - template: templates/azure-cli-steps-v2.yml
