@@ -2,7 +2,7 @@ steps:
 - task: AzureCLI@1
   displayName: 'Azure CLI '
   inputs:
-    azureSubscription: 'Ecosystems_eng (417cd125-8a26-41ac-8dcf-30b6d4dbbfed)'
+    azureSubscription: 
     scriptLocation: inlineScript
     scriptType: pscore
     inlineScript: |
