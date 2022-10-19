@@ -2,7 +2,7 @@ steps:
 - task: AzureCLI@1
   displayName: 'Azure CLI '
   inputs:
-    azureSubscription: 
+    azureSubscription: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
     scriptLocation: inlineScript
     scriptType: pscore
     inlineScript: |
