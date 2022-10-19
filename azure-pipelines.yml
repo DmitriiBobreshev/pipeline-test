@@ -10,20 +10,113 @@ variables:
   - name: agent.clean.buildDirectory
     value: all
 
-jobs:
-- job: 'Debian'
-  displayName: Debian
-  pool:
-    name: 'default'
-    demands: 
-      - Agent.Name -equals test200
-  steps:
-    - task: JenkinsQueueJob@1
-      displayName: 'Queue Jenkins Job: Parameterized'
-      inputs:
-        serverEndpoint: 'ABTT_JenkinsContainer'
-        jobName: 'BuildCanary_Parameterized'
-        jobParameters: |
-          MyBoolean=True
-          MyString=TestString123
-      retryCountOnTaskFailure: 3 
+stages:
+  - stage: 'Win2019'
+    dependsOn: []
+    jobs:
+    - job: 'azurecli'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'windows-2019'
+      steps:
+      - template: templates/azure-cli-steps.yml
+    - job: 'azuredevops'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'windows-2019'
+      steps:
+      - template: templates/azure-devops-steps.yml
+  
+  - stage: 'Win2022'
+    dependsOn: []
+    jobs:
+    - job: 'azurecli'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'windows-2022'
+      steps:
+      - template: templates/azure-cli-steps.yml
+    - job: 'azuredevops'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'windows-2022'
+      steps:
+      - template: templates/azure-devops-steps.yml
+  
+  - stage: 'Ubuntu_1804'
+    dependsOn: []
+    jobs:
+    - job: 'azurecli'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'ubuntu-18.04'
+      steps:
+      - template: templates/azure-cli-steps.yml
+    - job: 'azuredevops'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'ubuntu-18.04'
+      steps:
+      - template: templates/azure-devops-steps.yml
+  
+  - stage: 'Ubuntu_2004'
+    dependsOn: []
+    jobs:
+    - job: 'azurecli'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'ubuntu-20.04'
+      steps:
+      - template: templates/azure-cli-steps.yml
+    - job: 'azuredevops'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'ubuntu-20.04'
+      steps:
+      - template: templates/azure-devops-steps.yml
+  
+  - stage: 'Ubuntu_2204'
+    dependsOn: []
+    jobs:
+    - job: 'azurecli'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'ubuntu-22.04'
+      steps:
+      - template: templates/azure-cli-steps.yml
+    - job: 'azuredevops'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'ubuntu-22.04'
+      steps:
+      - template: templates/azure-devops-steps.yml
+  
+  - stage: 'MacOS_Public_Catalina'
+    dependsOn: []
+    jobs:
+    - job: 'azurecli_MacOS_Public_Catalina'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'macos-10.15'
+      steps:
+      - template: templates/azure-cli-steps.yml
+  
+  - stage: 'MacOS_Public_BigSur'
+    dependsOn: []
+    jobs:
+    - job: 'azurecli_MacOS_Public_BigSur'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'macos-11'
+      steps:
+      - template: templates/azure-cli-steps.yml
+  
+  - stage: 'MacOS_Public_Monterey'
+    dependsOn: []
+    jobs:
+    - job: 'azurecli_MacOS_Public_Monterey'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'macos-12'
+      steps:
+      - template: templates/azure-cli-steps.yml
