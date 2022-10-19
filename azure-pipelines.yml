@@ -20,12 +20,6 @@ stages:
         vmImage: 'windows-2019'
       steps:
       - template: templates/azure-cli-steps.yml
-    - job: 'azuredevops'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'windows-2019'
-      steps:
-      - template: templates/azure-devops-steps.yml
   
   - stage: 'Win2022'
     dependsOn: []
@@ -36,12 +30,6 @@ stages:
         vmImage: 'windows-2022'
       steps:
       - template: templates/azure-cli-steps.yml
-    - job: 'azuredevops'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'windows-2022'
-      steps:
-      - template: templates/azure-devops-steps.yml
   
   - stage: 'Ubuntu_1804'
     dependsOn: []
@@ -52,12 +40,6 @@ stages:
         vmImage: 'ubuntu-18.04'
       steps:
       - template: templates/azure-cli-steps.yml
-    - job: 'azuredevops'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'ubuntu-18.04'
-      steps:
-      - template: templates/azure-devops-steps.yml
   
   - stage: 'Ubuntu_2004'
     dependsOn: []
@@ -68,12 +50,6 @@ stages:
         vmImage: 'ubuntu-20.04'
       steps:
       - template: templates/azure-cli-steps.yml
-    - job: 'azuredevops'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'ubuntu-20.04'
-      steps:
-      - template: templates/azure-devops-steps.yml
   
   - stage: 'Ubuntu_2204'
     dependsOn: []
@@ -84,12 +60,6 @@ stages:
         vmImage: 'ubuntu-22.04'
       steps:
       - template: templates/azure-cli-steps.yml
-    - job: 'azuredevops'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'ubuntu-22.04'
-      steps:
-      - template: templates/azure-devops-steps.yml
   
   - stage: 'MacOS_Public_Catalina'
     dependsOn: []
