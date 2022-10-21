@@ -6,16 +6,27 @@ stages:
     name: 'Azure Pipelines'
     vmImage: 'windows-2022'
   jobs:
-    - deployment: VMDeploy
-      displayName: Deploy to VM
-      environment: 
-        name: аываываыва
-        resourceType: VirtualMachine
-      strategy:
-        runOnce:
-          deploy:   
-              steps:
-              - script: echo $(pwd)
-              - bash: echo $(pwd)
-              - script: pwd
-        
+    - job: 'TestInCorrect'
+      displayName: 'Test incorrect checkout'
+      steps:
+        - checkout: self
+          path: s/
+        - checkout: git://playground/playground
+          path: s/roles/logstash
+          clean: false
+
+    - job: 'TestCorrect'
+      displayName: 'Test correct checkout'
+      steps:
+        - checkout: git://playground/playground
+          path: s/roles/logstash2
+          clean: false
+        - checkout: self
+          path: s/
+
+    - job: 'TestIsCorrect'
+      displayName: 'Test is correct checkout'
+      steps:
+        - checkout: git://playground/playground
+          path: s/roles/logstash2
+          clean: false
