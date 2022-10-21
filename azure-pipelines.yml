@@ -3,8 +3,7 @@ name: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)00'
 stages:
 - stage: 'ArchiveFilesWin2022'
   pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2022'
+    name: 'Default'
   jobs:
     - job: 'TestInCorrect'
       displayName: 'Test incorrect checkout'
