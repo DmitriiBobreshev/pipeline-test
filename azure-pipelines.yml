@@ -26,7 +26,7 @@ jobs:
     #       MyBoolean=True
     #       MyString=TestString123
     #   retryCountOnTaskFailure: 3 
-    - task: AzureRMWebAppDeployment@4
+    - task: AzureRMWebAppDeployment@4.1.10
       inputs:
         appType: webApp
         ConnectedServiceName: ''
