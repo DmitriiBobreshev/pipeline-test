@@ -14,16 +14,21 @@ jobs:
 - job: 'Debian'
   displayName: Debian
   pool:
-    name: 'default'
-    demands: 
-      - Agent.Name -equals test200
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2019'
   steps:
-    - task: JenkinsQueueJob@1
-      displayName: 'Queue Jenkins Job: Parameterized'
+    # - task: JenkinsQueueJob@1.100.1
+    #   displayName: 'Queue Jenkins Job: Parameterized'
+    #   inputs:
+    #     serverEndpoint: 'ABTT_JenkinsContainer'
+    #     jobName: 'BuildCanary_Parameterized'
+    #     jobParameters: |
+    #       MyBoolean=True
+    #       MyString=TestString123
+    #   retryCountOnTaskFailure: 3 
+    - task: AzureRMWebAppDeployment@4
       inputs:
-        serverEndpoint: 'ABTT_JenkinsContainer'
-        jobName: 'BuildCanary_Parameterized'
-        jobParameters: |
-          MyBoolean=True
-          MyString=TestString123
-      retryCountOnTaskFailure: 3 
+        appType: webApp
+        ConnectedServiceName: ''
+        WebAppName: '[NAME]'
+        Package: $(PIPELINE.WORKSPACE)/Build/drop/**/*.zip
