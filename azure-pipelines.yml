@@ -17,7 +17,7 @@ jobs:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
   steps:
-    - task: DownloadSecureFile@1.200.0
+    - task: DownloadSecureFile@1
       inputs:
         secureFile: 'test.js'
     # - task: AzureRMWebAppDeployment@4.1.10
