@@ -17,15 +17,9 @@ jobs:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
   steps:
-    - task: Synapse workspace deployment@2
+    - task: DownloadSecureFile@1.200.0
       inputs:
-        operation: 'deploy'
-        TargetWorkspaceName: 
-        DeleteArtifactsNotInTemplate: false
-        DeployManagedPrivateEndpoints: false
-        FailOnMissingOverrides: false
-        Environment: 'prod'
-        npmpackage: 'prod'
+        secureFile: 'test.js'
     # - task: AzureRMWebAppDeployment@4.1.10
     #   inputs:
     #     appType: webApp
