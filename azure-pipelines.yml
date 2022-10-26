@@ -17,18 +17,18 @@ jobs:
     name: 'Azure Pipelines'
     vmImage: 'windows-2019'
   steps:
-    # - task: JenkinsQueueJob@1.100.1
-    #   displayName: 'Queue Jenkins Job: Parameterized'
-    #   inputs:
-    #     serverEndpoint: 'ABTT_JenkinsContainer'
-    #     jobName: 'BuildCanary_Parameterized'
-    #     jobParameters: |
-    #       MyBoolean=True
-    #       MyString=TestString123
-    #   retryCountOnTaskFailure: 3 
-    - task: AzureRMWebAppDeployment@4.1.10
+    - task: Synapse workspace deployment@2
       inputs:
-        appType: webApp
-        ConnectedServiceName: ''
-        WebAppName: '[NAME]'
-        Package: $(PIPELINE.WORKSPACE)/Build/drop/**/*.zip
+        operation: 'deploy'
+        TargetWorkspaceName: 
+        DeleteArtifactsNotInTemplate: false
+        DeployManagedPrivateEndpoints: false
+        FailOnMissingOverrides: false
+        Environment: 'prod'
+        npmpackage: 'prod'
+    # - task: AzureRMWebAppDeployment@4.1.10
+    #   inputs:
+    #     appType: webApp
+    #     ConnectedServiceName: ''
+    #     WebAppName: '[NAME]'
+    #     Package: $(PIPELINE.WORKSPACE)/Build/drop/**/*.zip
