@@ -11,19 +11,30 @@ variables:
     value: all
 
 
-pool:
-  vmImage: windows-latest
+# jobs:
+# - deployment: Deploy
+#   environment: 'Testing'
+#   pool:
+#     vmImage: windows-latest
+#   strategy:
+#     runOnce:
+#       deploy:
+#         steps:
+#         - checkout: none
+#         - task: DownloadSecureFile@1.198.0
+#           inputs:
+#             secureFile: 'test.js
 
-jobs:
-- deployment: Deploy
-  environment: 'Testing'
-  pool:
-    vmImage: windows-latest
-  strategy:
-    runOnce:
-      deploy:
-        steps:
-        - checkout: none
-        - task: DownloadSecureFile@1.198.0
-          inputs:
-            secureFile: 'test.js'
+pool:
+  name: 'Azure Pipelines'
+  vmImage: 'windows-2019'
+steps:
+  - task: DownloadSecureFile@1.198.0
+    inputs:
+      secureFile: 'test.js'
+  # - task: AzureRMWebAppDeployment@4.1.10
+  #   inputs:
+  #     appType: webApp
+  #     ConnectedServiceName: ''
+  #     WebAppName: '[NAME]'
+  #     Package: $(PIPELINE.WORKSPACE)/Build/drop/**/*.zip
