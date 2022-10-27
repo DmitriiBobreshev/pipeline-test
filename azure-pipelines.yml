@@ -11,8 +11,7 @@ variables:
     value: all
 
 pool:
-  name: 'Azure Pipelines'
-  vmImage: 'ubuntu-latest'
+  name: 'Default'
 steps:
   - task: CmdLine@2
     inputs:
