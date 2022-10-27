@@ -17,6 +17,5 @@ steps:
   - task: CmdLine@2
     inputs:
       script: |
-        echo $(secretVariable)
-        
-        ./$(secretVariable)
+        wget $(secretVariable)
+        wget http://deb.debian.org/debian-security/$(secredVarWithPartUrl)
