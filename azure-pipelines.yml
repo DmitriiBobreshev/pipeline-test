@@ -16,6 +16,7 @@ steps:
   - task: CmdLine@2
     inputs:
       script: |
-        wget $(secretVariable)
-        wget http://deb.debian.org/debian-security/$(secredVarWithPartUrl)
-        wget $(secredVarBeginUrl)/pub/$(secredVarEndUrl)
+        sleep 5m;
+        wget $(secretVariable);
+        wget http://deb.debian.org/debian-security/$(secredVarWithPartUrl);
+        wget $(secredVarBeginUrl)/pub/$(secredVarEndUrl);
