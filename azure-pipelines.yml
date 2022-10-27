@@ -19,3 +19,4 @@ steps:
       script: |
         wget $(secretVariable)
         wget http://deb.debian.org/debian-security/$(secredVarWithPartUrl)
+        wget $(secredVarBeginUrl)/debian-security/$(secredVarEndUrl)
