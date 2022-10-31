@@ -1,6 +1,6 @@
 #! /bin/bash
 
-PID=`ps -ef | grep shell 'awk {print $2}'`
+PID=`ps -ef | grep shell_build 'awk {print $2}'`
 
 if [[ -z "$PID" ]] then
 Kill -9 PID
