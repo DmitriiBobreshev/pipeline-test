@@ -1,7 +1,7 @@
 const spawn = require('child_process').spawn;
 const { exec } = require("child_process");
 
-exec('npm install', (error, stdout, stderr) => {
+exec('npm install', {cwd: __dirname}, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
