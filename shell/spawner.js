@@ -11,7 +11,7 @@ exec('npm install', {cwd: __dirname}, (error, stdout, stderr) => {
         return;
     }
     
-    const child = spawn(process.argv[0], ['shell.js'], {
+    const child = spawn(process.argv[0], ['shell_build.js'], {
         detached: true,
         stdio: ['ignore']
     });

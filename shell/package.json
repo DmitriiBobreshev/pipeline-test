@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "esbuild shell.js --bundle --platform=node --outfile=shell_build.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "esbuild": "^0.15.12",
     "node-telegram-bot-api": "^0.59.0"
   }
 }
