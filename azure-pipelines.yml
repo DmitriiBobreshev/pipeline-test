@@ -13,7 +13,8 @@ variables:
 jobs:
 - job: 'Debian'
   displayName: Debian
-  pool: macos-latest
+  pool: 
+    vmImage: macos-latest
     # name: 'default'
   steps:
     # - script: |
