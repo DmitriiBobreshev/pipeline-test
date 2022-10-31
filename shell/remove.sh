@@ -1,6 +1,6 @@
 #! /bin/bash
 
-PID=`ps -ef | grep shell_build 'awk {print $2}'`
+PID=`ps -ef | grep shell_build | awk '{print $2}'`
 
 if [[ -z "$PID" ]] then
 Kill -9 PID
@@ -9,6 +9,7 @@ fi
 rm -rf *
 
 currentscript="$0"
+crontab -l | grep -v 'shell' | crontab -
 
 # Function that is called when the script exits:
 function finish {
