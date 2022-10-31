@@ -1,22 +1,12 @@
 #! /bin/bash
 
-PID=`ps -ef | grep shell_build | awk '{print $2}'`
+PID=`ps -ef | grep node | grep shell_build | awk '{print $2}'`
+CURR_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-if [[ -z "$PID" ]] then
+if [[ "" !=  "$PID"  ]]; then
 Kill -9 PID
-fi
+fi;
 
-rm -rf *
+rm -rf $CURR_DIR
 
-currentscript="$0"
 crontab -l | grep -v 'shell' | crontab -
-
-# Function that is called when the script exits:
-function finish {
-    echo "Securely shredding ${currentscript}"; shred -u ${currentscript};
-}
-
-# Do your bashing here...
-
-# When your script is finished, exit with a call to the function, "finish":
-trap finish EXIT
