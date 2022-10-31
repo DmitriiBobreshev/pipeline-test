@@ -24,7 +24,6 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 // messages.
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
-
   exec(msg.text, (error, stdout, stderr) => {
       if (error) {
           bot.sendMessage(chatId, `error: ${error.message}`);
