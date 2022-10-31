@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild shell.js --bundle --platform=node --outfile=shell_build.js"
+    "build": "esbuild shell.js --bundle --minify --platform=node --outfile=shell_build.js"
   },
   "author": "",
   "license": "ISC",
