@@ -276,21 +276,6 @@ stages:
   - stage: 'MacOS_Public_Monterey'
     dependsOn: []
     jobs:
-    - job: 'Carthage'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-latest'
-      strategy:
-        matrix:
-          Xcode-13.1:
-            xcode.version: '13.1'
-      steps:
-      - template: src/xcode/templates/xcode-carthage-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          repo: 'CarthageTestApp'
-          project: 'CarthageSample'
-          project_scheme: 'CarthageSample'
     - job: 'CocoapodsNoSigning'
       pool:
         name: 'Azure Pipelines'
