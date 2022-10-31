@@ -295,11 +295,12 @@ stages:
 
         - task: CocoaPods@0
           displayName: 'pod install'
+          condition: ne(variables.PODS_CACHE_RESTORED, 'true')
 
         - task: Xcode@5
           displayName: 'Xcode build (not signed)'
           inputs:
-            xcWorkspacePath: 'New/New.xcworkspace'
+            xcWorkspacePath: 'New.xcworkspace'
             scheme: New
             sdk: 'iphoneos'
             configuration: 'Release'
