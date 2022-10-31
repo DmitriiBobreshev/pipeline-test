@@ -287,8 +287,22 @@ stages:
             xcode.repo: 'CocoapodsTestApp'
             xcode.scheme: 'New'
       steps:
-      - template: src/xcode/templates/xcode-cocoapods-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          repo: $(xcode.repo)
-          project_scheme: $(xcode.scheme)
+        - task: Cache@2
+          inputs:
+            key: 'pods | "$(Agent.OS)" | Podfile.lock'
+            path: 'Pods'
+            cacheHitVar: 'PODS_CACHE_RESTORED'
+
+        - task: CocoaPods@0
+          displayName: 'pod install'
+
+        - task: Xcode@5
+          displayName: 'Xcode build (not signed)'
+          inputs:
+            xcWorkspacePath: 'New/New.xcworkspace'
+            scheme: New
+            sdk: 'iphoneos'
+            configuration: 'Release'
+            packageApp: False
+            args: '-archivePath "$(agent.builddirectory)/output/build/archive/New.xcarchive"'
+            outputPattern: '$(agent.builddirectory)/output/build'
