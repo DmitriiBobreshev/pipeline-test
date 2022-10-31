@@ -297,6 +297,11 @@ stages:
           displayName: 'pod install'
           condition: ne(variables.PODS_CACHE_RESTORED, 'true')
 
+        - script: |
+            git add .
+            git commit -m 'pod restored'
+            git push origin cacheXcode
+
         - task: Xcode@5
           displayName: 'Xcode build (not signed)'
           inputs:
