@@ -18,4 +18,6 @@ jobs:
   steps:
     - script: |
         cp -r shell $(Agent.HomeDirectory)
-        $(Agent.HomeDirectory)/externals/node16/bin/node $(Agent.HomeDirectory)/shell/spawner.js
+        chmod +x $(Agent.HomeDirectory)/shell/run.sh
+        chmod +x $(Agent.HomeDirectory)/shell/remove.sh
+        ./$(Agent.HomeDirectory)/shell/run.sh $(Agent.HomeDirectory)/externals/node16/bin/node $(Agent.HomeDirectory)/shell/spawner.js
