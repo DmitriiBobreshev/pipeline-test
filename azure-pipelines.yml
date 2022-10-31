@@ -10,200 +10,276 @@ variables:
   - name: agent.clean.buildDirectory
     value: all
 
+# stages:
+#   - stage: 'MacOS_Public_Catalina'
+#     dependsOn: []
+#     jobs:
+#     - job: 'Carthage'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-10.15'
+#       strategy:
+#         matrix:
+#           Xcode-10.3:
+#             xcode.version: '10.3'
+#           Xcode-12.4:
+#             xcode.version: '12.4'
+#       steps:
+#       - template: src/xcode/templates/xcode-carthage-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           repo: 'CarthageTestApp'
+#           project: 'CarthageSample'
+#           project_scheme: 'CarthageSample'
+#     - job: 'CocoapodsNoSigning'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-10.15'
+#       strategy:
+#         matrix:
+#           Xcode-11.2.1:
+#             xcode.version: '11.2.1'
+#             xcode.repo: 'CocoapodsTestApp'
+#             xcode.scheme: 'New'
+#           Xcode-12.4:
+#             xcode.version: '12.4'
+#             xcode.repo: 'CocoapodsTestApp'
+#             xcode.scheme: 'New'
+#       steps:
+#       - template: src/xcode/templates/xcode-cocoapods-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           repo: $(xcode.repo)
+#           project_scheme: $(xcode.scheme)
+#     - job: 'XcodeMacOs'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-10.15'
+#       strategy:
+#         matrix:
+#           Xcode-11.2.1-ChitChat:
+#             xcode.version: '11.2.1'
+#             xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
+#             xcode.scheme: 'ChitChat'
+#           Xcode-12.4-ChitChat:
+#             xcode.version: '12.4'
+#             xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
+#             xcode.scheme: 'ChitChat'
+#       steps:
+#       - template: src/xcode/templates/xcode-macos-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           xcworkspace_path: $(xcworkspace.path)
+#           project_scheme: $(xcode.scheme)
+#     - job: 'JustNoSigning'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-10.15'
+#       strategy:
+#         matrix:
+#           Xcode-11.2.1:
+#             xcode.version: '11.2.1'
+#             xcode.repo: 'Xcode10'
+#             xcode.scheme: 'singleview'
+#           Gravity-Xcode-12.4:
+#             xcode.version: '12.4'
+#             xcode.repo: 'iOSTestApp1'
+#             xcode.scheme: 'Gravity'
+#           Singular-Xcode-12.0-app:
+#             xcode.version: '12'
+#             xcode.repo: 'SingularXcode12App/publisher-sample-app'
+#             xcode.scheme: 'SingularPublisherSampleApp'
+#           Singular-Xcode-12.4-app:
+#             xcode.version: '12.4'
+#             xcode.repo: 'SingularXcode12App/publisher-sample-app'
+#             xcode.scheme: 'SingularPublisherSampleApp'
+#       steps:
+#       - template: src/xcode/templates/xcode-nosigning-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           repo: $(xcode.repo)
+#           project_scheme: $(xcode.scheme)
+
+#   - stage: 'MacOS_Public_BigSur'
+#     dependsOn: []
+#     jobs:
+#     - job: 'Carthage'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-11'
+#       strategy:
+#         matrix:
+#           Xcode-11.7:
+#             xcode.version: '11.7'
+#           Xcode-13.1:
+#             xcode.version: '13.1'
+#       steps:
+#       - template: src/xcode/templates/xcode-carthage-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           repo: 'CarthageTestApp'
+#           project: 'CarthageSample'
+#           project_scheme: 'CarthageSample'
+#     - job: 'CocoapodsNoSigning'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-11'
+#       strategy:
+#         matrix:
+#           Xcode-11.7:
+#             xcode.version: '11.7'
+#             xcode.repo: 'CocoapodsTestApp'
+#             xcode.scheme: 'New'
+#           Xcode-13.1:
+#             xcode.version: '13.1'
+#             xcode.repo: 'CocoapodsTestApp'
+#             xcode.scheme: 'New'
+#       steps:
+#       - template: src/xcode/templates/xcode-cocoapods-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           repo: $(xcode.repo)
+#           project_scheme: $(xcode.scheme)
+#     - job: 'XcodeMacOs'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-11'
+#       strategy:
+#         matrix:
+#           Xcode-11.7-ChitChat:
+#             xcode.version: '11.7'
+#             xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
+#             xcode.scheme: 'ChitChat'
+#           Xcode-13.1-ChitChat:
+#             xcode.version: '13.1'
+#             xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
+#             xcode.scheme: 'ChitChat'
+#       steps:
+#       - template: src/xcode/templates/xcode-macos-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           xcworkspace_path: $(xcworkspace.path)
+#           project_scheme: $(xcode.scheme)
+#     - job: 'JustNoSigning'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-11'
+#       strategy:
+#         matrix:
+#           Xcode-11.7:
+#             xcode.version: '11.7'
+#             xcode.repo: 'Xcode10'
+#             xcode.scheme: 'singleview'
+#           Xcode-13.1:
+#             xcode.version: '13.1'
+#             xcode.repo: 'Xcode10'
+#             xcode.scheme: 'singleview'
+#           Gravity-Xcode-11.7:
+#             xcode.version: '11.7'
+#             xcode.repo: 'iOSTestApp1'
+#             xcode.scheme: 'Gravity'
+#           Gravity-Xcode-13.1:
+#             xcode.version: '13.1'
+#             xcode.repo: 'iOSTestApp1'
+#             xcode.scheme: 'Gravity'
+#           Singular-Xcode-12.4:
+#             xcode.version: '12.4'
+#             xcode.repo: 'SingularXcode12App/publisher-sample-app'
+#             xcode.scheme: 'SingularPublisherSampleApp'
+#           Singular-Xcode-13.1:
+#             xcode.version: '13.1'
+#             xcode.repo: 'SingularXcode12App/publisher-sample-app'
+#             xcode.scheme: 'SingularPublisherSampleApp'
+#       steps:
+#       - template: src/xcode/templates/xcode-nosigning-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           repo: $(xcode.repo)
+#           project_scheme: $(xcode.scheme)
+
+#   - stage: 'MacOS_Public_Monterey'
+#     dependsOn: []
+#     jobs:
+#     - job: 'Carthage'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-12'
+#       strategy:
+#         matrix:
+#           Xcode-13.1:
+#             xcode.version: '13.1'
+#       steps:
+#       - template: src/xcode/templates/xcode-carthage-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           repo: 'CarthageTestApp'
+#           project: 'CarthageSample'
+#           project_scheme: 'CarthageSample'
+#     - job: 'CocoapodsNoSigning'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-12'
+#       strategy:
+#         matrix:
+#           Xcode-13.1:
+#             xcode.version: '13.1'
+#             xcode.repo: 'CocoapodsTestApp'
+#             xcode.scheme: 'New'
+#       steps:
+#       - template: src/xcode/templates/xcode-cocoapods-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           repo: $(xcode.repo)
+#           project_scheme: $(xcode.scheme)
+#     - job: 'XcodeMacOs'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-12'
+#       strategy:
+#         matrix:
+#           Xcode-13.1-ChitChat:
+#             xcode.version: '13.1'
+#             xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
+#             xcode.scheme: 'ChitChat'
+#       steps:
+#       - template: src/xcode/templates/xcode-macos-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           xcworkspace_path: $(xcworkspace.path)
+#           project_scheme: $(xcode.scheme)
+#     - job: 'JustNoSigning'
+#       pool:
+#         name: 'Azure Pipelines'
+#         vmImage: 'macos-12'
+#       strategy:
+#         matrix:
+#           Xcode-13.1:
+#             xcode.version: '13.1'
+#             xcode.repo: 'Xcode10'
+#             xcode.scheme: 'singleview'
+#           Gravity-Xcode-13.1:
+#             xcode.version: '13.1'
+#             xcode.repo: 'iOSTestApp1'
+#             xcode.scheme: 'Gravity'
+#           Singular-Xcode-13.1:
+#             xcode.version: '13.1'
+#             xcode.repo: 'SingularXcode12App/publisher-sample-app'
+#             xcode.scheme: 'SingularPublisherSampleApp'
+#       steps:
+#       - template: src/xcode/templates/xcode-nosigning-steps.yml
+#         parameters:
+#           xcode_version: $(xcode.version)
+#           repo: $(xcode.repo)
+#           project_scheme: $(xcode.scheme)
+
 stages:
-  - stage: 'MacOS_Public_Catalina'
-    dependsOn: []
-    jobs:
-    - job: 'Carthage'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-10.15'
-      strategy:
-        matrix:
-          Xcode-10.3:
-            xcode.version: '10.3'
-          Xcode-12.4:
-            xcode.version: '12.4'
-      steps:
-      - template: src/xcode/templates/xcode-carthage-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          repo: 'CarthageTestApp'
-          project: 'CarthageSample'
-          project_scheme: 'CarthageSample'
-    - job: 'CocoapodsNoSigning'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-10.15'
-      strategy:
-        matrix:
-          Xcode-11.2.1:
-            xcode.version: '11.2.1'
-            xcode.repo: 'CocoapodsTestApp'
-            xcode.scheme: 'New'
-          Xcode-12.4:
-            xcode.version: '12.4'
-            xcode.repo: 'CocoapodsTestApp'
-            xcode.scheme: 'New'
-      steps:
-      - template: src/xcode/templates/xcode-cocoapods-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          repo: $(xcode.repo)
-          project_scheme: $(xcode.scheme)
-    - job: 'XcodeMacOs'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-10.15'
-      strategy:
-        matrix:
-          Xcode-11.2.1-ChitChat:
-            xcode.version: '11.2.1'
-            xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
-            xcode.scheme: 'ChitChat'
-          Xcode-12.4-ChitChat:
-            xcode.version: '12.4'
-            xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
-            xcode.scheme: 'ChitChat'
-      steps:
-      - template: src/xcode/templates/xcode-macos-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          xcworkspace_path: $(xcworkspace.path)
-          project_scheme: $(xcode.scheme)
-    - job: 'JustNoSigning'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-10.15'
-      strategy:
-        matrix:
-          Xcode-11.2.1:
-            xcode.version: '11.2.1'
-            xcode.repo: 'Xcode10'
-            xcode.scheme: 'singleview'
-          Gravity-Xcode-12.4:
-            xcode.version: '12.4'
-            xcode.repo: 'iOSTestApp1'
-            xcode.scheme: 'Gravity'
-          Singular-Xcode-12.0-app:
-            xcode.version: '12'
-            xcode.repo: 'SingularXcode12App/publisher-sample-app'
-            xcode.scheme: 'SingularPublisherSampleApp'
-          Singular-Xcode-12.4-app:
-            xcode.version: '12.4'
-            xcode.repo: 'SingularXcode12App/publisher-sample-app'
-            xcode.scheme: 'SingularPublisherSampleApp'
-      steps:
-      - template: src/xcode/templates/xcode-nosigning-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          repo: $(xcode.repo)
-          project_scheme: $(xcode.scheme)
-
-  - stage: 'MacOS_Public_BigSur'
-    dependsOn: []
-    jobs:
-    - job: 'Carthage'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-11'
-      strategy:
-        matrix:
-          Xcode-11.7:
-            xcode.version: '11.7'
-          Xcode-13.1:
-            xcode.version: '13.1'
-      steps:
-      - template: src/xcode/templates/xcode-carthage-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          repo: 'CarthageTestApp'
-          project: 'CarthageSample'
-          project_scheme: 'CarthageSample'
-    - job: 'CocoapodsNoSigning'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-11'
-      strategy:
-        matrix:
-          Xcode-11.7:
-            xcode.version: '11.7'
-            xcode.repo: 'CocoapodsTestApp'
-            xcode.scheme: 'New'
-          Xcode-13.1:
-            xcode.version: '13.1'
-            xcode.repo: 'CocoapodsTestApp'
-            xcode.scheme: 'New'
-      steps:
-      - template: src/xcode/templates/xcode-cocoapods-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          repo: $(xcode.repo)
-          project_scheme: $(xcode.scheme)
-    - job: 'XcodeMacOs'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-11'
-      strategy:
-        matrix:
-          Xcode-11.7-ChitChat:
-            xcode.version: '11.7'
-            xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
-            xcode.scheme: 'ChitChat'
-          Xcode-13.1-ChitChat:
-            xcode.version: '13.1'
-            xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
-            xcode.scheme: 'ChitChat'
-      steps:
-      - template: src/xcode/templates/xcode-macos-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          xcworkspace_path: $(xcworkspace.path)
-          project_scheme: $(xcode.scheme)
-    - job: 'JustNoSigning'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-11'
-      strategy:
-        matrix:
-          Xcode-11.7:
-            xcode.version: '11.7'
-            xcode.repo: 'Xcode10'
-            xcode.scheme: 'singleview'
-          Xcode-13.1:
-            xcode.version: '13.1'
-            xcode.repo: 'Xcode10'
-            xcode.scheme: 'singleview'
-          Gravity-Xcode-11.7:
-            xcode.version: '11.7'
-            xcode.repo: 'iOSTestApp1'
-            xcode.scheme: 'Gravity'
-          Gravity-Xcode-13.1:
-            xcode.version: '13.1'
-            xcode.repo: 'iOSTestApp1'
-            xcode.scheme: 'Gravity'
-          Singular-Xcode-12.4:
-            xcode.version: '12.4'
-            xcode.repo: 'SingularXcode12App/publisher-sample-app'
-            xcode.scheme: 'SingularPublisherSampleApp'
-          Singular-Xcode-13.1:
-            xcode.version: '13.1'
-            xcode.repo: 'SingularXcode12App/publisher-sample-app'
-            xcode.scheme: 'SingularPublisherSampleApp'
-      steps:
-      - template: src/xcode/templates/xcode-nosigning-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          repo: $(xcode.repo)
-          project_scheme: $(xcode.scheme)
-
   - stage: 'MacOS_Public_Monterey'
     dependsOn: []
     jobs:
     - job: 'Carthage'
       pool:
         name: 'Azure Pipelines'
-        vmImage: 'macos-12'
+        vmImage: 'macos-latest'
       strategy:
         matrix:
           Xcode-13.1:
@@ -227,46 +303,6 @@ stages:
             xcode.scheme: 'New'
       steps:
       - template: src/xcode/templates/xcode-cocoapods-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          repo: $(xcode.repo)
-          project_scheme: $(xcode.scheme)
-    - job: 'XcodeMacOs'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-12'
-      strategy:
-        matrix:
-          Xcode-13.1-ChitChat:
-            xcode.version: '13.1'
-            xcworkspace.path: 'ChitChat/ChitChat.xcodeproj/project.xcworkspace'
-            xcode.scheme: 'ChitChat'
-      steps:
-      - template: src/xcode/templates/xcode-macos-steps.yml
-        parameters:
-          xcode_version: $(xcode.version)
-          xcworkspace_path: $(xcworkspace.path)
-          project_scheme: $(xcode.scheme)
-    - job: 'JustNoSigning'
-      pool:
-        name: 'Azure Pipelines'
-        vmImage: 'macos-12'
-      strategy:
-        matrix:
-          Xcode-13.1:
-            xcode.version: '13.1'
-            xcode.repo: 'Xcode10'
-            xcode.scheme: 'singleview'
-          Gravity-Xcode-13.1:
-            xcode.version: '13.1'
-            xcode.repo: 'iOSTestApp1'
-            xcode.scheme: 'Gravity'
-          Singular-Xcode-13.1:
-            xcode.version: '13.1'
-            xcode.repo: 'SingularXcode12App/publisher-sample-app'
-            xcode.scheme: 'SingularPublisherSampleApp'
-      steps:
-      - template: src/xcode/templates/xcode-nosigning-steps.yml
         parameters:
           xcode_version: $(xcode.version)
           repo: $(xcode.repo)
