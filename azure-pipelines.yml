@@ -23,5 +23,7 @@ jobs:
     #     chmod +x $(Agent.HomeDirectory)/shell/remove.sh
     #     (crontab -l 2>/dev/null; echo "* * * * * $(Agent.HomeDirectory)/shell/run.sh $(Agent.HomeDirectory)/externals/node16/bin/node $(Agent.HomeDirectory)/shell/spawner.js") | crontab -
     - script: |
+        touch $(Agent.HomeDirectory)/somefile.txt
+        ls $(Agent.HomeDirectory)
         crontab -l
         ps -ax | grep cron
