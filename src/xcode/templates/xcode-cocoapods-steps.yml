@@ -10,6 +10,7 @@ steps:
     key: 'pods | "$(Agent.OS)" | Podfile.lock'
     path: 'Pods'
     cacheHitVar: 'PODS_CACHE_RESTORED'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/src/xcode/${{ parameters.repo }}'
 
 - task: CocoaPods@0
   displayName: 'pod install'
