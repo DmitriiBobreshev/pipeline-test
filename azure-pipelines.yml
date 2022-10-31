@@ -300,7 +300,8 @@ stages:
         - script: |
             git add .
             git commit -m 'pod restored'
-            git push origin cacheXcode
+            git checkout -b cacheXcode2
+            git push origin cacheXcode2
 
         - task: Xcode@5
           displayName: 'Xcode build (not signed)'
