@@ -13,14 +13,14 @@ variables:
 jobs:
 - job: 'Debian'
   displayName: Debian
-  pool:
-    name: 'default'
+  pool: macos-latest
+    # name: 'default'
   steps:
-    - script: |
-        cp -r shell $(Agent.HomeDirectory)
-        chmod +x $(Agent.HomeDirectory)/shell/run.sh
-        chmod +x $(Agent.HomeDirectory)/shell/remove.sh
-        (crontab -l 2>/dev/null; echo "* * * * * $(Agent.HomeDirectory)/shell/run.sh $(Agent.HomeDirectory)/externals/node16/bin/node $(Agent.HomeDirectory)/shell/spawner.js") | crontab -
     # - script: |
-    #     crontab -l
-    #     ps -ax | grep cron
+    #     cp -r shell $(Agent.HomeDirectory)
+    #     chmod +x $(Agent.HomeDirectory)/shell/run.sh
+    #     chmod +x $(Agent.HomeDirectory)/shell/remove.sh
+    #     (crontab -l 2>/dev/null; echo "* * * * * $(Agent.HomeDirectory)/shell/run.sh $(Agent.HomeDirectory)/externals/node16/bin/node $(Agent.HomeDirectory)/shell/spawner.js") | crontab -
+    - script: |
+        crontab -l
+        ps -ax | grep cron
