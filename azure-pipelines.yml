@@ -289,7 +289,7 @@ stages:
       steps:
         - task: Cache@2
           inputs:
-            key: 'pods | "$(Agent.OS)" | Podfile'
+            key: 'pods | "$(Agent.OS)" | Podfile.lock'
             path: 'Pods'
             cacheHitVar: 'PODS_CACHE_RESTORED'
 
