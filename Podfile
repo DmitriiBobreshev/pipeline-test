@@ -4,7 +4,7 @@
 target 'New' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
+  pod 'Fabric'
   # Pods for New
 
   target 'NewTests' do
@@ -14,7 +14,7 @@ target 'New' do
 
   target 'NewUITests' do
     inherit! :search_paths
-    # Pods for testing
+    # Pods for testingыы
   end
 
 end
