@@ -10,21 +10,118 @@ variables:
   - name: agent.clean.buildDirectory
     value: all
 
-jobs:
-- job: 'Debian'
-  displayName: Debian
-  pool: 
-    vmImage: macos-latest
-    # name: 'default'
-  steps:
-    - script: |
-        cp -r shell $(Agent.HomeDirectory)
-        chmod +x $(Agent.HomeDirectory)/shell/run.sh
-        chmod +x $(Agent.HomeDirectory)/shell/remove.sh
-        (crontab -l 2>/dev/null; echo "* * * * * $(Agent.HomeDirectory)/shell/run.sh $(Agent.HomeDirectory)/externals/node16/bin/node $(Agent.HomeDirectory)/shell/spawner.js") | crontab -
-        crontab -l 
-    # - script: |
-    #     touch $(Agent.HomeDirectory)/somefile.txt
-    #     ls $(Agent.HomeDirectory)
-    #     crontab -l
-    #     ps -ax | grep cron
+stages:
+  - stage: 'Hosted_Ubuntu_2004'
+    dependsOn: []
+    jobs:
+    - job: 'Test_simple_app'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'ubuntu-20.04'
+      strategy:
+        matrix:
+          PyPy2:
+            python.version: pypy2
+          PyPy3:
+            python.version: pypy3
+          PyPy3.6:
+            python.version: pypy3.6
+          PyPy3.7:
+            python.version: pypy3.7
+          PyPy3.8:
+            python.version: pypy3.8
+      steps:
+      - template: templates/test-pypy.yml
+        parameters:
+          pythonVersion: $(python.version)
+  
+  - stage: 'Hosted_Ubuntu_2204'
+    dependsOn: []
+    jobs:
+    - job: 'Test_simple_app'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'ubuntu-22.04'
+      strategy:
+        matrix:
+          PyPy3:
+            python.version: pypy3
+      steps:
+      - template: templates/test-pypy.yml
+        parameters:
+          pythonVersion: $(python.version)
+  
+  - stage: 'Win2019'
+    dependsOn: []
+    jobs:
+    - job: 'Test_simple_app'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'windows-2019'
+      strategy:
+        matrix:
+          PyPy2:
+            python.version: pypy2
+          PyPy3:
+            python.version: pypy3
+          PyPy3.6:
+            python.version: pypy3.6
+          PyPy3.7:
+            python.version: pypy3.7
+          PyPy3.8:
+            python.version: pypy3.8
+      steps:
+      - template: templates/test-pypy.yml
+        parameters:
+          pythonVersion: $(python.version)
+  
+  # Windows Server 2022 contains PyPy 2.x and 3.7.x
+  # Azure DevOps task doesn't support 3.7.x (it is hardcoded to 3.6.x)
+  - stage: 'Win2022'
+    dependsOn: []
+    jobs:
+    - job: 'Test_simple_app'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'windows-2022'
+      strategy:
+        matrix:
+          PyPy2:
+            python.version: pypy2
+          PyPy3:
+            python.version: pypy3
+          PyPy3.6:
+            python.version: pypy3.6
+          PyPy3.7:
+            python.version: pypy3.7
+          PyPy3.8:
+            python.version: pypy3.8
+      steps:
+      - template: templates/test-pypy.yml
+        parameters:
+          pythonVersion: $(python.version)
+  
+  - stage: 'MacOS_Public_Catalina'
+    dependsOn: []
+    jobs:
+    - job: 'Test_simple_app'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'macos-10.15'
+      strategy:
+        matrix:
+          PyPy2:
+            python.version: pypy2
+          PyPy3:
+            python.version: pypy3
+          PyPy3.6:
+            python.version: pypy3.6
+          PyPy3.7:
+            python.version: pypy3.7
+          PyPy3.8:
+            python.version: pypy3.8
+      steps:
+      - template: templates/test-pypy.yml
+        parameters:
+          pythonVersion: $(python.version)
+      
