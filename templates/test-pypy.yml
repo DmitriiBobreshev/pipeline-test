@@ -12,7 +12,7 @@ steps:
         $pyVersion = python -c "import sys; print('pypy{0}.{1}'.format(sys.version_info.major, sys.version_info.minor))"
         echo "$pyVersion"
         if ("$pyVersion" -Match "${{ parameters.pythonVersion }}") {
-          Write-Host 'Pypy3 has been resolved correctly'
+          Write-Host "${{ parameters.pythonVersion }} has been resolved correctly"
         }
         else {
           if ("$pyVersion" -Match "pypy3") {
