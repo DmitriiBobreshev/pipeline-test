@@ -18,8 +18,9 @@ steps:
         else {
           if ("$pyVersion" -Match "pypy3") {
             Write-Host 'Pypy3 has been resolved correctly with default version'
+          } else {
+            throw 'Pypy3 has not been resolved correctly'
           }
-          throw 'Pypy3 has not been resolved correctly'
         }
       } else {
 
