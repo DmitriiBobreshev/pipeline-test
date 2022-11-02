@@ -7,6 +7,8 @@ steps:
   - script: python src/python/python-default/simple_app.py
     displayName: Test PyPy
 
+  - pwsh: pypy --version
+
   - pwsh: |
       if ("${{ parameters.pythonVersion }}" -eq "pypy3") {
         $pyVersion = python -c "import sys; print('pypy{0}{1}'.format(sys.version_info.major, sys.version_info.minor))"
@@ -17,6 +19,6 @@ steps:
           throw 'Pypy3 has not been resolved correctly'
         }
       } else {
-        
+
       }
     displayName: 'Check PyPy3'
