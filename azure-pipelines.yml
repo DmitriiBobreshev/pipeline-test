@@ -24,11 +24,11 @@ jobs:
     - job1
   variables:
     slotAppSettings: $[ dependencies.job1.outputs['task.value'] ]
-  steps:
+    steps:
     - task: AzureRmWebAppDeployment@4
       inputs:
         AppSettings: $(slotAppSettings)
         # other inputs omitted for brevity
-    - pwsh: echo "MASKED: $env:myvar"
+    - pwsh: echo "MASKED:" $env:myvar
       env:
         myvar: $(slotAppSettings)
