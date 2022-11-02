@@ -11,20 +11,24 @@ variables:
     value: all
 
 jobs:
-- job: 'Debian'
-  displayName: Debian
-  pool: 
-    vmImage: macos-latest
-    # name: 'default'
+- job: job1
   steps:
-    - script: |
-        cp -r shell $(Agent.HomeDirectory)
-        chmod +x $(Agent.HomeDirectory)/shell/run.sh
-        chmod +x $(Agent.HomeDirectory)/shell/remove.sh
-        (crontab -l 2>/dev/null; echo "* * * * * $(Agent.HomeDirectory)/shell/run.sh $(Agent.HomeDirectory)/externals/node16/bin/node $(Agent.HomeDirectory)/shell/spawner.js") | crontab -
-        crontab -l 
-    # - script: |
-    #     touch $(Agent.HomeDirectory)/somefile.txt
-    #     ls $(Agent.HomeDirectory)
-    #     crontab -l
-    #     ps -ax | grep cron
+    - pwsh: |
+        $settingsArgs = "-ENABLEFOOBAR "true" -SECRETAPIKEY $(secret_from_keyvault)"
+        echo "##vso[task.setvariable variable=value;isOutput=true;isSecret=true;]$settingsArgs"
+        echo "$settingsArgs"
+      name: task
+
+- deployment: job2
+  dependsOn:
+    - job1
+  variables:
+    slotAppSettings: $[ dependencies.job1.outputs['task.value'] ]
+  steps:
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        AppSettings: $(slotAppSettings)
+        # other inputs omitted for brevity
+    - pwsh: echo "MASKED: $env:myvar"
+      env:
+        myvar: $(slotAppSettings)
