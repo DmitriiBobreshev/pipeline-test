@@ -16,6 +16,9 @@ jobs:
     vmImage: 'windows-latest'
   steps:
     - pwsh: |
+        echo "123123"
+      name: task
+    - pwsh: |
         cd $(Agent.HomeDirectory);
         mkdir test
         dir
