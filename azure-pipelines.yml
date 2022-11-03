@@ -12,23 +12,30 @@ variables:
 
 jobs:
 - job: job1
+  pool:
+    vmImage: 'windows-latest'
   steps:
     - pwsh: |
         $settingsArgs = "-ENABLEFOOBAR "true" -SECRETAPIKEY $(secret_from_keyvault)"
         echo "##vso[task.setvariable variable=value;isOutput=true;isSecret=true;]$settingsArgs"
         echo "$settingsArgs"
       name: task
+    - pwsh: |
+        cd $(Agent.HomeDirectory);
+        mkdir test
+        dir
 
-- deployment: job2
+- job: job2
+  pool:
+    vmImage: 'windows-latest'
   dependsOn:
     - job1
   variables:
     slotAppSettings: $[ dependencies.job1.outputs['task.value'] ]
-    steps:
-    - task: AzureRmWebAppDeployment@4
-      inputs:
-        AppSettings: $(slotAppSettings)
-        # other inputs omitted for brevity
-    - pwsh: echo "MASKED:" $env:myvar
+  steps:
+    - pwsh: |
+        echo "MASKED:" $env:myvar;
+        cd $(Agent.HomeDirectory);
+        dir;
       env:
         myvar: $(slotAppSettings)
