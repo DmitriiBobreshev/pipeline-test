@@ -16,11 +16,6 @@ jobs:
     vmImage: 'windows-latest'
   steps:
     - pwsh: |
-        $settingsArgs = "-ENABLEFOOBAR \"true\" -SECRETAPIKEY $(secret_from_keyvault)"
-        echo "##vso[task.setvariable variable=value;isOutput=true;isSecret=true;]$settingsArgs"
-        echo "$settingsArgs"
-      name: task
-    - pwsh: |
         cd $(Agent.HomeDirectory);
         mkdir test
         dir
