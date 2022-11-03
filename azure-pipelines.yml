@@ -20,6 +20,7 @@ jobs:
       name: task
     - pwsh: |
         cd src/npm;
+        vsts-npm-auth -config .npmrc
         npm install --save-dev
 
 - job: job2
