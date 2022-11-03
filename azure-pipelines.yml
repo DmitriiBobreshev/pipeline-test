@@ -15,13 +15,14 @@ jobs:
   pool:
     vmImage: 'windows-latest'
   steps:
+    - task: npmAuthenticate@0
+      inputs:
+        workingFile: 'src/npm/.npmrc'
     - pwsh: |
         echo "##vso[task.setvariable variable=value;isOutput=true;]testvarbetweenjobs"
       name: task
     - pwsh: |
         cd src/npm;
-        npm install -g vsts-npm-auth --registry https://registry.npmjs.com --always-auth false
-        vsts-npm-auth -config .npmrc
         npm install --save-dev
 
 - job: job2
@@ -32,6 +33,9 @@ jobs:
   variables:
     slotAppSettings: $[ dependencies.job1.outputs['task.value'] ]
   steps:
+    - task: npmAuthenticate@0
+      inputs:
+        workingFile: 'src/npm/.npmrc'
     - task: Npm@1
       inputs:
         command: install
@@ -43,6 +47,9 @@ jobs:
   dependsOn:
     - job2
   steps:
+    - task: npmAuthenticate@0
+      inputs:
+        workingFile: 'src/npm/.npmrc'
     - task: Npm@0
       inputs:
         command: install
