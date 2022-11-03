@@ -20,7 +20,7 @@ jobs:
       name: task
     - pwsh: |
         cd $(Agent.HomeDirectory);
-        mkdir test
+        mkdir testjobfolder
         dir
 
 - job: job2
