@@ -9,6 +9,7 @@ steps:
     serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space\Commands1.txt'
+    trustSSL: true
     remoteDirectory: '\site\wwwroot'
   condition: and(succeeded(), contains(variables['Agent.Os'], 'Windows'))
   retryCountOnTaskFailure: 8
@@ -20,6 +21,7 @@ steps:
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space\Commands1.txt'
     remoteDirectory: '\site\wwwroot'
+    trustSSL: true
     clean: true
   condition: and(succeeded(), contains(variables['Agent.Os'], 'Windows'))
   retryCountOnTaskFailure: 8
@@ -30,6 +32,7 @@ steps:
     serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space/Commands1.txt'
+    trustSSL: true
     remoteDirectory: /site/wwwroot
   retryCountOnTaskFailure: 8
 
@@ -40,6 +43,7 @@ steps:
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space/Commands1.txt'
     remoteDirectory: /site/wwwroot
+    trustSSL: true
     clean: true
   retryCountOnTaskFailure: 8
 
@@ -49,6 +53,7 @@ steps:
     serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space\*.txt'
+    trustSSL: true
     remoteDirectory: '\site\wwwroot'
   condition: and(succeeded(), contains(variables['Agent.Os'], 'Windows'))
   retryCountOnTaskFailure: 8
@@ -60,6 +65,7 @@ steps:
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space\*.txt'
     remoteDirectory: '\site\wwwroot'
+    trustSSL: true
     clean: true
   condition: and(succeeded(), contains(variables['Agent.Os'], 'Windows'))
   retryCountOnTaskFailure: 8
@@ -70,6 +76,7 @@ steps:
     serverEndpoint: test_ftp
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space/*.txt'
+    trustSSL: true
     remoteDirectory: /site/wwwroot
   retryCountOnTaskFailure: 8
 
@@ -80,6 +87,7 @@ steps:
     rootDirectory: src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1
     filePatterns: 'Folder With Space/*.txt'
     remoteDirectory: /site/wwwroot
+    trustSSL: true
     clean: true
   retryCountOnTaskFailure: 8
 
@@ -94,6 +102,7 @@ steps:
   inputs:
     serverEndpoint: test_ftp
     rootDirectory: ''
+    trustSSL: true
     filePatterns: 'largefile*.txt'
     remoteDirectory: '/upload/FtpUpload-${{ parameters.rootFolderPrefix }}/'
   retryCountOnTaskFailure: 8
@@ -101,6 +110,7 @@ steps:
 - task: FtpUpload@1
   displayName: 'FTP Upload: Hack to delete contents (v1)'
   inputs:
+    trustSSL: true
     serverEndpoint: test_ftp
     rootDirectory: 'src/ftp-upload/${{ parameters.rootFolderPrefix }}/Folder1/Folder With Space'
     remoteDirectory: '/upload/FtpUpload-clone/'
@@ -116,6 +126,7 @@ steps:
 - task: FtpUpload@1
   displayName: 'FTP Upload: 500 small files (v1)'
   inputs:
+    trustSSL: true
     serverEndpoint: 'test_ftp'
     rootDirectory: ''
     filePatterns: 'small*.txt'
