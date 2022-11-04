@@ -145,12 +145,12 @@ steps:
 
 - template: create-dummy-files.yml
   parameters:
-    fileCount: 1000
+    fileCount: 20000
     fileName: "small"
     fileSize: 4096
 
 - task: FtpUpload@2
-  displayName: 'FTP Upload: 1000 small files'
+  displayName: 'FTP Upload: 20000 small files'
   inputs:
     serverEndpoint: 'test_ftp'
     rootDirectory: ''
