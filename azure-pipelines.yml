@@ -8,19 +8,19 @@ jobs:
 - job: 'VS2019'
   pool:
     name: default
-    demands:
-      - Agent.Name -equals win-11
+    # demands:
+    #   - Agent.Name -equals win-11
   steps:
   - template: src/ftp-upload/templates/ftp-upload-test.yml
     parameters:
       rootFolderPrefix: vs2019
 
-- job: 'Ubuntu_1804'
-  pool:
-    name: default
-    demands:
-      - Agent.Name -equals debian
-  steps:
-  - template: src/ftp-upload/templates/ftp-upload-test.yml
-    parameters:
-      rootFolderPrefix: ubuntu1804
+# - job: 'Ubuntu_1804'
+#   pool:
+#     name: default
+#     demands:
+#       - Agent.Name -equals debian
+#   steps:
+#   - template: src/ftp-upload/templates/ftp-upload-test.yml
+#     parameters:
+#       rootFolderPrefix: ubuntu1804
