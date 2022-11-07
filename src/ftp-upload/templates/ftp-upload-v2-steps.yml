@@ -145,9 +145,15 @@ steps:
 
 - template: create-dummy-files.yml
   parameters:
-    fileCount: 20000
+    fileCount: 10000
     fileName: "small"
     fileSize: 4096
+
+- template: create-dummy-files.yml
+  parameters:
+    fileCount: 10000
+    fileName: "small"
+    fileSize: 262144
 
 - task: FtpUpload@2
   displayName: 'FTP Upload: 20000 small files'
