@@ -146,7 +146,7 @@ steps:
 - template: create-dummy-files.yml
   parameters:
     fileCount: 10000
-    fileName: "small"
+    fileName: "smalll"
     fileSize: 4096
 
 - template: create-dummy-files.yml
