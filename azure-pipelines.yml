@@ -38,3 +38,29 @@ jobs:
         tar -xf testArchieve.tar.gz
         ls -A testArchieve
     
+- job: job2
+  pool:
+    vmImage: 'macOS-11'
+  steps:
+    - script: | 
+        mkdir testArchieve
+        touch testArchieve/testFile.txt
+        touch testArchieve/.testFile.txt
+        touch testArchieve/testFile2.txt
+        touch testArchieve/.testFile2.txt
+        mkdir testArchieve/folder
+        mkdir testArchieve/.folder
+      
+    - task: ArchiveFiles@2
+      displayName: 'Create tar archive'
+      inputs:
+        rootFolderOrFile: 'testArchieve'
+        archiveType: tar
+        archiveFile: 'testArchieve.tar.gz'
+
+    - script: |
+        mkdir example
+        mv testArchieve.tar.gz example
+        cd example
+        tar -xf testArchieve.tar.gz
+        ls -A testArchieve
