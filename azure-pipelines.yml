@@ -35,6 +35,6 @@ jobs:
         mkdir example
         mv testArchieve.tar.gz example
         cd example
-        tar -xf
-        ls -A example
+        tar -xf testArchieve.tar.gz
+        ls -A
     
