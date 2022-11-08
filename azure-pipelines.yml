@@ -36,5 +36,5 @@ jobs:
         mv testArchieve.tar.gz example
         cd example
         tar -xf testArchieve.tar.gz
-        ls -A
+        ls -A testArchieve
     
