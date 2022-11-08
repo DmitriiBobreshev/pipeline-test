@@ -29,10 +29,10 @@ jobs:
       inputs:
         rootFolderOrFile: 'testArchieve'
         archiveType: tar
-        archiveFile: '$(scheme)-release/$(product_name).tar.gz'
+        archiveFile: 'testArchieve.tar.gz'
 
     - script: |
         mkdir example
-        mv $(scheme)-release/$(product_name).tar.gz example
+        mv testArchieve.tar.gz example
         ls -A example
     
