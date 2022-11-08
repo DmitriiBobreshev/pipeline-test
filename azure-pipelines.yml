@@ -13,44 +13,26 @@ variables:
 jobs:
 - job: job1
   pool:
-    vmImage: 'windows-latest'
+    vmImage: 'macOS-12'
   steps:
-    - task: npmAuthenticate@0
+    - script: | 
+        mkdir testArchieve
+        touch testArchieve/testFile.txt
+        touch testArchieve/.testFile.txt
+        touch testArchieve/testFile2.txt
+        touch testArchieve/.testFile2.txt
+        mkdir testArchieve/folder
+        mkdir testArchieve/.folder
+      
+    - task: ArchiveFiles@2
+      displayName: 'Create tar archive'
       inputs:
-        workingFile: 'src/npm/.npmrc'
-    - pwsh: |
-        echo "##vso[task.setvariable variable=value;isOutput=true;]testvarbetweenjobs"
-      name: task
-    - pwsh: |
-        cd src/npm;
-        npm install --save-dev
+        rootFolderOrFile: 'testArchieve'
+        archiveType: tar
+        archiveFile: '$(scheme)-release/$(product_name).tar.gz'
 
-- job: job2
-  pool:
-    vmImage: 'windows-latest'
-  dependsOn:
-    - job1
-  variables:
-    slotAppSettings: $[ dependencies.job1.outputs['task.value'] ]
-  steps:
-    - task: npmAuthenticate@0
-      inputs:
-        workingFile: 'src/npm/.npmrc'
-    - task: Npm@1
-      inputs:
-        command: install
-        workingDir: src/npm
-
-- job: job3
-  pool:
-    vmImage: 'windows-latest'
-  dependsOn:
-    - job2
-  steps:
-    - task: npmAuthenticate@0
-      inputs:
-        workingFile: 'src/npm/.npmrc'
-    - task: Npm@0
-      inputs:
-        command: install
-        cwd: src/npm
+    - script: |
+        mkdir example
+        mv $(scheme)-release/$(product_name).tar.gz example
+        ls -A example
+    
