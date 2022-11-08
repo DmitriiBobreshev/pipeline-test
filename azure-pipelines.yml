@@ -34,5 +34,7 @@ jobs:
     - script: |
         mkdir example
         mv testArchieve.tar.gz example
+        cd example
+        tar -xf
         ls -A example
     
