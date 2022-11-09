@@ -9,9 +9,8 @@ variables:
     value: all
   - name: agent.clean.buildDirectory
     value: all
-
-trigger:
-- preprod
+  - name: scheme
+    value: test
 
 pool:
   name: Default
@@ -21,7 +20,9 @@ pool:
 steps:
 
 - script: |
-    echo 'Hello World!'
+    mkdir '$(Build.SourcesDirectory)/build/$(scheme)'
+    touch '$(Build.SourcesDirectory)/build/$(scheme)/file.txt'
+    ls -A '$(Build.SourcesDirectory)/build/$(scheme)'
   displayName: 'Hello World!'
 
 # jobs:
