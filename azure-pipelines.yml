@@ -21,6 +21,7 @@ steps:
     mkdir '$(Build.SourcesDirectory)/build'
     mkdir '$(Build.SourcesDirectory)/build/$(scheme)'
     touch '$(Build.SourcesDirectory)/build/$(scheme)/file.txt'
+    touch '$(Build.SourcesDirectory)/build/$(scheme)/.file.txt'
     ls -A '$(Build.SourcesDirectory)/build/$(scheme)'
   displayName: 'Hello World!'
 
