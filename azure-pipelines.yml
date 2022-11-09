@@ -17,16 +17,16 @@ jobs:
   pool:
       vmImage: 'macOS-11'
   steps:
-    - bash: xcode -v 
+    - bash: xcodebuild -version
     - bash: '/bin/bash -c "sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer"'
       displayName: 'Set Xcode 13.1 as default'
-    - bash: xcode -v 
+    - bash: xcodebuild -version 
     
 - job: job2
   pool:
     vmImage: 'macOS-11'
   steps:
-    - bash: xcode -v 
+    - bash: xcodebuild -version 
     - bash: '/bin/bash -c "sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer"'
       displayName: 'Set Xcode 13.1 as default'
-    - bash: xcode -v 
+    - bash: xcodebuild -version 
