@@ -13,9 +13,7 @@ variables:
     value: test
 
 pool:
-  name: Default
-  demands: 
-  - Agent.Name -equals V-BOBRESHEVD
+  vmImage: 'macOS-11'
 
 steps:
 
