@@ -18,6 +18,5 @@ jobs:
       vmImage: 'ubuntu-latest'
   steps:
     - script: |
-        echo '123'
-        exit 1
+        cd /nonExistingDirectory
     - script: echo 'second Step'
