@@ -41,6 +41,7 @@ jobs:
       ${{each item in parameters}}:
           ${{if contains(item.name, '_module')}}:
             $result = "${result}${{item.name}}"
+      echo $result
 
 
 
