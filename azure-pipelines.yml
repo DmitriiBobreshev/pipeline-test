@@ -1,32 +1,4 @@
-
-parameters:
-  - name: applications_module
-    displayName: Applications
-    type: boolean
-    default: 'false'
-    values: ['3','4']
-  - name: management
-    displayName: Management
-    type: boolean
-    default: 'false'
-    values: []
-  - name: It
-    displayName: IT_module
-    type: boolean
-    default: 'false'
-    values: ['1', '2']
-  - name: test
-    type: object
-    default:
-      ${{each item in parameters}}:
-        ${{if contains(item.name, '_module')}}: 
-          item.name
-          
-#  ${{each item in parameters}}:
-#       ${{if contains(item.name, '_module')}}: 
 variables:
-  - name: allValues
-    value: ${{ join(';',parameters.test) }}
   - name: ndkPath
     value: TEST_NDK_PATH
   - name: androidSdkPath
@@ -39,12 +11,11 @@ variables:
     value: all
   - name: scheme
     value: test
-    # here I want to concatenate all the parameters names that have name _module but this statement is throwing an error 
 
-jobs:
-- job: job1
-  pool:
-      vmImage: 'ubuntu-latest'
-  steps:
-    - script: echo '$(allValues)'
+pool:
+  vmImage: 'ubuntu-20'
 
+container: ubuntu:20.04
+
+steps:
+- script: printenv
