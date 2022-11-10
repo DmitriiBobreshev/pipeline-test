@@ -25,7 +25,7 @@ jobs:
 - job: DockerStarted
   pool: 'Default'
   container: ubuntu:18.04
-  dependsOn: WaitForDocker
+  dependsOn: WaitForDocker 
   steps:
   - script: printenv
 
