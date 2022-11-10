@@ -15,6 +15,14 @@ parameters:
     type: boolean
     default: 'false'
     values: ['1', '2']
+  - name: allModules
+    type: string
+    default: ''
+    values:
+      - 
+    ${{each item in parameters}}:
+      ${{if contains(item.name, '_module')}}: 
+      - ${{item.name}}
 
 variables:
   - name: ndkPath
