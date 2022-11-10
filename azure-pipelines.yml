@@ -15,18 +15,9 @@ variables:
 jobs:
 - job: job1
   pool:
-      vmImage: 'macOS-11'
+      vmImage: 'ubuntu-latest'
   steps:
-    - bash: xcodebuild -version
-    - bash: '/bin/bash -c "sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer"'
-      displayName: 'Set Xcode 13.1 as default'
-    - bash: xcodebuild -version 
-    
-- job: job2
-  pool:
-    vmImage: 'macOS-11'
-  steps:
-    - bash: xcodebuild -version 
-    - bash: '/bin/bash -c "sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer"'
-      displayName: 'Set Xcode 13.1 as default'
-    - bash: xcodebuild -version 
+    - script: |
+        echo '123'
+        exit 1
+    - script: echo 'second Step'
