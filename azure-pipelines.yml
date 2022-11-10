@@ -17,6 +17,10 @@ jobs:
   pool:
       vmImage: 'ubuntu-latest'
   steps:
+    - task: CmdLine@2
+      inputs:
+        failOnStderr: false
+        script: cd /nonExistingDirectory
     - script: |
         cd /nonExistingDirectory
       continueOnError: true
