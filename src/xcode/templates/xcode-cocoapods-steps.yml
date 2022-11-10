@@ -16,7 +16,7 @@ steps:
     xcWorkspacePath: '$(System.DefaultWorkingDirectory)/src/xcode/${{ parameters.repo }}/${{ parameters.project_scheme }}.xcworkspace'
     scheme: ${{ parameters.project_scheme }}
     sdk: 'iphoneos'
-    configuration: 'Release'
+    configuration: 'Release PROD'
     packageApp: False
     args: '-archivePath "$(agent.builddirectory)/output/build/archive/New.xcarchive"'
     outputPattern: '$(agent.builddirectory)/output/build'
