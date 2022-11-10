@@ -18,9 +18,10 @@ parameters:
   - name: test
     type: object
     default:
-      - 1
-      - 2
-
+      ${{each item in parameters}}:
+        ${{if contains(item.name, '_module')}}: 
+          item.name
+          
 #  ${{each item in parameters}}:
 #       ${{if contains(item.name, '_module')}}: 
 variables:
@@ -45,5 +46,5 @@ jobs:
   pool:
       vmImage: 'ubuntu-latest'
   steps:
-    - script: echo $(allValues)
+    - script: echo '$(allValues)'
 
