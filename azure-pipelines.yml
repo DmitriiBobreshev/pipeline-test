@@ -12,8 +12,7 @@ variables:
   - name: scheme
     value: test
 
-pool:
-  vmImage: 'ubuntu-latest'
+pool: 'Default'
 
 container: ubuntu:18.04
 
