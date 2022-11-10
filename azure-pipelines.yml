@@ -12,9 +12,24 @@ variables:
   - name: scheme
     value: test
 
-pool: 'Default'
+jobs:
+- job: WaitForDocker
+  pool: 'Default'
+  steps:
+    - checkout: none
+    - bash: |
+        while (! docker stats --no-stream ); do
+          echo "Waiting for Docker to launch..."
+          sleep 1
+        done
+- job: DockerStarted
+  pool: 'Default'
+  container: ubuntu:18.04
+  dependsOn: WaitForDocker
+  steps:
+  - script: printenv
 
-container: ubuntu:18.04
 
-steps:
-- script: printenv
+
+
+
