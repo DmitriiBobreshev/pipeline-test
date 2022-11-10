@@ -19,7 +19,7 @@ parameters:
     type: string
     default: ''
     values:
-      - 
+      - as
     ${{each item in parameters}}:
       ${{if contains(item.name, '_module')}}: 
       - ${{item.name}}
