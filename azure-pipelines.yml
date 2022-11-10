@@ -18,6 +18,6 @@ jobs:
       vmImage: 'ubuntu-latest'
   steps:
     - script: |
-        set -e
         cd /nonExistingDirectory
+      continueOnError: true
     - script: echo 'second Step'
