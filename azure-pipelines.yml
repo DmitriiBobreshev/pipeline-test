@@ -13,9 +13,9 @@ variables:
     value: test
 
 pool:
-  vmImage: 'ubuntu-20'
+  vmImage: 'ubuntu-latest'
 
-container: ubuntu:20.04
+container: ubuntu:18.04
 
 steps:
 - script: printenv
