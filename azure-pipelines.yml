@@ -25,7 +25,7 @@ parameters:
 #       ${{if contains(item.name, '_module')}}: 
 variables:
   - name: allValues
-    value: ${{ join(';',parameters.myArray) }}
+    value: ${{ join(';',parameters.test) }}
   - name: ndkPath
     value: TEST_NDK_PATH
   - name: androidSdkPath
