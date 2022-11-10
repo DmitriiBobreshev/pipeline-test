@@ -282,8 +282,8 @@ stages:
         vmImage: 'macos-12'
       strategy:
         matrix:
-          Xcode-13.1:
-            xcode.version: '13.1'
+          Xcode-14.1:
+            xcode.version: '14.0'
             xcode.repo: 'CocoapodsTestApp'
             xcode.scheme: 'New'
       steps:
