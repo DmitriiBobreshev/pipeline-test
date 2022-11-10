@@ -15,16 +15,17 @@ parameters:
     type: boolean
     default: 'false'
     values: ['1', '2']
-  - name: allModules
-    type: string
-    default: ''
-    values:
-      - as
-    ${{each item in parameters}}:
-      ${{if contains(item.name, '_module')}}: 
-      - ${{item.name}}
+  - name: test
+    type: object
+    default:
+      - 1
+      - 2
 
+#  ${{each item in parameters}}:
+#       ${{if contains(item.name, '_module')}}: 
 variables:
+  - name: allValues
+    value: ${{ join(';',parameters.myArray) }}
   - name: ndkPath
     value: TEST_NDK_PATH
   - name: androidSdkPath
@@ -37,11 +38,7 @@ variables:
     value: all
   - name: scheme
     value: test
-  - name: allValues
-    ${{each item in parameters}}:
-      ${{if contains(item.name, '_module')}}: 
-      value:  ${{ join(';',item.name) }}
-       # here I want to concatenate all the parameters names that have name _module but this statement is throwing an error 
+    # here I want to concatenate all the parameters names that have name _module but this statement is throwing an error 
 
 jobs:
 - job: job1
