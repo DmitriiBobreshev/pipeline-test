@@ -23,7 +23,7 @@ jobs:
         script: |
           cd /nonExistingDirectory
           echo '123'
-    - task: CmdLine@2
+    - task: Bash@3
       inputs:
         failOnStderr: true
         script: |
