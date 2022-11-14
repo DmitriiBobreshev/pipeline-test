@@ -36,12 +36,10 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   steps:
-  - script: |
-      $result = ""
-      ${{each item in parameters}}:
-          ${{if contains(item.name, '_module')}}:
-            $result = "${result}${{item.name}}"
-      echo $result
+  - checkout: self
+    fetchTags: true
+    env: 
+      GIT_TRACE: true
 
 
 
