@@ -40,10 +40,10 @@ jobs:
       git config --global --get-regexp core
       git config --global --get-regexp pack
       
-      git config --global core.packedGitLimit=8m
-      git config --global core.packedGitWindowSize=8m
-      git config --global pack.deltaCacheSize=8m
-      git config --global pack.windowMemory=8m
+      git config --global core.packedGitLimit 8m
+      git config --global core.packedGitWindowSize 8m
+      git config --global pack.deltaCacheSize 8m
+      git config --global pack.windowMemory 8m
 
       git config --global --get-regexp core
       git config --global --get-regexp pack
