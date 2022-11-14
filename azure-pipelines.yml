@@ -46,7 +46,6 @@ jobs:
       git config --global core.packedGitWindowSize=8m
       git config --global pack.deltaCacheSize=8m
       git config --global pack.windowMemory=8m
-      cat .git/config
 
       git config --global --get-regexp core
       git config --global --get-regexp pack
