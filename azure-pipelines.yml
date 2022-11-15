@@ -30,24 +30,33 @@ variables:
     value: test
   - name: allValues
 
+pool: 
+  vmImage: 'ubuntu-latest'
 jobs:
-- job: WaitForDocker
-  pool: 
-    vmImage: 'ubuntu-latest'
-
+- job: job1
   steps:
-  - task: CmdLine@2
-    inputs:
-      failOnStderr: false
-      script: |
-        cd /nonExistingDirectory
-        echo '123'
-  - script: |
-      cd /nonExistingDirectory
-      echo '123'
-    failOnStderr: true
-    # continueOnError: true
-  - script: echo 'second Step'
+    - task: AzureKeyVault@1
+      inputs:
+        azureSubscription: my_azure_sub
+        keyVaultName: my_key_vault
 
+    - pwsh: |
+        $settingsArgs = "-ENABLEFOOBAR "true" -SECRETAPIKEY $(secret_from_keyvault)"
+        echo "##vso[task.setvariable variable=value;isOutput=true;isSecret=true;]$settingsArgs"
+        echo "$settingsArgs" # MASKED
+      name: task
 
+- job: job2
+  dependsOn:
+    - job1
+  variables:
+    slotAppSettings: $[ dependencies.job1.outputs['task.value'] ]
+  steps:
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        AppSettings: $(slotAppSettings) # UNMASKED
+        # other inputs omitted for brevity
 
+    - pwsh: echo 'You can't see the secret here: $env:MYVAR' # MASKED
+      env:
+        MYVAR: $(slotAppSettings)
