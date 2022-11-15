@@ -36,29 +36,18 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   steps:
+  - task: CmdLine@2
+    inputs:
+      failOnStderr: false
+      script: |
+        cd /nonExistingDirectory
+        echo '123'
   - script: |
-      git config --global --get-regexp core
-      git config --global --get-regexp pack
-      
-      git config --global core.packedGitLimit 1024m 
-      git config --global core.packedGitWindowSize 2048m
-      git config --global pack.deltaCacheSize 2047m
-      git config --global pack.windowMemory 4096m
-
-      git config --global --get-regexp core
-      git config --global --get-regexp pack
-      
-
-  - checkout: self
-    fetchTags: true
-    env: 
-      GIT_TRACE: true
-      GIT_TRACE_PACK_ACCESS: true
-      GIT_TRACE_PACKET: true
-      GIT_TRACE_PERFORMANCE: true
-      GIT_TRACE_SETUP: true
-
-
+      cd /nonExistingDirectory
+      echo '123'
+    failOnStderr: true
+    # continueOnError: true
+  - script: echo 'second Step'
 
 
 
