@@ -61,4 +61,4 @@ jobs:
       env:
         MYVAR: $(slotAppSettings)
       inputs:
-        script: echo "You can't see the secret here: $Env:MYVAR" # MASKED
+        script: echo "You can't see the secret here:"; echo $Env:MYVAR # MASKED
