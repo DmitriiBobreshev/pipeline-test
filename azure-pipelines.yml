@@ -57,6 +57,8 @@ jobs:
         AppSettings: $(slotAppSettings) # UNMASKED
         # other inputs omitted for brevity
 
-    - pwsh: echo 'You can't see the secret here: $env:MYVAR' # MASKED
+    - task: PowerShell@2
       env:
         MYVAR: $(slotAppSettings)
+      inputs:
+        script: echo "You can't see the secret here: $Env:MYVAR" # MASKED
