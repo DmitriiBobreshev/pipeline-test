@@ -35,8 +35,6 @@ pool:
 
 stages:
 - stage: A
-  variables:
-    - group: sampleGroup2
   jobs:
   - job: A1
     steps:
@@ -53,8 +51,6 @@ stages:
           echo "$(azureServiceConnectionGroup1)";
 
 - stage: B
-  variables:
-    - group: sampleGroup2
   jobs:
   - job: B1
     steps: 
