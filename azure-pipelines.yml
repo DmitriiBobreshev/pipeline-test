@@ -41,8 +41,8 @@ stages:
   - job: A1
     steps: 
       - script: |
-          echo $(azureServiceConnectionGroup2);
-          echo $(azureServiceConnectionGroup1);
+          echo "$(azureServiceConnectionGroup2)";
+          echo "$(azureServiceConnectionGroup1)";
 
 - stage: B
   variables:
@@ -51,5 +51,5 @@ stages:
   - job: B1
     steps: 
       - script: |
-          echo $(azureServiceConnectionGroup2);
-          echo $(azureServiceConnectionGroup1);
+          echo "$(azureServiceConnectionGroup2)";
+          echo "$(azureServiceConnectionGroup1)";
