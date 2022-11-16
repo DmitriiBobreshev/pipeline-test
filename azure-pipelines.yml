@@ -31,7 +31,7 @@ variables:
   - name: allValues
 
 pool: 
-  vmImage: 'ubuntu-latest'
+  name: 'default'
 jobs:
 - job: job1
   steps:
