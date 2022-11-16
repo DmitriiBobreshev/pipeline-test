@@ -31,7 +31,7 @@ variables:
   - name: allValues
 
 pool: 
-  name: 'default'
+  vmImage: 'ubuntu-latest'
 
 stages:
 - stage: A
