@@ -33,27 +33,32 @@ variables:
 pool: 
   vmImage: 'ubuntu-latest'
 
-# stages:
-# - stage: A
-jobs:
-- job: A1
-  steps:
-    - task: AzureCLI@2
-      displayName: Azure Bicep
-      inputs:
-        azureSubscription: $(azureServiceConnectionGroup2)
-        scriptType: bash
-        scriptLocation: inlineScript
-        inlineScript: |
-          echo test
-    - script: |
-        echo "$(azureServiceConnectionGroup2)";
-        echo "$(azureServiceConnectionGroup1)";
+stages:
+- stage: A
+  variables:
+    - group: sampleGroup1
+    - group: sampleGroup2
+  jobs:
+  - job: A1
+    steps:
+      - task: AzureCLI@2
+        displayName: Azure Bicep
+        inputs:
+          azureSubscription: $(azureServiceConnectionGroup2)
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            echo test
+      - script: |
+          echo "$(azureServiceConnectionGroup2)";
+          echo "$(azureServiceConnectionGroup1)";
 
-# - stage: B
-#   jobs:
-- job: B1
-  steps: 
-    - script: |
-        echo "$(azureServiceConnectionGroup2)";
-        echo "$(azureServiceConnectionGroup1)";
+- stage: B
+  variables:
+    - group: sampleGroup2
+  jobs:
+  - job: B1
+    steps: 
+      - script: |
+          echo "$(azureServiceConnectionGroup2)";
+          echo "$(azureServiceConnectionGroup1)";
