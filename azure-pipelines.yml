@@ -32,19 +32,24 @@ variables:
 
 pool: 
   name: 'default'
-jobs:
-- job: job1
-  steps:
-    - pwsh: |
-        $settingsArgs = "-ENABLEFOOBAR true -SECRETAPIKEY $(secret_from_keyvault)"
-        echo "##vso[task.setvariable variable=value;isOutput=true;isSecret=true;]$settingsArgs"
-        echo "$settingsArgs" # MASKED 
-      name: task
-    - task: AzureCLI@2
-      displayName: Azure Bicep
-      inputs:
-        azureSubscription: $(azureServiceConnection)
-        scriptType: bash
-        scriptLocation: inlineScript
-        inlineScript: |
-          echo test
+
+stages:
+- stage: A
+  variables:
+    - group: sampleGroup1
+  jobs:
+  - job: A1
+    steps: 
+      - script: |
+          echo $(azureServiceConnectionGroup2);
+          echo $(azureServiceConnectionGroup1);
+
+- stage: B
+  variables:
+    - group: sampleGroup2
+  jobs:
+  - job: B1
+    steps: 
+      - script: |
+          echo $(azureServiceConnectionGroup2);
+          echo $(azureServiceConnectionGroup1);
