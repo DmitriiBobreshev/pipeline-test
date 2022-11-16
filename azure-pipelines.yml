@@ -41,10 +41,10 @@ jobs:
         echo "$settingsArgs" # MASKED
       name: task
     - task: AzureCLI@2
-  displayName: Azure Bicep
-  inputs:
-    azureSubscription: $(azureServiceConnection)
-    scriptType: bash
-    scriptLocation: inlineScript
-    inlineScript: |
-      echo test
+      displayName: Azure Bicep
+      inputs:
+        azureSubscription: $(azureServiceConnection)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          echo test
