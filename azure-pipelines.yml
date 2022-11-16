@@ -37,7 +37,6 @@ stages:
 - stage: A
   variables:
     - group: sampleGroup1
-    - group: sampleGroup2
   jobs:
   - job: A1
     steps:
