@@ -40,14 +40,6 @@ stages:
   jobs:
   - job: A1
     steps:
-      - task: AzureCLI@2
-        displayName: Azure Bicep
-        inputs:
-          azureSubscription: $(azureServiceConnectionGroup2)
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: |
-            echo test
       - script: |
           echo "$(azureServiceConnectionGroup2)";
           echo "$(azureServiceConnectionGroup1)";
