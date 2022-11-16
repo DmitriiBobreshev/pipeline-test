@@ -33,8 +33,8 @@ variables:
 pool: 
   vmImage: 'ubuntu-latest'
 
-stages:
-- stage: A
+# stages:
+# - stage: A
   jobs:
   - job: A1
     steps:
@@ -50,8 +50,8 @@ stages:
           echo "$(azureServiceConnectionGroup2)";
           echo "$(azureServiceConnectionGroup1)";
 
-- stage: B
-  jobs:
+# - stage: B
+#   jobs:
   - job: B1
     steps: 
       - script: |
