@@ -2,7 +2,7 @@ steps:
 - bash: |
     mkdir test
     cd test
-    echo "FROM ubuntu:18.04" > Dockerfile
+    echo "FROM alpine" > Dockerfile
     echo "CMD ['ls']" >> Dockerfile
     docker build -t test1 .
     DOCKER_BUILDKIT=1 docker build -t test .
@@ -10,7 +10,7 @@ steps:
   displayName: 'Run an image'
   inputs:
     command: 'Run an image'
-    imageName: ubuntu:18.04
+    imageName: alpine
     qualifyImageName: false
     containerName: test
     containerCommand: 'sleep 60'

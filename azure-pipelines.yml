@@ -31,20 +31,6 @@ variables:
   - name: allValues
 
 jobs:
-  - job: 'Win2019'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2019'
-    steps:
-      - template: src/docker/templates/docker-test.yml
-  
-  - job: 'Win2022'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2022'
-    steps:
-      - template: src/docker/templates/docker-test.yml
-  
   - job: 'Ubuntu_1804'
     pool:
       name: 'Azure Pipelines'
@@ -63,26 +49,5 @@ jobs:
     pool:
       name: 'Azure Pipelines'
       vmImage: 'ubuntu-22.04'
-    steps:
-      - template: src/docker/templates/docker-test.yml
-  
-  - job: 'MacOS_Public_Catalina'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'macos-10.15'
-    steps:
-      - template: src/docker/templates/docker-test.yml
-  
-  - job: 'MacOS_Public_BigSur'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'macos-11'
-    steps:
-      - template: src/docker/templates/docker-test.yml
-  
-  - job: 'MacOS_Public_Monterey'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'macos-12'
     steps:
       - template: src/docker/templates/docker-test.yml
