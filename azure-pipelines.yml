@@ -31,23 +31,58 @@ variables:
   - name: allValues
 
 jobs:
-- job: WaitForDocker
-  pool: 
-    vmImage: 'ubuntu-latest'
-
-  steps:
-  - task: CmdLine@2
-    inputs:
-      failOnStderr: false
-      script: |
-        cd /nonExistingDirectory
-        echo '123'
-  - script: |
-      cd /nonExistingDirectory
-      echo '123'
-    failOnStderr: true
-    # continueOnError: true
-  - script: echo 'second Step'
-
-
-
+  - job: 'Win2019'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2019'
+    steps:
+      - template: src/docker/templates/docker-test.yml
+  
+  - job: 'Win2022'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2022'
+    steps:
+      - template: src/docker/templates/docker-test.yml
+  
+  - job: 'Ubuntu_1804'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-18.04'
+    steps:
+      - template: src/docker/templates/docker-test.yml
+  
+  - job: 'Ubuntu_2004'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-20.04'
+    steps:
+      - template: src/docker/templates/docker-test.yml
+  
+  - job: 'Ubuntu_2204'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: src/docker/templates/docker-test.yml
+  
+  - job: 'MacOS_Public_Catalina'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'macos-10.15'
+    steps:
+      - template: src/docker/templates/docker-test.yml
+  
+  - job: 'MacOS_Public_BigSur'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'macos-11'
+    steps:
+      - template: src/docker/templates/docker-test.yml
+  
+  - job: 'MacOS_Public_Monterey'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'macos-12'
+    steps:
+      - template: src/docker/templates/docker-test.yml

@@ -1,0 +1,17 @@
+steps:
+- bash: |
+    mkdir test
+    cd test
+    echo "FROM alpine" > Dockerfile
+    echo "CMD ['ls']" >> Dockerfile
+    docker build -t test1 .
+    DOCKER_BUILDKIT=1 docker build -t test .
+- task: Docker@1
+  displayName: 'Run an image'
+  inputs:
+    command: 'Run an image'
+    imageName: alpine
+    qualifyImageName: false
+    containerName: test
+    containerCommand: 'sleep 60'
+- bash: 'docker ps | sed -n 2p | awk ''{print $1}'' | xargs docker kill'
