@@ -3,7 +3,7 @@ steps:
     mkdir test
     cd test
     echo "FROM alpine" > Dockerfile
-    echo "CMD ['echo 123;']" >> Dockerfile
+    echo "RUN echo $(ls -1 /tmp/dir)" >> Dockerfile
     docker build -t test1 .
     DOCKER_BUILDKIT=1 docker build -t test .
 
