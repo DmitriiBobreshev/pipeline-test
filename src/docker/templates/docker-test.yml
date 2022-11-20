@@ -10,7 +10,8 @@ steps:
   displayName: 'Run an image'
   inputs:
     command: 'start'
+    repository: alpine
     imageName: alpine
     qualifyImageName: false
-    containerName: test
+    container: test
     containerCommand: 'sleep 60'
