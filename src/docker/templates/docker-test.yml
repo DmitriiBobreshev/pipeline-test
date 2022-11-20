@@ -9,7 +9,7 @@ steps:
 - task: Docker@2
   displayName: 'Run an image'
   inputs:
-    command: 'start'
+    command: 'run'
     repository: alpine
     imageName: alpine
     qualifyImageName: false
