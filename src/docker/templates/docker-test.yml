@@ -6,10 +6,10 @@ steps:
     echo "CMD ['ls']" >> Dockerfile
     docker build -t test1 .
     DOCKER_BUILDKIT=1 docker build -t test .
-- task: Docker@0
+- task: Docker@2
   displayName: 'Run an image'
   inputs:
-    command: 'Run an image'
+    command: 'start'
     imageName: alpine
     qualifyImageName: false
     containerName: test
