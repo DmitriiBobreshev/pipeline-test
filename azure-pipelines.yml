@@ -29,6 +29,8 @@ variables:
   - name: scheme
     value: test
   - name: allValues
+  - name: AGENT_USE_NODE10
+    value: true
 
 jobs:
   - job: 'Ubuntu_1804'
