@@ -14,4 +14,3 @@ steps:
     qualifyImageName: false
     containerName: test
     containerCommand: 'sleep 60'
-- bash: 'docker ps | sed -n 2p | awk ''{print $1}'' | xargs docker kill'
