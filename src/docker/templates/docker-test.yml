@@ -20,6 +20,6 @@ steps:
   displayName: 'Run an image'
   inputs:
     command: 'run'
-    arguments: '--name test'
+    arguments: 'test'
     Dockerfile: '**/Dockerfile'
     imageName: alpine
