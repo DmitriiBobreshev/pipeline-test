@@ -25,18 +25,18 @@ stages:
   jobs:
   - template: src/install-apple-certificate/templates/install-apple-certificate-steps.yml
 
-- stage: 'MacOS_Public_BigSur'
-  dependsOn: []
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-11'
-  jobs:
-  - template: src/install-apple-certificate/templates/install-apple-certificate-steps.yml
+# - stage: 'MacOS_Public_BigSur'
+#   dependsOn: []
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'macos-11'
+#   jobs:
+#   - template: src/install-apple-certificate/templates/install-apple-certificate-steps.yml
 
-- stage: 'MacOS_Public_Monterey'
-  dependsOn: []
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-12'
-  jobs:
-  - template: src/install-apple-certificate/templates/install-apple-certificate-steps.yml
+# - stage: 'MacOS_Public_Monterey'
+#   dependsOn: []
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'macos-12'
+#   jobs:
+#   - template: src/install-apple-certificate/templates/install-apple-certificate-steps.yml

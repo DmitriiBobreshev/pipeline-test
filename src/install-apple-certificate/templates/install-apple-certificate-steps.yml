@@ -1,83 +1,83 @@
 jobs:
-- job:
-  displayName: 'Install temporary keychain certificate'
-  steps:
-  - task: InstallAppleCertificate@2
-    inputs:
-      certSecureFile: $(certificateFileName)
-      certPwd: $(certificatePassword)
-      keychain: temp
-    retryCountOnTaskFailure: 3
-  - task: Bash@3
-    inputs:
-      filePath: src/install-apple-certificate/detectInstalledCertificate.sh
-      failOnStderr: true
+# - job:
+#   displayName: 'Install temporary keychain certificate'
+#   steps:
+#   - task: InstallAppleCertificate@2
+#     inputs:
+#       certSecureFile: $(certificateFileName)
+#       certPwd: $(certificatePassword)
+#       keychain: temp
+#     retryCountOnTaskFailure: 3
+#   - task: Bash@3
+#     inputs:
+#       filePath: src/install-apple-certificate/detectInstalledCertificate.sh
+#       failOnStderr: true
 
-- job:
-  displayName: 'Install temporary keychain certificate with keychain password'
-  steps:
-  - task: InstallAppleCertificate@2
-    inputs:
-      certSecureFile: $(certificateFileName)
-      certPwd: $(certificatePassword)
-      keychain: temp
-      keychainPassword: $(keychainPassword)
-    retryCountOnTaskFailure: 3
-  - task: Bash@3
-    inputs:
-      filePath: src/install-apple-certificate/detectInstalledCertificate.sh
-      failOnStderr: true
+# - job:
+#   displayName: 'Install temporary keychain certificate with keychain password'
+#   steps:
+#   - task: InstallAppleCertificate@2
+#     inputs:
+#       certSecureFile: $(certificateFileName)
+#       certPwd: $(certificatePassword)
+#       keychain: temp
+#       keychainPassword: $(keychainPassword)
+#     retryCountOnTaskFailure: 3
+#   - task: Bash@3
+#     inputs:
+#       filePath: src/install-apple-certificate/detectInstalledCertificate.sh
+#       failOnStderr: true
 
-- job:
-  displayName: 'Install custom keychain certificate'
-  steps:
-  - task: InstallAppleCertificate@2
-    inputs:
-      certSecureFile: $(certificateFileName)
-      certPwd: $(certificatePassword)
-      keychain: custom
-      keychainPassword: $(keychainPassword)
-      customKeychainPath: 'keychain1/'
-    retryCountOnTaskFailure: 3
-  - task: Bash@3
-    inputs:
-      filePath: src/install-apple-certificate/detectInstalledCertificate.sh
-      failOnStderr: true
+# - job:
+#   displayName: 'Install custom keychain certificate'
+#   steps:
+#   - task: InstallAppleCertificate@2
+#     inputs:
+#       certSecureFile: $(certificateFileName)
+#       certPwd: $(certificatePassword)
+#       keychain: custom
+#       keychainPassword: $(keychainPassword)
+#       customKeychainPath: 'keychain1/'
+#     retryCountOnTaskFailure: 3
+#   - task: Bash@3
+#     inputs:
+#       filePath: src/install-apple-certificate/detectInstalledCertificate.sh
+#       failOnStderr: true
 
-- job:
-  displayName: 'Install custom keychain certificate; delete certificate after'
-  steps:
-  - task: InstallAppleCertificate@2
-    inputs:
-      certSecureFile: $(certificateFileName)
-      certPwd: $(certificatePassword)
-      keychain: custom
-      keychainPassword: $(keychainPassword)
-      customKeychainPath: 'keychain2/'
-      deleteCert: true
-    retryCountOnTaskFailure: 3
-  - task: Bash@3
-    inputs:
-      filePath: src/install-apple-certificate/detectInstalledCertificate.sh
-      failOnStderr: true
+# - job:
+#   displayName: 'Install custom keychain certificate; delete certificate after'
+#   steps:
+#   - task: InstallAppleCertificate@2
+#     inputs:
+#       certSecureFile: $(certificateFileName)
+#       certPwd: $(certificatePassword)
+#       keychain: custom
+#       keychainPassword: $(keychainPassword)
+#       customKeychainPath: 'keychain2/'
+#       deleteCert: true
+#     retryCountOnTaskFailure: 3
+#   - task: Bash@3
+#     inputs:
+#       filePath: src/install-apple-certificate/detectInstalledCertificate.sh
+#       failOnStderr: true
 
-- job:
-  displayName: 'Install custom keychain certificate; delete certificate and keychain after'
-  steps:
-  - task: InstallAppleCertificate@2
-    inputs:
-      certSecureFile: $(certificateFileName)
-      certPwd: $(certificatePassword)
-      keychain: custom
-      keychainPassword: $(keychainPassword)
-      customKeychainPath: 'keychain3/'
-      deleteCert: true
-      deleteCustomKeychain: true
-    retryCountOnTaskFailure: 3
-  - task: Bash@3
-    inputs:
-      filePath: src/install-apple-certificate/detectInstalledCertificate.sh
-      failOnStderr: true
+# - job:
+#   displayName: 'Install custom keychain certificate; delete certificate and keychain after'
+#   steps:
+#   - task: InstallAppleCertificate@2
+#     inputs:
+#       certSecureFile: $(certificateFileName)
+#       certPwd: $(certificatePassword)
+#       keychain: custom
+#       keychainPassword: $(keychainPassword)
+#       customKeychainPath: 'keychain3/'
+#       deleteCert: true
+#       deleteCustomKeychain: true
+#     retryCountOnTaskFailure: 3
+#   - task: Bash@3
+#     inputs:
+#       filePath: src/install-apple-certificate/detectInstalledCertificate.sh
+#       failOnStderr: true
 
 - job:
   displayName: 'Install custom keychain certificate with signing identity'
@@ -95,3 +95,4 @@ jobs:
     inputs:
       filePath: src/install-apple-certificate/detectInstalledCertificate.sh
       failOnStderr: true
+  - script: security delete-certificate -Z ${{APPLE_CERTIFICATE_SHA1HASH}} ${{APPLE_CERTIFICATE_KEYCHAIN}}
