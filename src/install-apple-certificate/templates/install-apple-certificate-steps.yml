@@ -95,4 +95,5 @@ jobs:
     inputs:
       filePath: src/install-apple-certificate/detectInstalledCertificate.sh
       failOnStderr: true
+  - script: echo $(APPLE_CERTIFICATE_SHA1HASH)
   - script: security delete-certificate -Z $(APPLE_CERTIFICATE_SHA1HASH) $(APPLE_CERTIFICATE_KEYCHAIN)
