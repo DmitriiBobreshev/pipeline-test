@@ -91,6 +91,7 @@ jobs:
       keychainPassword: $(keychainPassword)
       customKeychainPath: 'keychain4/'
       signingIdentity: 'Some signing identity'
+      deleteCustomKeychain: true
     retryCountOnTaskFailure: 3
   - task: Bash@3
     inputs:
