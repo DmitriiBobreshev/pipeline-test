@@ -83,6 +83,7 @@ jobs:
   displayName: 'Install custom keychain certificate with signing identity'
   steps:
   - task: InstallAppleCertificate@2
+    name: setOutput
     inputs:
       certSecureFile: $(certificateFileName)
       certPwd: $(certificatePassword)
@@ -95,5 +96,5 @@ jobs:
     inputs:
       filePath: src/install-apple-certificate/detectInstalledCertificate.sh
       failOnStderr: true
-  - script: echo $(APPLE_CERTIFICATE_SHA1HASH)
-  - script: security delete-certificate -Z $(APPLE_CERTIFICATE_SHA1HASH) $(APPLE_CERTIFICATE_KEYCHAIN)
+  - script: echo $(setOutput.APPLE_CERTIFICATE_SHA1HASH)
+  - script: security delete-certificate -Z $(setOutput.APPLE_CERTIFICATE_SHA1HASH) $(setOutput.APPLE_CERTIFICATE_KEYCHAIN)
