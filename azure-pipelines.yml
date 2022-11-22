@@ -39,7 +39,7 @@ jobs:
     - task: FileTransform@2
       inputs:
         folderPath: '$(System.DefaultWorkingDirectory)/src/filetransform/test' # string. Required. Package or folder. Default: $(System.DefaultWorkingDirectory)/**/*.zip.
-        xmlTransformationRules: '-transform **\*.rules -xml **\*.config' # string. XML Transformation rules. Default: -transform **\*.Release.config -xml **\*.config.
+        xmlTransformationRules: '-transform **\*rules.xml -xml **\*.xml' # string. XML Transformation rules. Default: -transform **\*.Release.config -xml **\*.config.
       # Variable Substitution
         #jsonTargetFiles: # string. JSON target files. 
         xmlTargetFiles: '*.xml'
