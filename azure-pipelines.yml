@@ -33,7 +33,7 @@ variables:
 jobs:
 - job: WaitForDocker
   pool: 
-    vmImage: 'ubuntu-latest'
+    vmImage: 'windows-latest'
 
   steps:
     - task: FileTransform@2
