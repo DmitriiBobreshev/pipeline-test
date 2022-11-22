@@ -30,26 +30,16 @@ variables:
     value: test
   - name: allValues
 
-pool: 
-  vmImage: 'ubuntu-latest'
+jobs:
+- job: WaitForDocker
+  pool: 
+    vmImage: 'ubuntu-latest'
 
-stages:
-- stage: A
-  variables:
-    - group: sampleGroup1
-  jobs:
-  - job: A1
-    steps:
-      - script: |
-          echo "$(azureServiceConnectionGroup2)";
-          echo "$(azureServiceConnectionGroup1)";
-
-- stage: B
-  variables:
-    - group: sampleGroup2
-  jobs:
-  - job: B1
-    steps: 
-      - script: |
-          echo "$(azureServiceConnectionGroup2)";
-          echo "$(azureServiceConnectionGroup1)";
+  steps:
+    - task: FileTransform@2
+      inputs:
+        folderPath: '$(System.DefaultWorkingDirectory)/src/filetransform/*.zip' # string. Required. Package or folder. Default: $(System.DefaultWorkingDirectory)/**/*.zip.
+        xmlTransformationRules: '-transform **\*.confix -xml **\*.config' # string. XML Transformation rules. Default: -transform **\*.Release.config -xml **\*.config.
+      # Variable Substitution
+        #jsonTargetFiles: # string. JSON target files. 
+        xmlTargetFiles: 'confix.xml'
