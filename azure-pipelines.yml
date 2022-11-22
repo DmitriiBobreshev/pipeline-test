@@ -38,8 +38,8 @@ jobs:
   steps:
     - task: FileTransform@2
       inputs:
-        folderPath: '$(System.DefaultWorkingDirectory)/src/filetransform/*.zip' # string. Required. Package or folder. Default: $(System.DefaultWorkingDirectory)/**/*.zip.
-        xmlTransformationRules: '-transform **\*.confix -xml **\*.config' # string. XML Transformation rules. Default: -transform **\*.Release.config -xml **\*.config.
+        folderPath: '$(System.DefaultWorkingDirectory)/src/filetransform/test' # string. Required. Package or folder. Default: $(System.DefaultWorkingDirectory)/**/*.zip.
+        xmlTransformationRules: '-transform **\*.rules -xml **\*.config' # string. XML Transformation rules. Default: -transform **\*.Release.config -xml **\*.config.
       # Variable Substitution
         #jsonTargetFiles: # string. JSON target files. 
-        xmlTargetFiles: 'confix.xml'
+        xmlTargetFiles: '*.xml'
