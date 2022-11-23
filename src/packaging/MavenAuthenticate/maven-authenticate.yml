@@ -1,4 +1,3 @@
-name: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)00'
 
 jobs:
 - job: 'ubuntu2004'
