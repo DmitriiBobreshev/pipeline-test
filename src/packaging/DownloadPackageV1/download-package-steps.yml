@@ -1,0 +1,40 @@
+steps:
+- task: DownloadPackage@1
+  inputs:
+    packageType: 'nuget'
+    feed: '/8db8a026-e3ba-47e9-8c8e-64cee22479ad'
+    view: '41f6c528-acd2-4524-857c-1bcdb72e3649'
+    definition: '9a148856-2795-46fb-8288-386ab3d93b04'
+    version: '9.0.1'
+    extract: true
+    downloadPath: '$(System.ArtifactsDirectory)/nuget'
+
+- task: DownloadPackage@1
+  inputs:
+    packageType: 'pypi'
+    feed: '/8db8a026-e3ba-47e9-8c8e-64cee22479ad'
+    view: '41f6c528-acd2-4524-857c-1bcdb72e3649'
+    definition: 'cd206a40-32be-4d24-af69-3db023e9cf83'
+    version: '0.1'
+    downloadPath: '$(System.ArtifactsDirectory)/pip'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Checking nuget packages"
+      if ((ls $(System.ArtifactsDirectory)/nuget).Count -ne 6) {
+        Write-Host "Expecting 6 NewtonSoft files."  
+        exit 1 
+      }
+
+      Write-Host "Checking pypi packages"
+      if ((ls $(System.ArtifactsDirectory)/pip).Count -ne 1) {
+        Write-Host "Expecting 1 python file."  
+        exit 1 
+      }
+      if ((ls $(System.ArtifactsDirectory)/pip/duiker-0.1.0-py3-none-any.whl).Length -ne 53) {
+        Write-Host "Incorrect python file size."  
+        exit 1 
+      }
+  displayName: 'Verify package is of the correct size'

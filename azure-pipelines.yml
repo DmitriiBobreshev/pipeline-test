@@ -31,15 +31,4 @@ variables:
   - name: allValues
 
 jobs:
-- job: WaitForDocker
-  pool: 
-    vmImage: 'windows-latest'
-
-  steps:
-    - task: FileTransform@2
-      inputs:
-        folderPath: '$(System.DefaultWorkingDirectory)/src/filetransform/test' # string. Required. Package or folder. Default: $(System.DefaultWorkingDirectory)/**/*.zip.
-        xmlTransformationRules: '-transform **\*rules.xml -xml **\*confix.xml' # string. XML Transformation rules. Default: -transform **\*.Release.config -xml **\*.config.
-      # Variable Substitution
-        #jsonTargetFiles: # string. JSON target files. 
-        xmlTargetFiles: '*.xml'
+- template: src\packaging\MavenAuthenticate\maven-authenticate.yml

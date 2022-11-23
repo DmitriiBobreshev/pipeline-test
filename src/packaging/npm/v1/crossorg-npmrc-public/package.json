@@ -1,0 +1,7 @@
+{
+    "name": "testpackage",
+    "version": "1.0.0",
+    "dependencies": {
+      "publiccanary-crossorg-npmrc-public": "1.0.0"
+    }
+}

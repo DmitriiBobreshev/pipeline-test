@@ -1,0 +1,127 @@
+steps:
+- task: Npm@1
+  displayName: 'npm install test dependencies from npmjs.org'
+  inputs:
+    workingDir: 'src/packaging/npm'
+
+## INSTALL TESTS
+# sameorg-npmrc
+- task: Npm@1
+  displayName: 'npm install, same organization (BuildCanary), PipelineCanary feed from npmrc'
+  inputs:
+    workingDir: 'src/packaging/npm/v1/sameorg-npmrc'
+
+- task: Gulp@0
+  displayName: Verify pipelinecanary-sameorg-npmrc installed
+  inputs:
+    gulpjs: 'src/packaging/npm/node_modules/gulp/bin/gulp.js'
+    gulpFile: 'src/packaging/npm/gulpfile.js'
+    targets: 'verify-file-exists'
+    arguments: '--path "v1/sameorg-npmrc/node_modules/pipelinecanary-sameorg-npmrc/package.json"'
+
+# sameorg-customfeed
+- task: Npm@1
+  displayName: 'npm install, same organization (BuildCanary), PipelineCanary customFeed'
+  inputs:
+    workingDir: 'src/packaging/npm/v1/sameorg-customfeed'
+    customRegistry: useFeed
+    customFeed: 'eb10a898-78c1-45c0-9fc1-eb12cbcfb020' # PipelineCanary feed
+
+- task: Gulp@0
+  displayName: Verify pipelinecanary-sameorg-customfeed installed
+  inputs:
+    gulpjs: 'src/packaging/npm/node_modules/gulp/bin/gulp.js'
+    gulpFile: 'src/packaging/npm/gulpfile.js'
+    targets: 'verify-file-exists'
+    arguments: '--path "v1/sameorg-customfeed/node_modules/pipelinecanary-sameorg-customfeed/package.json"'
+
+- task: Npm@1
+  displayName: 'npm install, same organization (BuildCanary), PublicCanary customFeed'
+  inputs:
+    workingDir: 'src/packaging/npm/v1/sameorg-customfeed-public'
+    customRegistry: useFeed
+    customFeed: '890e2d2f-ff6f-45db-98a0-28c25c1f2a66/44766bfd-d353-4ba2-b9a0-1108638e1fb1' # PublicCanary feed
+
+- task: Gulp@0
+  displayName: Verify publiccanary-sameorg-customfeed-public installed
+  inputs:
+    gulpjs: 'src/packaging/npm/node_modules/gulp/bin/gulp.js'
+    gulpFile: 'src/packaging/npm/gulpfile.js'
+    targets: 'verify-file-exists'
+    arguments: '--path "v1/sameorg-customfeed-public/node_modules/publiccanary-sameorg-customfeed-public/package.json"'
+
+# sameorg-overridenpmrc
+- task: Npm@1
+  displayName: 'npm install, same organization (BuildCanary), PipelineCanary customFeed overrides npmrc'
+  inputs:
+    workingDir: 'src/packaging/npm/v1/sameorg-overridenpmrc'
+    customRegistry: useFeed
+    customFeed: 'eb10a898-78c1-45c0-9fc1-eb12cbcfb020' # PipelineCanary feed
+
+- task: Gulp@0
+  displayName: Verify pipelinecanary-sameorg-overridenpmrc installed
+  inputs:
+    gulpjs: 'src/packaging/npm/node_modules/gulp/bin/gulp.js'
+    gulpFile: 'src/packaging/npm/gulpfile.js'
+    targets: 'verify-file-exists'
+    arguments: '--path "v1/sameorg-overridenpmrc/node_modules/pipelinecanary-sameorg-overridenpmrc/package.json"'
+
+# crossorg-npmrc-public, no auth
+- task: Npm@1
+  displayName: 'npm install, cross organization (CodeSharing-SU0), PipelineCanary feed from npmrc'
+  inputs:
+    workingDir: 'src/packaging/npm/v1/crossorg-npmrc-public'
+
+- task: Gulp@0
+  displayName: Verify publiccanary-crossorg-npmrc-public installed
+  inputs:
+    gulpjs: 'src/packaging/npm/node_modules/gulp/bin/gulp.js'
+    gulpFile: 'src/packaging/npm/gulpfile.js'
+    targets: 'verify-file-exists'
+    arguments: '--path "v1/crossorg-npmrc-public/node_modules/publiccanary-crossorg-npmrc-public/package.json"'
+
+## PUBLISH TESTS
+- task: Npm@1
+  displayName: 'npm version package'
+  inputs:
+    command: custom
+    workingDir: 'src/packaging/npm/v1/publish'
+    customCommand: 'version 1.0.0-canary-$(Build.BuildId)-$(System.JobId) -m "this comment should be parsed correctly and sent to npm without any double quote issues..."'
+
+- task: Npm@1
+  displayName: 'npm publish, same organization (BuildCanary), PipelineCanary feed'
+  inputs:
+    command: publish
+    workingDir: 'src/packaging/npm/v1/publish'
+    publishRegistry: useFeed
+    publishFeed: 'eb10a898-78c1-45c0-9fc1-eb12cbcfb020' # PipelineCanary feed
+
+- task: Npm@1
+  displayName: 'npm publish, same org, PublicCanary feed'
+  inputs:
+    command: publish
+    workingDir: 'src/packaging/npm/v1/publish'
+    publishRegistry: useFeed
+    publishFeed: '890e2d2f-ff6f-45db-98a0-28c25c1f2a66/44766bfd-d353-4ba2-b9a0-1108638e1fb1' # PublicCanary feed
+
+- task: Npm@1
+  displayName: 'npm publish, cross organization (CodeSharing-SU0), PAT'
+  inputs:
+    command: publish
+    workingDir: 'src/packaging/npm/v1/publish'
+    publishEndpoint: 'Canary@codesharing-su0 (VSTS)'
+
+- task: Npm@1
+  displayName: 'npm publish, cross organization (CodeSharing-SU0), Basic'
+  inputs:
+    command: publish
+    workingDir: 'src/packaging/npm/v1/publish'
+    publishEndpoint: 'CanaryBasic@codesharing-su0 (Basic)'
+
+- task: Npm@1
+  displayName: 'npm publish, cross organization (CodeSharing-SU0) to PublicCanary feed, PAT'
+  inputs:
+    command: publish
+    workingDir: 'src/packaging/npm/v1/publish'
+    verbose: true
+    publishEndpoint: 'PublicCanary@Codesharing-SU0 (npm)'

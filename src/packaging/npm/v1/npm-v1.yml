@@ -1,0 +1,48 @@
+trigger: none
+jobs:
+- job: 'ubuntu1804'
+  displayName: Ubuntu_1804
+  pool: $[ coalesce(variables.ubuntu1804, 'Hosted Ubuntu 1804') ]
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Ubuntu 1804'))
+  steps:
+  - template: npm-v1-steps.yml
+
+- job: 'ubuntu2004'
+  displayName: Ubuntu_2004
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-20.04'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Ubuntu 2004'))
+  steps:
+  - template: npm-v1-steps.yml
+
+- job: 'Win2022'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2022'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Windows Server 2022'))
+  steps:
+  - template: npm-v1-steps.yml
+
+- job: 'vs2019win2019'
+  displayName: VS2019_Win2019
+  pool: $[ coalesce(variables.windows2019withvs2019, 'Hosted Windows 2019 with VS2019') ]
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted Windows 2019 with VS2019'))
+  steps:
+  - template: npm-v1-steps.yml
+
+- job: 'MacOS_Public_Catalina'
+  pool:
+    name: 'LimitedPublicCatalina'
+    vmImage: 'macos-10.15'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS Catalina'))
+  steps:
+  - template: npm-v1-steps.yml
+
+- job: 'MacOS_Public_BigSur'
+  pool:
+    name: 'LimitedPublicBigSur'
+    vmImage: 'macos-11'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS BigSur'))
+  steps:
+  - template: npm-v1-steps.yml

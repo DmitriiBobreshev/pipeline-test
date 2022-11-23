@@ -1,0 +1,20 @@
+steps:
+- pwsh: |
+    if ($IsWindows) {
+        $nugetConfigPath = "$env:APPDATA\NuGet\NuGet.Config"
+    }
+
+    if ($IsMacOS) {
+        $nugetConfigPath = (Get-ChildItem $env:HOME/.config/NuGet -Filter nuget.config).FullName
+    }
+
+    if (-not (Test-Path $nugetConfigPath)) {
+        throw "$nugetConfigPath not found"
+    }
+
+    Write-Host "The $nugetConfigPath file content:"
+    Get-Content $nugetConfigPath
+    $isKeyPresent = Select-Xml -Path $nugetConfigPath -XPath "//add[@key='nuget.org']"
+    if(-not $isKeyPresent) {
+        throw "NuGet.org repository not found: $nugetConfigPath"
+    }

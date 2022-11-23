@@ -1,0 +1,39 @@
+steps:
+- task: TwineAuthenticate@0
+  displayName: 'Twine Authenticate V0'
+  inputs:
+    artifactFeeds: 'PipelineCanary,PublicCanary/PublicCanary'
+    externalFeeds: 'PublicCanary@CodeSharing-SU0 (python upload)'
+
+- script: |
+   pip install twine
+   cd "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package"
+   python setup.py sdist
+   python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz"
+  displayName: 'twine upload same-org with retries'
+
+- script: |
+   python -m twine upload -r PublicCanary/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PublicCanary/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r PublicCanary/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz"
+  displayName: 'twine upload same-org public with retries'
+
+- script: |
+   python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/pipelinecanary-twineauthenticate-publishtest-*.tar.gz"
+  displayName: 'twine upload cross-org public with retries'
+
+- task: TwineAuthenticate@1
+  displayName: 'Twine Authenticate V1'
+  inputs:
+    artifactFeed: 'PipelineCanary'
+    pythonUploadServiceConnection: 'PublicCanary@CodeSharing-SU0 (python upload)'
+
+- script: |
+   pip install twine
+   pip install wheel
+   cd "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package"
+   python setup.py bdist_wheel
+   python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r PipelineCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/*.whl"
+  displayName: 'twine upload v1 same-org with retries'
+
+- script: |
+   python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/*.whl" || python -m twine upload -r CodeSharing-SU0/Test-Public/PublicCanary --config-file $(PYPIRC_PATH) "$(build.sourcesdirectory)/src/packaging/TwineAuthenticate/python-package/dist/*.whl"
+  displayName: 'twine upload v1 cross-org public with retries'

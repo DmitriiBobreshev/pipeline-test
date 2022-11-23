@@ -1,0 +1,36 @@
+steps:
+- bash: echo "##vso[task.setvariable variable=JAVA_HOME]$JAVA_HOME_8_X64"
+  displayName: Switch to Java 8
+- task: MavenAuthenticate@0
+  displayName: 'Maven Authenticate V0'
+  inputs:
+    artifactsFeeds: 'MavenAuth'
+
+- bash: |
+   cd "$(build.sourcesdirectory)/src/packaging/MavenAuthenticate/ProjectA"
+   export CMD='mvn install' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Install mvn dependencies with retries'
+
+- powershell: |
+   cd "$(build.sourcesdirectory)/src/packaging/MavenAuthenticate/ProjectB";
+   $minorVersion = Get-Date -Format "yyMMdd";
+   $nextIncrementalVersion = Get-Date -Format "HHmmssffff";
+   mvn versions:set -DnewVersion="1.$minorVersion.$nextIncrementalVersion" versions:commit
+  displayName: 'Set version for ProjectB'
+
+- bash: |
+   cd "$(build.sourcesdirectory)/src/packaging/MavenAuthenticate/ProjectB"
+   export CMD='mvn deploy' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Publish to Canary with retries'
+
+- powershell: |
+   cd "$(build.sourcesdirectory)/src/packaging/MavenAuthenticate/ProjectC";
+   $minorVersion = Get-Date -Format "yyMMdd";
+   $nextIncrementalVersion = Get-Date -Format "HHmmssffff";
+   mvn versions:set -DnewVersion="1.$minorVersion.$nextIncrementalVersion" versions:commit
+  displayName: 'Set version for ProjectC'
+
+- bash: |
+   cd "$(build.sourcesdirectory)/src/packaging/MavenAuthenticate/ProjectC"
+   export CMD='mvn deploy' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Publish to PublicCanary with retries'

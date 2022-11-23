@@ -1,0 +1,13 @@
+{
+  "name": "buildcanary",
+  "version": "1.0.0",
+  "description": "test code for npm build tasks",
+  "main": "gulpfile.js",
+  "author": "zarenner",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "minimist": "^1.2.0",
+    "vsts-task-lib": "^2.0.2-preview"
+  }
+}

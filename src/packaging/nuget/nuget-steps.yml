@@ -1,0 +1,28 @@
+steps:
+- script: |
+    nuget locals all -clear -verbosity Detailed
+  displayName: 'NuGet cleanup'
+
+- script: |
+    nuget install Microsoft.Extensions.Logging
+  displayName: 'Install package from Nuget.org'
+
+- script: |
+    nuget restore NETCore.sln
+  displayName: 'Restore simple project'
+  workingDirectory: src/packaging/nuget/NuGetV2/Simple
+
+- script: |
+    nuget restore MyWeather.sln
+  displayName: 'Restore Xamarin project'
+  workingDirectory: src/xamarin-android/macOS/MyWeather.Forms
+
+- script: |
+    nuget pack Package.nuspec
+  displayName: 'Create package from .nuspec'
+  workingDirectory: src/packaging/nuget/NuGetV2/NuspecFolder
+
+- script: |
+    nuget pack NETCore.csproj -Build -Version $(Build.BuildNumber)
+  displayName: 'Create package from .csproj'
+  workingDirectory: src/packaging/nuget/NuGetV2/Simple/NETCore

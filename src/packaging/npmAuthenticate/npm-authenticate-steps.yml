@@ -1,0 +1,90 @@
+steps:
+- task: NodeTool@0
+  displayName: 'Use Node 8.x'
+  inputs:
+    versionSpec: 8.x
+    checkLatest: true
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    verbose: true
+    workingDir: 'src/packaging/npmAuthenticate'
+
+- task: npmAuthenticate@0
+  displayName: 'npm Authenticate projecta/.npmrc'
+  inputs:
+    workingFile: src/packaging/npmAuthenticate/projecta/.npmrc
+
+- bash: export CMD='npm install --verbose' && eval $CMD || eval $CMD || eval $CMD
+  displayName: npm install projecta with retries
+  workingDirectory: 'src/packaging/npmAuthenticate/projecta'
+
+- task: geeklearningio.gl-vsts-tasks-yarn.yarn-installer-task.YarnInstaller@2
+  displayName: 'Use Yarn 1.3.2'
+  inputs:
+    versionSpec: 1.3.2
+
+- task: Gulp@0
+  displayName: 'gulp yarninstall-vsts'
+  inputs:
+    gulpFile: 'src/packaging/npmAuthenticate/gulpfile.js'
+    workingDirectory: 'src/packaging/npmAuthenticate/'
+    targets: 'yarninstall-vsts'
+
+- task: npmAuthenticate@0
+  displayName: 'npm Authenticate projecta-public'
+  inputs:
+    workingFile: 'src/packaging/npmAuthenticate/projecta-public/.npmrc'
+
+- bash: export CMD='npm install --verbose' && eval $CMD || eval $CMD || eval $CMD
+  displayName: npm install projecta-public with retries
+  workingDirectory: 'src/packaging/npmAuthenticate/projecta-public'
+
+- script: npm version 1.0.0-canary-$(Build.BuildId)-$(System.JobId)
+  displayName: npm version projecta-public
+  workingDirectory: 'src/packaging/npmAuthenticate/projecta-public'
+
+- bash: export CMD='npm publish --verbose' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'npm publish projecta-public with retries'
+  workingDirectory: 'src/packaging/npmAuthenticate/projecta-public'
+
+- task: npmAuthenticate@0
+  displayName: 'npm Authenticate projectb-externalVsts/.npmrc'
+  inputs:
+    workingFile: 'src/packaging/npmAuthenticate/projectb-externalVsts/.npmrc'
+    customEndpoint: 'Canary@codesharing-su0 (VSTS)'
+
+- task: Gulp@0
+  displayName: 'gulp yarninstall-externalVsts'
+  inputs:
+    gulpFile: 'src/packaging/npmAuthenticate/gulpfile.js'
+    workingDirectory: 'src/packaging/npmAuthenticate/'
+    targets: 'yarninstall-externalVsts'
+
+- task: npmAuthenticate@0
+  displayName: 'npm Authenticate projectb-externalVsts-public'
+  inputs:
+    workingFile: 'src/packaging/npmAuthenticate/projectb-externalVsts-public/.npmrc'
+    customEndpoint: 'PublicCanary@Codesharing-SU0 (npm)'
+
+- bash: export CMD='npm install --verbose' && eval $CMD || eval $CMD || eval $CMD 
+  displayName: npm install projectb-externalVsts-public with retries
+  workingDirectory: 'src/packaging/npmAuthenticate/projectb-externalVsts-public'
+
+- script: npm version 1.0.0-canary-$(Build.BuildId)-$(System.JobId)
+  displayName: npm version projectb-externalVsts-public
+  workingDirectory: 'src/packaging/npmAuthenticate/projectb-externalVsts-public'
+
+- bash: export CMD='npm publish --verbose' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'npm publish projectb-externalVsts-public with retries'
+  workingDirectory: 'src/packaging/npmAuthenticate/projectb-externalVsts-public'
+
+- task: npmAuthenticate@0
+  displayName: 'npm Authenticate multiScopeProject/.npmrc'
+  inputs:
+    workingFile: src/packaging/npmAuthenticate/multiScopeProject/.npmrc
+
+- bash: export CMD='npm install --verbose' && eval $CMD || eval $CMD || eval $CMD
+  displayName: npm install multiScopeProject with retries
+  workingDirectory: 'src/packaging/npmAuthenticate/multiScopeProject'

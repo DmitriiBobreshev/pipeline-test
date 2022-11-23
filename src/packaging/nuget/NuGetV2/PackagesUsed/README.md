@@ -1,0 +1,1 @@
+Do not build against these packages.  These are the packages that should be restored by the build tasks from the internal and external feeds. Provided here in case they ever get lost.

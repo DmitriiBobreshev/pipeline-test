@@ -1,0 +1,8 @@
+{
+  "name": "multi-Scope-Test",
+  "version": "1.0.0",
+  "dependencies": {
+    "@example/scope-package-test": "1.0.0",
+    "buildcanary-publish-test": "1.0.0-canary-59088"
+  }
+}

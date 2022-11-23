@@ -1,0 +1,41 @@
+steps:
+- task: PipAuthenticate@0
+  displayName: 'Pip Authenticate V0'
+  inputs:
+    artifactFeeds: 'Canary,PublicCanary/PublicCanary'
+    externalFeeds: 'PipAuthConnectionsu0,PublicCanary@CodeSharing-SU0 (python download)'
+
+- bash: |
+   python -m pip install --upgrade pip
+   export CMD='pip install HelloVat --no-cache-dir' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Bash Script'
+
+- task: PipAuthenticate@1
+  displayName: 'Pip Authenticate V1'
+  inputs:
+    artifactFeeds: 'Canary,PublicCanary/PublicCanary'
+    pythonDownloadServiceConnections: 'canarysu0, PublicCanary@CodeSharing-SU0 (python download)'
+
+- bash: |
+   export CMD='pip install HelloVat --no-cache-dir' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Download test package from internal feed without consulting pypi with retries'
+
+- bash: 
+   export CMD='pip install codesharing-su0-buildcanary-test --no-cache-dir' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Download package from external origanization private feed with retries'
+
+- bash: |
+   export CMD='pip install codesharing-su0-publicbuildcanary-test --no-cache-dir' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Download package from external origanization public feed with retries'
+  
+- task: PipAuthenticate@1
+  displayName: 'Pip Authenticate V1'
+  inputs:
+    artifactFeeds: 'Canary,PublicCanary/PublicCanary'
+    onlyAddExtraIndex: true
+
+- bash: |
+   python -m pip install --upgrade pip
+   export CMD='pip install requests --no-cache-dir' && eval $CMD || eval $CMD || eval $CMD
+   export CMD='pip install HelloVat --no-cache-dir' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Download package from both pypi and internal feed with retries'

@@ -1,0 +1,10 @@
+jobs:
+- job: Artifacts_Proxy_Private_Agent
+  pool: $[ coalesce(variables.artifactsproxy, 'jotaylo') ]
+  condition: and(succeeded(),  contains(variables.targetPools, 'jotaylo'))
+  steps:
+  - powershell: |
+      Remove-Item -path $env:APPDATA\npm-cache\* -recurse -ErrorAction Ignore
+      Remove-Item -path $env:UserProfile\.npmrc -ErrorAction Ignore
+    displayName: 'Clear NPM Cache and User .npmrc'
+  - template: npm-v1-steps.yml

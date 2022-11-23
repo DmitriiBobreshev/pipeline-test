@@ -1,0 +1,80 @@
+steps:
+- task: UniversalPackages@0
+  displayName: 'Universal download internal'
+  inputs:
+    vstsFeed: 'PipelineCanary'
+    vstsFeedPackage: 'upack-canary-downloadtest'
+    vstsPackageVersion: 1.0.0
+
+- task: UniversalPackages@0
+  displayName: 'Universal download external'
+  inputs:
+    feedsToUse: external
+    externalFeedCredentials: 'CodeSharingSU0 upack canary builds'
+    feedDownloadExternal: PipelineCanary
+    packageDownloadExternal: 'upack-canary-codesharingsu0-downloadtest'
+    versionDownloadExternal: 1.0.0
+
+- task: UniversalPackages@0
+  displayName: 'Universal publish internal'
+  inputs:
+    command: publish
+    publishDirectory: '$(System.DefaultWorkingDirectory)'
+    vstsFeedPublish: 'a83dfdee-ca90-4d7c-9e83-3b3b99c2dc77'
+    vstsFeedPackagePublish: 'upack-canary-publishtest-$(System.JobId)'
+    versionOption: custom
+    versionPublish: '1.0.$(Build.BuildId)'
+    packagePublishDescription: 'This is a canary test package.'
+
+- task: UniversalPackages@0
+  displayName: 'Universal publish external'
+  inputs:
+    command: publish
+    publishDirectory: '$(System.DefaultWorkingDirectory)'
+    feedsToUsePublish: external
+    publishFeedCredentials: 'CodeSharingSU0 upack canary builds'
+    feedPublishExternal: PipelineCanary
+    packagePublishExternal: 'upack-canary-codesharingsu0-publishtest-$(System.JobId)'
+    versionOption: custom
+    versionPublish: '1.0.$(Build.BuildId)'
+    packagePublishDescription: 'This is a canary test package.'
+
+- task: UniversalPackages@0
+  displayName: 'Universal download internal project-scoped'
+  inputs:
+    vstsFeed: 'PipelineCanary/PipelineCanary-Public'
+    vstsFeedPackage: 'upack-canary-downloadtest'
+    vstsPackageVersion: 1.0.0
+
+- task: UniversalPackages@0
+  displayName: 'Universal download external project-scoped'
+  inputs:
+    feedsToUse: external
+    externalFeedCredentials: 'CodeSharingSU0 upack canary builds'
+    feedDownloadExternal: 'aamalladTest/PipelineCanary-Project'
+    packageDownloadExternal: 'upack-canary-codesharingsu0-downloadtest'
+    versionDownloadExternal: 1.0.0
+
+- task: UniversalPackages@0
+  displayName: 'Universal publish internal project-scoped'
+  inputs:
+    command: publish
+    publishDirectory: '$(System.DefaultWorkingDirectory)'
+    vstsFeedPublish: 'PipelineCanary/PipelineCanary-Public'
+    vstsFeedPackagePublish: 'upack-canary-publishtest-$(System.JobId)'
+    versionOption: custom
+    versionPublish: '1.0.$(Build.BuildId)'
+    packagePublishDescription: 'This is a canary test package.'
+
+- task: UniversalPackages@0
+  displayName: 'Universal publish external project-scoped'
+  inputs:
+    command: publish
+    publishDirectory: '$(System.DefaultWorkingDirectory)'
+    feedsToUsePublish: external
+    publishFeedCredentials: 'CodeSharingSU0 upack canary builds'
+    feedPublishExternal: 'aamalladTest/PipelineCanary-Project'
+    packagePublishExternal: 'upack-canary-codesharingsu0-publishtest-$(System.JobId)'
+    versionOption: custom
+    versionPublish: '1.0.$(Build.BuildId)'
+    packagePublishDescription: 'This is a canary test package.'

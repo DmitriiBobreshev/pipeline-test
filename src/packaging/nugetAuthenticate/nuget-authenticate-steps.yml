@@ -1,0 +1,181 @@
+steps:
+# Set up NuGetAuthenticateV0 task and use latest nuget.exe
+# V1 tests below
+- task: NuGetAuthenticate@0
+  inputs:
+    nuGetServiceConnections: Canary@CodeSharing-SU0 (Artifacts), TestProject-Canary@CodeSharing-SU0
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet Latest'
+  inputs:
+    versionSpec: '*'
+    checkLatest: true
+
+# Test NuGet.exe restore with private project scoped feeds
+- script: nuget.exe locals all -clear -verbosity Detailed
+  displayName: 'NuGet locals all -clear'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/InternalDependency/Internal.sln -ConfigFile src/packaging/nugetAuthenticate/InternalDependency/project-scoped-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore Internal private project scoped feed with retries'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/ExternalDependency/External.sln -ConfigFile src/packaging/nugetAuthenticate/ExternalDependency/project-scoped-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore External private project scoped feed with retries'
+  
+# Test NuGet.exe restore with collection scoped feeds
+- script:
+   nuget.exe locals all -clear -verbosity Detailed
+  displayName: 'NuGet locals all -clear'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/InternalDependency/Internal.sln -ConfigFile src/packaging/nugetAuthenticate/InternalDependency/collection-scoped-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore Internal collection scoped feed with retries'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/ExternalDependency/External.sln -ConfigFile src/packaging/nugetAuthenticate/ExternalDependency/collection-scoped-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore External collection scoped feed with retries'
+  
+# Test NuGet.exe restore with public project scoped feeds
+- script:
+   nuget.exe locals all -clear -verbosity Detailed
+  displayName: 'NuGet locals all -clear'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/InternalDependency/Internal.sln -ConfigFile src/packaging/nugetAuthenticate/InternalDependency/public-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore from a public feed from internal org with retries'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/ExternalDependency/External.sln -ConfigFile src/packaging/nugetAuthenticate/ExternalDependency/public-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore public feed from codesharing-su0 without auth with retries'
+
+# Test Dotnet with private project scoped feeds
+- script: nuget.exe locals all -clear -verbosity Detailed
+  displayName: 'NuGet locals all -clear'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/InternalDependency/Internal/Internal.csproj --configfile src/packaging/nugetAuthenticate/InternalDependency/project-scoped-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore Internal private project scoped feed with retries'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/ExternalDependency/External/External.csproj --configfile src/packaging/nugetAuthenticate/ExternalDependency/project-scoped-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore External private project scoped feed with retries'
+  
+# Test Dotnet with collection scoped feeds
+- script: nuget.exe locals all -clear -verbosity Detailed
+  displayName: 'NuGet locals all -clear'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/InternalDependency/Internal/Internal.csproj --configfile src/packaging/nugetAuthenticate/InternalDependency/collection-scoped-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore Internal collection scoped feed with retries'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/ExternalDependency/External/External.csproj --configfile src/packaging/nugetAuthenticate/ExternalDependency/collection-scoped-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore External collection scoped feed with retries'
+
+# Test Dotnet with public project scoped feeds
+- script: dotnet nuget locals all --clear
+  displayName: 'NuGet locals all --clear'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/InternalDependency/Internal.sln --configfile src/packaging/nugetAuthenticate/InternalDependency/public-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore from a public feed from internal org with retries'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/ExternalDependency/External.sln --configfile src/packaging/nugetAuthenticate/ExternalDependency/public-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore public feed from codesharing-su0 without auth with retries'
+
+# Test NuGet.exe push with private project scoped feed
+- task: NuGetCommand@2
+  displayName: 'NuGet pack |DateTime|'
+  inputs:
+    command: pack
+    packagesToPack: 'src/packaging/nugetAuthenticate/NuspecFolder/Package.nuspec'
+    packDestination: '$(Build.ArtifactStagingDirectory)\NuGetAuth\Date'
+    versioningScheme: byPrereleaseNumber
+    buildProperties: 'CustomPackageName=CustomPackageName$(Agent.JobName)'
+- script:
+   nuget.exe push -Source https://buildcanary.pkgs.visualstudio.com/CanaryBuilds/_packaging/CanaryBuilds/nuget/v3/index.json -ApiKey AzureArtifacts $(Build.ArtifactStagingDirectory)\NuGetAuth\Date\*.nupkg -SkipDuplicate
+  displayName: 'NuGet push to project scoped feed' 
+
+
+# Test same tests with V1
+# Set up NuGetAuthenticateV1 task and use latest nuget.exe and .NET 6
+- task: NuGetAuthenticate@1
+  inputs:
+    forceReinstallCredentialProvider: true
+    nuGetServiceConnections: Canary@CodeSharing-SU0 (Artifacts), TestProject-Canary@CodeSharing-SU0
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet Latest'
+  inputs:
+    versionSpec: '*'
+    checkLatest: true
+
+# Test NuGet.exe restore with private project scoped feeds
+- script: nuget.exe locals all -clear -verbosity Detailed
+  displayName: 'NuGet locals all -clear'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/InternalDependency/Internal.sln -ConfigFile src/packaging/nugetAuthenticate/InternalDependency/project-scoped-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore Internal private project scoped feed with retries'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/ExternalDependency/External.sln -ConfigFile src/packaging/nugetAuthenticate/ExternalDependency/project-scoped-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore External private project scoped feed with retries'
+  
+# Test NuGet.exe restore with collection scoped feeds
+- script:
+   nuget.exe locals all -clear -verbosity Detailed
+  displayName: 'NuGet locals all -clear'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/InternalDependency/Internal.sln -ConfigFile src/packaging/nugetAuthenticate/InternalDependency/collection-scoped-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore Internal collection scoped feed with retries'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/ExternalDependency/External.sln -ConfigFile src/packaging/nugetAuthenticate/ExternalDependency/collection-scoped-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore External collection scoped feed with retries'
+  
+# Test NuGet.exe restore with public project scoped feeds
+- script:
+   nuget.exe locals all -clear -verbosity Detailed
+  displayName: 'NuGet locals all -clear'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/InternalDependency/Internal.sln -ConfigFile src/packaging/nugetAuthenticate/InternalDependency/public-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore from a public feed from internal org with retries'
+- bash:
+   export CMD='nuget.exe restore src/packaging/nugetAuthenticate/ExternalDependency/External.sln -ConfigFile src/packaging/nugetAuthenticate/ExternalDependency/public-nuget.config -NoCache -Verbosity Detailed -NonInteractive' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'NuGet restore public feed from codesharing-su0 without auth with retries'
+
+# Use .NET 6
+- task: UseDotNet@2
+  displayName: Use .NET 6 SDK
+  inputs:
+    packageType: sdk
+    version: 6.x
+
+# Test Dotnet with private project scoped feeds
+- script: nuget.exe locals all -clear -verbosity Detailed
+  displayName: 'NuGet locals all -clear'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/InternalDependency/Internal/Internal.csproj --configfile src/packaging/nugetAuthenticate/InternalDependency/project-scoped-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore Internal private project scoped feed with retries'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/ExternalDependency/External/External.csproj --configfile src/packaging/nugetAuthenticate/ExternalDependency/project-scoped-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore External private project scoped feed with retries'
+  
+# Test Dotnet with collection scoped feeds
+- script: nuget.exe locals all -clear -verbosity Detailed
+  displayName: 'NuGet locals all -clear'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/InternalDependency/Internal/Internal.csproj --configfile src/packaging/nugetAuthenticate/InternalDependency/collection-scoped-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore Internal collection scoped feed with retries'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/ExternalDependency/External/External.csproj --configfile src/packaging/nugetAuthenticate/ExternalDependency/collection-scoped-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore External collection scoped feed with retries'
+
+# Test Dotnet with public project scoped feeds
+- script: dotnet nuget locals all --clear
+  displayName: 'NuGet locals all --clear'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/InternalDependency/Internal.sln --configfile src/packaging/nugetAuthenticate/InternalDependency/public-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore from a public feed from internal org with retries'
+- bash:
+   export CMD='dotnet restore src/packaging/nugetAuthenticate/ExternalDependency/External.sln --configfile src/packaging/nugetAuthenticate/ExternalDependency/public-nuget.config --verbosity Detailed' && eval $CMD || eval $CMD || eval $CMD
+  displayName: 'Dotnet restore public feed from codesharing-su0 without auth with retries'
+
+# Test NuGet.exe push with private project scoped feed
+- task: NuGetCommand@2
+  displayName: 'NuGet pack |DateTime|'
+  inputs:
+    command: pack
+    packagesToPack: 'src/packaging/nugetAuthenticate/NuspecFolder/Package.nuspec'
+    packDestination: '$(Build.ArtifactStagingDirectory)\NuGetAuth\Date'
+    versioningScheme: byPrereleaseNumber
+    buildProperties: 'CustomPackageName=CustomPackageName$(Agent.JobName)'
+- script:
+   nuget.exe push -Source https://buildcanary.pkgs.visualstudio.com/CanaryBuilds/_packaging/CanaryBuilds/nuget/v3/index.json -ApiKey AzureArtifacts $(Build.ArtifactStagingDirectory)\NuGetAuth\Date\*.nupkg -SkipDuplicate
+  displayName: 'NuGet push to project scoped feed' 

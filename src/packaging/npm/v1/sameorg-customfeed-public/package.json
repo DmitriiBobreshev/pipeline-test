@@ -1,0 +1,7 @@
+{
+    "name": "testpackage",
+    "version": "1.0.0",
+    "dependencies": {
+      "publiccanary-sameorg-customfeed-public": "1.0.0"
+    }
+}

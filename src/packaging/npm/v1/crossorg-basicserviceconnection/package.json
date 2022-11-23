@@ -1,0 +1,7 @@
+{
+    "name": "testpackage",
+    "version": "1.0.0",
+    "dependencies": {
+      "pipelinecanary-crossorg-basicserviceconnection": "1.0.0"
+    }
+}

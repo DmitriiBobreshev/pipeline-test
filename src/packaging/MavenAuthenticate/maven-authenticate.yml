@@ -1,0 +1,25 @@
+name: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)00'
+
+jobs:
+- job: 'ubuntu2004'
+  displayName: Ubuntu_2004
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-20.04'
+  steps:
+  - template: maven-authenticate-steps.yml
+
+- job: 'Win2022'
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2022'
+  steps:
+  - template: maven-authenticate-steps.yml
+
+- job: 'vs2019win2019'
+  displayName: VS2019_Win2019
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2019'
+  steps:
+  - template: maven-authenticate-steps.yml
