@@ -7,5 +7,25 @@ steps:
     checkLatestKubeCtl: true
   displayName: 'Helm installer'
 
+- pwsh: |
+    $ActualVersion = helm version --template='{{.Version}}'
+    Write-Host "Expected version is '${{ parameters.helmVersion }}'"
+    Write-Host "Actual version is '${ActualVersion}'"
+
+    if ($ActualVersion -like "*.${ExpectedVersion}.*") {
+        Write-Host "Helm version is correct"
+        exit 0
+    } else {
+        Write-Host "Helm version is incorrect"
+        exit 1
+    }
+  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+
 - script: |
-    helm -v
+    helm version --template='{{.Version}}';
+
+    if ! helm version --template='{{.Version}}' | grep -q ${{ parameters.helmVersion }}; then
+      echo "Helm version is incorrect" >>/dev/stderr
+    fi
+  condition: eq(False,  eq(variables['Agent.OS'], 'Windows_NT'))
+

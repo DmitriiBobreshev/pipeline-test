@@ -33,7 +33,7 @@ variables:
 stages:
 - stage: 'Ubuntu_2004'
   jobs:
-  - job: 'Toolcache'
+  - job: 'HelmInstall'
     pool:
       name: 'Azure Pipelines'
       vmImage: 'ubuntu-20.04'
@@ -47,8 +47,8 @@ stages:
           helm.version: '2.16.7'
         Helm2.7.0:
           helm.version: '2.16.7'
-        default: 
-          helm.version: 'latest'
+        # default: 
+        #   helm.version: 'latest'
     steps:
     - template: templates/helm-installer.yml
       parameters:
@@ -56,7 +56,7 @@ stages:
 
 - stage: 'Ubuntu_2204'
   jobs:
-  - job: 'Toolcache'
+  - job: 'HelmInstall'
     pool:
       name: 'Azure Pipelines'
       vmImage: 'ubuntu-22.04'
@@ -70,8 +70,8 @@ stages:
           helm.version: '2.16.7'
         Helm2.7.0:
           helm.version: '2.16.7'
-        default: 
-          helm.version: 'latest'
+        # default: 
+        #   helm.version: 'latest'
     steps:
     - template: templates/helm-installer.yml
       parameters:
@@ -80,7 +80,7 @@ stages:
 - stage: 'Win2019'
   dependsOn: []
   jobs:
-  - job: 'Toolcache'
+  - job: 'HelmInstall'
     pool:
       name: 'Azure Pipelines'
       vmImage: 'windows-2019'
@@ -94,8 +94,8 @@ stages:
           helm.version: '2.16.7'
         Helm2.7.0:
           helm.version: '2.16.7'
-        default: 
-          helm.version: 'latest'
+        # default: 
+        #   helm.version: 'latest'
     steps:
     - template: templates/helm-installer.yml
       parameters:
@@ -104,7 +104,7 @@ stages:
 - stage: 'Win2022'
   dependsOn: []
   jobs:
-  - job: 'Toolcache'
+  - job: 'HelmInstall'
     pool:
       name: 'Azure Pipelines'
       vmImage: 'windows-2022'
@@ -118,8 +118,8 @@ stages:
           helm.version: '2.16.7'
         Helm2.7.0:
           helm.version: '2.16.7'
-        default: 
-          helm.version: 'latest'
+        # default: 
+        #   helm.version: 'latest'
     steps:
     - template: templates/helm-installer.yml
       parameters:
@@ -128,7 +128,7 @@ stages:
 - stage: 'MacOS_Public_Catalina'
   dependsOn: []
   jobs:
-  - job: 'Toolcache'
+  - job: 'HelmInstall'
     pool:
       name: 'Azure Pipelines'
       vmImage: 'macos-10.15'
@@ -142,8 +142,8 @@ stages:
           helm.version: '2.16.7'
         Helm2.7.0:
           helm.version: '2.16.7'
-        default: 
-          helm.version: 'latest'
+        # default: 
+        #   helm.version: 'latest'
     steps:
     - template: templates/helm-installer.yml
       parameters:
@@ -153,7 +153,7 @@ stages:
   condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS BigSur'))
   dependsOn: []
   jobs:
-  - job: 'Toolcache'
+  - job: 'HelmInstall'
     pool:
       name: 'Azure Pipelines'
       vmImage: 'macos-11'
@@ -167,8 +167,8 @@ stages:
           helm.version: '2.16.7'
         Helm2.7.0:
           helm.version: '2.16.7'
-        default: 
-          helm.version: 'latest'
+        # default: 
+        #   helm.version: 'latest'
     steps:
     - template: templates/helm-installer.yml
       parameters:
@@ -176,7 +176,7 @@ stages:
 
 - stage: 'MacOS_Public_Monterey'
   jobs:
-  - job: 'Toolcache'
+  - job: 'HelmInstall'
     pool:
       name: 'Azure Pipelines'
       vmImage: 'macos-12'
@@ -190,8 +190,8 @@ stages:
           helm.version: '2.16.7'
         Helm2.7.0:
           helm.version: '2.16.7'
-        default: 
-          helm.version: 'latest'
+        # default: 
+        #   helm.version: 'latest'
     steps:
     - template: templates/helm-installer.yml
       parameters:
