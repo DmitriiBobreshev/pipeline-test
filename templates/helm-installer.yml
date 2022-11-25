@@ -28,6 +28,7 @@ steps:
 
 - script: |
     if [[ ${{ parameters.helmVersion }} == "2*" ]]; then 
+     echo "Skipping";
     else 
       helm version --template='{{.Version}}';
 
