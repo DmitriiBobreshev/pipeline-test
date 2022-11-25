@@ -78,7 +78,6 @@ stages:
         helmVersion: $(helm.version)
 
 - stage: 'Win2019'
-  dependsOn: []
   jobs:
   - job: 'HelmInstall'
     pool:
@@ -102,7 +101,6 @@ stages:
         helmVersion: $(helm.version)
 
 - stage: 'Win2022'
-  dependsOn: []
   jobs:
   - job: 'HelmInstall'
     pool:
@@ -126,7 +124,6 @@ stages:
         helmVersion: $(helm.version)
 
 - stage: 'MacOS_Public_Catalina'
-  dependsOn: []
   jobs:
   - job: 'HelmInstall'
     pool:
@@ -150,8 +147,6 @@ stages:
         helmVersion: $(helm.version)
 
 - stage: 'MacOS_Public_BigSur'
-  condition: and(succeeded(),  contains(variables.targetPools, 'Hosted macOS BigSur'))
-  dependsOn: []
   jobs:
   - job: 'HelmInstall'
     pool:
