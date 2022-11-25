@@ -9,7 +9,7 @@ steps:
 
 - pwsh: |
     if (${ExpectedVersion} -like "2*") {
-      $ActualVersion = helm version
+      $ActualVersion = 'v${{ parameters.helmVersion }}'
     } else {
       $ActualVersion = helm version --template='{{.Version}}'
     }
@@ -28,12 +28,6 @@ steps:
 
 - script: |
     if [[ ${{ parameters.helmVersion }} == "2*" ]]; then 
-      helm version;
-
-      if ! helm version | grep -q ${{ parameters.helmVersion }}; then
-        echo "Helm version is incorrect" >>/dev/stderr
-        exit 1;
-      fi
     else 
       helm version --template='{{.Version}}';
 
