@@ -27,7 +27,7 @@ steps:
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
 
 - script: |
-    if [[ ${{ parameters.helmVersion }} == "2*" ]]; then 
+    if [[ "${{ parameters.helmVersion }}" == "2*" ]]; then 
      echo "Skipping";
     else 
       helm version --template='{{.Version}}';
