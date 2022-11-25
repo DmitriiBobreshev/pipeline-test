@@ -27,10 +27,18 @@ steps:
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
 
 - script: |
-    helm version --template='{{.Version}}';
+    if [[ ${{ parameters.helmVersion }} == "2*" ]]; then 
+      helm version;
 
-    if ! helm version --template='{{.Version}}' | grep -q ${{ parameters.helmVersion }}; then
-      echo "Helm version is incorrect" >>/dev/stderr
+      if ! helm version | grep -q ${{ parameters.helmVersion }}; then
+        echo "Helm version is incorrect" >>/dev/stderr
+      fi
+    else 
+      helm version --template='{{.Version}}';
+
+      if ! helm version --template='{{.Version}}' | grep -q ${{ parameters.helmVersion }}; then
+        echo "Helm version is incorrect" >>/dev/stderr
+      fi
     fi
   condition: eq(False,  eq(variables['Agent.OS'], 'Windows_NT'))
 
