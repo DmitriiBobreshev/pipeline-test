@@ -1,0 +1,11 @@
+steps:
+- task: HelmInstaller@0
+  inputs:
+    helmVersion: ${{ parameters.helmVersion }}
+    checkLatestHelmVersion: false
+    installKubeCtl: true
+    checkLatestKubeCtl: true
+  displayName: 'Helm installer'
+
+- script: |
+    helm -v
