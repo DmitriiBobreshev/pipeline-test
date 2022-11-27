@@ -29,8 +29,8 @@ variables:
   - name: scheme
     value: test 
   - name: allValues
-  - name: AGENT_USE_NODE10
-    value: true
+  # - name: AGENT_USE_NODE10
+  #   value: true
 
 stages:
 - stage: 'Ubuntu_2004'
