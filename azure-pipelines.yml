@@ -27,7 +27,7 @@ variables:
   - name: agent.clean.buildDirectory
     value: all
   - name: scheme
-    value: test
+    value: test 
   - name: allValues
   # - name: AGENT_USE_NODE10
   #   value: true
