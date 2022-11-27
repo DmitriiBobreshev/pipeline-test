@@ -7,35 +7,35 @@ steps:
     checkLatestKubeCtl: true
   displayName: 'Helm installer'
 
-- pwsh: |
-    if (${ExpectedVersion} -like "2*") {
-      $ActualVersion = 'v${{ parameters.helmVersion }}'
-    } else {
-      $ActualVersion = helm version --template='{{.Version}}'
-    }
+# - pwsh: |
+#     if (${ExpectedVersion} -like "2*") {
+#       $ActualVersion = 'v${{ parameters.helmVersion }}'
+#     } else {
+#       $ActualVersion = helm version --template='{{.Version}}'
+#     }
 
-    Write-Host "Expected version is 'v${{ parameters.helmVersion }}'"
-    Write-Host "Actual version is '${ActualVersion}'"
+#     Write-Host "Expected version is 'v${{ parameters.helmVersion }}'"
+#     Write-Host "Actual version is '${ActualVersion}'"
 
-    if ($ActualVersion -like "v${ExpectedVersion}.*") {
-        Write-Host "Helm version is correct"
-        exit 0
-    } else {
-        Write-Host "Helm version is incorrect"
-        exit 1
-    }
-  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+#     if ($ActualVersion -like "v${ExpectedVersion}.*") {
+#         Write-Host "Helm version is correct"
+#         exit 0
+#     } else {
+#         Write-Host "Helm version is incorrect"
+#         exit 1
+#     }
+#   condition: eq( variables['Agent.OS'], 'Windows_NT' )
 
-- script: |
-    if [[ "${{ parameters.helmVersion }}" == "2*" ]]; then 
-     echo "Skipping";
-    else 
-      helm version --template='{{.Version}}';
+# - script: |
+#     if [[ "${{ parameters.helmVersion }}" == "2*" ]]; then 
+#      echo "Skipping";
+#     else 
+#       helm version --template='{{.Version}}';
 
-      if ! helm version --template='{{.Version}}' | grep -q ${{ parameters.helmVersion }}; then
-        echo "Helm version is incorrect" >>/dev/stderr;
-        exit 1;
-      fi
-    fi
-  condition: eq(False,  eq(variables['Agent.OS'], 'Windows_NT'))
+#       if ! helm version --template='{{.Version}}' | grep -q ${{ parameters.helmVersion }}; then
+#         echo "Helm version is incorrect" >>/dev/stderr;
+#         exit 1;
+#       fi
+#     fi
+#   condition: eq(False,  eq(variables['Agent.OS'], 'Windows_NT'))
 
