@@ -1,16 +1,16 @@
 steps:
-- task: HelmInstaller@0
-  inputs:
-    helmVersion: ${{ parameters.helmVersion }}
-    checkLatestHelmVersion: false
-    installKubeCtl: true
-    checkLatestKubeCtl: true
-  displayName: 'Helm installer'
-
-# - task: HelmInstaller@1
+# - task: HelmInstaller@0
 #   inputs:
-#     helmVersionToInstall: ${{ parameters.helmVersion }}
+#     helmVersion: ${{ parameters.helmVersion }}
+#     checkLatestHelmVersion: false
+#     installKubeCtl: true
+#     checkLatestKubeCtl: true
 #   displayName: 'Helm installer'
+
+- task: HelmInstaller@1
+  inputs:
+    helmVersionToInstall: ${{ parameters.helmVersion }}
+  displayName: 'Helm installer'
 
 # - pwsh: |
 #     if (${ExpectedVersion} -like "2*") {
