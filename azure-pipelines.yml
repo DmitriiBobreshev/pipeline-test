@@ -41,12 +41,12 @@ stages:
       vmImage: 'ubuntu-20.04'
     strategy:
       matrix:
-        Helm3.10.2:
-          helm.version: '3.10.2'
-        Helm3.5.4:
-          helm.version: '3.5.4'
-        Helm2.16.7:
-          helm.version: '2.16.7'
+        # Helm3.10.2:
+        #   helm.version: '3.10.2'
+        # Helm3.5.4:
+        #   helm.version: '3.5.4'
+        # Helm2.16.7:
+        #   helm.version: '2.16.7'
         Helm2.7.0:
           helm.version: '2.16.7'
         # default: 
@@ -56,140 +56,140 @@ stages:
       parameters:
         helmVersion: $(helm.version)
 
-- stage: 'Ubuntu_2204'
-  jobs:
-  - job: 'HelmInstall'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'ubuntu-22.04'
-    strategy:
-      matrix:
-        Helm3.10.2:
-          helm.version: '3.10.2'
-        Helm3.5.4:
-          helm.version: '3.5.4'
-        Helm2.16.7:
-          helm.version: '2.16.7'
-        Helm2.7.0:
-          helm.version: '2.16.7'
-        # default: 
-        #   helm.version: 'latest'
-    steps:
-    - template: templates/helm-installer.yml
-      parameters:
-        helmVersion: $(helm.version)
+# - stage: 'Ubuntu_2204'
+#   jobs:
+#   - job: 'HelmInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'ubuntu-22.04'
+#     strategy:
+#       matrix:
+#         Helm3.10.2:
+#           helm.version: '3.10.2'
+#         Helm3.5.4:
+#           helm.version: '3.5.4'
+#         Helm2.16.7:
+#           helm.version: '2.16.7'
+#         Helm2.7.0:
+#           helm.version: '2.16.7'
+#         # default: 
+#         #   helm.version: 'latest'
+#     steps:
+#     - template: templates/helm-installer.yml
+#       parameters:
+#         helmVersion: $(helm.version)
 
-- stage: 'Win2019'
-  jobs:
-  - job: 'HelmInstall'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2019'
-    strategy:
-      matrix:
-        Helm3.10.2:
-          helm.version: '3.10.2'
-        Helm3.5.4:
-          helm.version: '3.5.4'
-        Helm2.16.7:
-          helm.version: '2.16.7'
-        Helm2.7.0:
-          helm.version: '2.16.7'
-        # default: 
-        #   helm.version: 'latest'
-    steps:
-    - template: templates/helm-installer.yml
-      parameters:
-        helmVersion: $(helm.version)
+# - stage: 'Win2019'
+#   jobs:
+#   - job: 'HelmInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'windows-2019'
+#     strategy:
+#       matrix:
+#         Helm3.10.2:
+#           helm.version: '3.10.2'
+#         Helm3.5.4:
+#           helm.version: '3.5.4'
+#         Helm2.16.7:
+#           helm.version: '2.16.7'
+#         Helm2.7.0:
+#           helm.version: '2.16.7'
+#         # default: 
+#         #   helm.version: 'latest'
+#     steps:
+#     - template: templates/helm-installer.yml
+#       parameters:
+#         helmVersion: $(helm.version)
 
-- stage: 'Win2022'
-  jobs:
-  - job: 'HelmInstall'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2022'
-    strategy:
-      matrix:
-        Helm3.10.2:
-          helm.version: '3.10.2'
-        Helm3.5.4:
-          helm.version: '3.5.4'
-        Helm2.16.7:
-          helm.version: '2.16.7'
-        Helm2.7.0:
-          helm.version: '2.16.7'
-        # default: 
-        #   helm.version: 'latest'
-    steps:
-    - template: templates/helm-installer.yml
-      parameters:
-        helmVersion: $(helm.version)
+# - stage: 'Win2022'
+#   jobs:
+#   - job: 'HelmInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'windows-2022'
+#     strategy:
+#       matrix:
+#         Helm3.10.2:
+#           helm.version: '3.10.2'
+#         Helm3.5.4:
+#           helm.version: '3.5.4'
+#         Helm2.16.7:
+#           helm.version: '2.16.7'
+#         Helm2.7.0:
+#           helm.version: '2.16.7'
+#         # default: 
+#         #   helm.version: 'latest'
+#     steps:
+#     - template: templates/helm-installer.yml
+#       parameters:
+#         helmVersion: $(helm.version)
 
-- stage: 'MacOS_Public_Catalina'
-  jobs:
-  - job: 'HelmInstall'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'macos-10.15'
-    strategy:
-      matrix:
-        Helm3.10.2:
-          helm.version: '3.10.2'
-        Helm3.5.4:
-          helm.version: '3.5.4'
-        Helm2.16.7:
-          helm.version: '2.16.7'
-        Helm2.7.0:
-          helm.version: '2.16.7'
-        # default: 
-        #   helm.version: 'latest'
-    steps:
-    - template: templates/helm-installer.yml
-      parameters:
-        helmVersion: $(helm.version)
+# - stage: 'MacOS_Public_Catalina'
+#   jobs:
+#   - job: 'HelmInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'macos-10.15'
+#     strategy:
+#       matrix:
+#         Helm3.10.2:
+#           helm.version: '3.10.2'
+#         Helm3.5.4:
+#           helm.version: '3.5.4'
+#         Helm2.16.7:
+#           helm.version: '2.16.7'
+#         Helm2.7.0:
+#           helm.version: '2.16.7'
+#         # default: 
+#         #   helm.version: 'latest'
+#     steps:
+#     - template: templates/helm-installer.yml
+#       parameters:
+#         helmVersion: $(helm.version)
 
-- stage: 'MacOS_Public_BigSur'
-  jobs:
-  - job: 'HelmInstall'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'macos-11'
-    strategy:
-      matrix:
-        Helm3.10.2:
-          helm.version: '3.10.2'
-        Helm3.5.4:
-          helm.version: '3.5.4'
-        Helm2.16.7:
-          helm.version: '2.16.7'
-        Helm2.7.0:
-          helm.version: '2.16.7'
-        # default: 
-        #   helm.version: 'latest'
-    steps:
-    - template: templates/helm-installer.yml
-      parameters:
-        helmVersion: $(helm.version)
+# - stage: 'MacOS_Public_BigSur'
+#   jobs:
+#   - job: 'HelmInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'macos-11'
+#     strategy:
+#       matrix:
+#         Helm3.10.2:
+#           helm.version: '3.10.2'
+#         Helm3.5.4:
+#           helm.version: '3.5.4'
+#         Helm2.16.7:
+#           helm.version: '2.16.7'
+#         Helm2.7.0:
+#           helm.version: '2.16.7'
+#         # default: 
+#         #   helm.version: 'latest'
+#     steps:
+#     - template: templates/helm-installer.yml
+#       parameters:
+#         helmVersion: $(helm.version)
 
-- stage: 'MacOS_Public_Monterey'
-  jobs:
-  - job: 'HelmInstall'
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'macos-12'
-    strategy:
-      matrix:
-        Helm3.10.2:
-          helm.version: '3.10.2'
-        Helm3.5.4:
-          helm.version: '3.5.4'
-        Helm2.16.7:
-          helm.version: '2.16.7'
-        Helm2.7.0:
-          helm.version: '2.16.7'
-        # default: 
-        #   helm.version: 'latest'
-    steps:
-    - template: templates/helm-installer.yml
-      parameters:
-        helmVersion: $(helm.version)
+# - stage: 'MacOS_Public_Monterey'
+#   jobs:
+#   - job: 'HelmInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'macos-12'
+#     strategy:
+#       matrix:
+#         Helm3.10.2:
+#           helm.version: '3.10.2'
+#         Helm3.5.4:
+#           helm.version: '3.5.4'
+#         Helm2.16.7:
+#           helm.version: '2.16.7'
+#         Helm2.7.0:
+#           helm.version: '2.16.7'
+#         # default: 
+#         #   helm.version: 'latest'
+#     steps:
+#     - template: templates/helm-installer.yml
+#       parameters:
+#         helmVersion: $(helm.version)
