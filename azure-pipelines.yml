@@ -42,13 +42,13 @@ stages:
     strategy:
       matrix:
         Nuget3.3.0:
-          nuget.version: '3.3.0'
+          nuget.version: '4.0.0.2283'
         Nuget3.5.0:
-          nuget.version: '3.5.0'
+          nuget.version: '3.5.0.1829'
         Nuget4.0.0:
-          nuget.version: '4.0.0'
-        Nuget5:
-          nuget.version: '5'
+          nuget.version: '4.0.0.2283'
+        Nugetcustom:
+          nuget.version: 'custom'
         # default: 
         #   nuget.version: 'latest'
     steps:
