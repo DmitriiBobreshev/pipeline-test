@@ -1,3 +1,9 @@
+parameters:
+  - name: nugetVersion
+    displayName: nugetVersion
+    type: string
+    default: 'custom'
+
 steps:
 - task: NuGetToolInstaller@1
   displayName: Nuget Tool Install version 1
