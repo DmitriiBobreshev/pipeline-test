@@ -47,83 +47,121 @@ stages:
           nuget.version: '3.5.0.1829'
         Nuget4.0.0:
           nuget.version: '4.0.0.2283'
-        Nugetcustom:
-          nuget.version: 'custom'
-        # default: 
-        #   nuget.version: 'latest'
     steps:
     - template: src/msbuild/nuget-installer.yml
       parameters:
         nugetVersion: $(nuget.version)
 
-# - stage: 'Ubuntu_2204'
-#   jobs:
-#   - job: 'NugetInstall'
-#     pool:
-#       name: 'Azure Pipelines'
-#       vmImage: 'ubuntu-22.04'
-    
-#     steps:
-#     - template: src/msbuild/nuget-installer.yml
-#       parameters:
-#         nugetVersion: $(nuget.version)
+- stage: 'Ubuntu_2204'
+  jobs:
+  - job: 'NugetInstall'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-22.04'
+    strategy:
+      matrix:
+        Nuget3.3.0:
+          nuget.version: '4.0.0.2283'
+        Nuget3.5.0:
+          nuget.version: '3.5.0.1829'
+        Nuget4.0.0:
+          nuget.version: '4.0.0.2283'
+    steps:
+    - template: src/msbuild/nuget-installer.yml
+      parameters:
+        nugetVersion: $(nuget.version)
 
-# - stage: 'Win2019'
-#   jobs:
-#   - job: 'NugetInstall'
-#     pool:
-#       name: 'Azure Pipelines'
-#       vmImage: 'windows-2019'
-  
-#     steps:
-#     - template: src/msbuild/nuget-installer.yml
-#       parameters:
-#         nugetVersion: $(nuget.version)
+- stage: 'Win2019'
+  jobs:
+  - job: 'NugetInstall'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2019'
+    strategy:
+      matrix:
+        Nuget3.3.0:
+          nuget.version: '4.0.0.2283'
+        Nuget3.5.0:
+          nuget.version: '3.5.0.1829'
+        Nuget4.0.0:
+          nuget.version: '4.0.0.2283'
+    steps:
+    - template: src/msbuild/nuget-installer.yml
+      parameters:
+        nugetVersion: $(nuget.version)
 
-# - stage: 'Win2022'
-#   jobs:
-#   - job: 'NugetInstall'
-#     pool:
-#       name: 'Azure Pipelines'
-#       vmImage: 'windows-2022'
-   
-#     steps:
-#     - template: src/msbuild/nuget-installer.yml
-#       parameters:
-#         nugetVersion: $(nuget.version)
+- stage: 'Win2022'
+  jobs:
+  - job: 'NugetInstall'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2022'
+    strategy:
+      matrix:
+        Nuget3.3.0:
+          nuget.version: '4.0.0.2283'
+        Nuget3.5.0:
+          nuget.version: '3.5.0.1829'
+        Nuget4.0.0:
+          nuget.version: '4.0.0.2283'
+    steps:
+    - template: src/msbuild/nuget-installer.yml
+      parameters:
+        nugetVersion: $(nuget.version)
 
-# - stage: 'MacOS_Public_Catalina'
-#   jobs:
-#   - job: 'NugetInstall'
-#     pool:
-#       name: 'Azure Pipelines'
-#       vmImage: 'macos-10.15'
-   
-#     steps:
-#     - template: src/msbuild/nuget-installer.yml
-#       parameters:
-#         nugetVersion: $(nuget.version)
+- stage: 'MacOS_Public_Catalina'
+  jobs:
+  - job: 'NugetInstall'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'macos-10.15'
+    strategy:
+      matrix:
+        Nuget3.3.0:
+          nuget.version: '4.0.0.2283'
+        Nuget3.5.0:
+          nuget.version: '3.5.0.1829'
+        Nuget4.0.0:
+          nuget.version: '4.0.0.2283'
+    steps:
+    - template: src/msbuild/nuget-installer.yml
+      parameters:
+        nugetVersion: $(nuget.version)
 
-# - stage: 'MacOS_Public_BigSur'
-#   jobs:
-#   - job: 'NugetInstall'
-#     pool:
-#       name: 'Azure Pipelines'
-#       vmImage: 'macos-11'
-   
-#     steps:
-#     - template: src/msbuild/nuget-installer.yml
-#       parameters:
-#         nugetVersion: $(nuget.version)
+- stage: 'MacOS_Public_BigSur'
+  jobs:
+  - job: 'NugetInstall'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'macos-11'
+    strategy:
+      matrix:
+        Nuget3.3.0:
+          nuget.version: '4.0.0.2283'
+        Nuget3.5.0:
+          nuget.version: '3.5.0.1829'
+        Nuget4.0.0:
+          nuget.version: '4.0.0.2283'
+    steps:
+    - template: src/msbuild/nuget-installer.yml
+      parameters:
+        nugetVersion: $(nuget.version)
 
-# - stage: 'MacOS_Public_Monterey'
-#   jobs:
-#   - job: 'NugetInstall'
-#     pool:
-#       name: 'Azure Pipelines'
-#       vmImage: 'macos-12'
-    
-#     steps:
-#     - template: src/msbuild/nuget-installer.yml
-#       parameters:
-#         nugetVersion: $(nuget.version)
+- stage: 'MacOS_Public_Monterey'
+  jobs:
+  - job: 'NugetInstall'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'macos-12'
+    strategy:
+      matrix:
+        Nuget3.3.0:
+          nuget.version: '4.0.0.2283'
+        Nuget3.5.0:
+          nuget.version: '3.5.0.1829'
+        Nuget4.0.0:
+          nuget.version: '4.0.0.2283'
+    steps:
+    - template: src/msbuild/nuget-installer.yml
+      parameters:
+        nugetVersion: $(nuget.version)

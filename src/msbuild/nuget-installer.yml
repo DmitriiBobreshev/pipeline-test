@@ -1,29 +1,4 @@
-parameters:
-  - name: nugetVersion
-    displayName: nugetVersion
-    type: string
-    default: 'custom'
-
 steps:
-
-- ${{ if eq(parameters.nugetVersion, 'custom') }}:
-  - task: NuGetToolInstaller@1
-    displayName: Nuget Tool Install version 1
-    inputs:
-      checkLatest: true
-      versionSpec: '5'
-    retryCountOnTaskFailure: 3
-
-  - task: NuGetInstaller@0
-    inputs:
-      solution: 'src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
-      restoreMode: 'restore' # 'restore' | 'install'. Required. Installation type. Default: restore.
-      verbosity: 'Detailed' 
-      nuGetVersion: '${{ parameters.nugetVersion }}'
-      nuGetPath: 'test'
-
-- ${{ else }}:
-
   - task: NuGetInstaller@0
     inputs:
       solution: 'src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
