@@ -34,6 +34,7 @@ variables:
 
 stages:
 - stage: 'Ubuntu_2004'
+  dependsOn: []
   jobs:
   - job: 'NugetInstall'
     pool:
@@ -53,6 +54,7 @@ stages:
         nugetVersion: $(nuget.version)
 
 - stage: 'Ubuntu_2204'
+  dependsOn: []
   jobs:
   - job: 'NugetInstall'
     pool:
@@ -72,6 +74,7 @@ stages:
         nugetVersion: $(nuget.version)
 
 - stage: 'Win2019'
+  dependsOn: []
   jobs:
   - job: 'NugetInstall'
     pool:
@@ -91,6 +94,7 @@ stages:
         nugetVersion: $(nuget.version)
 
 - stage: 'Win2022'
+  dependsOn: []
   jobs:
   - job: 'NugetInstall'
     pool:
@@ -110,6 +114,7 @@ stages:
         nugetVersion: $(nuget.version)
 
 - stage: 'MacOS_Public_Catalina'
+  dependsOn: []
   jobs:
   - job: 'NugetInstall'
     pool:
@@ -129,6 +134,7 @@ stages:
         nugetVersion: $(nuget.version)
 
 - stage: 'MacOS_Public_BigSur'
+  dependsOn: []
   jobs:
   - job: 'NugetInstall'
     pool:
@@ -148,6 +154,7 @@ stages:
         nugetVersion: $(nuget.version)
 
 - stage: 'MacOS_Public_Monterey'
+  dependsOn: []
   jobs:
   - job: 'NugetInstall'
     pool:
