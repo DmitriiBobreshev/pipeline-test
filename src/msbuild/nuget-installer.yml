@@ -1,7 +1,7 @@
 steps:
 - task: NuGetToolInstaller@1
   displayName: Nuget Tool Install version 1
-  condition: ${{ and(succeeded(), eq(parameters.nugetVersion, 'custom')) }}
+  condition: ${{ eq(parameters.nugetVersion, 'custom') }}
   inputs:
     checkLatest: true
     versionSpec: '5'
