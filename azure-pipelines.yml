@@ -27,19 +27,103 @@ variables:
   - name: agent.clean.buildDirectory
     value: all
   - name: scheme
-    value: test
+    value: test 
   - name: allValues
+  - name: AGENT_USE_NODE10
+    value: true
 
-jobs:
-- job: WaitForDocker
-  pool: 
-    vmImage: 'windows-latest'
+stages:
+- stage: 'Ubuntu_2004'
+  jobs:
+  - job: 'NugetInstall'
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-20.04'
+    strategy:
+      matrix:
+        Nuget3.10.2:
+          nuget.version: '3.3.0'
+        Nuget3.5.4:
+          nuget.version: '3.5.0'
+        Nuget2.16.7:
+          nuget.version: '4.0.0'
+        Nuget2.7.0:
+          nuget.version: '5'
+        # default: 
+        #   nuget.version: 'latest'
+    steps:
+    - template: src/msbuild/nuget-installer.yml
+      parameters:
+        nugetVersion: $(nuget.version)
 
-  steps:
-    - task: FileTransform@2
-      inputs:
-        folderPath: '$(System.DefaultWorkingDirectory)/src/filetransform/test' # string. Required. Package or folder. Default: $(System.DefaultWorkingDirectory)/**/*.zip.
-        xmlTransformationRules: '-transform **\*rules.xml -xml **\*confix.xml' # string. XML Transformation rules. Default: -transform **\*.Release.config -xml **\*.config.
-      # Variable Substitution
-        #jsonTargetFiles: # string. JSON target files. 
-        xmlTargetFiles: '*.xml'
+# - stage: 'Ubuntu_2204'
+#   jobs:
+#   - job: 'NugetInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'ubuntu-22.04'
+    
+#     steps:
+#     - template: src/msbuild/nuget-installer.yml
+#       parameters:
+#         nugetVersion: $(nuget.version)
+
+# - stage: 'Win2019'
+#   jobs:
+#   - job: 'NugetInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'windows-2019'
+  
+#     steps:
+#     - template: src/msbuild/nuget-installer.yml
+#       parameters:
+#         nugetVersion: $(nuget.version)
+
+# - stage: 'Win2022'
+#   jobs:
+#   - job: 'NugetInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'windows-2022'
+   
+#     steps:
+#     - template: src/msbuild/nuget-installer.yml
+#       parameters:
+#         nugetVersion: $(nuget.version)
+
+# - stage: 'MacOS_Public_Catalina'
+#   jobs:
+#   - job: 'NugetInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'macos-10.15'
+   
+#     steps:
+#     - template: src/msbuild/nuget-installer.yml
+#       parameters:
+#         nugetVersion: $(nuget.version)
+
+# - stage: 'MacOS_Public_BigSur'
+#   jobs:
+#   - job: 'NugetInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'macos-11'
+   
+#     steps:
+#     - template: src/msbuild/nuget-installer.yml
+#       parameters:
+#         nugetVersion: $(nuget.version)
+
+# - stage: 'MacOS_Public_Monterey'
+#   jobs:
+#   - job: 'NugetInstall'
+#     pool:
+#       name: 'Azure Pipelines'
+#       vmImage: 'macos-12'
+    
+#     steps:
+#     - template: src/msbuild/nuget-installer.yml
+#       parameters:
+#         nugetVersion: $(nuget.version)
