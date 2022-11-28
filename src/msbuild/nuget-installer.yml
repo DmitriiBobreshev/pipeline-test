@@ -1,3 +1,4 @@
+steps:
 - task: NuGetInstaller@0
   inputs:
     solution: 'projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
