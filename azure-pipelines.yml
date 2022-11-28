@@ -41,13 +41,13 @@ stages:
       vmImage: 'ubuntu-20.04'
     strategy:
       matrix:
-        Nuget3.10.2:
+        Nuget3.3.0:
           nuget.version: '3.3.0'
-        Nuget3.5.4:
+        Nuget3.5.0:
           nuget.version: '3.5.0'
-        Nuget2.16.7:
+        Nuget4.0.0:
           nuget.version: '4.0.0'
-        Nuget2.7.0:
+        Nuget5:
           nuget.version: '5'
         # default: 
         #   nuget.version: 'latest'
