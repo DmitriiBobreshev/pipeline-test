@@ -22,7 +22,7 @@ steps:
       nuGetVersion: '${{ parameters.nugetVersion }}'
       nuGetPath: 'test'
 
-${{ else }}:
+- ${{ else }}:
 
   - task: NuGetInstaller@0
     inputs:
