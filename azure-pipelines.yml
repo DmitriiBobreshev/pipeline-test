@@ -84,8 +84,6 @@ stages:
       matrix:
         Nuget3.3.0:
           nuget.version: '4.0.0.2283'
-        Nuget3.5.0:
-          nuget.version: '3.5.0.1829'
         Nuget4.0.0:
           nuget.version: '4.0.0.2283'
     steps:
@@ -104,8 +102,6 @@ stages:
       matrix:
         Nuget3.3.0:
           nuget.version: '4.0.0.2283'
-        Nuget3.5.0:
-          nuget.version: '3.5.0.1829'
         Nuget4.0.0:
           nuget.version: '4.0.0.2283'
     steps:
@@ -122,12 +118,8 @@ stages:
       vmImage: 'macos-10.15'
     strategy:
       matrix:
-        Nuget3.3.0:
-          nuget.version: '4.0.0.2283'
         Nuget3.5.0:
           nuget.version: '3.5.0.1829'
-        Nuget4.0.0:
-          nuget.version: '4.0.0.2283'
     steps:
     - template: src/msbuild/nuget-installer.yml
       parameters:
@@ -142,12 +134,8 @@ stages:
       vmImage: 'macos-11'
     strategy:
       matrix:
-        Nuget3.3.0:
-          nuget.version: '4.0.0.2283'
         Nuget3.5.0:
           nuget.version: '3.5.0.1829'
-        Nuget4.0.0:
-          nuget.version: '4.0.0.2283'
     steps:
     - template: src/msbuild/nuget-installer.yml
       parameters:
@@ -162,12 +150,8 @@ stages:
       vmImage: 'macos-12'
     strategy:
       matrix:
-        Nuget3.3.0:
-          nuget.version: '4.0.0.2283'
         Nuget3.5.0:
           nuget.version: '3.5.0.1829'
-        Nuget4.0.0:
-          nuget.version: '4.0.0.2283'
     steps:
     - template: src/msbuild/nuget-installer.yml
       parameters:
