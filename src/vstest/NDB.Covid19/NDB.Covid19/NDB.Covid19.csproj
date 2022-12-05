@@ -5,7 +5,7 @@
 
     <Configurations>Debug;Release;UNIT_TEST</Configurations>
     <RestoreSources>
-      ../TempNugetFeed;https://api.nuget.org/v3/index.json;
+      https://api.nuget.org/v3/index.json;
     </RestoreSources>
 
   </PropertyGroup>
