@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "TheItemId1",
+    "Description": "TheItemDescription1"
+  },
+  {
+    "Id": "TheItemId2",
+    "Description": "TheItemDescription2"
+  }
+]

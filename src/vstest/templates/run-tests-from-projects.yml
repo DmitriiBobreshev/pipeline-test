@@ -1,0 +1,34 @@
+#
+# Run tests using 'dotnet test'
+#
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Dotnet Test: Run Unit Tests'
+  inputs:
+    command: test
+    arguments: "--no-restore --configuration $(Build.Configuration)"
+    projects: |
+      **/*UnitTests.csproj
+    
+    testRunTitle: 'Dotnet Test: Unit Tests'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Dotnet Test: Run Integration Tests'
+  inputs:
+    arguments: "--no-restore --configuration $(Build.Configuration)"
+    command: test
+    projects: |
+      **/*IntegrationTests.csproj
+    
+    testRunTitle: 'Dotnet Test: Integration Tests'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Dotnet Test: Run Acceptance Tests'
+  inputs:
+    arguments: "--no-restore --configuration $(Build.Configuration)"
+    command: test
+    projects: |
+      **/*AcceptanceTests.csproj
+    
+    testRunTitle: 'Dotnet Test: Acceptance Tests'

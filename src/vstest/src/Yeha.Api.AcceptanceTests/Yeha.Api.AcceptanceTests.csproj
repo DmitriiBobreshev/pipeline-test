@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="serilogSettings.json" />
+    <None Remove="Snapshots\Many.json" />
+    <None Remove="Snapshots\One.json" />
+    <None Remove="Snapshots\Zero.json" />
+    <None Remove="TestExecutionContexts\testsettings.CI.json" />
+    <None Remove="TestExecutionContexts\testsettings.Development.json" />
+    <None Remove="TestExecutionContexts\testsettings.json" />
+    <None Remove="TestExecutionContexts\testsettings.Local-InProcess.json" />
+    <None Remove="TestExecutionContexts\testsettings.Local.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\Yeha.Api\appsettings.Development.json" Link="appsettings.Development.json" />
+    <Content Include="..\Yeha.Api\appsettings.json" Link="appsettings.json" />
+    <Content Include="..\Yeha.Api\appsettings.Local.json" Link="appsettings.Local.json" />
+    <Content Include="serilogSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Snapshots\Many.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Snapshots\One.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Snapshots\Zero.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestExecutionContexts\testsettings.CI.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestExecutionContexts\testsettings.Local-InProcess.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestExecutionContexts\testsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestExecutionContexts\testsettings.Local.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestExecutionContexts\testsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.7" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
+    <PackageReference Include="coverlet.collector" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NSubstitute" Version="4.2.2" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Yeha.Api\Yeha.Api.csproj" />
+  </ItemGroup>
+
+</Project>

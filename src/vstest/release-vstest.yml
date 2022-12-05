@@ -1,0 +1,32 @@
+trigger: none
+pr: none
+    
+#
+# NOTE: This uses the Visual Studio Test Runner and therefore needs to run on Windows 2019 Image
+#
+
+name: 1.0$(Rev:.r)
+
+variables:
+  - name: Build.Configuration
+    value: Release
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      vmImage: windows-2019
+
+    steps:
+    - task: VisualStudioTestPlatformInstaller@1
+      displayName: 'Visual Studio Test Platform Installer'
+      inputs:
+        versionSelector: latestStable
+    - task: DotNetCoreCLI@2
+      displayName: 'Dotnet Restore'
+      inputs:
+        command: restore
+        projects: '**/*.sln'
+    - template: templates/run-tests-from-projects.yml
+    - template: templates/run-tests-from-dlls-vstest.yml

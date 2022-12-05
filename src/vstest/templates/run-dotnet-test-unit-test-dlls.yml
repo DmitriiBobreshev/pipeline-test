@@ -1,0 +1,15 @@
+#
+# Run tests from the DLLs using dotnet test
+#
+steps:
+- powershell: |
+    dotnet test $(System.DefaultWorkingDirectory)src/vstest/templates/src/Yeha.Api.UnitTests/bin/$(Build.Configuration)/netcoreapp3.1/publish/Yeha.Api.UnitTests.dll --logger:"trx;LogFileName=DotNet-Test-UnitTests.trx"
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results **/DotNet-Test-UnitTests.trx'
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFormat: VSTest
+    testResultsFiles: '**/*DotNet-Test-UnitTests.trx'
+    failTaskOnFailedTests: true
+    testRunTitle: 'Dotnet Test: Unit Tests'

@@ -1,0 +1,16 @@
+#
+# Run tests from the DLLs using dotnet test
+#
+steps:
+- powershell: |
+    dotnet test $(System.DefaultWorkingDirectory)src/Yeha.Api.IntegrationTests/bin/$(Build.Configuration)/netcoreapp3.1/publish/Yeha.Api.IntegrationTests.dll --logger:"trx;LogFileName=DotNet-Test-IntegrationTests.trx"
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results **/DotNet-Test-IntegrationTests.trx'
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFormat: VSTest
+    testResultsFiles: '**/*DotNet-Test-IntegrationTests.trx'
+    failTaskOnFailedTests: true
+    testRunTitle: 'Dotnet Test: Integration Tests'
+    

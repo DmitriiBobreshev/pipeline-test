@@ -1,0 +1,28 @@
+#
+# Run tests using VsTest
+#
+
+steps:
+- task: VSTest@2
+  displayName: 'VsTest: Run Unit Tests'
+  inputs:
+    testAssemblyVer2: |
+     **\*UnitTests.dll
+     !**\obj\**
+    testRunTitle: 'VsTest: Unit Tests'
+
+- task: VSTest@2
+  displayName: 'VsTest: Run Integration Tests'
+  inputs:
+    testAssemblyVer2: |
+     **\*IntegrationTests.dll
+     !**\obj\**
+    testRunTitle: 'VsTest: Integration Tests'
+
+- task: VSTest@2
+  displayName: 'VsTest: Run Acceptance Tests'
+  inputs:
+    testAssemblyVer2: |
+     **\*AcceptanceTests.dll
+     !**\obj\**
+    testRunTitle: 'VsTest: Acceptance Tests'
