@@ -7,7 +7,7 @@ steps:
 
 - task: VSBuild@1
   inputs:
-    solution: 'NDB.Covid19/*.sln'
+    solution: 'src/vstest/NDB.Covid19/*.sln'
     msbuildArgs: '/p:PackageLocation="$(build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
