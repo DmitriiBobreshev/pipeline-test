@@ -49,10 +49,10 @@ stages:
         command: restore
         projects: '**/*.sln'
 
-    - template: templates/run-tests-from-projects.yml
+    - template: src/vstest/templates/run-tests-from-projects.yml
     - powershell: 'Get-ChildItem -Recurse'
-      workingDirectory: src
+      workingDirectory: src/vstest/src
       displayName: 'PowerShell Script'
-    - template: templates/run-dotnet-test-unit-test-dlls.yml
-    - template: templates/run-dotnet-test-integration-test-dlls.yml
-    - template: templates/run-dotnet-test-acceptance-test-dlls.yml
+    - template: src/vstest/templates/run-dotnet-test-unit-test-dlls.yml
+    - template: src/vstest/templates/run-dotnet-test-integration-test-dlls.yml
+    - template: src/vstest/templates/run-dotnet-test-acceptance-test-dlls.yml
