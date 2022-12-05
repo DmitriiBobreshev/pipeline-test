@@ -1,0 +1,33 @@
+steps:
+- task: DotNetCoreCLI@2
+  displayName: dotnet restore
+  inputs:
+    command: restore
+    projects:  '**/*.sln'
+
+- task: VSBuild@1
+  inputs:
+    solution: 'NDB.Covid19/*.sln'
+    msbuildArgs: '/p:PackageLocation="$(build.artifactStagingDirectory)"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+# Copy files of Test
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: '$(system.defaultworkingdirectory)'
+    contents: |
+      **\bin\$(buildConfiguration)\**
+      **\$(buildConfiguration)\*test.dll 
+      !**\obj\**
+    targetFolder: '$(build.artifactStagingDirectory)'
+
+# Regression Test
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    searchFolder: '$(build.artifactStagingDirectory)'
+    testAssemblyVer2: '**\*test.dll'
+    publishRunAttachement: true
+    codeCoverageEnabled: true

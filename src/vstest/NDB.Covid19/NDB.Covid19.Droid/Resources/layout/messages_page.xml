@@ -1,0 +1,92 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/defaultVerticalMargin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/defaultHorizontalMargin">
+        <ImageView
+                android:id="@+id/arrow_back"
+                android:layout_width="@dimen/backButton"
+                android:layout_height="@dimen/backButton"
+                app:layout_constraintBaseline_toBaselineOf="@id/messages_page_title"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+                android:id="@+id/messages_page_title"
+                android:text="Beskeder"
+                style="@style/HeaderText"
+                android:textStyle="bold"
+                android:accessibilityTraversalBefore="@id/messages_page_sub_header"
+                android:layout_width="0dp"
+                android:paddingStart="@dimen/smallMargin"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/arrow_back"
+                app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+            android:id="@+id/messages_page_sub_header"
+            style="@style/HeaderText"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="4sp"
+            android:layout_marginTop="@dimen/defaultVerticalMargin"
+            android:layout_marginHorizontal="@dimen/defaultHorizontalMargin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_layout"
+            android:text="Du har ingen beskede"/>
+
+    <TextView
+            android:id="@+id/last_updated"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Last updated"
+            android:textAppearance="@style/PrimaryText"
+            android:layout_marginHorizontal="@dimen/defaultHorizontalMargin"
+            android:paddingBottom="@dimen/defaultVerticalMargin"
+            android:paddingTop="@dimen/smallMargin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/messages_page_sub_header" />
+
+    <TextView
+            android:id="@+id/no_items_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:lineSpacingExtra="10sp"
+            android:layout_marginHorizontal="@dimen/defaultHorizontalMargin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/last_updated"
+            style="@style/PrimaryText"
+            android:text="Dummy text" />
+
+    <ListView
+            android:id="@+id/messages_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/no_items_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

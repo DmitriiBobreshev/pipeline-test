@@ -16,43 +16,25 @@ parameters:
     values: []
 
 variables:
-  - name: ndkPath
-    value: TEST_NDK_PATH
-  - name: androidSdkPath
-    value: TEST_SDK_PATH
   - name: System.Debug
     value: true
   - name: build.clean
     value: all
   - name: agent.clean.buildDirectory
     value: all
-  - name: scheme
-    value: test 
-  - name: allValues
-  - name: Build.Configuration
-    value: Release
+  - name: buildPlatform
+    value: 'Any CPU'
+  - name: buildConfiguration
+    value: 'UNIT_TEST'
   # - name: AGENT_USE_NODE10
   #   value: true
 
       
-stages:
-- stage: Build
-  jobs:
-  - job: Build
-    pool:
-      vmImage: ubuntu-18.04
+jobs:
+- job: Build
+  pool:
+    name: Azure Pipelines
+    vmImage: windows-latest
 
-    steps:
-    - task: DotNetCoreCLI@2
-      displayName: 'Dotnet Restore'
-      inputs:
-        command: restore
-        projects: '**/*.sln'
-
-    - template: src/vstest/templates/run-tests-from-projects.yml
-    - powershell: 'Get-ChildItem -Recurse'
-      workingDirectory: src/vstest/src
-      displayName: 'PowerShell Script'
-    - template: src/vstest/templates/run-dotnet-test-unit-test-dlls.yml
-    - template: src/vstest/templates/run-dotnet-test-integration-test-dlls.yml
-    - template: src/vstest/templates/run-dotnet-test-acceptance-test-dlls.yml
+  steps:
+   - template: src/vstest/template.yml
