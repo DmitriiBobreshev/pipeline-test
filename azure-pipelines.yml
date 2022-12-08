@@ -37,11 +37,9 @@ jobs:
     vmImage: ubuntu-latest
 
   steps:
-  - task: Bash@3
+  - task: NodeTool@0
     inputs:
-      targetType: 'inline'
-      script: |
-        # Write your commands here
-        
-        echo 'Hello world'
+      versionSource: 'spec'
+      versionSpec: '6.x'
+      checkLatest: true
   #  - template: src/vstest/template.yml
