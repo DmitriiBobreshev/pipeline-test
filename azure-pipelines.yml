@@ -34,7 +34,8 @@ jobs:
 - job: Build
   pool:
     name: Azure Pipelines
-    vmImage: windows-latest
+    vmImage: ubuntu-latest
 
   steps:
-   - template: src/vstest/template.yml
+    - script: echo '123';
+  #  - template: src/vstest/template.yml
