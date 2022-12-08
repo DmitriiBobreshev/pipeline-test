@@ -37,5 +37,11 @@ jobs:
     vmImage: ubuntu-latest
 
   steps:
-    - script: echo '123';
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        # Write your commands here
+        
+        echo 'Hello world'
   #  - template: src/vstest/template.yml
