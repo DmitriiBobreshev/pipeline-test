@@ -37,9 +37,4 @@ jobs:
     vmImage: ubuntu-latest
 
   steps:
-  - task: NodeTool@0
-    inputs:
-      versionSource: 'spec'
-      versionSpec: '6.x'
-      checkLatest: true
-  #  - template: src/vstest/template.yml
+  - task: Kubernetes@0
