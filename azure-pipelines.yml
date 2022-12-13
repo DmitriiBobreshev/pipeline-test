@@ -38,3 +38,6 @@ jobs:
 
   steps:
   - task: Kubernetes@0
+    displayName: 'kubectl '
+    inputs:
+      versionSpec: 1.13.2
