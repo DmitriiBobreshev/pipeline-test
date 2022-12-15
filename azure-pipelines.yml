@@ -37,6 +37,9 @@ jobs:
     vmImage: ubuntu-latest
 
   steps:
+  - bash: |
+      echo "##vso[build.updatebuildnumber]my-new-build-number"
+    displayName: 'Update Build Number'
   - task: Docker@2
     displayName: ' Build docker container'
     continueOnError: false
