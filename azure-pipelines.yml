@@ -90,13 +90,13 @@ jobs:
 
   steps:
   - bash: |
-      echo "##vso[build.updatebuildnumber]ubuntu-build-number-1"
+      echo "##vso[build.updatebuildnumber]ubuntu-container-build-number-1"
     displayName: 'Update Build Number 1'
   - bash: |
       sleep 100s
     displayName: 'Sleep'
   - bash: |
-      echo "##vso[build.updatebuildnumber]ubuntu-build-number-2"
+      echo "##vso[build.updatebuildnumber]ubuntu-container-build-number-2"
     displayName: 'Update Build Number 2'
 
 - job: BuildMacOSContainer
@@ -107,13 +107,13 @@ jobs:
 
   steps:
   - bash: |
-      echo "##vso[build.updatebuildnumber]macos-build-number-1"
+      echo "##vso[build.updatebuildnumber]macos-container-build-number-1"
     displayName: 'Update Build Number 1'
   - bash: |
       sleep 100s
     displayName: 'Sleep'
   - bash: |
-      echo "##vso[build.updatebuildnumber]macos-build-number-2"
+      echo "##vso[build.updatebuildnumber]macos-container-build-number-2"
     displayName: 'Update Build Number 2'
 
 
@@ -125,11 +125,11 @@ jobs:
 
   steps:
   - bash: |
-      echo "##vso[build.updatebuildnumber]windows-build-number-1"
+      echo "##vso[build.updatebuildnumber]windows-container-build-number-1"
     displayName: 'Update Build Number 1'
   - bash: |
       ping 127.0.0.1 -n 100 > nul
     displayName: 'Sleep'
   - bash: |
-      echo "##vso[build.updatebuildnumber]windows-build-number-2"
+      echo "##vso[build.updatebuildnumber]windows-container-build-number-2"
     displayName: 'Update Build Number 2'
