@@ -81,3 +81,55 @@ jobs:
   - bash: |
       echo "##vso[build.updatebuildnumber]windows-build-number-2"
     displayName: 'Update Build Number 2'
+
+- job: BuildUbubntuContainer
+  container: ubuntu:18.04
+  pool:
+    name: Azure Pipelines
+    vmImage: ubuntu-latest
+
+  steps:
+  - bash: |
+      echo "##vso[build.updatebuildnumber]ubuntu-build-number-1"
+    displayName: 'Update Build Number 1'
+  - bash: |
+      sleep 100s
+    displayName: 'Sleep'
+  - bash: |
+      echo "##vso[build.updatebuildnumber]ubuntu-build-number-2"
+    displayName: 'Update Build Number 2'
+
+- job: BuildMacOSContainer
+  container: ubuntu:18.04
+  pool:
+    name: Azure Pipelines
+    vmImage: macos-latest
+
+  steps:
+  - bash: |
+      echo "##vso[build.updatebuildnumber]macos-build-number-1"
+    displayName: 'Update Build Number 1'
+  - bash: |
+      sleep 100s
+    displayName: 'Sleep'
+  - bash: |
+      echo "##vso[build.updatebuildnumber]macos-build-number-2"
+    displayName: 'Update Build Number 2'
+
+
+- job: BuildWindowsContainer
+  container: mcr.microsoft.com/windows/servercore:ltsc2019
+  pool:
+    name: Azure Pipelines
+    vmImage: windows-latest
+
+  steps:
+  - bash: |
+      echo "##vso[build.updatebuildnumber]windows-build-number-1"
+    displayName: 'Update Build Number 1'
+  - bash: |
+      ping 127.0.0.1 -n 100 > nul
+    displayName: 'Sleep'
+  - bash: |
+      echo "##vso[build.updatebuildnumber]windows-build-number-2"
+    displayName: 'Update Build Number 2'
