@@ -37,12 +37,6 @@ jobs:
     vmImage: ubuntu-latest
 
   steps:
-  - task: Docker@0
-    displayName: ' Build docker container'
-    continueOnError: false
-    inputs:
-      action: 'Build an image'
-      Dockerfile: './Dockerfile.text'
   - task: Docker@1
     displayName: ' Build docker container'
     continueOnError: false
