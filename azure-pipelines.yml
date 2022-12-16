@@ -49,69 +49,69 @@ jobs:
       echo "##vso[build.updatebuildnumber]ubuntu-build-number-2"
     displayName: 'Update Build Number 2'
 
-- job: BuildMacOS
-  pool:
-    name: Azure Pipelines
-    vmImage: macos-latest
+# - job: BuildMacOS
+#   pool:
+#     name: Azure Pipelines
+#     vmImage: macos-latest
 
-  steps:
-  - bash: |
-      echo "##vso[build.updatebuildnumber]macos-build-number-1"
-    displayName: 'Update Build Number 1'
-  - bash: |
-      sleep 100s
-    displayName: 'Sleep'
-  - bash: |
-      echo "##vso[build.updatebuildnumber]macos-build-number-2"
-    displayName: 'Update Build Number 2'
+#   steps:
+#   - bash: |
+#       echo "##vso[build.updatebuildnumber]macos-build-number-1"
+#     displayName: 'Update Build Number 1'
+#   - bash: |
+#       sleep 100s
+#     displayName: 'Sleep'
+#   - bash: |
+#       echo "##vso[build.updatebuildnumber]macos-build-number-2"
+#     displayName: 'Update Build Number 2'
 
 
-- job: BuildWindows
-  pool:
-    name: Azure Pipelines
-    vmImage: windows-latest
+# - job: BuildWindows
+#   pool:
+#     name: Azure Pipelines
+#     vmImage: windows-latest
 
-  steps:
-  - bash: |
-      echo "##vso[build.updatebuildnumber]windows-build-number-1"
-    displayName: 'Update Build Number 1'
-  - bash: |
-      ping 127.0.0.1 -n 100 > nul
-    displayName: 'Sleep'
-  - bash: |
-      echo "##vso[build.updatebuildnumber]windows-build-number-2"
-    displayName: 'Update Build Number 2'
+#   steps:
+#   - bash: |
+#       echo "##vso[build.updatebuildnumber]windows-build-number-1"
+#     displayName: 'Update Build Number 1'
+#   - bash: |
+#       ping 127.0.0.1 -n 100 > nul
+#     displayName: 'Sleep'
+#   - bash: |
+#       echo "##vso[build.updatebuildnumber]windows-build-number-2"
+#     displayName: 'Update Build Number 2'
 
-- job: BuildUbubntuContainer
-  container: ubuntu:18.04
-  pool:
-    name: Azure Pipelines
-    vmImage: ubuntu-latest
+# - job: BuildUbubntuContainer
+#   container: ubuntu:18.04
+#   pool:
+#     name: Azure Pipelines
+#     vmImage: ubuntu-latest
 
-  steps:
-  - bash: |
-      echo "##vso[build.updatebuildnumber]ubuntu-container-build-number-1"
-    displayName: 'Update Build Number 1'
-  - bash: |
-      sleep 100s
-    displayName: 'Sleep'
-  - bash: |
-      echo "##vso[build.updatebuildnumber]ubuntu-container-build-number-2"
-    displayName: 'Update Build Number 2'
+#   steps:
+#   - bash: |
+#       echo "##vso[build.updatebuildnumber]ubuntu-container-build-number-1"
+#     displayName: 'Update Build Number 1'
+#   - bash: |
+#       sleep 100s
+#     displayName: 'Sleep'
+#   - bash: |
+#       echo "##vso[build.updatebuildnumber]ubuntu-container-build-number-2"
+#     displayName: 'Update Build Number 2'
 
-- job: BuildWindowsContainer
-  container: ubuntu:18.04
-  pool:
-    name: Azure Pipelines
-    vmImage: windows-latest
+# - job: BuildWindowsContainer
+#   container: ubuntu:18.04
+#   pool:
+#     name: Azure Pipelines
+#     vmImage: windows-latest
 
-  steps:
-  - bash: |
-      echo "##vso[build.updatebuildnumber]windows-container-build-number-1"
-    displayName: 'Update Build Number 1'
-  - bash: |
-      sleep 100s
-    displayName: 'Sleep'
-  - bash: |
-      echo "##vso[build.updatebuildnumber]windows-container-build-number-2"
-    displayName: 'Update Build Number 2'
+#   steps:
+#   - bash: |
+#       echo "##vso[build.updatebuildnumber]windows-container-build-number-1"
+#     displayName: 'Update Build Number 1'
+#   - bash: |
+#       sleep 100s
+#     displayName: 'Sleep'
+#   - bash: |
+#       echo "##vso[build.updatebuildnumber]windows-container-build-number-2"
+#     displayName: 'Update Build Number 2'
