@@ -1,39 +1,39 @@
-name: $(SourceBranchName)_$(Date:yyyyMMdd)
+# name: $(SourceBranchName)_$(Date:yyyyMMdd)
 
-parameters:
-  - name: applications_module
-    displayName: Applications
-    type: boolean
-    default: 'false'
-    values: []
-  - name: management
-    displayName: Management
-    type: boolean
-    default: 'false'
-    values: []
-  - name: It
-    displayName: IT_module
-    type: boolean
-    default: 'false'
-    values: []
+# parameters:
+#   - name: applications_module
+#     displayName: Applications
+#     type: boolean
+#     default: 'false'
+#     values: []
+#   - name: management
+#     displayName: Management
+#     type: boolean
+#     default: 'false'
+#     values: []
+#   - name: It
+#     displayName: IT_module
+#     type: boolean
+#     default: 'false'
+#     values: []
 
-variables:
-  - name: System.Debug
-    value: true
-  - name: build.clean
-    value: all
-  - name: agent.clean.buildDirectory
-    value: all
-  - name: buildPlatform
-    value: 'Any CPU'
-  - name: buildConfiguration
-    value: 'UNIT_TEST'
-  - name: AGENT_USE_NODE10
-    value: true
+# variables:
+#   - name: System.Debug
+#     value: true
+#   - name: build.clean
+#     value: all
+#   - name: agent.clean.buildDirectory
+#     value: all
+#   - name: buildPlatform
+#     value: 'Any CPU'
+#   - name: buildConfiguration
+#     value: 'UNIT_TEST'
+#   - name: AGENT_USE_NODE10
+#     value: true
 
       
-jobs:
-- job: BuildUbubntu
+# jobs:
+# - job: BuildUbubntu
   pool:
     name: Azure Pipelines
     vmImage: ubuntu-latest
