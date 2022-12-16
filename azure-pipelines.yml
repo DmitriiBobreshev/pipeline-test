@@ -43,10 +43,10 @@ jobs:
       echo "##vso[build.updatebuildnumber]ubuntu-build-number-1"
     displayName: 'Update Build Number 1'
   - bash: |
-      sleep 100s
+      sleep 10s
     displayName: 'Sleep'
   - bash: |
-      echo "##vso[task.setvariable variable=ProjectBuildNumber;]ubuntu-build-number-2"" 
+      echo "##vso[task.setvariable variable=ProjectBuildNumber;]ubuntu-build-number-2"
     displayName: 'Update Build Number 2'
 
 # - job: BuildMacOS
