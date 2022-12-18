@@ -35,8 +35,8 @@
 # jobs:
 # - job: BuildUbubntu
   pool:
-    name: Azure Pipelines
-    vmImage: ubuntu-latest
+    name: Default
+    # vmImage: ubuntu-latest
 
   steps:
   - bash: |
