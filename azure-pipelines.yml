@@ -41,6 +41,7 @@ pool:
   # vmImage: ubuntu-latest
 
 steps:
+- checkout: none
 - script: |
     echo "##vso[build.addbuildtag]BuildName=e00f8cf4-8b30-43ff-97b5-eb3aae673193"
     echo "##vso[build.addbuildtag]Tag_UnitTestPassed"
