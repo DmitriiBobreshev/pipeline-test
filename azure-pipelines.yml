@@ -40,8 +40,8 @@
 
   steps:
   - bash: |
-      echo ##vso[build.addbuildtag]LegacyBranchName=FMBase_Main
-      echo ##vso[build.addbuildtag]LegacyBranchName=RequesterBuildName=8.22.12.09.3519204.FMBase_Main.inc, RequestingAlias=4zabuild;;4zabuild;ASage
+      echo ##vso[build.addbuildtag]Tag_UnitTestPassed
+      echo ##vso[build.addbuildtag]8.22.12.09.3519204.FMBase_Main.inc
       echo "##vso[build.updatebuildnumber]ubuntu-build-number-1"
     displayName: 'Update Build Number 1'
   - bash: |
