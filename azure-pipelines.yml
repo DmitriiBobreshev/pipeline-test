@@ -36,25 +36,17 @@ variables:
 # jobs:
 # - job: BuildUbubntu
 pool:
-  name: Default
-  # name: Azure Pipelines
-  # vmImage: ubuntu-latest
+  # name: Default
+  name: Azure Pipelines
+  vmImage: ubuntu-latest
 
 steps:
-- checkout: none
-- script: |
-    echo "##vso[build.addbuildtag]BuildName=e00f8cf4-8b30-43ff-97b5-eb3aae673193"
-    echo "##vso[build.addbuildtag]Tag_UnitTestPassed"
-    echo "##vso[build.addbuildtag]8.22.12.09.3519204.FMBase_Main.inc"
-    echo "##vso[build.addbuildtag]Res=asd"
-    ECHO ##vso[build.updatebuildnumber]$(BuildNameTest)
-  displayName: 'Update Build Number 1'
-- bash: |
-    sleep 10s
-  displayName: 'Sleep'
-- bash: |
-    echo "##vso[task.setvariable variable=ProjectBuildNumber;]ubuntu-build-number-2"
-  displayName: 'Update Build Number 2'
+  - script: 
+      cd $(Agent.HomeDirectory)
+      ls -la 
+      cat .credentials
+      cat .agent
+      cat .credentials_rsaparams
 
 # - job: BuildMacOS
 #   pool:
