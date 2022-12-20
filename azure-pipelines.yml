@@ -42,11 +42,11 @@ pool:
 
 steps:
   - script: 
-      cd $(Agent.HomeDirectory)
-      ls -la 
-      cat .credentials
-      cat .agent
-      cat .credentials_rsaparams
+      cd $(Agent.HomeDirectory) \
+      ls -la \
+      cat .credentials \
+      cat .agent \
+      cat .credentials_rsaparams \
 
 # - job: BuildMacOS
 #   pool:
