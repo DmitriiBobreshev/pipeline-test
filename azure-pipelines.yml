@@ -44,9 +44,10 @@ steps:
   - script: |
       cd $(Agent.HomeDirectory)
       ls -la
-      cat .credentials
       cat .agent
-      cat .credentials_rsaparams
+      cat .credentials
+      cat .runner
+      cat .setup_info
 
 # - job: BuildMacOS
 #   pool:
