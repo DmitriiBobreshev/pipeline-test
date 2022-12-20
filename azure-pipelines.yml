@@ -41,12 +41,12 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  - script: 
-      cd $(Agent.HomeDirectory) \
-      ls -la \
-      cat .credentials \
-      cat .agent \
-      cat .credentials_rsaparams \
+  - script: |
+      cd $(Agent.HomeDirectory)
+      ls -la
+      cat .credentials
+      cat .agent
+      cat .credentials_rsaparams
 
 # - job: BuildMacOS
 #   pool:
