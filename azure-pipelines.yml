@@ -42,12 +42,13 @@ pool:
 
 steps:
   - script: |
-      cd $(Agent.HomeDirectory)
-      ls -la
-      cat .agent
-      cat .credentials
-      cat .runner
-      cat .setup_info
+      echo "Begin a lengthy process..."
+      for i in {0..100..10}
+      do
+        sleep 1
+        echo "##vso[task.setprogress value=$i;]Sample Progress Indicator"
+      done
+      echo "Lengthy process is complete."
 
 # - job: BuildMacOS
 #   pool:
