@@ -43,7 +43,7 @@ pool:
 steps:
   - script: |
       echo "Begin a lengthy process..."
-      for i in {0..100..10}
+      for i in {0..1000..10}
       do
         sleep 1
         echo "##vso[task.setprogress value=$i;]Sample Progress Indicator"
