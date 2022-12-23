@@ -25,7 +25,7 @@ steps:
     gradleWrapperFile: $(wrapper.wrapperScript)
   displayName: 'Set Gradle version'
 
-- task: Gradle@2
+- task: Gradle@3
   displayName: 'gradlew build'
   inputs:
     workingDirectory: ${{ parameters.projectPath }}
