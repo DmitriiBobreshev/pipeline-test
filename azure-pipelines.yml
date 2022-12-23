@@ -7,8 +7,8 @@ variables:
     value: all
   - name: agent.clean.buildDirectory
     value: all
-  - name: AGENT_USE_NODE10
-    value: true
+  # - name: AGENT_USE_NODE10
+  #   value: true
 
 stages:
 - stage: 'Hosted_Ubuntu_1804'
