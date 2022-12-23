@@ -1,6 +1,14 @@
 variables:
   - name: enableAzureResourcesDependentTests # Enable tests that are using Azure resources
     value: true
+  - name: System.Debug
+    value: true
+  - name: build.clean
+    value: all
+  - name: agent.clean.buildDirectory
+    value: all
+  - name: AGENT_USE_NODE10
+    value: true
 
 stages:
 - stage: 'Hosted_Ubuntu_1804'
