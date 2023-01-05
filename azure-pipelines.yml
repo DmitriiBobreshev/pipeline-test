@@ -1,21 +1,4 @@
-# name: $(SourceBranchName)_$(Date:yyyyMMdd)
-
-# parameters:
-#   - name: applications_module
-#     displayName: Applications
-#     type: boolean
-#     default: 'false'
-#     values: []
-#   - name: management
-#     displayName: Management
-#     type: boolean
-#     default: 'false'
-#     values: []
-#   - name: It
-#     displayName: IT_module
-#     type: boolean
-#     default: 'false'
-#     values: []
+name: $(SourceBranchName)_$(Date:yyyyMMdd)
 
 variables:
 #   - name: System.Debug
@@ -33,86 +16,12 @@ variables:
   - name: BuildNameTest
     value: 'ubuntu-build-number-1' 
       
-# jobs:
-# - job: BuildUbubntu
-pool:
-  # name: Default
-  name: Azure Pipelines
-  vmImage: ubuntu-latest
-
-steps:
-  - script: |
-      echo "Begin a lengthy process..."
-      for i in {0..1000..10}
-      do
-        sleep 1
-        echo "##vso[task.setprogress value=$i;]Sample Progress Indicator"
-      done
-      echo "Lengthy process is complete."
-
-# - job: BuildMacOS
-#   pool:
-#     name: Azure Pipelines
-#     vmImage: macos-latest
-
-#   steps:
-#   - bash: |
-#       echo "##vso[build.updatebuildnumber]macos-build-number-1"
-#     displayName: 'Update Build Number 1'
-#   - bash: |
-#       sleep 100s
-#     displayName: 'Sleep'
-#   - bash: |
-#       echo "##vso[build.updatebuildnumber]macos-build-number-2"
-#     displayName: 'Update Build Number 2'
-
-
-# - job: BuildWindows
-#   pool:
-#     name: Azure Pipelines
-#     vmImage: windows-latest
-
-#   steps:
-#   - bash: |
-#       echo "##vso[build.updatebuildnumber]windows-build-number-1"
-#     displayName: 'Update Build Number 1'
-#   - bash: |
-#       ping 127.0.0.1 -n 100 > nul
-#     displayName: 'Sleep'
-#   - bash: |
-#       echo "##vso[build.updatebuildnumber]windows-build-number-2"
-#     displayName: 'Update Build Number 2'
-
-# - job: BuildUbubntuContainer
-#   container: ubuntu:18.04
-#   pool:
-#     name: Azure Pipelines
-#     vmImage: ubuntu-latest
-
-#   steps:
-#   - bash: |
-#       echo "##vso[build.updatebuildnumber]ubuntu-container-build-number-1"
-#     displayName: 'Update Build Number 1'
-#   - bash: |
-#       sleep 100s
-#     displayName: 'Sleep'
-#   - bash: |
-#       echo "##vso[build.updatebuildnumber]ubuntu-container-build-number-2"
-#     displayName: 'Update Build Number 2'
-
-# - job: BuildWindowsContainer
-#   container: ubuntu:18.04
-#   pool:
-#     name: Azure Pipelines
-#     vmImage: windows-latest
-
-#   steps:
-#   - bash: |
-#       echo "##vso[build.updatebuildnumber]windows-container-build-number-1"
-#     displayName: 'Update Build Number 1'
-#   - bash: |
-#       sleep 100s
-#     displayName: 'Sleep'
-#   - bash: |
-#       echo "##vso[build.updatebuildnumber]windows-container-build-number-2"
-#     displayName: 'Update Build Number 2'
+jobs:
+  - job: macos_test
+    pool:
+        vmImage: macos-latest
+    steps:
+    - task: npmAuthenticate@0
+      inputs:
+        workingFile: .npmrc
+      condition: eq('false', 'true')
