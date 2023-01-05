@@ -19,7 +19,8 @@ variables:
 jobs:
   - job: macos_test
     pool:
-        vmImage: macos-latest
+        name: Default
+        # vmImage: macos-latest
     steps:
     - task: npmAuthenticate@0
       inputs:
