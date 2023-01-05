@@ -11,8 +11,8 @@ variables:
 #     value: 'Any CPU'
 #   - name: buildConfiguration
 #     value: 'UNIT_TEST'
-#   - name: AGENT_USE_NODE10
-#     value: true
+  - name: AGENT_USE_NODE10
+    value: true
   - name: BuildNameTest
     value: 'ubuntu-build-number-1' 
       
