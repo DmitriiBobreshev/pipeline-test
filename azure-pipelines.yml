@@ -55,7 +55,7 @@ jobs:
           addToPath: true
           architecture: 'x64'
       - script:  python --version
-  - job: pyton38test
+  - job: pyton39test
     pool:
         # name: Default
         vmImage: windows-latest
