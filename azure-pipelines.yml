@@ -1,69 +1,30 @@
-name: $(SourceBranchName)_$(Date:yyyyMMdd)
-
 variables:
+  - name: ndkPath
+    value: TEST_NDK_PATH
+  - name: androidSdkPath
+    value: TEST_SDK_PATH
   - name: System.Debug
     value: true
-#   - name: build.clean
-#     value: all
-#   - name: agent.clean.buildDirectory
-#     value: all
-#   - name: buildPlatform
-#     value: 'Any CPU'
-#   - name: buildConfiguration
-#     value: 'UNIT_TEST'
-  # - name: AGENT_USE_NODE10
-  #   value: true
-  - name: BuildNameTest
-    value: 'ubuntu-build-number-1' 
-      
-jobs:
-  - job: pyton24test
-    pool:
-        # name: Default
-        vmImage: windows-latest
-    steps:
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: 'pypy2.4'
-          allowUnstable: true
-          addToPath: true
-          architecture: 'x64'
-      - script:  python --version
-    
-  - job: pytonlatesttest
-    pool:
-        # name: Default
-        vmImage: windows-latest
-    steps:
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: 'pypy2'
-          allowUnstable: true
-          addToPath: true
-          architecture: 'x64'
-      - script:  python --version
+  - name: build.clean
+    value: all
+  - name: agent.clean.buildDirectory
+    value: all
+  - name: scheme
+    value: test
 
-  - job: pyton38test
-    pool:
-        # name: Default
-        vmImage: windows-latest
-    steps:
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: 'pypy3.8'
-          allowUnstable: true
-          addToPath: true
-          architecture: 'x64'
-      - script:  python --version
-  - job: pyton39test
-    pool:
-        # name: Default
-        vmImage: windows-latest
-    steps:
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: 'pypy3.9'
-          allowUnstable: true
-          addToPath: true
-          architecture: 'x64'
-      - script:  python --version
+jobs:
+- job: WaitForDocker
+  pool: 'Default'
+  steps:
+    - checkout: none
+    - bash: |
+        while (! docker stats --no-stream ); do
+          echo "Waiting for Docker to launch..."
+          sleep 1
+        done
+- job: DockerStarted
+  pool: 'Default'
+  container: ubuntu:18.04
+  dependsOn: WaitForDocker 
+  steps:
+  - script: printenv
