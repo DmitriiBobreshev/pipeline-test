@@ -14,7 +14,8 @@ variables:
 
 jobs:
 - job: WaitForDocker
-  pool: 'Default'
+  pool: 
+    vmImage: 'ubuntu-latest'
   steps:
     - checkout: none
     - bash: |
@@ -23,8 +24,7 @@ jobs:
           sleep 1
         done
 - job: DockerStarted
-  pool: 'Default'
-  container: ubuntu:18.04
+ 
   dependsOn: WaitForDocker 
   steps:
   - script: printenv
