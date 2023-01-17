@@ -11,7 +11,7 @@ steps:
 
 - task: NuGetRestore@1
   inputs:
-    filePath: ${{ parameters.solutionPath }} 
+    solution: ${{ parameters.solutionPath }} 
     selectOrConfig: 'select'
     includeNuGetOrg: true
   retryCountOnTaskFailure: 3
