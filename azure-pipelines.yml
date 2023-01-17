@@ -13,18 +13,15 @@ variables:
     value: test
 
 jobs:
-- job: WaitForDocker
-  pool: 
-    vmImage: 'ubuntu-latest'
-  steps:
-    - checkout: none
-    - bash: |
-        while (! docker stats --no-stream ); do
-          echo "Waiting for Docker to launch..."
-          sleep 1
-        done
-- job: DockerStarted
- 
-  dependsOn: WaitForDocker 
-  steps:
-  - script: printenv
+  - job: 'Win2022s'
+    displayName: Windows VS2022
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2022'
+    steps:
+      - template: src/msbuild/msbuild-steps.yml
+        parameters:
+          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+      - template: src/msbuild/msbuild-steps.yml
+        parameters:
+          solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
