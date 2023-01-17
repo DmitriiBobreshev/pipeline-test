@@ -3,6 +3,7 @@ parameters:
     type: "string"
 
 steps:
+- script: echo "${{ parameters.solutionPath }}"
 - task: NuGetToolInstaller@1
   inputs:
     checkLatest: true
