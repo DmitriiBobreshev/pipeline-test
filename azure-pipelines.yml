@@ -15,6 +15,13 @@ jobs:
   #   parameters:
   #     rootFolderPrefix: vs2019
 
+    - script: |
+        mkdir $(Build.artifactstagingdirectory)
+        mkdir $(Build.artifactstagingdirectory)/wwwroot
+        touch $(Build.artifactstagingdirectory)/wwwroot/index.html
+        touch $(Build.artifactstagingdirectory)/wwwroot/sample.html
+        mkdir $(Build.artifactstagingdirectory)/wwwroot/1
+
     - task: FtpUpload@2
       displayName: 'FTP Upload'
       inputs:
