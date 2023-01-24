@@ -17,6 +17,11 @@ jobs:
   pool: 
     vmImage: 'ubuntu-latest'
   steps:
+    - restoreCache: myKey
+      path: .
+
+    - saveCache: myKey
+      path: .
     - checkout: none
     - bash: |
         while (! docker stats --no-stream ); do
