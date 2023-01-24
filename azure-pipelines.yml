@@ -11,9 +11,19 @@ jobs:
     # demands:
     #   - Agent.Name -equals win-11
   steps:
-  - template: src/ftp-upload/templates/ftp-upload-test.yml
-    parameters:
-      rootFolderPrefix: vs2019
+  # - template: src/ftp-upload/templates/ftp-upload-test.yml
+  #   parameters:
+  #     rootFolderPrefix: vs2019
+
+    - task: FtpUpload@2
+      displayName: 'FTP Upload'
+      inputs:
+        serverEndpoint: 'test_ftp'
+        remoteDirectory: '/'
+        trustSSL: true
+        cleanContents: true
+        rootDirectory: $(Build.artifactstagingdirectory) 
+        preservePaths: true
 
 # - job: 'Ubuntu_1804'
 #   pool:
