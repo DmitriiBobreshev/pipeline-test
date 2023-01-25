@@ -21,8 +21,8 @@ resources:
 jobs:
 - job: integration_tests
   displayName: Run integration tests
-  pool:
-    vmImage: 'ubuntu-latest'
+  pool: 'Default'
+    # vmImage: 'ubuntu-latest'
 
   container: my_container
   services:
