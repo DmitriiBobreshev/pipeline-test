@@ -29,7 +29,6 @@ jobs:
       target: host
     - script: |
         cat /etc/hostname
-        <script_that_initializes_postgres>
       target: 
         container: postgis
 # - job: WaitForDocker
