@@ -22,7 +22,7 @@ jobs:
     postgis: postgis
 
   container: 
-    image: postgis:14-3.3-alpine
+    image: postgis:14-3.3
   steps:
     - script: docker ps
       target: host
