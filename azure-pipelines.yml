@@ -13,23 +13,42 @@ variables:
     value: test
 
 jobs:
-- job: WaitForDocker
-  pool: 
-    vmImage: 'ubuntu-latest'
-  steps:
-    - restoreCache: myKey
-      path: .
+- job: integration_tests
+  displayName: Run integration tests
+  pool:
+    vmImage: ubuntu-latest
 
-    - saveCache: myKey
-      path: .
-    - checkout: none
-    - bash: |
-        while (! docker stats --no-stream ); do
-          echo "Waiting for Docker to launch..."
-          sleep 1
-        done
-- job: DockerStarted
- 
-  dependsOn: WaitForDocker 
+  services:
+    postgis: postgis
+
+  container: 
+    image: postgis:14-3.3-alpine
+    endpoint: 'asdasd'
   steps:
-  - script: printenv
+    - script: docker ps
+      target: host
+    - script: |
+        cat /etc/hostname
+        <script_that_initializes_postgres>
+      target: 
+        container: postgis
+# - job: WaitForDocker
+#   pool: 
+#     vmImage: 'ubuntu-latest'
+#   steps:
+#     - restoreCache: myKey
+#       path: .
+
+#     - saveCache: myKey
+#       path: .
+#     - checkout: none
+#     - bash: |
+#         while (! docker stats --no-stream ); do
+#           echo "Waiting for Docker to launch..."
+#           sleep 1
+#         done
+# - job: DockerStarted
+ 
+#   dependsOn: WaitForDocker 
+#   steps:
+#   - script: printenv
