@@ -13,27 +13,35 @@ variables:
     value: test
 resources:
   containers:
-  - container: postgis
-    image: ubuntu:20.04
-    
+  - container: my_container
+    image: buildpack-deps:focal
+  - container: nginx
+    image: nginx
+
 jobs:
 - job: integration_tests
   displayName: Run integration tests
   pool:
-    vmImage: ubuntu-latest
+    vmImage: 'ubuntu-latest'
 
+  container: my_container
   services:
-    postgis: postgis
+    nginx: nginx
 
-  container:
-    image: ubuntu:18.04
   steps:
-    - script: docker ps
-      target: host
-    - script: |
-        cat /etc/hostname
-      target: 
-        container: postgis
+  - script: |
+      curl nginx
+    displayName: Show that nginx is running
+  - script: docker ps
+    target: host
+  - script: |
+      cat /etc/hostname
+    target: 
+      container: nginx
+  - script: |
+      cat /etc/hostname
+    target: 
+      container: my_container
 # - job: WaitForDocker
 #   pool: 
 #     vmImage: 'ubuntu-latest'
