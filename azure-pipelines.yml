@@ -29,9 +29,9 @@ jobs:
     nginx: nginx
 
   steps:
-  - script: |
-      curl nginx
-    displayName: Show that nginx is running
+  # - script: |
+  #     curl nginx
+  #   displayName: Show that nginx is running
   - script: docker ps
     target: host
   - script: |
