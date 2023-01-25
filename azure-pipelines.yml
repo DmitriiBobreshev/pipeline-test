@@ -11,7 +11,11 @@ variables:
     value: all
   - name: scheme
     value: test
-
+resources:
+  containers:
+  - container: postgis
+    image: postgis:14-3.3-alpine
+    
 jobs:
 - job: integration_tests
   displayName: Run integration tests
@@ -21,8 +25,7 @@ jobs:
   services:
     postgis: postgis
 
-  container: 
-    # image: postgis:14-3.3-alpine
+  container:
     image: ubuntu:18.04
   steps:
     - script: docker ps
