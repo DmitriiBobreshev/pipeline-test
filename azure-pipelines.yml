@@ -14,7 +14,7 @@ variables:
 resources:
   containers:
   - container: my_container
-    image: ubuntu:18.04
+    image: alpine:3.16
   - container: nginx
     image: nginx
 
