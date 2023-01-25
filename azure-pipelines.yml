@@ -23,7 +23,6 @@ jobs:
 
   container: 
     image: postgis:14-3.3-alpine
-    endpoint: 'asdasd'
   steps:
     - script: docker ps
       target: host
