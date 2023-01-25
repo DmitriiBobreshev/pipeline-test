@@ -22,7 +22,8 @@ jobs:
     postgis: postgis
 
   container: 
-    image: postgis:14-3.3
+    # image: postgis:14-3.3-alpine
+    image: ubuntu:18.04
   steps:
     - script: docker ps
       target: host
