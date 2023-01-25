@@ -14,7 +14,7 @@ variables:
 resources:
   containers:
   - container: postgis
-    image: postgis:14-3.3-alpine
+    image: ubuntu:20.04
     
 jobs:
 - job: integration_tests
