@@ -14,7 +14,7 @@ variables:
 resources:
   containers:
   - container: my_container
-    image: buildpack-deps:focal
+    image: ubuntu:18.04
   - container: nginx
     image: nginx
 
