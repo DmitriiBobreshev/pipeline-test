@@ -32,7 +32,7 @@ jobs:
   - script: |
       docker network ls
       docker ps
-      curl localhost:8080
+      curl ${agent.containernetwork}:8080
     target: host
 
   - script: cat /etc/hostname
@@ -41,7 +41,7 @@ jobs:
   
   - script: | 
       cat /etc/hostname
-      curl localhost:8080
+      curl ${agent.containernetwork}:8080
     target:
       container: ubuntu
 
