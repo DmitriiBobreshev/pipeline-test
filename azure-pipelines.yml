@@ -47,12 +47,16 @@ jobs:
     target:
         container: nginx
   
+  - script: |
+      docker pull instrumentisto/nmap:latest
+      echo $(agent.containernetwork)
+      docker run --network $(agent.containernetwork) --rm -it instrumentisto/nmap  -v -A $(nginx-test-ip)
+    target: host
+
   - script: |  
       su 
-      apt-get install -y curl
-      apt-get install -y nmap
-      nmap -v -A $(nginx-test-ip)
-      curl $(nginx-test-ip):80
+      apt get install -y curl
+      curl $(nginx-test-ip):8080
     target:
       container: ubuntucontainer
 
