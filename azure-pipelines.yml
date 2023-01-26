@@ -26,11 +26,11 @@ jobs:
 
   container: my_container
   services:
-    nginx2: nginx
+    nginx_service: nginx
 
   steps:
   - script: |
-      curl nginx2
+      curl nginx_service
     displayName: Show that nginx is running
   - script: docker ps
     target: host
