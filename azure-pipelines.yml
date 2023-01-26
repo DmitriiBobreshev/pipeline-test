@@ -15,15 +15,12 @@ resources:
   containers:
   - container: ubuntu
     image: ubuntu:latest
-  - container: postgis
-    image: kartoza/postgis:9.6-2.4
+  - container: nginx
+    image: nginx
     ports:
-    - 5432:5432
+    - 8080:80
     env:
-      POSTGRES_USER: test
-      POSTGRES_PASS: test 
-      POSTGRES_DBNAME: test 
-      ALLOW_IP_RANGE: 0.0.0.0/0
+      NGINX_PORT: 80
 
 jobs:
 - job: integration_tests
@@ -39,9 +36,11 @@ jobs:
 
   - script: cat /etc/hostname
     target:
-        container: postgis
+        container: nginx
   
-  - script: cat /etc/hostname
+  - script: | 
+      cat /etc/hostname
+      curl localhost:8080
     target:
       container: ubuntu
 
