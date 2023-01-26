@@ -33,12 +33,14 @@ jobs:
   steps:
   - script: |
       docker ps
-      docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-test
+      $IP = docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-test
+      echo $IP
+      echo "##vso[task.setvariable variable=nginx-test-ip;]$IP"
     target: host
   
   - script: |
       # curl 127.0.0.2:8080
-      curl localhost:8080
+      curl $(nginx-test-ip):8080
 
   - script: 
       cat /etc/hostname
