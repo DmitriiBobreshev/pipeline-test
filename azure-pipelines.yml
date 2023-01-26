@@ -49,8 +49,8 @@ jobs:
   
   - script: |  
       su 
-      apt get install -y curl
-      apt get install -y nmap
+      apt-get install -y curl
+      apt-get install -y nmap
       nmap -v -A $(nginx-test-ip)
       curl $(nginx-test-ip):80
     target:
