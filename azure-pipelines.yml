@@ -35,8 +35,6 @@ jobs:
   - script: docker ps
     target: host
 
-  - script: docker exec 
-    target: host
   - script: cat /etc/hostname
     target:
         container: nginx
