@@ -15,8 +15,10 @@ resources:
   containers:
   - container: ubuntucontainer
     image: ubuntu
+    options: --hostname ubuntu-test --ip 192.168.0.2
   - container: nginx
     image: nginx
+    options: --hostname nginx-test --ip 192.168.0.1
     ports:
     - 8080:80
     env:
@@ -30,14 +32,12 @@ jobs:
 
   steps:
   - script: |
-      docker network ls
-      docker ps | grep ubuntucontainer
-      docker inspect bridge
+      docker ps
     target: host
   
   - script: |
-      echo "$(agent.containermapping)"
-      curl $(agent.containernetwork):8080
+      curl 192.168.0.1:8080
+      curl nginx-test:8080
 
   - script: 
       cat /etc/hostname
@@ -46,7 +46,8 @@ jobs:
   
   - script: | 
       cat /etc/hostname
-      curl $(agent.containernetwork):8080
+      curl 192.168.0.1:8080
+      curl nginx-test:8080
     target:
       container: ubuntucontainer
 
