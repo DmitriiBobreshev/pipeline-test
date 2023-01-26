@@ -13,7 +13,7 @@ variables:
     value: test
 resources:
   containers:
-  - container: ubuntu
+  - container: ubuntucontainer
     image: ubuntu
   - container: nginx
     image: nginx
@@ -31,7 +31,7 @@ jobs:
   steps:
   - script: |
       docker network ls
-      docker ps
+      docker ps | grep ubuntucontainer
       docker inspect bridge
     target: host
   
@@ -48,7 +48,7 @@ jobs:
       cat /etc/hostname
       curl $(agent.containernetwork):8080
     target:
-      container: ubuntu
+      container: ubuntucontainer
 
 # - job: example
 #   pool: 'Default'
