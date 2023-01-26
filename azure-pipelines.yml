@@ -47,16 +47,10 @@ jobs:
     target:
         container: nginx
   
-  - script: |
-      docker pull curlimages/curl:7.87.0
-      echo $(agent.containernetwork)
-      docker run --network $(agent.containernetwork) --rm curlimages/curl:7.87.0 -L -v $(nginx-test-ip):80
-    target: host
-
   - script: |  
-      cat /etc/hostname
-      dpkg -l
-      curl $(nginx-test-ip):8080
+      su 
+      apt get install -y curl
+      curl $(nginx-test-ip):80
     target:
       container: ubuntucontainer
 
