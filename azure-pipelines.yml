@@ -25,9 +25,17 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   container: my_container
+  services:
+    nginx2: nginx
 
   steps:
+  - script: |
+      curl nginx2
+    displayName: Show that nginx is running
   - script: docker ps
+    target: host
+
+  - script: docker exec 
     target: host
   - script: cat /etc/hostname
     target:
@@ -35,10 +43,7 @@ jobs:
   - script: cat /etc/hostname
     target:
       container: my_container
-  - script: |
-      curl nginx
-    displayName: Show that nginx is running
-    
+
 # - job: example
 #   pool: 'Default'
 #   container: my_container
