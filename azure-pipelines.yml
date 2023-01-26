@@ -31,10 +31,10 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   steps:
-  - script: 
-      docker-machine ip default
-    target:
-        container: nginx
+  # - script: 
+  #     docker-machine ip default
+  #   target:
+  #       container: nginx
 
   - script: |
       docker ps
