@@ -15,10 +15,10 @@ resources:
   containers:
   - container: ubuntucontainer
     image: ubuntu
-    options: --hostname ubuntu-test --ip 192.168.0.2
+    options: --hostname ubuntu-test
   - container: nginx
     image: nginx
-    options: --hostname nginx-test --ip 192.168.0.1
+    options: --hostname nginx-test
     ports:
     - 8080:80
     env:
@@ -36,7 +36,7 @@ jobs:
     target: host
   
   - script: |
-      curl 192.168.0.1:8080
+      # curl 192.168.0.1:8080
       curl nginx-test:8080
 
   - script: 
@@ -46,7 +46,7 @@ jobs:
   
   - script: | 
       cat /etc/hostname
-      curl 192.168.0.1:8080
+      # curl 192.168.0.1:8080
       curl nginx-test:8080
     target:
       container: ubuntucontainer
