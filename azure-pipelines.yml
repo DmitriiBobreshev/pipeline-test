@@ -31,6 +31,8 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
 
+  container: ubuntu
+
   steps:
   - script: |
       docker network ls
