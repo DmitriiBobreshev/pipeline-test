@@ -13,8 +13,8 @@ variables:
     value: test
 resources:
   containers:
-  - container: alpine
-    image: alpine:3.14
+  - container: ubuntu
+    image: ubuntu
   - container: nginx
     image: nginx
     ports:
@@ -43,7 +43,7 @@ jobs:
       cat /etc/hostname
       curl localhost:8080
     target:
-      container: alpine
+      container: ubuntu
 
 # - job: example
 #   pool: 'Default'
