@@ -14,7 +14,7 @@ variables:
 resources:
   containers:
   - container: alpine
-    image: ellerbrock/alpine-bash-curl-ssl
+    image: alpine:3.14
   - container: nginx
     image: nginx
     ports:
