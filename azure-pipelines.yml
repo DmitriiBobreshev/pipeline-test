@@ -33,7 +33,7 @@ jobs:
   steps:
   - script: |
       docker ps
-      docker container inspect -f '{{ .NetworkSettings.IPAddress }}' nginx-test
+      docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-test
     target: host
   
   - script: |
