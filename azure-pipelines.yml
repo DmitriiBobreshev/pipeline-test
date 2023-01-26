@@ -28,6 +28,10 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
 
+  services:
+    nginx: nginx
+    ubuntu: ubuntu
+
   steps:
   - script: |
       docker network ls
