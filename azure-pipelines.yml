@@ -31,8 +31,6 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
 
-  container: ubuntu
-
   steps:
   - script: |
       echo $AGENT_SERVICES_POSTGIS_PORTS_5432
