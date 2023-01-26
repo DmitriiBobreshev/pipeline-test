@@ -15,10 +15,10 @@ resources:
   containers:
   - container: ubuntucontainer
     image: ubuntu
-    options: --hostname ubuntu-test --name ubuntu-test --network bridge
+    options: --hostname ubuntu-test --name ubuntu-test
   - container: nginx
     image: nginx
-    options: --hostname nginx-test --name nginx-test --network bridge
+    options: --hostname nginx-test --name nginx-test
     ports:
     - 8080:80
     env:
