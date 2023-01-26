@@ -17,6 +17,8 @@ resources:
     image: node:latest
   - container: nginx
     image: nginx
+  - container: python
+    image: python:3.8
 
 jobs:
 - job: integration_tests
@@ -29,9 +31,6 @@ jobs:
     nginx: nginx
 
   steps:
-  # - script: |
-  #     curl nginx
-  #   displayName: Show that nginx is running
   - script: docker ps
     target: host
   - script: |
@@ -42,23 +41,18 @@ jobs:
       cat /etc/hostname
     target: 
       container: my_container
-# - job: WaitForDocker
-#   pool: 
-#     vmImage: 'ubuntu-latest'
-#   steps:
-#     - restoreCache: myKey
-#       path: .
 
-#     - saveCache: myKey
-#       path: .
-#     - checkout: none
-#     - bash: |
-#         while (! docker stats --no-stream ); do
-#           echo "Waiting for Docker to launch..."
-#           sleep 1
-#         done
-# - job: DockerStarted
- 
-#   dependsOn: WaitForDocker 
-#   steps:
-#   - script: printenv
+- job: example
+  container: python
+
+  steps:
+  - script: docker ps
+    target: host
+    
+  - script: cat /etc/hostname
+    target:
+        container: python
+
+  - script: cat /etc/hostname
+    target:
+      container: node
