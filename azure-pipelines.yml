@@ -27,9 +27,6 @@ jobs:
   container: my_container
 
   steps:
-  - script: |
-      curl nginx
-    displayName: Show that nginx is running
   - script: docker ps
     target: host
   - script: cat /etc/hostname
@@ -38,7 +35,10 @@ jobs:
   - script: cat /etc/hostname
     target:
       container: my_container
-
+  - script: |
+      curl nginx
+    displayName: Show that nginx is running
+    
 # - job: example
 #   pool: 'Default'
 #   container: my_container
