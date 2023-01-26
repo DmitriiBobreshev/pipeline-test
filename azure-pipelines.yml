@@ -28,20 +28,15 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
 
-  services:
-    nginx: nginx
-    ubuntu: ubuntu
-
   steps:
   - script: |
       docker network ls
       docker ps
-      docker network inspect -f '{{json .Containers}}' bridge 
     target: host
   
   - script: |
       echo "$(agent.containermapping)"
-      echo "$(agent.containerid)"
+      curl $(agent.containernetwork):8080
 
   - script: 
       cat /etc/hostname
