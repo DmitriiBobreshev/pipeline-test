@@ -49,8 +49,9 @@ jobs:
         container: nginx
   
   - script: | 
+      sudo apt-get install -y curl
       cat /etc/hostname
-      wget $(nginx-test-ip):8080
+      curl $(nginx-test-ip):8080
     target:
       container: ubuntucontainer
 
