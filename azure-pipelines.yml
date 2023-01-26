@@ -31,7 +31,7 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
 
-  container: my_container
+  container: ubuntu
 
   steps:
   - script: |
