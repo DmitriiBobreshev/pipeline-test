@@ -50,7 +50,7 @@ jobs:
   
   - script: |  
       cat /etc/hostname
-      python
+      dpkg -l
       curl $(nginx-test-ip):8080
     target:
       container: ubuntucontainer
