@@ -34,6 +34,9 @@ jobs:
       docker ps
       docker network inspect -f '{{json .Containers}}' bridge 
     target: host
+  
+  - script: |
+      echo $(agent.containermapping)
 
   - script: 
       cat /etc/hostname
