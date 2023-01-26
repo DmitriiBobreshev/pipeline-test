@@ -4,7 +4,7 @@ variables:
   - name: androidSdkPath
     value: TEST_SDK_PATH
   - name: System.Debug
-    value: true
+    value: false
   - name: build.clean
     value: all
   - name: agent.clean.buildDirectory
