@@ -17,6 +17,10 @@ resources:
     image: buildpack-deps:focal
   - container: nginx
     image: nginx
+    ports:
+    - 8080:80
+    env:
+      NGINX_PORT: 80
 
 jobs:
 - job: integration_tests
@@ -25,8 +29,6 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   container: my_container
-  services:
-    nginx_service: nginx
 
   steps:
   - script: |
