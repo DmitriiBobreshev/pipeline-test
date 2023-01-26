@@ -14,7 +14,7 @@ variables:
 resources:
   containers:
   - container: ubuntucontainer
-    image: curlimages/curl:7.87.0
+    image: ubuntu:latest
     options: --hostname ubuntu-test --name ubuntu-test
   - container: nginx
     image: nginx
@@ -50,7 +50,7 @@ jobs:
   
   - script: |  
       cat /etc/hostname
-      python -v
+      python
       curl $(nginx-test-ip):8080
     target:
       container: ubuntucontainer
