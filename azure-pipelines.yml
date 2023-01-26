@@ -14,30 +14,31 @@ variables:
 resources:
   containers:
   - container: my_container
-    image: node:latest
+    image: buildpack-deps:focal
   - container: nginx
     image: nginx
 
 jobs:
 - job: integration_tests
   displayName: Run integration tests
-  pool: 'Default'
-    # vmImage: 'ubuntu-latest'
+  pool: #'Default'
+    vmImage: 'ubuntu-latest'
 
   container: my_container
   services:
     nginx: nginx
 
   steps:
+  - script: |
+      curl nginx
+    displayName: Show that nginx is running
   - script: docker ps
     target: host
-  - script: |
-      cat /etc/hostname
-    target: 
-      container: nginx
-  - script: |
-      cat /etc/hostname
-    target: 
+  - script: cat /etc/hostname
+    target:
+        container: nginx
+  - script: cat /etc/hostname
+    target:
       container: my_container
 
 # - job: example
