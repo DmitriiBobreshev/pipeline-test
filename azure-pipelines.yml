@@ -49,6 +49,7 @@ jobs:
         container: nginx
   
   - script: | 
+      node -v 
       apt-get install -y curl
       cat /etc/hostname
       curl $(nginx-test-ip):8080
