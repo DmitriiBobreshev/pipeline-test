@@ -33,7 +33,7 @@ jobs:
   steps:
   - script: |
       docker ps
-      docker inspact nginx-test
+      docker inspect nginx-test
     target: host
   
   - script: |
