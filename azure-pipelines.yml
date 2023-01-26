@@ -44,7 +44,7 @@ jobs:
 
 - job: example
   pool: 'Default'
-  container: python
+  container: my_container
 
   steps:
   - script: docker ps
