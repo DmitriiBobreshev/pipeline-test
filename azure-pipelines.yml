@@ -39,7 +39,6 @@ jobs:
   - script: |
       docker ps
       IP=`docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-test`
-      docker inspect nginx-test
       echo "##vso[task.setvariable variable=nginx-test-ip;]$IP"
     target: host
 
@@ -50,7 +49,7 @@ jobs:
   
   - script: 
       docker pull curlimages/curl:7.87.0
-      docker run --network="$(agent.containernetwork)" --rm curlimages/curl:7.87.0 -L -v $(nginx-test-ip):8080
+      docker run --network $(agent.containernetwork) --rm curlimages/curl:7.87.0 -L -v $(nginx-test-ip):8080
 
   - script: |  
       cat /etc/hostname
