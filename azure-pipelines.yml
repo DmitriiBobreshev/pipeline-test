@@ -13,36 +13,39 @@ variables:
     value: test
 resources:
   containers:
-  - container: my_container
-    image: buildpack-deps:focal
-  - container: nginx
-    image: nginx
+  - container: ubuntu
+    image: ubuntu:latest
+  - container: postgis
+    image: postgis:15-3.3
     ports:
-    - 8080:80
+    - 5432
     env:
-      NGINX_PORT: 80
+      POSTGRES_USER: test
+      POSTGRES_PASS: test 
+      POSTGRES_DBNAME: test 
+      ALLOW_IP_RANGE: 0.0.0.0/0
 
 jobs:
 - job: integration_tests
   displayName: Run integration tests
-  pool: #'Default'
+  pool:
     vmImage: 'ubuntu-latest'
 
   container: my_container
 
   steps:
   - script: |
-      curl nginx_service
-    displayName: Show that nginx is running
+      echo $AGENT_SERVICES_POSTGIS_PORTS_5432
   - script: docker ps
     target: host
 
   - script: cat /etc/hostname
     target:
-        container: nginx
+        container: postgis
+  
   - script: cat /etc/hostname
     target:
-      container: my_container
+      container: ubuntu
 
 # - job: example
 #   pool: 'Default'
