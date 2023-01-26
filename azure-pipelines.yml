@@ -38,7 +38,7 @@ jobs:
   
   - script: |
       curl 127.0.0.2:8080
-      # curl nginx-test:8080
+      curl localhost:8080
 
   - script: 
       cat /etc/hostname
