@@ -39,7 +39,7 @@ jobs:
         container: nginx
   
   - script: | 
-      apt-get -y install curl
+      sudo apt-get -y install curl
       cat /etc/hostname
       curl localhost:8080
     target:
