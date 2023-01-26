@@ -37,7 +37,7 @@ jobs:
     target: host
   
   - script: |
-      curl 127.0.0.2:8080
+      # curl 127.0.0.2:8080
       curl localhost:8080
 
   - script: 
