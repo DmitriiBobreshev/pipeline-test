@@ -17,8 +17,6 @@ resources:
     image: node:latest
   - container: nginx
     image: nginx
-  - container: python
-    image: python:3.8
 
 jobs:
 # - job: integration_tests
@@ -52,7 +50,7 @@ jobs:
 
   - script: cat /etc/hostname
     target:
-        container: python
+        container: nginx
 
   - script: cat /etc/hostname
     target:
