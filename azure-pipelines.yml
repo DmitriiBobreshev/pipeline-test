@@ -15,10 +15,10 @@ resources:
   containers:
   - container: ubuntucontainer
     image: ubuntu
-    options: --hostname ubuntu-test --name ubuntu-test --ip 127.0.0.2
+    options: --hostname ubuntu-test --name ubuntu-test
   - container: nginx
     image: nginx
-    options: --hostname nginx-test --name nginx-test --ip 127.0.0.3
+    options: --hostname nginx-test --name nginx-test
     ports:
     - 8080:80
     env:
