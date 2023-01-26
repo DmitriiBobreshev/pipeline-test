@@ -13,8 +13,8 @@ variables:
     value: test
 resources:
   containers:
-  - container: ubuntu
-    image: ubuntu:latest
+  - container: alpine
+    image: ellerbrock/alpine-bash-curl-ssl
   - container: nginx
     image: nginx
     ports:
@@ -32,6 +32,7 @@ jobs:
   - script: |
       docker network ls
       docker ps
+      curl localhost:8080
     target: host
 
   - script: cat /etc/hostname
@@ -39,11 +40,10 @@ jobs:
         container: nginx
   
   - script: | 
-      sudo apt-get -y install curl
       cat /etc/hostname
       curl localhost:8080
     target:
-      container: ubuntu
+      container: alpine
 
 # - job: example
 #   pool: 'Default'
