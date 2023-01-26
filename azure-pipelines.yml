@@ -32,6 +32,7 @@ jobs:
   - script: |
       docker network ls
       docker ps
+      docker inspect bridge
     target: host
   
   - script: |
