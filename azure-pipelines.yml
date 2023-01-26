@@ -15,10 +15,10 @@ resources:
   containers:
   - container: ubuntucontainer
     image: ubuntu
-    options: --hostname ubuntu-test --name ubuntu-test
+    options: --hostname ubuntu-test --name ubuntu-test --ip 127.0.0.2
   - container: nginx
     image: nginx
-    options: --hostname nginx-test --name nginx-test
+    options: --hostname nginx-test --name nginx-test --ip 127.0.0.3
     ports:
     - 8080:80
     env:
@@ -33,12 +33,12 @@ jobs:
   steps:
   - script: |
       docker ps
-      docer inspact nginx-test
+      docker inspact nginx-test
     target: host
   
   - script: |
-      # curl 192.168.0.1:8080
-      curl nginx-test:8080
+      curl 127.0.0.2:8080
+      # curl nginx-test:8080
 
   - script: 
       cat /etc/hostname
