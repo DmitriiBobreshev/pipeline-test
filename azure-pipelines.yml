@@ -47,7 +47,7 @@ jobs:
     target:
         container: nginx
   
-  - script: 
+  - script: |
       docker pull curlimages/curl:7.87.0
       docker run --network $(agent.containernetwork) --rm curlimages/curl:7.87.0 -L -v $(nginx-test-ip):8080
     target: host
