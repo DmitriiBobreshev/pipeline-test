@@ -37,6 +37,7 @@ jobs:
   
   - script: |
       echo "$(agent.containermapping)"
+      echo "$(agent.containerid)"
 
   - script: 
       cat /etc/hostname
