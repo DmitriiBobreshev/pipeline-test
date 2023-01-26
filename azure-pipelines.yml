@@ -33,7 +33,7 @@ jobs:
   steps:
   - script: |
       docker ps
-      IP = `docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-test`
+      IP=`docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-test`
       echo "$IP"
       echo "##vso[task.setvariable variable=nginx-test-ip;]$IP"
     target: host
