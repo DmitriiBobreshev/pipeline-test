@@ -43,9 +43,9 @@ jobs:
       echo "##vso[task.setvariable variable=nginx-test-ip;]$IP"
     target: host
   
-  - script: |
-      curl localhost:8080
-      curl $(nginx-test-ip):8080
+  # - script: |
+  #     curl localhost:8080
+  #     curl $(nginx-test-ip):8080
 
   - script: 
       cat /etc/hostname
@@ -55,7 +55,7 @@ jobs:
   - script: | 
       cat /etc/hostname
       # curl 192.168.0.1:8080
-      curl nginx-test:8080
+      curl $(nginx-test-ip):8080
     target:
       container: ubuntucontainer
 
