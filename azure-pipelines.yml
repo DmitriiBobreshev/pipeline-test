@@ -13,8 +13,8 @@ variables:
     value: test
 resources:
   containers:
-  - container: curlcontainer
-    image: curlimages/curl:7.87.0
+  - container: ubuntu
+    image: ubuntu:latest
   - container: nginx
     image: nginx
     ports:
@@ -39,10 +39,11 @@ jobs:
         container: nginx
   
   - script: | 
+      apt-get -y install curl
       cat /etc/hostname
       curl localhost:8080
     target:
-      container: curlcontainer
+      container: ubuntu
 
 # - job: example
 #   pool: 'Default'
