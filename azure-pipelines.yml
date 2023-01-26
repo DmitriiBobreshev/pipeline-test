@@ -14,7 +14,7 @@ variables:
 resources:
   containers:
   - container: ubuntucontainer
-    image: ubuntu
+    image: curlimages/curl:7.87.0
     options: --hostname ubuntu-test --name ubuntu-test
   - container: nginx
     image: nginx
@@ -48,9 +48,7 @@ jobs:
     target:
         container: nginx
   
-  - script: | 
-      node -v 
-      apt-get install -y curl
+  - script: |  
       cat /etc/hostname
       curl $(nginx-test-ip):8080
     target:
