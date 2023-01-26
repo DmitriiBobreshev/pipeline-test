@@ -32,10 +32,11 @@ jobs:
   - script: |
       docker network ls
       docker ps
-      curl $(agent.containernetwork):8080
+      docker network inspect -f '{{json .Containers}}' bridge 
     target: host
 
-  - script: cat /etc/hostname
+  - script: 
+      cat /etc/hostname
     target:
         container: nginx
   
