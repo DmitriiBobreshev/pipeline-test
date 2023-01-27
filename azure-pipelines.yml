@@ -23,7 +23,6 @@ resources:
   - container: ubuntucontainer
     image: ubuntu:latest
     options:  --name ubuntu-test
-    link: sql
 
 jobs:
 - job: integration_tests
