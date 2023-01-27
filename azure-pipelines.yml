@@ -44,5 +44,4 @@ jobs:
 
   - script: 
       docker exec -i nginx-test /bin/cat /etc/hostname
-    target:
-        container: host
+    target: host
