@@ -55,7 +55,7 @@ jobs:
   #   target: host
 
   - script: |
-      apt=get install curl
+      apt-get install curl
       echo $(nginx-test-ip)
       curl $(nginx-test-ip):8080
 
