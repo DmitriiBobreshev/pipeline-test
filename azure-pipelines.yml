@@ -13,9 +13,6 @@ variables:
     value: test
 resources:
   containers:
-  - container: ubuntucontainer
-    image: node:latest
-    options: --hostname ubuntu-test --name ubuntu-test
   - container: nginx
     image: nginx
     options: --hostname nginx-test --name nginx-test
@@ -23,6 +20,10 @@ resources:
     - 8080:80
     env:
       NGINX_PORT: 80
+  - container: ubuntucontainer
+    image: node:latest
+    options: --hostname ubuntu-test --name ubuntu-test
+    link: sql
 
 jobs:
 - job: integration_tests
@@ -59,9 +60,11 @@ jobs:
             let data = '';
             resp.on('data', (chunk) => {
               data += chunk;
-            }).on('end', () => {
+            })
+            resp.on('end', () => {
               console.log(JSON.parse(data).explanation);
-            }).on('error', (err) => {
+            })
+            resp.on('error', (err) => {
               console.log('Error: ' + err.message);
           });" >> test.js
       node test.js
