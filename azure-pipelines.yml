@@ -21,7 +21,7 @@ resources:
     env:
       NGINX_PORT: 80
   - container: ubuntucontainer
-    image: node:latest
+    image: ubuntu:latest
     options:  --name ubuntu-test
     link: sql
 
