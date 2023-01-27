@@ -43,6 +43,6 @@ jobs:
     target: ubuntucontainer
 
   - script: 
-      docker exec -it nginx-test cat  /etc/hostname
+      docker exec -it nginx-test /bin/cat /etc/hostname
     target:
         container: host
