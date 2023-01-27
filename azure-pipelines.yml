@@ -48,11 +48,11 @@ jobs:
         container: nginx
   
   - script: |
-      su
       apt get install -y nmap
       echo $(agent.containernetwork)
       echo $(nginx-test-ip)
       nmap  -v -A $(nginx-test-ip)
+      nmap  -v -A localhost
     target: host
 
   - script: |  
