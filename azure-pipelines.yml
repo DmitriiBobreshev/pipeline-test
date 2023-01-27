@@ -42,9 +42,6 @@ jobs:
       cat /etc/hostname
     target: ubuntucontainer
 
-  - script: |
-      curl localhos:8080
-
   - script: 
       docker exec -it nginx-test cat  /etc/hostname
     target:
