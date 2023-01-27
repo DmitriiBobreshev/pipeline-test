@@ -29,12 +29,11 @@ jobs:
   displayName: Run integration tests
   pool:
     vmImage: 'ubuntu-latest'
+  container: ubuntucontainer
 
   steps:
   # - script: 
   #     docker-machine ip default
-  #   target:
-  #       container: nginx
 
   - script: |
       docker ps
@@ -47,20 +46,18 @@ jobs:
     target:
         container: nginx
   
-  - script: |
-      apt get install -y nmap
-      echo $(agent.containernetwork)
-      echo $(nginx-test-ip)
-      nmap  -v -A $(nginx-test-ip)
-      nmap  -v -A localhost
-    target: host
+  # - script: |
+  #     apt get install -y nmap
+  #     echo $(agent.containernetwork)
+  #     echo $(nginx-test-ip)
+  #     nmap  -v -A $(nginx-test-ip)
+  #     nmap  -v -A localhost
+  #   target: host
 
-  - script: |  
-      su 
-      apt get install -y curl
+  - script: |
+      apt=get install curl
+      echo $(nginx-test-ip)
       curl $(nginx-test-ip):8080
-    target:
-      container: ubuntucontainer
 
 # - job: example
 #   pool: 'Default'
