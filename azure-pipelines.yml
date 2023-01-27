@@ -54,10 +54,24 @@ jobs:
   #   target: host
 
   - script: |  
-      node -v
-      docker pull curlimages/curl:7.87.0
-      docker run --rm curlimages/curl:7.87.0 -L -v $(nginx-test-ip):8080
-      curl $(nginx-test-ip):8080
+      echo "const https = require('https');
+          https.get('$(nginx-test-ip):8080', (resp) => {
+            let data = '';
+
+            // A chunk of data has been received.
+            resp.on('data', (chunk) => {
+              data += chunk;
+            });
+
+            // The whole response has been received. Print out the result.
+            resp.on('end', () => {
+              console.log(JSON.parse(data).explanation);
+            });
+
+          }).on("error", (err) => {
+            console.log('Error: '' + err.message);
+          });" >> test.js
+      node test.js
 
 # - job: example
 #   pool: 'Default'
