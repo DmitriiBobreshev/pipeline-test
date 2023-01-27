@@ -48,11 +48,11 @@ jobs:
         container: nginx
   
   - script: |
-      docker pull instrumentisto/nmap:latest
+      su
+      apt get install -y nmap
       echo $(agent.containernetwork)
       echo $(nginx-test-ip)
-      echo "docker run --network $(agent.containernetwork) --rm -it instrumentisto/nmap  -v -A $(nginx-test-ip)"
-      docker run --network $(agent.containernetwork) --rm -it instrumentisto/nmap  -v -A $(nginx-test-ip)
+      nmap  -v -A $(nginx-test-ip)
     target: host
 
   - script: |  
