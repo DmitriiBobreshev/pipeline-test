@@ -54,8 +54,8 @@ jobs:
   #   target: host
 
   - script: |  
-      echo "const https = require('https');
-          https.get('$(nginx-test-ip):8080', (resp) => {
+      echo "const https = require('http');
+          https.get('http://$(nginx-test-ip):8080', (resp) => {
             let data = '';
 
             // A chunk of data has been received.
