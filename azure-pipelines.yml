@@ -32,55 +32,21 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   container: ubuntucontainer
-
+  services:
+    nginx: nginx
   steps:
   - script: |
       docker ps
-      IP=`docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-test`
-      echo "##vso[task.setvariable variable=nginx-test-ip;]$IP"
     target: host
 
-  - script: 
+  - script: |
       cat /etc/hostname
+    target: ubuntucontainer
+
+  - script: |
+      curl localhos:8080
+
+  - script: 
+      docker exec -it nginx-test cat  /etc/hostname
     target:
-        container: nginx
-  
-  # - script: |
-  #     apt get install -y nmap
-  #     docker pull instrumentisto/nmap:latest
-  #     echo $(agent.containernetwork)
-  #     echo $(nginx-test-ip)
-  #     echo "docker run --network $(agent.containernetwork) --rm -it instrumentisto/nmap  -v -A $(nginx-test-ip)"
-  #     docker run --network $(agent.containernetwork) --rm -it instrumentisto/nmap  -v -A $(nginx-test-ip)
-  #   target: host
-
-  - script: |  
-      echo "const https = require('http');
-            https.get('http://$(nginx-test-ip):80', (resp) => {
-              let data = '';
-              resp.on('data', (chunk) => {
-                data += chunk;
-              }).on('end', () => {
-                console.log(JSON.parse(data).explanation);
-              })
-              
-            }).on('error', (err) => {
-                console.log('Error: ' + err.message);
-            });" >> test.js
-      node test.js
-
-# - job: example
-#   pool: 'Default'
-#   container: my_container
-
-#   steps:
-#   - script: docker ps
-#     target: host
-
-#   - script: cat /etc/hostname
-#     target:
-#         container: nginx
-
-#   - script: cat /etc/hostname
-#     target:
-#       container: my_container
+        container: host
