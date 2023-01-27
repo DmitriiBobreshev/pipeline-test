@@ -42,6 +42,6 @@ jobs:
       cat /etc/hostname
     target: ubuntucontainer
 
-  - script: 
+  - script: |
       docker exec -i nginx-test /bin/cat /etc/hostname
     target: host
