@@ -14,7 +14,7 @@ variables:
 resources:
   containers:
   - container: ubuntucontainer
-    image: ubuntu:latest
+    image: node:latest
     options: --hostname ubuntu-test --name ubuntu-test
   - container: nginx
     image: nginx
@@ -54,8 +54,9 @@ jobs:
   #   target: host
 
   - script: |  
+      node -v
       docker pull curlimages/curl:7.87.0
-       docker run --rm curlimages/curl:7.87.0 -L -v $(nginx-test-ip):8080
+      docker run --rm curlimages/curl:7.87.0 -L -v $(nginx-test-ip):8080
       curl $(nginx-test-ip):8080
 
 # - job: example
