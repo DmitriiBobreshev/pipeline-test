@@ -14,7 +14,7 @@ variables:
 resources:
   containers:
   - container: ubuntucontainer
-    image: ubuntu:latest
+    image: curlimages/curl:7.87.0
     options: --hostname ubuntu-test --name ubuntu-test
   - container: nginx
     image: nginx
@@ -29,12 +29,10 @@ jobs:
   displayName: Run integration tests
   pool:
     vmImage: 'ubuntu-latest'
+
   container: ubuntucontainer
 
   steps:
-  # - script: 
-  #     docker-machine ip default
-
   - script: |
       docker ps
       IP=`docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-test`
@@ -48,15 +46,14 @@ jobs:
   
   # - script: |
   #     apt get install -y nmap
+  #     docker pull instrumentisto/nmap:latest
   #     echo $(agent.containernetwork)
   #     echo $(nginx-test-ip)
-  #     nmap  -v -A $(nginx-test-ip)
-  #     nmap  -v -A localhost
+  #     echo "docker run --network $(agent.containernetwork) --rm -it instrumentisto/nmap  -v -A $(nginx-test-ip)"
+  #     docker run --network $(agent.containernetwork) --rm -it instrumentisto/nmap  -v -A $(nginx-test-ip)
   #   target: host
 
-  - script: |
-      apt-get install curl
-      echo $(nginx-test-ip)
+  - script: |  
       curl $(nginx-test-ip):8080
 
 # - job: example
