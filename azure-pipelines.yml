@@ -15,14 +15,14 @@ resources:
   containers:
   - container: nginx
     image: nginx
-    options: --hostname nginx-test --name nginx-test
+    options: --name nginx-test
     ports:
     - 8080:80
     env:
       NGINX_PORT: 80
   - container: ubuntucontainer
     image: node:latest
-    options: --hostname ubuntu-test --name ubuntu-test
+    options:  --name ubuntu-test
     link: sql
 
 jobs:
