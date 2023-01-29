@@ -11,37 +11,32 @@ variables:
     value: all
   - name: scheme
     value: test
-resources:
-  containers:
-  - container: nginx
-    image: nginx
-    options: --name nginx-test
-    ports:
-    - 8080:80
-    env:
-      NGINX_PORT: 80
-  - container: ubuntucontainer
-    image: ubuntu:latest
-    options:  --name ubuntu-test
+
 
 jobs:
 - job: integration_tests
   displayName: Run integration tests
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: 'macOS-latest'
 
-  container: ubuntucontainer
-  services:
-    nginx: nginx
   steps:
-  - script: |
-      docker ps
-    target: host
+  - bash: '/bin/bash -c "sudo xcode-select -s /Applications/Xcode_14.0.1.app/Contents/Developer"'
+    displayName: 'Set Xcode 14.0.1 as default'
 
   - script: |
-      cat /etc/hostname
-    target: ubuntucontainer
+      xcodebuild -version
+      swift -version
+
+  - bash: '/bin/bash -c "sudo xcode-select -s /Applications/Xcode_14.0.app/Contents/Developer"'
+    displayName: 'Set Xcode 14.0 as default'
 
   - script: |
-      docker exec -i nginx-test /bin/cat /etc/hostname
-    target: host
+      xcodebuild -version
+      swift -version
+  
+  - bash: '/bin/bash -c "sudo xcode-select -s /Applications/Xcode_14.1.app/Contents/Developer"'
+    displayName: 'Set Xcode 14.1 as default'
+
+  - script: |
+      xcodebuild -version
+      swift -version
