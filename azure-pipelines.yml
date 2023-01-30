@@ -11,15 +11,15 @@ variables:
     value: true
 
 stages:
-- stage: 'Hosted_Ubuntu_1804'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'ubuntu-18.04'
-  dependsOn: []
-  jobs:
-  - template: ./src/gradle/templates/gradle-jobs.yml
-    parameters:
-      skipJdk13Build: true
+# - stage: 'Hosted_Ubuntu_1804'
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'ubuntu-18.04'
+#   dependsOn: []
+#   jobs:
+#   - template: ./src/gradle/templates/gradle-jobs.yml
+#     parameters:
+#       skipJdk13Build: true
 
 - stage: 'Hosted_Ubuntu_2004'
   pool:
@@ -32,69 +32,69 @@ stages:
       skipJdk12Build: true
       skipJdk13Build: true
 
-- stage: 'Hosted_Ubuntu_2204'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'ubuntu-22.04'
-  dependsOn: []
-  jobs:
-  - template: ./src/gradle/templates/gradle-jobs.yml
-    parameters:
-      skipJdk12Build: true
-      skipJdk13Build: true
+# - stage: 'Hosted_Ubuntu_2204'
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'ubuntu-22.04'
+#   dependsOn: []
+#   jobs:
+#   - template: ./src/gradle/templates/gradle-jobs.yml
+#     parameters:
+#       skipJdk12Build: true
+#       skipJdk13Build: true
 
-- stage: 'Win2019'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2019'
-  dependsOn: []
-  jobs:
-  - template: ./src/gradle/templates/gradle-jobs.yml
-    parameters:
-      skipJdk12Build: true
+# - stage: 'Win2019'
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'windows-2019'
+#   dependsOn: []
+#   jobs:
+#   - template: ./src/gradle/templates/gradle-jobs.yml
+#     parameters:
+#       skipJdk12Build: true
 
-- stage: 'Win2022'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2022'
-  dependsOn: []
-  jobs:
-  - template: ./src/gradle/templates/gradle-jobs.yml
-    parameters:
-      skipJdk12Build: true
-      skipJdk13Build: true
-      skipNativeMediaBuild: true
+# - stage: 'Win2022'
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'windows-2022'
+#   dependsOn: []
+#   jobs:
+#   - template: ./src/gradle/templates/gradle-jobs.yml
+#     parameters:
+#       skipJdk12Build: true
+#       skipJdk13Build: true
+#       skipNativeMediaBuild: true
 
-- stage: 'MacOS_Public_Catalina'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-10.15'
-  dependsOn: []
-  jobs:
-  - template: ./src/gradle/templates/gradle-jobs.yml
-    parameters:
-      skipNativeMediaBuild: true
+# - stage: 'MacOS_Public_Catalina'
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'macos-10.15'
+#   dependsOn: []
+#   jobs:
+#   - template: ./src/gradle/templates/gradle-jobs.yml
+#     parameters:
+#       skipNativeMediaBuild: true
 
-- stage: 'MacOS_Public_BigSur'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-11'
-  dependsOn: []
-  jobs:
-  - template: ./src/gradle/templates/gradle-jobs.yml
-    parameters:
-      skipNativeMediaBuild: true
-      skipJdk12Build: true
-      skipJdk13Build: true
+# - stage: 'MacOS_Public_BigSur'
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'macos-11'
+#   dependsOn: []
+#   jobs:
+#   - template: ./src/gradle/templates/gradle-jobs.yml
+#     parameters:
+#       skipNativeMediaBuild: true
+#       skipJdk12Build: true
+#       skipJdk13Build: true
 
-- stage: 'MacOS_Public_Monterey'
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-12'
-  dependsOn: []
-  jobs:
-  - template: ./src/gradle/templates/gradle-jobs.yml
-    parameters:
-      skipNativeMediaBuild: true
-      skipJdk12Build: true
-      skipJdk13Build: true
+# - stage: 'MacOS_Public_Monterey'
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'macos-12'
+#   dependsOn: []
+#   jobs:
+#   - template: ./src/gradle/templates/gradle-jobs.yml
+#     parameters:
+#       skipNativeMediaBuild: true
+#       skipJdk12Build: true
+#       skipJdk13Build: true
