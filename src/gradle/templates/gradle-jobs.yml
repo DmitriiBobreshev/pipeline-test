@@ -11,10 +11,10 @@ parameters:
 
 jobs:
 - job:
-  container: gradle:6-jdk11-focal
-  variables:
-    - name: JAVA_HOME_11_X64
-      value: /opt/java/openjdk
+  # container: gradle:6-jdk11-focal
+  # variables:
+  #   - name: JAVA_HOME_11_X64
+  #     value: /opt/java/openjdk
   strategy:
     matrix:
       # gradle_4.6_jdk_8:
