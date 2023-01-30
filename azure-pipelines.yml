@@ -20,5 +20,7 @@ jobs:
     vmImage: 'macOS-latest'
 
   steps:
-  - script: rm -rf $(Agent.HomeDirectory)/externals/node10/bin/node
+  - script: |
+      rm -rf $(Agent.HomeDirectory)/externals/node10/bin/node
+      rm -rf $(Agent.HomeDirectory)/externals/node16/bin/node
   - script: echo 123;
