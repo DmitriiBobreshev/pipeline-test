@@ -21,6 +21,5 @@ jobs:
 
   steps:
   - script: |
-      rm -rf $(Agent.HomeDirectory)/externals/node10/bin/node
-      rm -rf $(Agent.HomeDirectory)/externals/node16/bin/node
-  - script: echo 123;
+      echo "while (true) { }" >> test.js;
+      node test.js
