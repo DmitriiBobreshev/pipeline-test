@@ -11,6 +11,8 @@ variables:
     value: all
   - name: scheme
     value: test
+  - name: VSTS_AGENT_CHANNEL_TIMEOUT
+    value: 250
 
 
 jobs:
