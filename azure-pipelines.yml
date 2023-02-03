@@ -27,8 +27,8 @@ container: nginx
 #   nginx: nginx
 
 steps:
-  - script: | 
-      curl nginx 
+  # - script: | 
+  #     curl nginx 
   - script: |
       docker ps
     target: host
