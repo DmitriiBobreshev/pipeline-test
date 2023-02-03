@@ -15,7 +15,7 @@ variables:
 resources:
   containers:
   - container: my_container
-    image: buildpack-deps:focal
+    image: node:latest
   - container: nginx
     image: nginx
 
