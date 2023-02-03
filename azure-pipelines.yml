@@ -39,7 +39,7 @@ jobs:
 
   - script: |
       cat /etc/hostname
-    target: ubuntucontainer
+    target: nginx
 
   - script: 
       cat /etc/hostname
