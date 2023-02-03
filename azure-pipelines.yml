@@ -22,9 +22,9 @@ resources:
 
 pool: Default
 
-container: my_container
-services:
-  nginx: nginx
+container: nginx
+# services:
+#   nginx: nginx
 
 steps:
   - script: | 
