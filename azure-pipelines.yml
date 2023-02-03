@@ -13,11 +13,11 @@ variables:
     value: test
 resources:
   containers:
-  - container: nginx
-    image: node:16-alpine
-    options: --name nginx-test
-  - container: ubuntucontainer
+  - container: node
     image: node:latest
+    options: --name node-test
+  - container: ubuntucontainer
+    image: sitespeedio/node:ubuntu-20.04-nodejs-12.14.1
     options:  --name ubuntu-test
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
   displayName: Run integration tests
   pool: Default
 
-  container: nginx
+  container: ubuntucontainer
   services:
     ubuntucontainer: ubuntucontainer
   steps:
@@ -35,7 +35,7 @@ jobs:
 
   - script: |
       cat /etc/hostname
-    target: nginx
+    target: node
 
   - script: 
       cat /etc/hostname
