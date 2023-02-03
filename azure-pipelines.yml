@@ -11,32 +11,22 @@ variables:
     value: all
   - name: scheme
     value: test
+
 resources:
   containers:
-  - container: node
-    image: node:latest
-    options: --name node-test
-  - container: ubuntucontainer
-    image: sitespeedio/node:ubuntu-20.04-nodejs-12.14.1
-    options:  --name ubuntu-test
+  - container: my_container
+    image: buildpack-deps:focal
+  - container: nginx
+    image: nginx
 
-jobs:
-- job: integration_tests
-  displayName: Run integration tests
-  pool: Default
 
-  container: ubuntucontainer
-  services:
-    ubuntucontainer: ubuntucontainer
-  steps:
-  - script: |
-      docker ps
-    target: host
+pool: Default
 
-  - script: |
-      cat /etc/hostname
-    target: node
+container: my_container
+services:
+  nginx: nginx
 
-  - script: 
-      cat /etc/hostname
-    target: ubuntucontainer
+steps:
+- script: |
+    curl nginx
+  displayName: Show that nginx is running
