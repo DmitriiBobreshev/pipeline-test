@@ -29,9 +29,9 @@ jobs:
   displayName: Run integration tests
   pool: Default
 
-  container: ubuntucontainer
+  container: nginx
   services:
-    nginx: nginx
+    ubuntucontainer: ubuntucontainer
   steps:
   - script: |
       docker ps
