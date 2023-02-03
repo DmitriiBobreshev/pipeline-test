@@ -27,6 +27,8 @@ services:
   nginx: nginx
 
 steps:
+  - script: | 
+      curl nginx 
   - script: |
       docker ps
     target: host
