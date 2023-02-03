@@ -17,7 +17,7 @@ resources:
   - container: my_container
     image: node:latest
   - container: nginx
-    image: nginx
+    image: nginxwithnode:latest
 
 
 pool: Default
