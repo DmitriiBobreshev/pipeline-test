@@ -27,6 +27,14 @@ services:
   nginx: nginx
 
 steps:
-- script: |
-    curl nginx
-  displayName: Show that nginx is running
+  - script: |
+      docker ps
+    target: host
+
+  - script: |
+      cat /etc/hostname
+    target: my_container
+
+  - script: 
+      cat /etc/hostname
+    target: nginx
