@@ -20,8 +20,12 @@ resources:
     image: dmybor/test:latest
 
 
-pool: Default
+# pool: //Default
+#     vmImage: 'ubuntu-latest'
 
+pool:
+    vmImage: 'ubuntu-latest'
+ 
 container: my_container
 services:
   nginx: nginx
