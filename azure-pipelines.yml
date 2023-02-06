@@ -17,7 +17,7 @@ resources:
   - container: my_container
     image: node:latest
   - container: nginx
-    image: dmybor/test:latest
+    image: nginx:latest
 
 
 pool: Default
