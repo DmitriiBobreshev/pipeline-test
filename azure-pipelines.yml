@@ -20,14 +20,14 @@ resources:
     image: nginx:latest
 
 
-pool: Default
+# pool: Default
 
-# pool:
-#     vmImage: 'ubuntu-latest'
+pool:
+    vmImage: 'windows-latest'
  
-container: my_container
+container: nginx
 services:
-  nginx: nginx
+  my_container: my_container
 
 steps:
   # - script: | 
