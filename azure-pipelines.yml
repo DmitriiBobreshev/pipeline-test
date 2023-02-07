@@ -23,7 +23,7 @@ resources:
 # pool: Default
 
 pool:
-    vmImage: 'windows-latest'
+    vmImage: 'ubuntu-latest'
  
 container: nginx
 services:
