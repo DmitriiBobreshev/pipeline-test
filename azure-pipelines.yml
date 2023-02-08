@@ -27,18 +27,6 @@ stages:
             parameters:
               solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln' 
       
-      - job: 'MacOS_Catalina'
-        pool:
-          name: 'Azure Pipelines'
-          vmImage: 'macos-10.15'
-        steps:
-          - template: src/msbuild/msbuild-steps-nugettoolinstaller-v1.yml
-            parameters:
-              solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-          - template: src/msbuild/msbuild-steps-nugettoolinstaller-v1.yml
-            parameters:
-              solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
-      
       - job: 'MacOS_BigSur'
         pool:
           name: 'Azure Pipelines'
@@ -91,18 +79,6 @@ stages:
           - template: src/msbuild/msbuild-steps-nugettoolinstaller-v0.yml
             parameters:
               solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln' 
-      
-      - job: 'MacOS_Catalina'
-        pool:
-          name: 'Azure Pipelines'
-          vmImage: 'macos-10.15'
-        steps:
-          - template: src/msbuild/msbuild-steps-nugettoolinstaller-v1.yml
-            parameters:
-              solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-          - template: src/msbuild/msbuild-steps-nugettoolinstaller-v1.yml
-            parameters:
-              solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
       
       - job: 'MacOS_BigSur'
         pool:
