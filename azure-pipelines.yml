@@ -56,7 +56,9 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
-          script: 'Get-ChildItem -Filter $(Agent.HomeDirectory)\System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo'
+          script: |
+            cd $(Agent.HomeDirectory)
+            Get-ChildItem -Filter $(Agent.HomeDirectory)\System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo
 
   - job: 'Win2022'
     displayName: Windows VS2022
@@ -67,7 +69,9 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
-          script: 'Get-ChildItem -Filter $(Agent.HomeDirectory)\System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo'
+          script: |
+            cd $(Agent.HomeDirectory)
+            Get-ChildItem -Filter System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo
   
   - job: 'Ubuntu'
     pool:
@@ -77,4 +81,6 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
-          script: 'Get-ChildItem -Filter $(Agent.HomeDirectory)/System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo'
+          script: | 
+            cd $(Agent.HomeDirectory)
+            Get-ChildItem -Filter System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo
