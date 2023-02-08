@@ -10,11 +10,19 @@ steps:
     versionSpec: '*'
   retryCountOnTaskFailure: 3
 
-- task: NuGetCommand@2
+- task: NuGet@0
+  displayName: Source add
+  inputs:
+    command: 'sources'
+    arguments: ' Add -NonInteractive -Name NuGetOrg -Source https://api.nuget.org/v3/index.json -ConfigFile $(Agent.BuildDirectory)/Nuget/tempNuGet_1143.config '
+    feedsToUse: 'select'
+  retryCountOnTaskFailure: 3
+
+- task: NuGet@0
   displayName: Restore Nuget Packages
   inputs:
     command: 'restore'
-    restoreSolution: ${{ parameters.solutionPath }} 
+    arguments: '${{ parameters.solutionPath }} -Verbosity Detailed -NonInteractive -ConfigFile $(Agent.BuildDirectory)/Nuget/tempNuGet_1143.config '
     feedsToUse: 'select'
   retryCountOnTaskFailure: 3
 
