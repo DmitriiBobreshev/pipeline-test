@@ -58,7 +58,7 @@ jobs:
           targetType: 'inline'
           script: |
             cd $(Agent.HomeDirectory)
-            Get-ChildItem -Filter $(Agent.HomeDirectory)\System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo
+            Get-ChildItem -Filter System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo
 
   - job: 'Win2022'
     displayName: Windows VS2022
