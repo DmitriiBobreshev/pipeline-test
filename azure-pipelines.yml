@@ -47,32 +47,6 @@ variables:
 # --------------------------------------------------------------------------------------------------
 
 jobs:
-  - job: 'Win2019'
-    displayName: Windows VS2019
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2019'
-    steps:
-      - task: PowerShell@2
-        inputs:
-          targetType: 'inline'
-          script: |
-            cd $(Agent.HomeDirectory)
-            Get-ChildItem -Filter System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo
-
-  - job: 'Win2022'
-    displayName: Windows VS2022
-    pool:
-      name: 'Azure Pipelines'
-      vmImage: 'windows-2022'
-    steps:
-      - task: PowerShell@2
-        inputs:
-          targetType: 'inline'
-          script: |
-            cd $(Agent.HomeDirectory)
-            Get-ChildItem -Filter System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo
-  
   - job: 'Ubuntu'
     pool:
       name: 'Azure Pipelines'
@@ -84,3 +58,5 @@ jobs:
           script: | 
             cd $(Agent.HomeDirectory)
             Get-ChildItem -Filter System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo
+        env: 
+          AGENT_USE_NODE10: true
