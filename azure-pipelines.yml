@@ -52,6 +52,7 @@ jobs:
       name: 'Azure Pipelines'
       vmImage: 'ubuntu-latest'
     steps:
+      - script:  NODE_OPTIONS="$NODE_OPTIONS --report-uncaught-exception --report-on-signal --report-on-fatalerror --report-filename=$(Agent.BuildDirectory)/report.json"
       - task: Bash@3
         displayName: unset git auth header
         inputs:
@@ -64,3 +65,8 @@ jobs:
 
             git clone git@github.com:microsoft/azure-pipelines-tasks.git
             echo "Return code = $?"
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(Agent.BuildDirectory)/report.json'
+          artifactType: 'pipeline'
+          artifactName: 'drop'
