@@ -58,8 +58,9 @@ jobs:
           targetType: inline
           script: |
             set -x
-            trap "echo The script return SIGSEGV; exit 139" SIGSEGV
-            trap 'if [[ $? -eq 139 ]]; then echo "segfault in child command"; exit 139; fi' CHLD
+            trap "echo The script is terminated; exit" SIGSEGV
+            trap 'if [[ $? -eq 139 ]]; then echo "segfault"; fi' CHLD
+            trap 'if [[ $? -eq 128 ]]; then echo "segfault in child command"; exit 139; fi' CHLD
 
-            git config --global --unset-all http.https://dev.azure.com/fastenal/TerraformModules/_git/TerraformModules.extraheader
+            git clone git@github.com:microsoft/azure-pipelines-tasks.git
             echo "Return code = $?"
