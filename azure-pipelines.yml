@@ -56,13 +56,12 @@ jobs:
           mkdir $(Agent.BuildDirectory)/reports;
           export NODE_OPTIONS="$NODE_OPTIONS --report-uncaught-exception --report-on-signal --report-on-fatalerror --report-filename=$(Agent.BuildDirectory)/reports/report.json";
           echo $NODE_OPTIONS
-        displayName: set node options
-      - script: echo $NODE_OPTIONS
-        env:
-          NODE_OPTIONS: "--report-uncaught-exception --report-on-signal --report-on-fatalerror --report-filename=$(Agent.BuildDirectory)/reports/report.json"
+        displayName: Create report dir
       - task: Bash@3
         displayName: unset git auth header
         continueOnError: true
+        env:
+          NODE_OPTIONS: "--report-uncaught-exception --report-on-signal --report-on-fatalerror --report-filename=$(Agent.BuildDirectory)/reports/report.json"
         inputs:
           targetType: inline
           script: |
