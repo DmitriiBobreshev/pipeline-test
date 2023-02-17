@@ -54,8 +54,6 @@ jobs:
     steps:
       - script: |
           mkdir $(Agent.BuildDirectory)/reports;
-          export NODE_OPTIONS="$NODE_OPTIONS --report-uncaught-exception --report-on-signal --report-on-fatalerror --report-filename=$(Agent.BuildDirectory)/reports/report.json";
-          echo $NODE_OPTIONS
         displayName: Create report dir
       - task: Bash@3
         displayName: unset git auth header
@@ -65,14 +63,9 @@ jobs:
         inputs:
           targetType: inline
           script: |
-            set -x
-            trap "echo The script is terminated; exit" SIGSEGV
-            trap 'if [[ $? -eq 139 ]]; then echo "segfault"; fi' CHLD
-            trap 'if [[ $? -eq 128 ]]; then echo "segfault in child command"; exit 139; fi' CHLD
-
-            git clone git@github.com:microsoft/azure-pipelines-tasks.git
-            echo "Return code = $?"
+            your script here
       - task: PublishPipelineArtifact@1
+        condition: failed()
         inputs:
           targetPath: '$(Agent.BuildDirectory)/reports'
           artifactType: 'pipeline'
