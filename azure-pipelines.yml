@@ -52,11 +52,14 @@ jobs:
       name: 'Azure Pipelines'
       vmImage: 'ubuntu-latest'
     steps:
-      - task: PowerShell@2
+      - task: Bash@3
+        displayName: unset git auth header
         inputs:
-          targetType: 'inline'
-          script: | 
-            cd $(Agent.HomeDirectory)
-            Get-ChildItem -Filter System.Core.dll -Recurse | Select-Object -ExpandProperty VersionInfo
-        env: 
-          AGENT_USE_NODE10: true
+          targetType: inline
+          script: |
+            set -x
+            trap "echo The script return SIGSEGV; exit 139" SIGSEGV
+            trap 'if [[ $? -eq 139 ]]; then echo "segfault in child command"; exit 139; fi' CHLD
+
+            git config --global --unset-all http.https://dev.azure.com/fastenal/TerraformModules/_git/TerraformModules.extraheader
+            echo "Return code = $?"
