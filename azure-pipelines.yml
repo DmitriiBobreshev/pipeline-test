@@ -55,4 +55,6 @@ jobs:
     container: ubuntu:18.04
 
     steps:
-    - script: docker ls
+    - script: |
+        printenv
+        docker ls
