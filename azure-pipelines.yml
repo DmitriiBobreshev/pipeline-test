@@ -50,7 +50,7 @@ variables:
 jobs:
   - job: 'Ubuntu'
     pool:
-      vmImage: 'windows-latest'
+      vmImage: 'ubuntu-latest'
 
     container: ubuntu:18.04
 
