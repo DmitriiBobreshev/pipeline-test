@@ -50,31 +50,9 @@ variables:
 jobs:
   - job: 'Ubuntu'
     pool:
-      name: 'Azure Pipelines'
-      vmImage: 'ubuntu-latest'
+      vmImage: 'windows-latest'
+
+    container: ubuntu:18.04
+
     steps:
-      - script: |
-          mkdir $(Agent.BuildDirectory)/reports;
-        displayName: Create report dir
-      - task: Bash@3
-        displayName: unset git auth header
-        env:
-          NODE_OPTIONS: "--report-uncaught-exception --report-on-signal --report-on-fatalerror --report-filename=$(Agent.BuildDirectory)/reports/report.json"
-        inputs:
-          targetType: inline
-          script: |
-            ls -la
-      - task: PublishPipelineArtifact@1
-        condition: failed()
-        inputs:
-          targetPath: '$(Agent.BuildDirectory)/reports'
-          artifactType: 'pipeline'
-          artifactName: 'drop'
-      - task: DownloadBuildArtifacts@0
-        inputs:
-          buildType: 'specific'
-          project: '4098af9f-9bef-4a67-8087-64b5d95a7597'
-          pipeline: '2'
-          buildVersionToDownload: 'latest'
-          downloadType: 'specific'
-          downloadPath: '$(System.ArtifactsDirectory)'
+    - script: docker ls
