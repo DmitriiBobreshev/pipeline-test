@@ -63,7 +63,7 @@ jobs:
         inputs:
           targetType: inline
           script: |
-            your script here
+            ls -la
       - task: PublishPipelineArtifact@1
         condition: failed()
         inputs:
