@@ -1,4 +1,5 @@
 variables:
+
   - name: ndkPath
     value: TEST_NDK_PATH
   - name: androidSdkPath
@@ -69,3 +70,11 @@ jobs:
           targetPath: '$(Agent.BuildDirectory)/reports'
           artifactType: 'pipeline'
           artifactName: 'drop'
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: 'specific'
+          project: '4098af9f-9bef-4a67-8087-64b5d95a7597'
+          pipeline: '2'
+          buildVersionToDownload: 'latest'
+          downloadType: 'specific'
+          downloadPath: '$(System.ArtifactsDirectory)'
