@@ -1,5 +1,4 @@
 variables:
-
   - name: ndkPath
     value: TEST_NDK_PATH
   - name: androidSdkPath
@@ -55,6 +54,13 @@ jobs:
     container: ubuntu:18.04
 
     steps:
-    - script: |
-        printenv
-        docker ls
+    - task: JavaToolInstaller@0
+      inputs:
+        versionSpec: '8'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'AzureStorage'
+        azureResourceManagerEndpoint: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
+        azureStorageAccountName: 'testjdkloc'
+        azureCommonVirtualFile: '5'
+        jdkDestinationDirectory: '65'
+        cleanDestinationDirectory: true
