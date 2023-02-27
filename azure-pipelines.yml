@@ -48,10 +48,12 @@ variables:
 
 jobs:
   - job: 'Ubuntu'
-    pool:
-      vmImage: 'ubuntu-latest'
-
-    container: ubuntu:18.04
+    pool: "Default"
 
     steps:
-    - script: ls -la
+    - script: |
+        while true
+        do
+          echo $(date +"%Y-%m-%d %H:%M:%S")
+          sleep 5
+        done
