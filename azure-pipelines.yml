@@ -11,6 +11,8 @@ variables:
     value: all
   - name: scheme
     value: test
+  - name: Agent.Diagnostic
+    value: true
 
 # resources:
 #   containers:
