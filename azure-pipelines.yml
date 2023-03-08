@@ -51,7 +51,7 @@ variables:
 jobs:
   - job: 'Ubuntu'
     pool: 
-      vmImage: 'ubuntu-latest'
+      vmImage: 'ubuntu-22.04'
 
     steps:
       - script: echo $JAVA_HOME_8_X86
