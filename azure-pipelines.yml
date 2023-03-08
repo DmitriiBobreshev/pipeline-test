@@ -58,5 +58,5 @@ jobs:
       - task: JavaToolInstaller@0
         inputs:
           versionSpec: '8'
-          jdkArchitectureOption: 'x86'
+          jdkArchitectureOption: 'x64'
           jdkSourceOption: 'PreInstalled'
