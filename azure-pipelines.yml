@@ -4,7 +4,7 @@ variables:
   - name: androidSdkPath
     value: TEST_SDK_PATH
   - name: System.Debug
-    value: true
+    value: false
   - name: build.clean
     value: all
   - name: agent.clean.buildDirectory
@@ -41,8 +41,7 @@ steps:
       cat /etc/hostname
       sleep 10
   - script: |
-      echo $MY_ENv
-      ls 
+      echo $MY_ENV
       ls test
 
   
