@@ -24,39 +24,40 @@ variables:
 
 # pool: Default
 
-# pool:
-#     vmImage: 'ubuntu-latest'
+pool:
+    vmImage: 'ubuntu-latest'
  
-# container: my_container
-# services:
-#   nginx: nginx
+container: my_container
+services:
+  nginx: nginx
 
-# steps:
-#   # - script: | 
-#   #     curl nginx 
-#   - script: |
-#       docker ps
-#     target: host
+steps:
+  - script: |
+      cat /etc/hostname
+      export MY_ENV='test'
+      mkdir test
+      touch test/file_example
+  - script: |
+      cat /etc/hostname
+      sleep 10
+  - script: |
+      echo $MY_ENv
+      ls 
+      ls test
 
-#   - script: |
-#       cat /etc/hostname
-#     target: my_container
-
-#   - script: 
-#       cat /etc/hostname
-#     target: nginx
+  
 
 # --------------------------------------------------------------------------------------------------
 
-jobs:
-  - job: 'Ubuntu'
-    pool: 
-      vmImage: 'ubuntu-22.04'
+# jobs:
+#   - job: 'Ubuntu'
+#     pool: 
+#       vmImage: 'ubuntu-22.04'
 
-    steps:
-      - script: echo $JAVA_HOME_8_X86
-      - task: JavaToolInstaller@0
-        inputs:
-          versionSpec: '8'
-          jdkArchitectureOption: 'x64'
-          jdkSourceOption: 'PreInstalled'
+#     steps:
+#       - script: echo $JAVA_HOME_8_X86
+#       - task: JavaToolInstaller@0
+#         inputs:
+#           versionSpec: '8'
+#           jdkArchitectureOption: 'x64'
+#           jdkSourceOption: 'PreInstalled'
