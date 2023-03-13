@@ -53,7 +53,7 @@ pool: Default
   # vmImage: ubuntu-latest
 steps:
 - checkout: none
-- bash: env | grep TEST_
+- bash: echo "123" #env | grep TEST_
   env:
     TEST_SEC_FROM_GROUP: $(vs-secret) # \nnvg secret1
     TEST_SEC_FROM_GROUP_2: $(vs-secret1) # vg secret2\n
