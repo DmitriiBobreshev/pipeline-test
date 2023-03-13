@@ -1,4 +1,5 @@
 variables:
+  - group: secrets-groups
   - name: ndkPath
     value: TEST_NDK_PATH
   - name: androidSdkPath
@@ -24,39 +25,47 @@ variables:
 
 # pool: Default
 
-pool:
-    vmImage: 'ubuntu-latest'
+# pool:
+#     vmImage: 'ubuntu-latest'
  
-container:  ubuntu:18.04
+# container:  ubuntu:18.04
 # services:
   # nginx: nginx
 
-steps:
-  - script: |
-      cat /etc/hostname
-      export MY_ENV='test'
-      mkdir test
-      touch test/file_example
-  - script: |
-      cat /etc/hostname
-      sleep 10
-  - script: |
-      echo $MY_ENV
-      ls test
+# steps:
+#   - script: |
+#       cat /etc/hostname
+#       export MY_ENV='test'
+#       mkdir test
+#       touch test/file_example
+#   - script: |
+#       cat /etc/hostname
+#       sleep 10
+#   - script: |
+#       echo $MY_ENV
+#       ls test
 
   
 
 # --------------------------------------------------------------------------------------------------
 
-# jobs:
-#   - job: 'Ubuntu'
-#     pool: 
-#       vmImage: 'ubuntu-22.04'
-
-#     steps:
-#       - script: echo $JAVA_HOME_8_X86
-#       - task: JavaToolInstaller@0
-#         inputs:
-#           versionSpec: '8'
-#           jdkArchitectureOption: 'x64'
-#           jdkSourceOption: 'PreInstalled'
+pool: Default
+  # vmImage: ubuntu-latest
+steps:
+- checkout: none
+- bash: env | grep TEST_
+  env:
+    TEST_SEC_FROM_GROUP: $(vs-secret) # \nnvg secret1
+    TEST_SEC_FROM_GROUP_2: $(vs-secret1) # vg secret2\n
+    TEST_SEC_FROM_GROUP_3: $(vs-secret2) # vg\n secret3
+    TEST_SEC_FROM_GROUP_4: $(vs-secret3) # vg secret4\n ; through the UI interface
+- powershell: |
+    $env:TEST_SEC_FROM_GROUP
+    $env:TEST_SEC_FROM_GROUP_2
+    $env:TEST_SEC_FROM_GROUP_3
+    $env:TEST_SEC_FROM_GROUP_4
+  env:
+    TEST_SEC_FROM_GROUP: $(vs-secret) # \nnvg secret1
+    TEST_SEC_FROM_GROUP_2: $(vs-secret1) # vg secret2\n
+    TEST_SEC_FROM_GROUP_3: $(vs-secret2) # vg\n secret3
+    TEST_SEC_FROM_GROUP_4: $(vs-secret3) # vg secret4\n ; through the UI interface
