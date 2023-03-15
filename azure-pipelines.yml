@@ -50,6 +50,7 @@ variables:
 # --------------------------------------------------------------------------------------------------
 
 pool: #Default
+  name: 'Azure Pipelines'
   vmImage: ubuntu-22.04
 steps:
 - checkout: none
