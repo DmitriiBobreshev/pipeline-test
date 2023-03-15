@@ -50,7 +50,7 @@ variables:
 # --------------------------------------------------------------------------------------------------
 
 pool: #Default
-  vmImage: windows-latest
+  vmImage: ubuntu-22.04
 steps:
 - checkout: none
 - bash: env | grep TEST_
