@@ -51,22 +51,8 @@ variables:
 
 pool: #Default
   name: 'Azure Pipelines'
-  vmImage: ubuntu-22.04
+  vmImage: windows-latest
 steps:
 - checkout: none
-- bash: env | grep TEST_
-  env:
-    TEST_SEC_FROM_GROUP: $(vs-secret) # \nnvg secret1
-    TEST_SEC_FROM_GROUP_2: $(vs-secret1) # vg secret2\n
-    TEST_SEC_FROM_GROUP_3: $(vs-secret2) # vg\n secret3
-    TEST_SEC_FROM_GROUP_4: $(vs-secret3) # vg secret4\n ; through the UI interface
-- powershell: |
-    $env:TEST_SEC_FROM_GROUP
-    $env:TEST_SEC_FROM_GROUP_2
-    $env:TEST_SEC_FROM_GROUP_3
-    $env:TEST_SEC_FROM_GROUP_4
-  env:
-    TEST_SEC_FROM_GROUP: $(vs-secret) # \nnvg secret1
-    TEST_SEC_FROM_GROUP_2: $(vs-secret1) # vg secret2\n
-    TEST_SEC_FROM_GROUP_3: $(vs-secret2) # vg\n secret3
-    TEST_SEC_FROM_GROUP_4: $(vs-secret3) # vg secret4\n ; through the UI interface
+- bash: echo process.kill(process.pid, "SIGINT"); test.js 
+- script: node  test.js
