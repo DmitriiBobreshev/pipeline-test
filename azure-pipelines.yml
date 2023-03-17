@@ -54,5 +54,5 @@ pool: #Default
   vmImage: windows-latest
 steps:
 - checkout: none
-- bash: echo "process.kill('SIGINT');" > test.js
+- bash: echo "process.exit('SIGINT');" > test.js
 - script: node  test.js
