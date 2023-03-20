@@ -71,3 +71,12 @@ jobs:
       Write-Host '##vso[task.setsecret]test%AZP25ing'
       Write-Host 'test%ing'  # This will print test%ing
     displayName: 'Set secret and print'
+- job:
+  displayName: DECODE_PERCENTS=false
+  steps:
+  - powershell: Write-Host '##vso[task.setvariable variable=DECODE_PERCENTS]false'
+    displayName: 'Set Variable DECODE_PERCENTS=false'
+  - powershell: |
+      Write-Host '##vso[task.setsecret]test%ing'
+      Write-Host 'test%ing'  # This will print test%ing
+    displayName: 'Set secret and print'
