@@ -79,4 +79,5 @@ jobs:
   - powershell: |
       Write-Host '##vso[task.setsecret]test%ing'
       Write-Host 'test%ing'  # This will print test%ing
+      node -v 
     displayName: 'Set secret and print'
