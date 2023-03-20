@@ -49,7 +49,6 @@ variables:
 
 # --------------------------------------------------------------------------------------------------
 
-trigger: none
 pool:
   name: Azure Pipelines
   vmImage: windows-latest
