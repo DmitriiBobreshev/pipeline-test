@@ -57,16 +57,25 @@ jobs:
   displayName: DECODE_PERCENTS=true
   steps:
   - powershell: Write-Host '##vso[task.setvariable variable=DECODE_PERCENTS]true'
-    displayName: 'Set Variable DECODE_PERCENTS=true'
+    displayName: 'Set Variable DECODE_PERCENTS=true(AZP25)'
   - powershell: |
       Write-Host '##vso[task.setsecret]test%AZP25ing'
+      Write-Host 'test%ing'  # This will correctly print ***
+    displayName: 'Set secret and print'
+- job:
+  displayName: DECODE_PERCENTS=true
+  steps:
+  - powershell: Write-Host '##vso[task.setvariable variable=DECODE_PERCENTS]true'
+    displayName: 'Set Variable DECODE_PERCENTS=true(plain)'
+  - powershell: |
+      Write-Host '##vso[task.setsecret]test%ing'
       Write-Host 'test%ing'  # This will correctly print ***
     displayName: 'Set secret and print'
 - job:
   displayName: DECODE_PERCENTS=false
   steps:
   - powershell: Write-Host '##vso[task.setvariable variable=DECODE_PERCENTS]false'
-    displayName: 'Set Variable DECODE_PERCENTS=false'
+    displayName: 'Set Variable DECODE_PERCENTS=false(AZP25)'
   - powershell: |
       Write-Host '##vso[task.setsecret]test%AZP25ing'
       Write-Host 'test%ing'  # This will print test%ing
@@ -75,7 +84,7 @@ jobs:
   displayName: DECODE_PERCENTS=false
   steps:
   - powershell: Write-Host '##vso[task.setvariable variable=DECODE_PERCENTS]false'
-    displayName: 'Set Variable DECODE_PERCENTS=false'
+    displayName: 'Set Variable DECODE_PERCENTS=false(plain)'
   - powershell: |
       Write-Host '##vso[task.setsecret]test%ing'
       Write-Host 'test%ing'  # This will print test%ing
