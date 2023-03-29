@@ -59,5 +59,4 @@ jobs:
  
   - task: Npm@0
     displayName: 'npm install'
-    inputs:
-      filePath: src/npm
+    workingDirectory: src/npm
