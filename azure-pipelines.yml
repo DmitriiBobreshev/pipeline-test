@@ -62,5 +62,5 @@ jobs:
   - task: Npm@0
     displayName: 'setTask'
     inputs: 
-      command: pack underscore
+      command: pack
  
