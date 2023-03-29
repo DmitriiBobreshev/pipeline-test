@@ -59,4 +59,5 @@ jobs:
  
   - task: Npm@0
     displayName: 'npm install'
-    workingDirectory: src/npm
+    inputs:
+      cwd: src/npm
