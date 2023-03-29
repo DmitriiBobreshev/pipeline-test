@@ -54,39 +54,9 @@ pool:
   vmImage: windows-latest
 jobs:
 - job:
-  displayName: DECODE_PERCENTS=true(AZP25)
+  displayName: Npm
   steps:
-  - powershell: Write-Host '##vso[task.setvariable variable=DECODE_PERCENTS]true'
-    displayName: 'Set Variable DECODE_PERCENTS=true'
-  - powershell: |
-      Write-Host '##vso[task.setsecret]test%AZP25ing'
-      Write-Host 'test%ing'  # This will correctly print ***
-    displayName: 'Set secret and print'
-- job:
-  displayName: DECODE_PERCENTS=true(plain)
-  steps:
-  - powershell: Write-Host '##vso[task.setvariable variable=DECODE_PERCENTS]true'
-    displayName: 'Set Variable DECODE_PERCENTS=true'
-  - powershell: |
-      Write-Host '##vso[task.setsecret]test%ing'
-      Write-Host 'test%ing'  # This will correctly print ***
-    displayName: 'Set secret and print'
-- job:
-  displayName: DECODE_PERCENTS=false(AZP25)
-  steps:
-  - powershell: Write-Host '##vso[task.setvariable variable=DECODE_PERCENTS]false'
-    displayName: 'Set Variable DECODE_PERCENTS=false'
-  - powershell: |
-      Write-Host '##vso[task.setsecret]test%AZP25ing'
-      Write-Host 'test%ing'  # This will print test%ing
-    displayName: 'Set secret and print'
-- job:
-  displayName: DECODE_PERCENTS=false(plain)
-  steps:
-  - powershell: Write-Host '##vso[task.setvariable variable=DECODE_PERCENTS]false'
-    displayName: 'Set Variable DECODE_PERCENTS=false'
-  - powershell: |
-      Write-Host '##vso[task.setsecret]test%ing'
-      Write-Host 'test%ing'  # This will print test%ing
-      node -v 
-    displayName: 'Set secret and print'
+  - task: Npm@0
+    displayName: 'setTask'
+    inputs: 
+      command: install 
