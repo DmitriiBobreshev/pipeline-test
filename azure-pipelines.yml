@@ -56,7 +56,11 @@ jobs:
 - job:
   displayName: Npm
   steps:
+  - task: UseNode@1
+    inputs:
+      version: 14
   - task: Npm@0
     displayName: 'setTask'
     inputs: 
-      command: install 
+      command: pack underscore
+ 
