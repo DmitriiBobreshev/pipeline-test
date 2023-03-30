@@ -57,7 +57,6 @@ jobs:
   displayName: Npm
   steps:
  
-  - task: Npm@0
-    displayName: 'npm install'
+  - task: npmAuthenticate@0
     inputs:
-      cwd: src/npm
+      workingFile: src\npm\npm\.npmrc
