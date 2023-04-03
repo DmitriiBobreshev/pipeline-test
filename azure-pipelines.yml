@@ -14,6 +14,8 @@ variables:
     value: test
   - name: agent.diagnostic
     value: true
+  - name: system.culture
+    value: "ru-RU"
 
 # resources:
 #   containers:
