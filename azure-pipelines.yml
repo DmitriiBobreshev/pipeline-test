@@ -1,3 +1,10 @@
+resources:
+  repositories:
+  - repository: AzureDevOps
+    type: git
+    endpoint: AzureDevOps
+    name: AzureDevOps/AzureDevOps
+
 variables:
   - group: secrets-groups
   - name: ndkPath
