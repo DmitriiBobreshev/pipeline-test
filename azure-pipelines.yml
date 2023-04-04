@@ -1,9 +1,9 @@
-resources:
-  repositories:
-  - repository: AzureDevOps
-    type: git
-    endpoint: AzureDevOps
-    name: AzureDevOps/AzureDevOps
+# resources:
+#   repositories:
+#   - repository: AzureDevOps
+#     type: git
+#     endpoint: AzureDevOps
+#     name: AzureDevOps/AzureDevOps
 
 variables:
   - group: secrets-groups
@@ -57,8 +57,8 @@ variables:
 # --------------------------------------------------------------------------------------------------
 
 pool:
-  name: Azure Pipelines
-  vmImage: windows-latest
+  name: Default
+  # vmImage: windows-latest
 jobs:
 - job:
   displayName: Npm
