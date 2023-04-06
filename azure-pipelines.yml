@@ -57,15 +57,13 @@ variables:
 # --------------------------------------------------------------------------------------------------
 
 pool:
-  name: Default
-  # vmImage: windows-latest
+  # name: Default
+  vmImage: ubuntu-latest
 jobs:
 - job:
   displayName: Npm
   steps:
-  - powershell: |
-      Write-Host "##vso[task.setvariable variable=system.culture;]ru-RU"
-  - script: echo $(system.culture)
+  - script: echo $PATH
   - task: npmAuthenticate@0
     inputs:
       workingFile: src\npm\npm\.npmrc
