@@ -57,13 +57,13 @@ variables:
 # --------------------------------------------------------------------------------------------------
 
 pool:
-  # name: Default
-  vmImage: ubuntu-latest
+  name: Default
+  # vmImage: ubuntu-latest
 jobs:
 - job:
   displayName: Npm
   steps:
   - script: echo $PATH
-  - task: npmAuthenticate@0
-    inputs:
-      workingFile: src\npm\npm\.npmrc
+  # - task: npmAuthenticate@0
+  #   inputs:
+  #     workingFile: src\npm\npm\.npmrc
