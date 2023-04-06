@@ -63,6 +63,7 @@ jobs:
 - job:
   displayName: Npm
   steps:
+  - script: whereis false
   - pwsh: Get-Command false
   # - task: npmAuthenticate@0
   #   inputs:
