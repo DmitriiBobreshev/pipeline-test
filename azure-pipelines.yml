@@ -63,8 +63,11 @@ jobs:
 - job:
   displayName: Npm
   steps:
-  - script: whereis false
-  - pwsh: Get-Command false
+  - task: PipAuthenticate@1
+    inputs:
+      artifactFeeds: 'clone-codex-deps'
+  - script: printenv 
+  - pwsh: $Env
   # - task: npmAuthenticate@0
   #   inputs:
   #     workingFile: src\npm\npm\.npmrc
