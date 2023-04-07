@@ -30,44 +30,44 @@ variables:
 #     image: nginx:latest
 
 
-# pool: Default
+pool: Default
 
-# pool:
-#     vmImage: 'ubuntu-latest'
+pool:
+    vmImage: 'ubuntu-latest'
  
-# container:  ubuntu:18.04
+container:  ubuntu:18.04
 # services:
   # nginx: nginx
 
-# steps:
-#   - script: |
-#       cat /etc/hostname
-#       export MY_ENV='test'
-#       mkdir test
-#       touch test/file_example
-#   - script: |
-#       cat /etc/hostname
-#       sleep 10
-#   - script: |
-#       echo $MY_ENV
-#       ls test
+steps:
+  - script: |
+      cat /etc/hostname
+      export MY_ENV='test'
+      mkdir test
+      touch test/file_example
+  - script: |
+      cat /etc/hostname
+      sleep 10
+  - script: |
+      echo $MY_ENV
+      ls test
 
   
 
 # --------------------------------------------------------------------------------------------------
 
-pool:
-  # name: Default
-  vmImage: ubuntu-latest
-jobs:
-- job:
-  displayName: Npm
-  steps:
-  - task: PipAuthenticate@1
-    inputs:
-      artifactFeeds: 'clone-codex-deps'
-  - script: printenv 
-  - pwsh: $Env
-  # - task: npmAuthenticate@0
-  #   inputs:
-  #     workingFile: src\npm\npm\.npmrc
+# pool:
+#   # name: Default
+#   vmImage: ubuntu-latest
+# jobs:
+# - job:
+#   displayName: Npm
+#   steps:
+#   - task: PipAuthenticate@1
+#     inputs:
+#       artifactFeeds: 'clone-codex-deps'
+#   - script: printenv 
+#   - pwsh: $Env
+#   # - task: npmAuthenticate@0
+#   #   inputs:
+#   #     workingFile: src\npm\npm\.npmrc
