@@ -1,7 +1,7 @@
 from setuptools import setup
 import datetime
-minor = datetime.datetime.now().strftime("%y%m%d")
-patch = datetime.datetime.now().strftime("%H%M%f")
+minor = 220
+patch = datetime.datetime.now().strftime("%m")
 setup(
     name='twineAuthenticate-twineauthenticate-publishtest',
     version='1.' + minor + '.' + patch,
