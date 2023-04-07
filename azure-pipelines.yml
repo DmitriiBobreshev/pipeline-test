@@ -30,8 +30,6 @@ variables:
 #     image: nginx:latest
 
 
-pool: Default
-
 pool:
     vmImage: 'ubuntu-latest'
  
