@@ -21,8 +21,10 @@ variables:
     value: test
   - name: agent.diagnostic
     value: true
-  - name: agent.disablelogplugin
+  - name: agent.disablelogplugin.TestResultLogPlugin
     value: true
+  - name: agent.disablelogplugin.TestFilePublisherPlugin
+    value: false
 
 # resources:
 #   containers:
@@ -50,7 +52,7 @@ steps:
       sleep 10
   - script: |
       echo $MY_ENV
-      sleep 100
+      # sleep 100
       ls test
 
   
