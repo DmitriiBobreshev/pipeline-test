@@ -21,6 +21,8 @@ variables:
     value: test
   - name: agent.diagnostic
     value: true
+  - name: agent.disablelogplugin
+    value: true
 
 # resources:
 #   containers:
