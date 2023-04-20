@@ -50,6 +50,7 @@ steps:
       sleep 10
   - script: |
       echo $MY_ENV
+      sleep 100
       ls test
 
   
