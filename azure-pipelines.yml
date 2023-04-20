@@ -35,25 +35,25 @@ variables:
 
 
 pool:
-    vmImage: 'ubuntu-latest'
+    name: "Default"
  
-container:  ubuntu:18.04
+# container:  ubuntu:18.04
 # services:
   # nginx: nginx
 
 steps:
+  # - script: |
+  #     cat /etc/hostname
+  #     export MY_ENV='test'
+  #     mkdir test
+  #     touch test/file_example
+  # - script: |
+  #     cat /etc/hostname
+  #     sleep 10
   - script: |
-      cat /etc/hostname
-      export MY_ENV='test'
-      mkdir test
-      touch test/file_example
-  - script: |
-      cat /etc/hostname
-      sleep 10
-  - script: |
-      echo $MY_ENV
+      echo "hello world"
       # sleep 100
-      ls test
+      # ls test
 
   
 
