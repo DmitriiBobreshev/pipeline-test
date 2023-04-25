@@ -12,19 +12,19 @@ variables:
   - name: androidSdkPath
     value: TEST_SDK_PATH
   - name: System.Debug
-    value: true
+    value: false
   - name: build.clean
     value: all
   - name: agent.clean.buildDirectory
     value: all
   - name: scheme
     value: test
-  - name: agent.diagnostic
-    value: true
-  - name: agent.disablelogplugin.TestResultLogPlugin
-    value: true
-  - name: agent.disablelogplugin.TestFilePublisherPlugin
-    value: false
+  # - name: agent.diagnostic
+  #   value: true
+  # - name: agent.disablelogplugin.TestResultLogPlugin
+  #   value: true
+  # - name: agent.disablelogplugin.TestFilePublisherPlugin
+  #   value: false
 
 # resources:
 #   containers:
