@@ -12,15 +12,15 @@ variables:
   - name: androidSdkPath
     value: TEST_SDK_PATH
   - name: System.Debug
-    value: false
+    value: true
   - name: build.clean
     value: all
   - name: agent.clean.buildDirectory
     value: all
   - name: scheme
     value: test
-  # - name: agent.diagnostic
-  #   value: true
+  - name: agent.diagnostic
+    value: true
   # - name: agent.disablelogplugin.TestResultLogPlugin
   #   value: true
   # - name: agent.disablelogplugin.TestFilePublisherPlugin
@@ -34,14 +34,14 @@ variables:
 #     image: nginx:latest
 
 
-pool:
-    name: "Default"
+# pool:
+#     name: "Default"
  
 # container:  ubuntu:18.04
 # services:
   # nginx: nginx
 
-steps:
+# steps:
   # - script: |
   #     cat /etc/hostname
   #     export MY_ENV='test'
@@ -50,27 +50,29 @@ steps:
   # - script: |
   #     cat /etc/hostname
   #     sleep 10
-  - script: |
-      echo "hello world"
-      # sleep 100
-      # ls test
+  # - script: |
+  #     echo "hello world"
+  #     # sleep 100
+  #     # ls test
 
   
 
 # --------------------------------------------------------------------------------------------------
 
-# pool:
-#   # name: Default
-#   vmImage: ubuntu-latest
-# jobs:
-# - job:
-#   displayName: Npm
-#   steps:
-#   - task: PipAuthenticate@1
-#     inputs:
-#       artifactFeeds: 'clone-codex-deps'
-#   - script: printenv 
-#   - pwsh: $Env
-#   # - task: npmAuthenticate@0
-#   #   inputs:
-#   #     workingFile: src\npm\npm\.npmrc
+pool:
+  # name: Default
+  vmImage: ubuntu-latest
+jobs:
+- job:
+  displayName: Npm
+  timeoutInMinutes: 30
+  steps:
+  - script: echo "Test"
+  - task: Bash@3
+    displayName: Sleep Command
+    retryCountOnTaskFailure: 4
+    timeoutInMinutes: 10
+    inputs:
+      targetType: 'inline'
+      script: |
+        sleep 1200;
