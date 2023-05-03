@@ -75,4 +75,19 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-        sleep 1200;
+        runtime="20 minute"
+        endtime=$(date -ud "$runtime" +%s)
+
+        while [[ $(date -u +%s) -le $endtime ]]
+        do
+            echo "Time Now: `date +%H:%M:%S`"
+            echo "Sleeping for 10 seconds"
+            sleep 10
+        done
+  - task: Bash@3
+    displayName: Sleep Command
+    retryCountOnTaskFailure: 4
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo "test 2"
