@@ -75,7 +75,7 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-        node src\nodejs\test.js
+        node ./src/nodejs/test.js
   - task: Bash@3
     displayName: Sleep Command
     retryCountOnTaskFailure: 4
