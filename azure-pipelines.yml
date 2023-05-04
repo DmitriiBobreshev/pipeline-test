@@ -60,18 +60,18 @@ variables:
 # --------------------------------------------------------------------------------------------------
 
 pool:
-  # name: Default
-  vmImage: ubuntu-latest
+  name: Default
+  # vmImage: ubuntu-latest
 jobs:
 - job:
   displayName: Npm
-  timeoutInMinutes: 30
+  timeoutInMinutes: 10
   steps:
   - script: echo "Test"
   - task: Bash@3
     displayName: Sleep Command
     retryCountOnTaskFailure: 4
-    timeoutInMinutes: 10
+    timeoutInMinutes: 5
     inputs:
       targetType: 'inline'
       script: |
