@@ -82,6 +82,7 @@ jobs:
   #   inputs:
   #     targetType: 'inline'
   #     script: 'echo "Test 2'
+  - script: free -g -h -t
   - task: Bash@3
     displayName: Sleep Command
     retryCountOnTaskFailure: 4
