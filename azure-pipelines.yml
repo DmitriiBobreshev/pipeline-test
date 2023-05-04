@@ -60,40 +60,40 @@ variables:
 # --------------------------------------------------------------------------------------------------
 
 pool:
-  name: Default
-  # vmImage: ubuntu-latest
+  # name: Default
+  vmImage: ubuntu-latest
 jobs:
 - job:
   displayName: Npm
   timeoutInMinutes: 10
   steps:
   - script: echo "Test"
-  - task: PowerShell@2
-    displayName: Sleep Command
-    retryCountOnTaskFailure: 4
-    timeoutInMinutes: 5
-    inputs:
-      targetType: 'inline'
-      script: 'node ./src/nodejs/test.js'
-  - task: PowerShell@2
-    displayName: Sleep Command
-    retryCountOnTaskFailure: 4
-    timeoutInMinutes: 5
-    inputs:
-      targetType: 'inline'
-      script: 'echo "Test 2'
-  # - task: Bash@3
+  # - task: PowerShell@2
   #   displayName: Sleep Command
   #   retryCountOnTaskFailure: 4
   #   timeoutInMinutes: 5
   #   inputs:
   #     targetType: 'inline'
-  #     script: |
-        
-  # - task: Bash@3
+  #     script: 'node ./src/nodejs/test.js'
+  # - task: PowerShell@2
   #   displayName: Sleep Command
   #   retryCountOnTaskFailure: 4
+  #   timeoutInMinutes: 5
   #   inputs:
   #     targetType: 'inline'
-  #     script: |
-  #       echo "test 2"
+  #     script: 'echo "Test 2'
+  - task: Bash@3
+    displayName: Sleep Command
+    retryCountOnTaskFailure: 4
+    timeoutInMinutes: 5
+    inputs:
+      targetType: 'inline'
+      script: |
+        
+  - task: Bash@3
+    displayName: Sleep Command
+    retryCountOnTaskFailure: 4
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo "test 2"
