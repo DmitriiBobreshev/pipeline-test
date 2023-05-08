@@ -61,8 +61,8 @@ variables:
 
 pool:
   # name: Default
-  name: vmss
-  # vmImage: ubuntu-latest
+  # name: vmss
+  vmImage: ubuntu-latest
 jobs:
 - job:
   displayName: Npm
