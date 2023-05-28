@@ -58,7 +58,7 @@ stages:
           azureStorageAccountName: 'vbobreshevtestjavatask'
           azureContainerName: 'v-bobreshevd-java-container'
           azureCommonVirtualFile: 'jdk-20_linux-x64_bin.deb'
-          jdkDestinationDirectory: '~./'
+          # jdkDestinationDirectory: ''
           cleanDestinationDirectory: false
   
   # - stage: 'Win2019'
