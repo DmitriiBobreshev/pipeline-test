@@ -46,8 +46,8 @@ stages:
     jobs:
     - job: 'NugetInstall'
       pool:
-        name: 'Azure Pipelines'
-        vmImage: 'ubuntu-22.04'
+        name: 'Default'
+        # vmImage: 'ubuntu-22.04'
       steps:
       - task: JavaToolInstaller@0
         inputs:
