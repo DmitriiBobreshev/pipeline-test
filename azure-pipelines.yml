@@ -57,7 +57,7 @@ stages:
           azureResourceManagerEndpoint: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
           azureStorageAccountName: 'vbobreshevtestjavatask'
           azureContainerName: 'v-bobreshevd-java-container'
-          azureResourceGroupName: 'v-bobreshevd-rg'
+          azureResourceGroupName: 'v-bobreshevd-rg-which-not-exists'
           azureCommonVirtualFile: 'jdk-20_linux-x64_bin.deb'
           # jdkDestinationDirectory: ''
           cleanDestinationDirectory: false
