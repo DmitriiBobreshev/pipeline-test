@@ -57,9 +57,9 @@ stages:
           azureResourceManagerEndpoint: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
           azureStorageAccountName: 'vbobreshevtestjavatask'
           azureContainerName: 'v-bobreshevd-java-container'
-          azureResourceGroupName: 'v-bobreshevd-rg-which-not-exists'
+          azureResourceGroupName: 'v-bobreshevd-rg'
           azureCommonVirtualFile: 'jdk-20_linux-x64_bin.deb'
-          # jdkDestinationDirectory: ''
+          jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk14'
           cleanDestinationDirectory: false
   
   # - stage: 'Win2019'
