@@ -1,5 +1,6 @@
 # resources:
 
+
 #   repositories:
 #   - repository: AzureDevOps
 #     type: git
@@ -48,18 +49,12 @@ stages:
         # name: 'Default'
         vmImage: 'ubuntu-22.04'
       steps:
-      - script: |
-          echo $(ARGS)
-          echo $(myKey)
-      - task: AzureKeyVault@2
+      - script: mkdir ~/f
+      - task: CopyFiles@2
         inputs:
-          azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
-          KeyVaultName: 'Akvelon'
-          RunAsPreJob: false
-          ${{ if eq(variables['ARGS'], '123') }}:
-            SecretsFilter: 123
-          ${{ else }}:
-            SecretsFilter: 123
+          SourceFolder: '~/'
+          Contents: 'asd'
+          TargetFolder: '~/f'
   
   # - stage: 'Win2019'
   #   dependsOn: []
