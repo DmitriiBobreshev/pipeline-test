@@ -54,13 +54,10 @@ stages:
           azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
           KeyVaultName: 'Akvelon'
           RunAsPreJob: false
-          ${{ if eq(ARGS, 'dev') }}
+          - ${{ if eq(ARGS, 'dev') }}:
             SecretsFilter: 'test'
-          ${{ elseif eq(ARGS, '123') }}
+          - ${{ if eq(ARGS, '123') }}:
             SecretsFilter: 'test1'
-          ${{ else }}
-            SecretsFilter: 'test2'
-          ${{ endif }}
 
   
   # - stage: 'Win2019'
