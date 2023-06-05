@@ -49,12 +49,11 @@ stages:
         # name: 'Default'
         vmImage: 'ubuntu-22.04'
       steps:
-      - script: mkdir ~/f
+      - script: mkdir f
       - task: CopyFiles@2
         inputs:
-          SourceFolder: '~/'
           Contents: 'asd'
-          TargetFolder: '~/f'
+          TargetFolder: 'f'
   
   # - stage: 'Win2019'
   #   dependsOn: []
