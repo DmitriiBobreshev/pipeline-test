@@ -49,18 +49,19 @@ stages:
         # name: 'Default'
         vmImage: 'ubuntu-22.04'
       steps:
-      - task: JavaToolInstaller@0
+      - task: AzureKeyVault@2
         inputs:
-          versionSpec: '8'
-          jdkArchitectureOption: 'x64'
-          jdkSourceOption: 'AzureStorage'
-          azureResourceManagerEndpoint: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
-          azureStorageAccountName: 'vbobreshevtestjavatask'
-          azureContainerName: 'v-bobreshevd-java-container'
-          azureResourceGroupName: 'v-bobreshev-rg'
-          azureCommonVirtualFile: 'jdk-20_linux-x64_bin.deb'
-          jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk14'
-          cleanDestinationDirectory: false
+          azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
+          KeyVaultName: 'Akvelon'
+          RunAsPreJob: false
+          ${{ if eq(parameters.environment, 'dev') }}
+            SecretsFilter: 'test'
+          ${{ elseif eq(parameters.environment, 'prf') }}
+            SecretsFilter: 'test1'
+          ${{ else }}
+            SecretsFilter: 'test2'
+          ${{ endif }}
+
   
   # - stage: 'Win2019'
   #   dependsOn: []
