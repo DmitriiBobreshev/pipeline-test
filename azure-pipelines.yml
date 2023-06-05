@@ -24,8 +24,12 @@ variables:
     value: true
   - name: ARGS
     value: "123"
-
-    
+  ${{ if eq(variables['ARGS'], '123') }}:
+    - name: myKey
+      value: "123"
+  ${{ if eq(variables['ARGS'], '123') }}:
+    - name: myKey
+      value: "1234"
     
 stages:
   # - stage: 'Ubuntu_2004'
@@ -54,10 +58,8 @@ stages:
           azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
           KeyVaultName: 'Akvelon'
           RunAsPreJob: false
-          - ${{ if eq(variables.ARGS, 'dev') }}:
-            SecretsFilter: 'test'
-          - ${{ if eq(variables.ARGS, '123') }}:
-            SecretsFilter: 'test1'
+          SecretsFilter: |
+            $(myKey)
 
   
   # - stage: 'Win2019'
