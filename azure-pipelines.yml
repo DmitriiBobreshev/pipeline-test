@@ -24,10 +24,10 @@ variables:
     value: true
   - name: ARGS
     value: "123"
-  ${{ if eq(variables['ARGS'], '123') }}:
+  - ${{ if eq(variables['ARGS'], '123') }}:
     - name: myKey
       value: "123"
-  ${{ if eq(variables['ARGS'], '123') }}:
+  - ${{ if eq(variables['ARGS'], '123') }}:
     - name: myKey
       value: "1234"
     
