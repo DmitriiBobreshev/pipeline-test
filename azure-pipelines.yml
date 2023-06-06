@@ -25,7 +25,10 @@ variables:
     value: true
   - name: ARGS
     value: "123"
-    
+  - name: Aks.SubscriptionId
+    value: "testSubId"
+  - name: ob_outputdirectory
+    value: 'testfolder'
 
 stages:
   # - stage: 'Ubuntu_2004'
@@ -49,12 +52,18 @@ stages:
         # name: 'Default'
         vmImage: 'ubuntu-22.04'
       steps:
-      - script: mkdir f
+      - script: | 
+          echo "SubscriptionId: $(Aks.SubscriptionId)" 
+          echo "ob_outputdirectory: $(ob_outputdirectory)" 
+          mkdir -p $(Build.SourcesDirectory)/src/Linux/AKS/EV2-Deploy/CommonScopeBindings/subscriptions/$(Aks.SubscriptionId)
+          echo sample > $(Build.SourcesDirectory)/src/Linux/AKS/EV2-Deploy/CommonScopeBindings/subscriptions/$(Aks.SubscriptionId)/Configuration.json
       - task: CopyFiles@2
         inputs:
-          Contents: 'asd'
-          TargetFolder: 'f'
-  
+          Contents: '$(Build.SourcesDirectory)/src/Linux/AKS/EV2-Deploy/CommonScopeBindings/subscriptions/$(Aks.SubscriptionId)/Configuration.json'
+          TargetFolder: '$(ob_outputdirectory)'
+      - script: |
+          ls $(ob_outputdirectory)
+          cat $(ob_outputdirectory)/Configuration.json
   # - stage: 'Win2019'
   #   dependsOn: []
   #   jobs:
