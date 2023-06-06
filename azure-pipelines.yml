@@ -61,6 +61,7 @@ stages:
         inputs:
           Contents: '$(Build.SourcesDirectory)/src/Linux/AKS/EV2-Deploy/CommonScopeBindings/subscriptions/$(Aks.SubscriptionId)/Configuration.json'
           TargetFolder: '$(ob_outputdirectory)'
+          flattenFolders: true
       - script: |
           find ./ | grep Configuration.json
       - task: CopyFiles@2
