@@ -13,7 +13,7 @@ parameters:
   default: 'someSolutionTarget'
 - name: msBuildArguments
   type: string
-  default: ''
+  default: 'argspassed'
 - name: binSourcePath
   type: string
   default: ''
@@ -30,7 +30,7 @@ variables:
   - name: msBuildArgumentsVar
     value: ${{ coalesce(parameters.msBuildArguments, format('-target:{0}', parameters.solutionTarget)) }}
   - name: binSourcePath
-    value: ''
+    value: ${{ coalesce(parameters.binSourcePath, format(''{0}/{1}, Build.SourcesDirectory, parameters.solutionTarget ) }}
 
 jobs:
 - job: 'NugetInstall'
