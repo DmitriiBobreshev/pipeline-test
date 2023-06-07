@@ -43,3 +43,4 @@ jobs:
   - script: | 
       echo "msBuildArgumentsVar: $(msBuildArgumentsVar)" 
       echo "binSourcePath: $(binSourcePath)" 
+      echo "test: $(test)"
