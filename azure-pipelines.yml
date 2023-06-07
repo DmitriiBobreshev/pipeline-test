@@ -41,6 +41,8 @@ jobs:
     vmImage: 'ubuntu-22.04'
   steps:
   - powershell: | 
+      pwsh --version
+      az --version 
       $TTL = 60
       $ttl = [System.Convert]::ToInt32($TTL)
       $ttl.GetType()
