@@ -10,7 +10,7 @@
 parameters:
 - name: solutionTarget
   type: string
-  default: ''
+  default: 'someSolutionTarget'
 - name: msBuildArguments
   type: string
   default: ''
