@@ -27,12 +27,12 @@ variables:
     value: all
   - name: agent.diagnostic
     value: true
-  - name: sourceDir
-    value: $(Build.SourcesDirectory)
-  - name: msBuildArgumentsVar
-    value: ${{ coalesce(parameters.msBuildArguments, format('-target:{0}', parameters.solutionTarget)) }}
-  - name: binSourcePath
-    value: ${{ coalesce(parameters.binSourcePath, format('{0}/{1}/bin', variables.sourceDir, parameters.solutionTarget )) }}
+  # - name: sourceDir
+  #   value: $(Build.SourcesDirectory)
+  # - name: msBuildArgumentsVar
+  #   value: ${{ coalesce(parameters.msBuildArguments, format('-target:{0}', parameters.solutionTarget)) }}
+  # - name: binSourcePath
+  #   value: ${{ coalesce(parameters.binSourcePath, format('{0}/{1}/bin', variables.sourceDir, parameters.solutionTarget )) }}
 
 jobs:
 - job: 'Example'
@@ -40,6 +40,17 @@ jobs:
     # name: 'Default'
     vmImage: 'ubuntu-22.04'
   steps:
+  - bash: |
+      if [ -z "${{ parameters.msBuildArguments }}" ]; then
+        echo "##vso[task.setvariable variable=msBuildArgumentsVar]-target:${{ parameters.solutionTarget }}"
+      else
+        echo "##vso[task.setvariable variable=msBuildArgumentsVar]${{ parameters.msBuildArguments }}"
+      fi
+      if [ -z "${{ parameters.binSourcePath }}" ]; then
+        echo "##vso[task.setvariable variable=binSourcePathVar]$(Build.SourcesDirectory)/${{ parameters.solutionTarget }}/bin"
+      else
+        echo "##vso[task.setvariable variable=binSourcePathVar]${{ parameters.binSourcePath }}"
+      fi
   - script: | 
       echo "msBuildArgumentsVar: $(msBuildArgumentsVar)" 
       echo "binSourcePath: $(binSourcePath)" 
