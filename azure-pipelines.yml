@@ -27,10 +27,12 @@ variables:
     value: all
   - name: agent.diagnostic
     value: true
+  - name: test
+    value: $(Build.SourcesDirectory)
   - name: msBuildArgumentsVar
     value: ${{ coalesce(parameters.msBuildArguments, format('-target:{0}', parameters.solutionTarget)) }}
   - name: binSourcePath
-    value: ${{ coalesce(parameters.binSourcePath, format('{0}/{1}/bin', variables.Build.SourcesDirectory, parameters.solutionTarget )) }}
+    value: ${{ coalesce(parameters.binSourcePath, format('{0}/{1}/bin', variables.test, parameters.solutionTarget )) }}
 
 jobs:
 - job: 'Example'
