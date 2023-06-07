@@ -44,5 +44,5 @@ jobs:
       $TTL = 60
       $ttl = [System.Convert]::ToInt32($TTL)
       $ttl.GetType()
-
+      az login
       az network dns record-set cname create --name MyRecordSet --resource-group v-bobreshev-rg --zone-name www.mysite.com --ttl "60"
