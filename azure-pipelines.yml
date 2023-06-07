@@ -40,7 +40,7 @@ jobs:
     # name: 'Default'
     vmImage: 'ubuntu-22.04'
   steps:
-  - powershell: | 
+  - powershell: |
       $TTL = 60
       $ttl = [System.Convert]::ToInt32($TTL)
       $ttl.GetType()
