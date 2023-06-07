@@ -16,7 +16,7 @@ parameters:
   default: ''
 - name: binSourcePath
   type: string
-  default: ''
+  default: ${{variable.sourceDir}}
 
 variables:
   - name: System.Debug
