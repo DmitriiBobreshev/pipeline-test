@@ -30,9 +30,7 @@ variables:
   - name: msBuildArgumentsVar
     value: ${{ coalesce(parameters.msBuildArguments, format('-target:{0}', parameters.solutionTarget)) }}
   - name: binSourcePath
-    value: ${{ coalesce(parameters.binSourcePath, format('{0}/bin', parameters.solutionTarget )) }}
-  - name: test
-    value: $(Build.SourcesDirectory)
+    value: ${{ coalesce(parameters.binSourcePath, format('{0}/{1}/bin', variables.Build.SourcesDirectory, parameters.solutionTarget )) }}
 
 jobs:
 - job: 'Example'
