@@ -41,10 +41,11 @@ jobs:
     vmImage: 'ubuntu-22.04'
   steps:
   - script: |
-      cat /opt/az/lib/python3.10/site-packages/knack/cli.py
-      mv /opt/az/lib/python3.10/site-packages/knack/cli.py /opt/az/lib/python3.10/site-packages/knack/cli.py.bak
-      mv cli.py /opt/az/lib/python3.10/site-packages/knack/cli.py
-      mv __init__.py /opt/az/lib/python3.10/site-packages/azure/cli/core/commands/__init__.py
+      curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      # cat /opt/az/lib/python3.10/site-packages/knack/cli.py
+      # mv /opt/az/lib/python3.10/site-packages/knack/cli.py /opt/az/lib/python3.10/site-packages/knack/cli.py.bak
+      # mv cli.py /opt/az/lib/python3.10/site-packages/knack/cli.py
+      # mv __init__.py /opt/az/lib/python3.10/site-packages/azure/cli/core/commands/__init__.py
   - powershell: |
       $TTL = 60
       $ttl = [System.Convert]::ToInt32($TTL)
