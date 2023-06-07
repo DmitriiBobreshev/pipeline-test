@@ -7,131 +7,37 @@
 #     endpoint: AzureDevOps
 #     name: AzureDevOps/AzureDevOps
 
+parameters:
+- name: solutionTarget
+  type: string
+  default: ''
+- name: msBuildArguments
+  type: string
+  default: ''
+- name: binSourcePath
+  type: string
+  default: ''
+
 variables:
-  - group: secrets-groups
-  - name: ndkPath
-    value: TEST_NDK_PATH
-  - name: androidSdkPath
-    value: TEST_SDK_PATH
   - name: System.Debug
     value: true
   - name: build.clean
     value: all
   - name: agent.clean.buildDirectory
     value: all
-  - name: scheme
-    value: test
   - name: agent.diagnostic
     value: true
-  - name: ARGS
-    value: "123"
-  - name: Aks.SubscriptionId
-    value: "testSubId"
-  - name: ob_outputdirectory
-    value: 'testfolder'
+  - name: msBuildArgumentsVar
+    value: ${{ coalesce(parameters.msBuildArguments, '-target:'parameters.solutionTarget) }}
+  - name: binSourcePath
+    value: ''
 
-stages:
-  # - stage: 'Ubuntu_2004'
-  #   dependsOn: []
-  #   jobs:
-  #   - job: 'NugetInstall'
-  #     pool:
-  #       name: 'Azure Pipelines'
-  #       vmImage: 'ubuntu-20.04'
-  #     steps:
-  #       - task: PowerShell@2
-  #         inputs:
-  #           filePath: ./templates/script.ps1
-  #           arguments: $(ARGS)
-  
-  - stage: 'Ubuntu_2204'
-    dependsOn: []
-    jobs:
-    - job: 'NugetInstall'
-      pool:
-        # name: 'Default'
-        vmImage: 'ubuntu-22.04'
-      steps:
-      - script: | 
-          echo "SubscriptionId: $(Aks.SubscriptionId)" 
-          echo "ob_outputdirectory: $(ob_outputdirectory)" 
-          mkdir -p $(Build.SourcesDirectory)/src/Linux/AKS/EV2-Deploy/CommonScopeBindings/subscriptions/$(Aks.SubscriptionId)
-          echo sample > $(Build.SourcesDirectory)/src/Linux/AKS/EV2-Deploy/CommonScopeBindings/subscriptions/$(Aks.SubscriptionId)/Configuration.json
-      - task: CopyFiles@2
-        inputs:
-          Contents: '$(Build.SourcesDirectory)/src/Linux/AKS/EV2-Deploy/CommonScopeBindings/subscriptions/$(Aks.SubscriptionId)/Configuration.json'
-          TargetFolder: '$(ob_outputdirectory)'
-          flattenFolders: true
-      - script: |
-          find ./ | grep Configuration.json
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: '$(Build.SourcesDirectory)/src/Linux/AKS/EV2-Deploy/CommonScopeBindings/subscriptions/$(Aks.SubscriptionId)'
-          Contents: 'Configuration.json'
-          TargetFolder: '$(ob_outputdirectory)'
-      - script: |
-          find ./ | grep Configuration.json
-  # - stage: 'Win2019'
-  #   dependsOn: []
-  #   jobs:
-  #   - job: 'NugetInstall'
-  #     pool:
-  #       name: 'Azure Pipelines'
-  #       vmImage: 'windows-2019'
-  #     steps:
-  #       - task: PowerShell@2
-  #         inputs:
-  #           filePath: ./templates/script.ps1
-  #           arguments: $(ARGS)
-  
-  # - stage: 'Win2022'
-  #   dependsOn: []
-  #   jobs:
-  #   - job: 'NugetInstall'
-  #     pool:
-  #       name: 'Azure Pipelines'
-  #       vmImage: 'windows-2022'
-  #     steps:
-  #       - task: PowerShell@2
-  #         inputs:
-  #           filePath: ./templates/script.ps1
-  #           arguments: $(ARGS)
-  
-  # - stage: 'MacOS_Public_Catalina'
-  #   dependsOn: []
-  #   jobs:
-  #   - job: 'NugetInstall'
-  #     pool:
-  #       name: 'Azure Pipelines'
-  #       vmImage: 'macos-10.15'
-  #     steps:
-  #       - task: PowerShell@2
-  #         inputs:
-  #           filePath: ./templates/script.ps1
-  #           arguments: $(ARGS)
-  
-  # - stage: 'MacOS_Public_BigSur'
-  #   dependsOn: []
-  #   jobs:
-  #   - job: 'NugetInstall'
-  #     pool:
-  #       name: 'Azure Pipelines'
-  #       vmImage: 'macos-11'
-  #     steps:
-  #       - task: PowerShell@2
-  #         inputs:
-  #           filePath: ./templates/script.ps1
-  #           arguments: $(ARGS)
-  
-  # - stage: 'MacOS_Public_Monterey'
-  #   dependsOn: []
-  #   jobs:
-  #   - job: 'NugetInstall'
-  #     pool:
-  #       name: 'Azure Pipelines'
-  #       vmImage: 'macos-12'
-  #     steps:
-  #       - task: PowerShell@2
-  #         inputs:
-  #           filePath: ./templates/script.ps1
-  #           arguments: "$(ARGS)"
+jobs:
+- job: 'NugetInstall'
+  pool:
+    # name: 'Default'
+    vmImage: 'ubuntu-22.04'
+  steps:
+  - script: | 
+      echo "msBuildArgumentsVar: $(msBuildArgumentsVar)" 
+      echo "binSourcePath: $(binSourcePath)" 
