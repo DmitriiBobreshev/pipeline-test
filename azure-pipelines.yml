@@ -28,7 +28,7 @@ variables:
   - name: agent.diagnostic
     value: true
   - name: msBuildArgumentsVar
-    value: ${{ coalesce(parameters.msBuildArguments, '-target:'parameters.solutionTarget) }}
+    value: ${{ coalesce(parameters.msBuildArguments, format('-target:{0}', parameters.solutionTarget)) }}
   - name: binSourcePath
     value: ''
 
