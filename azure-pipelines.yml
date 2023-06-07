@@ -27,8 +27,8 @@ variables:
     value: all
   - name: agent.diagnostic
     value: true
-  # - name: sourceDir
-  #   value: $(Build.SourcesDirectory)
+  - name: sourceDir
+    value: $(Build.SourcesDirectory)
   # - name: msBuildArgumentsVar
   #   value: ${{ coalesce(parameters.msBuildArguments, format('-target:{0}', parameters.solutionTarget)) }}
   # - name: binSourcePath
@@ -53,5 +53,5 @@ jobs:
       fi
   - script: | 
       echo "msBuildArgumentsVar: $(msBuildArgumentsVar)" 
-      echo "binSourcePath: $(binSourcePath)" 
+      echo "binSourcePath: $(binSourcePathVar)" 
       echo "sourceDir: $(sourceDir)"
