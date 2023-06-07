@@ -52,4 +52,4 @@ jobs:
       $ttl.GetType()
       az login
       az account set --subscription "3f56da7f-5953-4018-8ca8-e20dbfa0a7e2"
-      az network dns record-set cname create --name MyRecordSet --resource-group v-bobreshev-rg --zone-name www.mysite.com --ttl 60
+      az network dns record-set cname create --name MyRecordSet --resource-group v-bobreshev-rg --zone-name www.mysite.com --ttl $ttl --debug --trace
