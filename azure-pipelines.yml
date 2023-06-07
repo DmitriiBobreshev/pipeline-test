@@ -13,10 +13,10 @@ parameters:
   default: 'someSolutionTarget'
 - name: msBuildArguments
   type: string
-  default: 'argspassed'
+  default: ''
 - name: binSourcePath
   type: string
-  default: ${{variables.sourceDir}}
+  default: ''
 
 variables:
   - name: System.Debug
