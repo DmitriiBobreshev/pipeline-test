@@ -42,7 +42,6 @@ jobs:
     # name: 'Default'
     vmImage: 'ubuntu-22.04'
   steps:
-  - script: echo $JAVA8IMAGE 
   - task: PowerShell@2
     displayName: 'Set Image'
     inputs:
@@ -57,4 +56,3 @@ jobs:
       targetType: 'inline'
       script: |
         echo JAVA$(javaImageEnv)IMAGE = $JAVA$(javaImageEnv)IMAGE
-        echo $(JAVA8_zuluIMAGE)
