@@ -42,14 +42,14 @@ jobs:
     # name: 'Default'
     vmImage: 'ubuntu-22.04'
   steps:
-  - task: Bash@3
+  - task: PowerShell@2
     displayName: 'Set Image'
     inputs:
       enable_network : true
       targetType: 'inline'
       script: |
         echo "##vso[task.setvariable variable=JAVA$(javaImageEnv)IMAGE]java$(javaImageEnv)image"
-        export java$(javaImageEnv)image=java$(javaImageEnv)image
+        export JAVA$(javaImageEnv)IMAGE=java$(javaImageEnv)image
 
   - task: Bash@3
     displayName: 'Test Images Part 1'
