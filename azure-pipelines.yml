@@ -37,7 +37,7 @@ jobs:
       _java8:
         javaImageEnv: "8"
       _java8-zulu:
-        javaImageEnv: "8-zulu"
+        javaImageEnv: "8_zulu"
   pool:
     # name: 'Default'
     vmImage: 'ubuntu-22.04'
