@@ -37,7 +37,7 @@ jobs:
       _java8:
         javaImageEnv: "8"
       _java8-zulu:
-        javaImageEnv: "8zulu"
+        javaImageEnv: "8_ZULU"
   pool:
     # name: 'Default'
     vmImage: 'ubuntu-22.04'
@@ -48,9 +48,7 @@ jobs:
       enable_network : true
       targetType: 'inline'
       script: |
-        $env:JAVA8IMAGE
         echo "##vso[task.setvariable variable=JAVA$(javaImageEnv)IMAGE]java$(javaImageEnv)image"
-        $env:JAVA8IMAGE
 
   - task: Bash@3
     displayName: 'Test Images Part 1'
