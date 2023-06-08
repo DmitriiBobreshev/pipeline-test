@@ -42,7 +42,7 @@ jobs:
     # name: 'Default'
     vmImage: 'ubuntu-22.04'
   steps:
-  - task: Bash@2
+  - task: Bash@3
     displayName: 'Set Image'
     inputs:
       enable_network : true
