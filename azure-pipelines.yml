@@ -48,7 +48,7 @@ jobs:
       enable_network : true
       targetType: 'inline'
       script: |
-        echo "##vso[task.setvariable variable=JAVA$(javaImageEnv)IMAGE]java$(javaImageEnv)image"
+        # echo "##vso[task.setvariable variable=JAVA$(javaImageEnv)IMAGE]java$(javaImageEnv)image"
         # export JAVA$(javaImageEnv)IMAGE=java$(javaImageEnv)image
         export JAVA8_zuluIMAGE=java8_zuluimage
 
@@ -58,4 +58,5 @@ jobs:
       enable_network : true
       targetType: 'inline'
       script: |
-        echo JAVA$(javaImageEnv)IMAGE = $JAVA$(javaImageEnv)IMAGE
+        # echo JAVA$(javaImageEnv)IMAGE = $JAVA$(javaImageEnv)IMAGE
+        echo JAVA8_zuluIMAGE = $JAVA8_zuluIMAGE
