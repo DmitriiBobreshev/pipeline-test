@@ -57,3 +57,4 @@ jobs:
       targetType: 'inline'
       script: |
         echo JAVA$(javaImageEnv)IMAGE = $JAVA$(javaImageEnv)IMAGE
+        echo $(JAVA8_zuluIMAGE)
