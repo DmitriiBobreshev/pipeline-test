@@ -48,9 +48,9 @@ jobs:
       enable_network : true
       targetType: 'inline'
       script: |
-        echo $env:JAVA8IMAGE
+        $env:JAVA8IMAGE
         echo "##vso[task.setvariable variable=JAVA$(javaImageEnv)IMAGE]java$(javaImageEnv)image"
-        echo $env:JAVA8IMAGE
+        $env:JAVA8IMAGE
 
   - task: Bash@3
     displayName: 'Test Images Part 1'
