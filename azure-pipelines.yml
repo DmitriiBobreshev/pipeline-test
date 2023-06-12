@@ -40,23 +40,22 @@ jobs:
         javaImageEnv: "8_zulu"
   pool:
     # name: 'Default'
-    vmImage: 'ubuntu-22.04'
+    vmImage: 'windows-latest'
   steps:
-  - task: Bash@3
+  - task: Powershell@2
     displayName: 'Set Image'
     inputs:
-      enable_network : true
       targetType: 'inline'
       script: |
         # echo "##vso[task.setvariable variable=JAVA$(javaImageEnv)IMAGE]java$(javaImageEnv)image"
         # export JAVA$(javaImageEnv)IMAGE=java$(javaImageEnv)image
-        export JAVA8_zuluIMAGE=java8_zuluimage
+        echo '123'
 
-  - task: Bash@3
-    displayName: 'Test Images Part 1'
-    inputs:
-      enable_network : true
-      targetType: 'inline'
-      script: |
-        # echo JAVA$(javaImageEnv)IMAGE = $JAVA$(javaImageEnv)IMAGE
-        echo JAVA8_zuluIMAGE = $JAVA8_zuluIMAGE
+  # - task: Bash@3
+  #   displayName: 'Test Images Part 1'
+  #   inputs:
+  #     enable_network : true
+  #     targetType: 'inline'
+  #     script: |
+  #       # echo JAVA$(javaImageEnv)IMAGE = $JAVA$(javaImageEnv)IMAGE
+  #       echo JAVA8_zuluIMAGE = $JAVA8_zuluIMAGE
