@@ -36,7 +36,7 @@ jobs:
     # name: 'Default'
     vmImage: 'windows-latest'
   steps:
-  - task: PackerBuild@1
+  - task: PackerBuild@0
     inputs:
       templateType: 'builtin'
       ConnectedServiceName: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
