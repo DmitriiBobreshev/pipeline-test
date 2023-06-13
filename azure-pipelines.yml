@@ -41,7 +41,8 @@ jobs:
     inputs:
       kubernetesServiceConnection: RMDev - Kubernetes
       command: get
-      arguments: services
+      arguments: pods
+      versionSpec: 1.13.2
     enabled: true
   # - task: Powershell@2
   #   displayName: 'Set Image'
