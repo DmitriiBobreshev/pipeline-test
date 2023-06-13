@@ -37,11 +37,13 @@ jobs:
     vmImage: 'windows-latest'
   steps:
   
-  - task: PackerBuild@1
-    inputs:
-      templateType: 'custom'
-      customTemplateLocation: '**/script.ps1'
-      packerVersion: '1.5.1''
+    - task: PackerBuild@1
+      inputs:
+        templateType: 'custom'
+        customTemplateLocation: '**/script.ps1'
+        packerVersion: '1.5.1'
+  
+
   # - task: PackerBuild@1
   #   inputs:
   #     templateType: 'builtin'
@@ -53,7 +55,7 @@ jobs:
   #     baseImageSource: 'default'
   #     baseImage: 'MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:windows'
   #     packagePath: 'templates'
-  #     deployScriptPath: '
+  #     deployScriptPath: '**/script.ps1'
   # - task: Powershell@2
   #   displayName: 'Set Image'
   #   inputs:
