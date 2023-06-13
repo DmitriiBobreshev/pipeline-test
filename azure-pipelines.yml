@@ -46,7 +46,7 @@ jobs:
       azureResourceGroup: 'v-bobreshev-rg'
       baseImageSource: 'default'
       baseImage: 'MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:windows'
-      packagePath: 'src/gradle/AndroidGradle'
+      packagePath: 'templates'
       deployScriptPath: 'templates/script.ps1'
   # - task: Powershell@2
   #   displayName: 'Set Image'
