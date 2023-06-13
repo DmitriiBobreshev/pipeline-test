@@ -32,24 +32,26 @@ variables:
 
 jobs:
 - job: 'Example'
-  strategy:
-    matrix:
-      _java8:
-        javaImageEnv: "8"
-      _java8-zulu:
-        javaImageEnv: "8_zulu"
   pool:
     # name: 'Default'
     vmImage: 'windows-latest'
   steps:
-  - task: Powershell@2
-    displayName: 'Set Image'
+  - task: Kubernetes@0
+    displayName: 'kubectl get - V0'
     inputs:
-      targetType: 'inline'
-      script: |
-        # echo "##vso[task.setvariable variable=JAVA$(javaImageEnv)IMAGE]java$(javaImageEnv)image"
-        # export JAVA$(javaImageEnv)IMAGE=java$(javaImageEnv)image
-        echo '123'
+      kubernetesServiceConnection: RMDev - Kubernetes
+      command: get
+      arguments: pods
+      versionSpec: 1.13.2
+    enabled: true
+  # - task: Powershell@2
+  #   displayName: 'Set Image'
+  #   inputs:
+  #     targetType: 'inline'
+  #     script: |
+  #       # echo "##vso[task.setvariable variable=JAVA$(javaImageEnv)IMAGE]java$(javaImageEnv)image"
+  #       # export JAVA$(javaImageEnv)IMAGE=java$(javaImageEnv)image
+  #       echo '123'
 
   # - task: Bash@3
   #   displayName: 'Test Images Part 1'
