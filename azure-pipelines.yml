@@ -36,14 +36,18 @@ jobs:
     # name: 'Default'
     vmImage: 'windows-latest'
   steps:
-  - task: Kubernetes@0
-    displayName: 'kubectl get - V0'
+  - task: PackerBuild@1
     inputs:
-      kubernetesServiceConnection: RMDev - Kubernetes
-      command: get
-      arguments: pods
-      versionSpec: 1.13.2
-    enabled: true
+      templateType: 'builtin'
+      ConnectedServiceName: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
+      isManagedImage: true
+      location: 'westus'
+      storageAccountName: 'vbobreshevtestjavatask'
+      azureResourceGroup: 'v-bobreshev-rg'
+      baseImageSource: 'default'
+      baseImage: 'MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:windows'
+      packagePath: 'src/gradle/AndroidGradle'
+      deployScriptPath: 'templates/script.ps1'
   # - task: Powershell@2
   #   displayName: 'Set Image'
   #   inputs:
