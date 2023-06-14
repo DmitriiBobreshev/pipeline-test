@@ -36,9 +36,6 @@ jobs:
     # name: 'Default'
     vmImage: 'windows-latest'
   steps:
-  
-    - powershell: |
-        ls Env: 
     - task: PackerBuild@1
       inputs:
         templateType: 'custom'
