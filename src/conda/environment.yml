@@ -1,4 +1,4 @@
-name: env-from-yaml
+name: myEnvironment
 channels:
 - pytorch
 dependencies:
