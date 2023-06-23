@@ -41,7 +41,7 @@ jobs:
         environmentName: myEnvironment
         updateConda: false # boolean. Update to the latest Conda. Default: true.
       # Advanced
-        #createOptions: # string. Environment creation options. 
+        createOptions: --quiet --file src/conda/environment.yml
         #cleanEnvironment: false # boolean. Clean the environment. Default: false.
 
     - script: |
