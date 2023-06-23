@@ -41,13 +41,20 @@ jobs:
         environmentName: myEnvironment
         updateConda: false # boolean. Update to the latest Conda. Default: true.
       # Advanced
-        createOptions: --quiet --file src/conda/environment.yml
+        createOptions: --quiet 
         #cleanEnvironment: false # boolean. Clean the environment. Default: false.
 
-    - script: |
-        cd src/conda
-        call activate myEnvironment
-        pip install pytest pytest-azurepipelines
-        pytest
-      displayName: pytest
-      retryCountOnTaskFailure: 3
+    - task: CondaEnvironment@0
+      inputs:
+        environmentName: myEnvironment
+        updateConda: false # boolean. Update to the latest Conda. Default: true.
+      # Advanced
+        createOptions: --quiet
+        #cleanEnvironment: false # boolean. Clean the environment. Default: false.
+    # - script: |
+    #     cd src/conda
+    #     call activate myEnvironment
+    #     pip install pytest pytest-azurepipelines
+    #     pytest
+    #   displayName: pytest
+    #   retryCountOnTaskFailure: 3
