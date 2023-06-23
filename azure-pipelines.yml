@@ -34,7 +34,7 @@ jobs:
 - job: 'Example'
   pool:
     # name: 'Default'
-    vmImage: 'windows-latest'
+    vmImage: 'ubuntu-latest'
   steps:
     - task: CondaEnvironment@0
       inputs:
