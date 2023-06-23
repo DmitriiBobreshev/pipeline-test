@@ -46,7 +46,7 @@ jobs:
 
     - script: |
         cd src/conda
-        source activate myEnvironment
+        call activate myEnvironment
         pip install pytest pytest-azurepipelines
         pytest
       displayName: pytest
