@@ -1,0 +1,12 @@
+steps:
+- bash: echo "##vso[task.prependpath]$CONDA/bin"
+  displayName: Add conda to PATH
+
+- bash: sudo chown -R $USER $CONDA
+  displayName: Take ownership of conda installation
+
+- bash: |
+    cd src/conda
+    conda update -y -n base conda setuptools
+  displayName: Update conda
+  retryCountOnTaskFailure: 3

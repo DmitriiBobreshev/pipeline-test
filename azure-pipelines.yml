@@ -36,41 +36,18 @@ jobs:
     # name: 'Default'
     vmImage: 'windows-latest'
   steps:
-    - powershell: |
-        cat D:\a\_tasks\PackerBuild_845fd4f4-642d-4694-8514-047948a5a556\1.224.0\task.json
-    - task: PackerBuild@1
+    - task: CondaEnvironment@0
       inputs:
-        templateType: 'custom'
-        customTemplateLocation: 'templates/script.ps1'
-        packerVersion: '1.5.1'
-  
+        environmentName: myEnvironment
+        updateConda: false # boolean. Update to the latest Conda. Default: true.
+      # Advanced
+        #createOptions: # string. Environment creation options. 
+        #cleanEnvironment: false # boolean. Clean the environment. Default: false.
 
-  # - task: PackerBuild@1
-  #   inputs:
-  #     templateType: 'builtin'
-  #     ConnectedServiceName: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
-  #     isManagedImage: false
-  #     location: 'westus'
-  #     storageAccountName: 'vbobreshevtestjavatask'
-  #     azureResourceGroup: 'v-bobreshev-rg'
-  #     baseImageSource: 'default'
-  #     baseImage: 'MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:windows'
-  #     packagePath: 'templates'
-  #     deployScriptPath: '**/script.ps1'
-  # - task: Powershell@2
-  #   displayName: 'Set Image'
-  #   inputs:
-  #     targetType: 'inline'
-  #     script: |
-  #       # echo "##vso[task.setvariable variable=JAVA$(javaImageEnv)IMAGE]java$(javaImageEnv)image"
-  #       # export JAVA$(javaImageEnv)IMAGE=java$(javaImageEnv)image
-  #       echo '123'
-
-  # - task: Bash@3
-  #   displayName: 'Test Images Part 1'
-  #   inputs:
-  #     enable_network : true
-  #     targetType: 'inline'
-  #     script: |
-  #       # echo JAVA$(javaImageEnv)IMAGE = $JAVA$(javaImageEnv)IMAGE
-  #       echo JAVA8_zuluIMAGE = $JAVA8_zuluIMAGE
+    - bash: |
+        cd src/conda/src
+        source activate myEnvironment
+        pip install pytest pytest-azurepipelines
+        pytest
+      displayName: pytest
+      retryCountOnTaskFailure: 3

@@ -1,0 +1,16 @@
+steps:
+- powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+  displayName: Add conda to PATH
+
+- script: |
+    cd src/conda
+    conda env create --quiet --file environment.yml
+  displayName: Create Anaconda environment
+
+- bash: |
+    cd src/conda
+    source activate env-from-yaml
+    pip install pytest pytest-azurepipelines
+    pytest
+  displayName: pytest
+  retryCountOnTaskFailure: 3
