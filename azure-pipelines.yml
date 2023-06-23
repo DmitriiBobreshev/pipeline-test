@@ -36,20 +36,9 @@ jobs:
     # name: 'Default'
     vmImage: 'windows-latest'
   steps:
-    - task: CondaEnvironment@0
+    - task: FuncToolsInstaller@0
       inputs:
-        environmentName: myEnvironment
-        updateConda: false # boolean. Update to the latest Conda. Default: true.
-      # Advanced
-        createOptions: --quiet 
-        #cleanEnvironment: false # boolean. Clean the environment. Default: false.
-
-    - task: CondaEnvironment@1
-      inputs:
-        environmentName: myEnvironment2
-        updateConda: false # boolean. Update to the latest Conda. Default: true.
-      # Advanced
-        createOptions: --quiet
+        version: 2.7.1575
         #cleanEnvironment: false # boolean. Clean the environment. Default: false.
     # - script: |
     #     cd src/conda
