@@ -44,9 +44,9 @@ jobs:
         createOptions: --quiet 
         #cleanEnvironment: false # boolean. Clean the environment. Default: false.
 
-    - task: CondaEnvironment@0
+    - task: CondaEnvironment@1
       inputs:
-        environmentName: myEnvironment
+        environmentName: myEnvironment2
         updateConda: false # boolean. Update to the latest Conda. Default: true.
       # Advanced
         createOptions: --quiet
