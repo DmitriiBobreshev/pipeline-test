@@ -45,7 +45,7 @@ jobs:
         #cleanEnvironment: false # boolean. Clean the environment. Default: false.
 
     - script: |
-        cd src/conda/src
+        cd src/conda
         source activate myEnvironment
         pip install pytest pytest-azurepipelines
         pytest
