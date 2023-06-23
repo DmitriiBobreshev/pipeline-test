@@ -25,11 +25,11 @@ jobs:
     # name: 'Default'
     vmImage: 'windows-latest'
   steps:
-    - task: PackerBuild@0
-      inputs:
-        templateType: 'custom'
-        customTemplateLocation: 'templates/script.ps1'
-        packerVersion: '1.5.1'
+    # - task: PackerBuild@0
+    #   inputs:
+    #     templateType: 'custom'
+    #     customTemplateLocation: 'templates/script.ps1'
+    #     packerVersion: '1.5.1'
   
 
     - task: PackerBuild@1
