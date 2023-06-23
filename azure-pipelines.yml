@@ -34,7 +34,7 @@ jobs:
 - job: 'Example'
   pool:
     # name: 'Default'
-    vmImage: 'ubuntu-latest'
+    vmImage: 'windows-latest'
   steps:
     - task: CondaEnvironment@0
       inputs:
@@ -44,7 +44,7 @@ jobs:
         #createOptions: # string. Environment creation options. 
         #cleanEnvironment: false # boolean. Clean the environment. Default: false.
 
-    - bash: |
+    - script: |
         cd src/conda/src
         source activate myEnvironment
         pip install pytest pytest-azurepipelines
