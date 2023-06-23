@@ -7,17 +7,6 @@
 #     endpoint: AzureDevOps
 #     name: AzureDevOps/AzureDevOps
 
-parameters:
-- name: solutionTarget
-  type: string
-  default: 'someSolutionTarget'
-- name: msBuildArguments
-  type: string
-  default: ''
-- name: binSourcePath
-  type: string
-  default: ''
-
 variables:
   - name: System.Debug
     value: true
@@ -36,14 +25,22 @@ jobs:
     # name: 'Default'
     vmImage: 'windows-latest'
   steps:
-    - task: FuncToolsInstaller@0
+    - task: PackerBuild@0
       inputs:
-        version: 2.7.1575
-        #cleanEnvironment: false # boolean. Clean the environment. Default: false.
-    # - script: |
-    #     cd src/conda
-    #     call activate myEnvironment
-    #     pip install pytest pytest-azurepipelines
-    #     pytest
-    #   displayName: pytest
-    #   retryCountOnTaskFailure: 3
+        templateType: 'custom'
+        customTemplateLocation: 'templates/script.ps1'
+        packerVersion: '1.5.1'
+  
+
+    - task: PackerBuild@1
+      inputs:
+        templateType: 'builtin'
+        ConnectedServiceName: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
+        isManagedImage: false
+        location: 'westus'
+        storageAccountName: 'vbobreshevtestjavatask'
+        azureResourceGroup: 'v-bobreshev-rg'
+        baseImageSource: 'default'
+        baseImage: 'MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:windows'
+        packagePath: 'templates'
+        deployScriptPath: '**/script.ps1'
