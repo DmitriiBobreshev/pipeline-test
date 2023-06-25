@@ -20,28 +20,19 @@ variables:
     value: $(Build.SourcesDirectory)
 
 jobs:
-- job: 'Example'
-  pool:
-    # name: 'Default'
-    vmImage: 'windows-latest'
-  steps:
-    # - task: PackerBuild@0
-    #   inputs:
-    #     templateType: 'custom'
-    #     customTemplateLocation: 'templates/script.ps1'
-    #     packerVersion: '1.5.1'
-  
-
-    - task: PackerBuild@0
-      condition: always()
+  - job: Job_1
+    displayName: Agent job 1
+    pool:
+      vmImage: windows-latest
+    steps:
+    - checkout: self
+      fetchDepth: 1
+    - task: NodeTool@0
+      displayName: Use Node 6.x
       inputs:
-        templateType: 'builtin'
-        ConnectedServiceName: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
-        # isManagedImage: false
-        location: 'westus'
-        storageAccountName: 'vbobreshevtestjavatask'
-        azureResourceGroup: 'v-bobreshev-rg'
-        baseImageSource: 'default'
-        baseImage: 'MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:windows'
-        packagePath: 'templates'
-        deployScriptPath: '**/script.ps1'
+        checkLatest: true
+    - task: Npm@1
+      displayName: npm install
+      inputs:
+        verbose: false
+        workingDir: src/npm
