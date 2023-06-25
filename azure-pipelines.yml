@@ -18,6 +18,8 @@ variables:
     value: true
   - name: sourceDir
     value: $(Build.SourcesDirectory)
+  - name:  npm_config_cache
+    value: $(Pipeline.Workspace)/.npm
 
 jobs:
   - job: Job_1
@@ -32,6 +34,14 @@ jobs:
       displayName: Use Node 6.x
       inputs:
         checkLatest: true
+    - task: Cache@2
+      inputs:
+        key: 'npm | "$(Agent.OS)" | package.json'
+        restoreKeys: |
+            npm | "$(Agent.OS)"
+        path: $(npm_config_cache)
+      displayName: Cache npm
+
     - task: Npm@1
       displayName: npm install
       inputs:
