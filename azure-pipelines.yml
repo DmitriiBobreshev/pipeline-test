@@ -1,6 +1,5 @@
 # resources:
 
-
 #   repositories:
 #   - repository: AzureDevOps
 #     type: git
@@ -8,42 +7,43 @@
 #     name: AzureDevOps/AzureDevOps
 
 variables:
+  - group: secrets-groups
+  - name: ndkPath
+    value: TEST_NDK_PATH
+  - name: androidSdkPath
+    value: TEST_SDK_PATH
   - name: System.Debug
     value: true
   - name: build.clean
     value: all
   - name: agent.clean.buildDirectory
     value: all
+  - name: scheme
+    value: test
   - name: agent.diagnostic
     value: true
-  - name: sourceDir
-    value: $(Build.SourcesDirectory)
-  - name:  npm_config_cache
-    value: $(Pipeline.Workspace)/.npm
+  - name: ARGS
+    value: "123"
 
-jobs:
-  - job: Job_1
-    displayName: Agent job 1
-    pool:
-      # name: Default
-      vmImage: windows-latest
-    steps:
-    - checkout: self
-      fetchDepth: 1
-    - task: NodeTool@0
-      displayName: Use Node 6.x
-      inputs:
-        checkLatest: true
-    - task: Cache@2
-      inputs:
-        key: 'npm | "$(Agent.OS)" | src/npm/package.json'
-        restoreKeys: |
-            npm | "$(Agent.OS)"
-        path: $(npm_config_cache)
-      displayName: Cache npm
-
-    - task: Npm@1
-      displayName: npm install
-      inputs:
-        verbose: false
-        workingDir: src/npm
+    
+    
+stages:
+  - stage: 'Ubuntu_2204'
+    dependsOn: []
+    jobs:
+    - job: 'NugetInstall'
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: 'ubuntu-22.04'
+      steps:
+      - task: JavaToolInstaller@0
+        inputs:
+          versionSpec: '8'
+          jdkArchitectureOption: 'x64'
+          jdkSourceOption: 'AzureStorage'
+          azureResourceManagerEndpoint: 'martinmrazik Dev Environment(0031e7b5-6649-4025-b90d-e428f8ad69d8)'
+          azureStorageAccountName: 'icm374740842testsa1000'
+          azureContainerName: 'v-bobreshevd-java-container'
+          azureCommonVirtualFile: 'jdk-20_linux-x64_bin.deb'
+          jdkDestinationDirectory: '~./'
+          cleanDestinationDirectory: false
