@@ -33,8 +33,9 @@ stages:
     jobs:
     - job: 'NugetInstall'
       pool:
-        name: 'Azure Pipelines'
-        vmImage: 'ubuntu-22.04'
+        name: 'Default'
+        # name: 'Azure Pipelines'
+        # vmImage: 'ubuntu-22.04'
       steps:
       - script: |
           echo $SECRET
@@ -44,14 +45,14 @@ stages:
         env: 
           SECRET: $(SECRET) 
           NOSECRET: $(NOSECRET) 
-      - task: JavaToolInstaller@0
-        inputs:
-          versionSpec: '8'
-          jdkArchitectureOption: 'x64'
-          jdkSourceOption: 'AzureStorage'
-          azureResourceManagerEndpoint: 'martinmrazik Dev Environment(0031e7b5-6649-4025-b90d-e428f8ad69d8)'
-          azureStorageAccountName: 'icm374740842testsa1000'
-          azureContainerName: 'v-bobreshevd-java-container'
-          azureCommonVirtualFile: 'jdk-20_linux-x64_bin.deb'
-          jdkDestinationDirectory: '~./'
-          cleanDestinationDirectory: false
+      # - task: JavaToolInstaller@0
+      #   inputs:
+      #     versionSpec: '8'
+      #     jdkArchitectureOption: 'x64'
+      #     jdkSourceOption: 'AzureStorage'
+      #     azureResourceManagerEndpoint: 'martinmrazik Dev Environment(0031e7b5-6649-4025-b90d-e428f8ad69d8)'
+      #     azureStorageAccountName: 'icm374740842testsa1000'
+      #     azureContainerName: 'v-bobreshevd-java-container'
+      #     azureCommonVirtualFile: 'jdk-20_linux-x64_bin.deb'
+      #     jdkDestinationDirectory: '~./'
+      #     cleanDestinationDirectory: false
