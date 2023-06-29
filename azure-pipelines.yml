@@ -37,7 +37,7 @@ stages:
         vmImage: 'ubuntu-22.04'
       steps:
       - script: |
-          echo 'console.log(process.argv.map(e => e.split(""))' > script.js
+          echo 'console.log(process.argv.map(e => e.split("")))' > script.js
           node ./script.js $SECRET $NOSECRET
         env: 
           SECRET: $(SECRET) 
