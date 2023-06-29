@@ -37,11 +37,13 @@ stages:
         vmImage: 'ubuntu-22.04'
       steps:
       - script: |
+          echo $SECRET
+          echo $NOSECRET
           echo 'console.log(process.argv.map(e => e.split("")))' > script.js
-          node ./script.js $(SECRET) $(NOSECRET)
-        # env: 
-        #   SECRET: $(SECRET) 
-        #   NOSECRET: $(NOSECRET) 
+          node ./script.js $SECRET $NOSECRET
+        env: 
+          SECRET: $(SECRET) 
+          NOSECRET: $(NOSECRET) 
       - task: JavaToolInstaller@0
         inputs:
           versionSpec: '8'
