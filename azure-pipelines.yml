@@ -30,7 +30,7 @@ variables:
 jobs: 
 - deployment: 
   environment:
-      name: Testing
+      name: аываываыва
       resourceType: VirtualMachine
   pool: 
     vmImage: 'ubuntu-latest'
