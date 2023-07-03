@@ -32,7 +32,6 @@ jobs:
   environment:
       name: Testing
       resourceType: VirtualMachine
-      tags: web1
   pool: 
     vmImage: 'ubuntu-latest'
   strategy:                  
