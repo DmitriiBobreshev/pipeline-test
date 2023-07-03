@@ -29,7 +29,10 @@ variables:
     
 jobs: 
 - deployment: 
-  environment: Testing
+  environment:
+      name: Testing
+      resourceType: VirtualMachine
+      tags: web1
   pool: 
     vmImage: 'ubuntu-latest'
   strategy:                  
