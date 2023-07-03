@@ -27,32 +27,24 @@ variables:
 
     
     
-stages:
-  - stage: 'Ubuntu_2204'
-    dependsOn: []
-    jobs:
-    - job: 'NugetInstall'
-      pool:
-        name: 'Default'
-        # name: 'Azure Pipelines'
-        # vmImage: 'ubuntu-22.04'
-      steps:
-      - script: |
-          echo $SECRET
-          echo $NOSECRET
-          echo 'console.log(process.argv.map(e => e.split("")))' > script.js
-          node ./script.js $SECRET $NOSECRET
-        env: 
-          SECRET: $(SECRET) 
-          NOSECRET: $(NOSECRET) 
-      # - task: JavaToolInstaller@0
-      #   inputs:
-      #     versionSpec: '8'
-      #     jdkArchitectureOption: 'x64'
-      #     jdkSourceOption: 'AzureStorage'
-      #     azureResourceManagerEndpoint: 'martinmrazik Dev Environment(0031e7b5-6649-4025-b90d-e428f8ad69d8)'
-      #     azureStorageAccountName: 'icm374740842testsa1000'
-      #     azureContainerName: 'v-bobreshevd-java-container'
-      #     azureCommonVirtualFile: 'jdk-20_linux-x64_bin.deb'
-      #     jdkDestinationDirectory: '~./'
-      #     cleanDestinationDirectory: false
+jobs: 
+- deployment: 
+  environment: Testing
+  pool: 
+    vmImage: 'ubuntu-latest'
+  strategy:                  
+    canary:      
+      increments: [10,20]  
+      preDeploy:                                     
+        steps:           
+        - script: initialize, cleanup....   
+      deploy:             
+        steps: 
+        - script: echo deploy updates...
+      on: 
+        failure: 
+          steps: 
+          - script: echo clean-up, rollback...   
+        success: 
+          steps: 
+          - script: echo checks passed, notify..
