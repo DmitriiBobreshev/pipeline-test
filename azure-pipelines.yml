@@ -27,26 +27,7 @@ variables:
 
     
     
-jobs: 
-- deployment: 
-  environment:
-      name: аываываыва
-      resourceType: VirtualMachine
-  pool: 
-    vmImage: 'ubuntu-latest'
-  strategy:                  
-    canary:      
-      increments: [10,20]  
-      preDeploy:                                     
-        steps:           
-        - script: initialize, cleanup....   
-      deploy:             
-        steps: 
-        - script: echo deploy updates...
-      on: 
-        failure: 
-          steps: 
-          - script: echo clean-up, rollback...   
-        success: 
-          steps: 
-          - script: echo checks passed, notify..
+pool: 
+  name: 'Default'
+  steps:           
+  - script: echo 123
