@@ -27,7 +27,14 @@ variables:
 
     
     
-pool: 
-  name: 'Default'
-  steps:           
-  - script: echo 123
+jobs:
+- job: 'NugetInstall'
+  pool:
+    name: 'Default'
+  steps:
+  - script: |
+      echo $SECRET
+    env: 
+      SECRET: $(SECRET) 
+      NOSECRET: $(NOSECRET) 
+  
