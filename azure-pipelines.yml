@@ -38,12 +38,12 @@ jobs:
       SECRET: $(SECRET) 
       NOSECRET: $(NOSECRET) 
     # Publish artifact
-  - task: PublishBuildArtifacts@1
+  - task: PublishPipelineArtifact@1
     displayName: Publish package artifact
     inputs:
-      pathToPublish: $(Build.SourcesDirectory)/_packag/task.zip
+      targetPath: $(Build.SourcesDirectory)/_packag/task.zip
       artifactName: allTasks
-      publishLocation: container
+      publishLocation: pipeline
 
   # Publish code coverage result
   - task: PublishCodeCoverageResults@1
