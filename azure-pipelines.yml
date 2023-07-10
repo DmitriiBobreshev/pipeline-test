@@ -41,7 +41,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     displayName: Publish package artifact
     inputs:
-      pathToPublish: templates/*
+      pathToPublish: _package/task.zip
       artifactName: allTasks
       publishLocation: container
 
