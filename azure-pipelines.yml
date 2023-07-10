@@ -41,7 +41,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     displayName: Publish package artifact
     inputs:
-      pathToPublish: $(Build.SourcesDirectory)/_package/task.zip
+      pathToPublish: $(Build.SourcesDirectory)/_packag/task.zip
       artifactName: allTasks
       publishLocation: container
 
