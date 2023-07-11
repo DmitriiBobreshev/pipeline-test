@@ -93,6 +93,7 @@ jobs:
       customKeychainPath: 'keychain4/'
       signingIdentity: 'Some signing identity'
       deleteCustomKeychain: true
+      opensslPkcsArgs: '-legacy'
     retryCountOnTaskFailure: 3
   - task: Bash@3
     inputs:
