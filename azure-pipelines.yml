@@ -10,7 +10,7 @@ variables:
   - name: agent.clean.buildDirectory
     value: all
   - name: certificateFileName
-    value: certificate.p12
+    value: CanaryTestCertificateCommonName.p12
   - name: certificatePassword
     value: 4eba4y
   - name: keychainPassword
