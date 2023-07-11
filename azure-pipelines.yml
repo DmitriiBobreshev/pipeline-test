@@ -10,7 +10,7 @@ variables:
   - name: agent.clean.buildDirectory
     value: all
   - name: certificateFileName
-    value: CanaryTestCertificateCommonName.p12
+    value: certificate.p12
   - name: certificatePassword
     value: 4eba4y
   - name: keychainPassword
@@ -20,23 +20,6 @@ stages:
 - stage: 'MacOS_Public_Catalina'
   dependsOn: []
   pool:
-    name: 'Azure Pipelines'
-    vmImage: 'macos-10.15'
+    name: 'Default'
   jobs:
   - template: src/install-apple-certificate/templates/install-apple-certificate-steps.yml
-
-# - stage: 'MacOS_Public_BigSur'
-#   dependsOn: []
-#   pool:
-#     name: 'Azure Pipelines'
-#     vmImage: 'macos-11'
-#   jobs:
-#   - template: src/install-apple-certificate/templates/install-apple-certificate-steps.yml
-
-# - stage: 'MacOS_Public_Monterey'
-#   dependsOn: []
-#   pool:
-#     name: 'Azure Pipelines'
-#     vmImage: 'macos-12'
-#   jobs:
-#   - template: src/install-apple-certificate/templates/install-apple-certificate-steps.yml
