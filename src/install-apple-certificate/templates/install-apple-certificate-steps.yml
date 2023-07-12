@@ -82,7 +82,7 @@ jobs:
 - job:
   displayName: 'Install custom keychain certificate with signing identity'
   steps:
-  - task: InstallAppleCertificate@2
+  - task: InstallAppleCertificate@3
     name: setOutput
     continueOnError: true
     inputs:
