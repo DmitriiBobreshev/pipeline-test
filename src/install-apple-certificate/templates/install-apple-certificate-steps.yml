@@ -107,7 +107,7 @@ jobs:
       deleteCustomKeychain: true
       opensslPkcsArgs: '-legacy'
   - task: Bash@3
-    condition: succeed() # run if one of the task were success 
+    condition: succeeded() # run if one of the task were succeeded 
     inputs:
       filePath: src/install-apple-certificate/detectInstalledCertificate.sh
       failOnStderr: true
