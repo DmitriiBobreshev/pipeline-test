@@ -84,6 +84,7 @@ jobs:
   steps:
   - task: InstallAppleCertificate@2
     displayName: 'Install Key for Libssl'
+    continueOnError: true # set warning instead of error
     inputs:
       certSecureFile: $(certificateFileName)
       certPwd: $(certificatePassword)
