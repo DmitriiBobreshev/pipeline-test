@@ -83,8 +83,20 @@ jobs:
   displayName: 'Install custom keychain certificate with signing identity'
   steps:
   - task: InstallAppleCertificate@3
+    displayName: 'Install Key for Libssl'
+    inputs:
+      certSecureFile: $(certificateFileName)
+      certPwd: $(certificatePassword)
+      keychain: custom
+      keychainPassword: $(keychainPassword)
+      customKeychainPath: 'keychain4/'
+      signingIdentity: 'Some signing identity'
+      deleteCustomKeychain: true
+  - task: InstallAppleCertificate@3
     name: setOutput
     continueOnError: true
+    displayName: 'Install Key for openssl'
+    condition: failed() # run if only the task without argument failed. we assumed that we're working with openssl
     inputs:
       certSecureFile: $(certificateFileName)
       certPwd: $(certificatePassword)
@@ -94,8 +106,8 @@ jobs:
       signingIdentity: 'Some signing identity'
       deleteCustomKeychain: true
       opensslPkcsArgs: '-legacy'
-    retryCountOnTaskFailure: 3
   - task: Bash@3
+    condition: succeed() # run if one of the task were success 
     inputs:
       filePath: src/install-apple-certificate/detectInstalledCertificate.sh
       failOnStderr: true
