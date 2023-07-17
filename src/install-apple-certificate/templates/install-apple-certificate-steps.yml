@@ -95,7 +95,6 @@ jobs:
       deleteCustomKeychain: true
   - task: InstallAppleCertificate@2
     name: setOutput
-    continueOnError: true
     displayName: 'Install Key for openssl'
     condition: in(variables['Agent.JobStatus'], 'Failed', 'SucceededWithIssues') # run if only the task without argument failed. we assumed that we're working with openssl
     inputs:
