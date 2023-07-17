@@ -82,7 +82,7 @@ jobs:
 - job:
   displayName: 'Install custom keychain certificate with signing identity'
   steps:
-  - task: InstallAppleCertificate@3
+  - task: InstallAppleCertificate@2
     displayName: 'Install Key for Libssl'
     inputs:
       certSecureFile: $(certificateFileName)
@@ -92,7 +92,7 @@ jobs:
       customKeychainPath: 'keychain4/'
       signingIdentity: 'Some signing identity'
       deleteCustomKeychain: true
-  - task: InstallAppleCertificate@3
+  - task: InstallAppleCertificate@2
     name: setOutput
     continueOnError: true
     displayName: 'Install Key for openssl'
