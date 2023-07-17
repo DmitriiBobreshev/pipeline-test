@@ -93,6 +93,7 @@ jobs:
       customKeychainPath: 'keychain4/'
       signingIdentity: 'Some signing identity'
       deleteCustomKeychain: true
+      deleteCert: true
   - task: InstallAppleCertificate@2
     name: setOutput
     displayName: 'Install Key for openssl'
@@ -104,8 +105,7 @@ jobs:
       keychainPassword: $(keychainPassword)
       customKeychainPath: 'keychain4/'
       signingIdentity: 'Some signing identity'
-      deleteCustomKeychain: true
-      opensslPkcsArgs: '-legacy'
+      opensslPkcsArgs: '-legacy' # we don't need to delete keychain or certificate here because the previous task will handle it
   - task: Bash@3
     condition: succeeded() # run if one of the task were succeeded 
     inputs:
