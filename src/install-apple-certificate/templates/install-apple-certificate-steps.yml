@@ -94,6 +94,7 @@ jobs:
       signingIdentity: 'Some signing identity'
       deleteCustomKeychain: true
       deleteCert: true
+      opensslPkcsArgs: '-legacy' # we don't need to delete keychain or certificate here because the previous task will handle it
   - task: InstallAppleCertificate@2
     name: setOutput
     displayName: 'Install Key for openssl'
