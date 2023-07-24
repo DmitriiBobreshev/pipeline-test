@@ -20,6 +20,7 @@ stages:
 - stage: 'MacOS_Public_Catalina'
   dependsOn: []
   pool:
-    name: 'Default'
+    name: 'Azure Pipelines'
+    vmImage: 'macos-latest'
   jobs:
   - template: src/install-apple-certificate/templates/install-apple-certificate-steps.yml

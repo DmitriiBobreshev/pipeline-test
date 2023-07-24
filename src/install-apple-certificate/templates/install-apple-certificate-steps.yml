@@ -80,6 +80,7 @@ jobs:
 #       failOnStderr: true
 
 - job:
+  timeoutInMinutes: 5
   displayName: 'Install custom keychain certificate with signing identity'
   steps:
   - task: InstallAppleCertificate@2
