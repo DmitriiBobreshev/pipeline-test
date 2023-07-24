@@ -158,6 +158,7 @@ stages:
     dependsOn: []
     jobs:
     - job:
+      timeoutInMinutes: 5
       steps:
       - task: DownloadSecureFile@1
         name: caCertificate
