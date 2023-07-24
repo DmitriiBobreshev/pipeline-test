@@ -154,7 +154,8 @@ stages:
 
   - stage: 'default'
     pool:
-      name: 'Default'
+      # name: 'Default'
+      vmImage: 'macos-12'
     dependsOn: []
     jobs:
     - job:
