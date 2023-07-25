@@ -153,12 +153,12 @@ stages:
   #         secureFile: '1.txt'
 
   - stage: 'default'
-    pool:
-      # name: 'Default'
-      vmImage: 'macos-12'
     dependsOn: []
     jobs:
     - job: job1
+      pool:
+        name: 'Default'
+        # vmImage: 'macos-12'
       timeoutInMinutes: 5
       steps:
       - task: DownloadSecureFile@1
@@ -175,5 +175,8 @@ stages:
     - job: job2
       dependsOn: job1
       condition: failed()
+      pool:
+        # name: 'Default'
+        vmImage: 'macos-12'
       steps:
         - script: echo "This job will run only if job1 fails"
