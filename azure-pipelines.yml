@@ -28,26 +28,38 @@ variables:
     
     
 jobs:
-- job: 'NugetInstall'
+- job: 'Win2022'
+  displayName: Windows VS2022
   pool:
-    name: 'Default'
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2022'
   steps:
-  - script: |
-      echo $SECRET
-    env: 
-      SECRET: $(SECRET) 
-      NOSECRET: $(NOSECRET) 
-    # Publish artifact
-  - task: PublishPipelineArtifact@1
-    displayName: Publish package artifact
-    inputs:
-      targetPath: $(Build.SourcesDirectory)/_packag/task.zip
-      artifactName: allTasks
-      publishLocation: pipeline
+    - template: src/msbuild/msbuild-steps.yml
+      parameters:
+        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+    - template: src/msbuild/msbuild-steps-2.yml
+      parameters:
+        solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
+# - job: 'NugetInstall'
+#   pool:
+#     name: 'Default'
+#   steps:
+#   - script: |
+#       echo $SECRET
+#     env: 
+#       SECRET: $(SECRET) 
+#       NOSECRET: $(NOSECRET) 
+#     # Publish artifact
+#   - task: PublishPipelineArtifact@1
+#     displayName: Publish package artifact
+#     inputs:
+#       targetPath: $(Build.SourcesDirectory)/_packag/task.zip
+#       artifactName: allTasks
+#       publishLocation: pipeline
 
-  # Publish code coverage result
-  - task: PublishCodeCoverageResults@1
-    displayName: Publish Code Coverage Results
-    inputs:
-      codeCoverageTool: Cobertura
-      summaryFileLocation: $(System.DefaultWorkingDirectory)/*coverage.xml
+#   # Publish code coverage result
+#   - task: PublishCodeCoverageResults@1
+#     displayName: Publish Code Coverage Results
+#     inputs:
+#       codeCoverageTool: Cobertura
+#       summaryFileLocation: $(System.DefaultWorkingDirectory)/*coverage.xml
