@@ -25,14 +25,10 @@ variables:
   - name: ARGS
     value: "123"
 
-    
-    
 jobs:
-- job: 'Win2022'
-  displayName: Windows VS2022
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: 'windows-2022'
+- job: 'default'
+  displayName: Job with default pool
+  pool: default
   steps:
     - template: src/msbuild/msbuild-steps-nugettoolinstaller-v0.yml
       parameters:
@@ -40,6 +36,19 @@ jobs:
     - template: src/msbuild/msbuild-steps-nugettoolinstaller-v1.yml
       parameters:
         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
+# jobs:
+# - job: 'Win2022'
+#   displayName: Windows VS2022
+#   pool:
+#     name: 'Azure Pipelines'
+#     vmImage: 'windows-2022'
+#   steps:
+#     - template: src/msbuild/msbuild-steps-nugettoolinstaller-v0.yml
+#       parameters:
+#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
+#     - template: src/msbuild/msbuild-steps-nugettoolinstaller-v1.yml
+#       parameters:
+#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
 # - job: 'NugetInstall'
 #   pool:
 #     name: 'Default'
