@@ -34,10 +34,10 @@ jobs:
     name: 'Azure Pipelines'
     vmImage: 'windows-2022'
   steps:
-    - template: src/msbuild/msbuild-steps.yml
+    - template: src/msbuild/msbuild-steps-nugettoolinstaller-v0.yml
       parameters:
         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-    - template: src/msbuild/msbuild-steps-2.yml
+    - template: src/msbuild/msbuild-steps-nugettoolinstaller-v1.yml
       parameters:
         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
 # - job: 'NugetInstall'
