@@ -154,11 +154,12 @@ stages:
 
   - stage: 'default'
     pool:
-      name: 'Default'
-      # vmImage: 'macos-12'
+      # name: 'Default'
+      vmImage: 'macos-12'
     dependsOn: []
     jobs:
-    - job:
+    - job: job1
+      timeoutInMinutes: 5
       steps:
       - task: DownloadSecureFile@1
         name: caCertificate
@@ -171,3 +172,8 @@ stages:
         displayName: 'Download Big File'
         inputs:
           secureFile: '1.txt'
+    - job: job2
+      dependsOn: job1
+      condition: failed()
+      steps:
+        - script: echo "This job will run only if job1 fails"
