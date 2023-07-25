@@ -157,6 +157,13 @@ stages:
     jobs:
     - job: job1
       pool:
+        # name: 'Default'
+        vmImage: 'macos-12'
+      steps:
+        - script: echo "This job will run only if job1 fails"
+    - job: job2
+      dependsOn: job1
+      pool:
         name: 'Default'
         # vmImage: 'macos-12'
       timeoutInMinutes: 5
@@ -172,8 +179,8 @@ stages:
         displayName: 'Download Big File'
         inputs:
           secureFile: '1.txt'
-    - job: job2
-      dependsOn: job1
+    - job: job3
+      dependsOn: job2
       condition: failed()
       pool:
         # name: 'Default'
