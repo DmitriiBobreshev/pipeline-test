@@ -38,7 +38,7 @@ jobs:
       - script: |
           cd test2
           mkdir test2
-      - script: mkdir dir test2
+      - script: dir test2
       - script: |
           rmdir /s /q test
           rmdir /s /q test2/test2
