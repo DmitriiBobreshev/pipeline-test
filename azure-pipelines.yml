@@ -41,7 +41,7 @@ jobs:
       - script: dir test2
       - script: |
           rmdir /s /q test
-          rmdir /s /q test2/test2
+          rmdir /s /q test2\test2
 # - job: 'default'
 #   displayName: Job with default pool
 #   pool: default
