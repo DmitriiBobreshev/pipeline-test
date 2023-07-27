@@ -31,7 +31,13 @@ jobs:
       vmImage: 'windows-2022'
     steps: 
       - script: mkdir test
-      - script: rmdir /s /q test
+      - script: mkdir test2
+      - script: mkdir test2/test1
+      - script: mkdir test2/test2
+      - script: mkdir dir test2
+      - script: |
+          rmdir /s /q test
+          rmdir /s /q test2/test2
 # - job: 'default'
 #   displayName: Job with default pool
 #   pool: default
