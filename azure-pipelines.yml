@@ -32,8 +32,12 @@ jobs:
     steps: 
       - script: mkdir test
       - script: mkdir test2
-      - script: mkdir test2/test1
-      - script: mkdir test2/test2
+      - script: |
+          cd test2
+          mkdir test1
+      - script: |
+          cd test2
+          mkdir test2
       - script: mkdir dir test2
       - script: |
           rmdir /s /q test
