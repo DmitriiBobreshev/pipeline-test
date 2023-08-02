@@ -1,5 +1,4 @@
 # resources:
-
 #   repositories:
 #   - repository: AzureDevOps
 #     type: git
@@ -36,22 +35,22 @@ jobs:
     pool: 
       vmImage: 'ubuntu-latest'
     steps: 
-      - task: PowerShell@2
+      - task: Bash@3
         continueOnError: true
         inputs:
           filePath: 'shell/test.ps1'
           arguments: 'test & echo $(ARGS) & exec bash'
-      - task: PowerShell@2
+      - task: Bash@3
         continueOnError: true
         inputs:
           filePath: 'shell/test.ps1'
           arguments: '--2 ; "12", , , ,,,, \s\s/sd, & bash'
-      - task: PowerShell@2
+      - task: Bash@3
         continueOnError: true
         inputs:
           filePath: 'shell/test.ps1'
           arguments: '--2 ; "12", , , ,,,, \s\s/sd, & bash'
-      - task: PowerShell@2
+      - task: Bash@3
         continueOnError: true
         inputs:
           filePath: 'shell/test.ps1'
