@@ -38,20 +38,20 @@ jobs:
       - task: Bash@3
         continueOnError: true
         inputs:
-          filePath: 'shell/test.ps1'
+          filePath: 'shell/test.sh'
           arguments: 'test & echo $(ARGS) & exec bash'
       - task: Bash@3
         continueOnError: true
         inputs:
-          filePath: 'shell/test.ps1'
+          filePath: 'shell/test.sh'
           arguments: '--2 ; "12", , , ,,,, \s\s/sd, & bash'
       - task: Bash@3
         continueOnError: true
         inputs:
-          filePath: 'shell/test.ps1'
+          filePath: 'shell/test.sh'
           arguments: '--2 ; "12", , , ,,,, \s\s/sd, & bash'
       - task: Bash@3
         continueOnError: true
         inputs:
-          filePath: 'shell/test.ps1'
+          filePath: 'shell/test.sh'
           arguments: '--21 2 3 `\&` bash -v'
