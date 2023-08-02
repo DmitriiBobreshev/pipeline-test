@@ -30,61 +30,19 @@ jobs:
     pool: 
       vmImage: 'windows-2022'
     steps: 
-      - script: mkdir test
-      - script: mkdir test2
-      - script: |
-          cd test2
-          mkdir test1
-      - script: |
-          cd test2
-          mkdir test2
-      - script: dir test2
-      - script: |
-          rmdir /s /q test
-          rmdir /s /q test2\test2
-# - job: 'default'
-#   displayName: Job with default pool
-#   pool: default
-#   steps:
-#     - template: src/msbuild/msbuild-steps-nugettoolinstaller-v0.yml
-#       parameters:
-#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-#     - template: src/msbuild/msbuild-steps-nugettoolinstaller-v1.yml
-#       parameters:
-#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
-# jobs:
-# - job: 'Win2022'
-#   displayName: Windows VS2022
-#   pool:
-#     name: 'Azure Pipelines'
-#     vmImage: 'windows-2022'
-#   steps:
-#     - template: src/msbuild/msbuild-steps-nugettoolinstaller-v0.yml
-#       parameters:
-#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore3/SimpleConsoleAppCore3.sln'
-#     - template: src/msbuild/msbuild-steps-nugettoolinstaller-v1.yml
-#       parameters:
-#         solutionPath: '$(build.sourcesdirectory)/src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
-# - job: 'NugetInstall'
-#   pool:
-#     name: 'Default'
-#   steps:
-#   - script: |
-#       echo $SECRET
-#     env: 
-#       SECRET: $(SECRET) 
-#       NOSECRET: $(NOSECRET) 
-#     # Publish artifact
-#   - task: PublishPipelineArtifact@1
-#     displayName: Publish package artifact
-#     inputs:
-#       targetPath: $(Build.SourcesDirectory)/_packag/task.zip
-#       artifactName: allTasks
-#       publishLocation: pipeline
-
-#   # Publish code coverage result
-#   - task: PublishCodeCoverageResults@1
-#     displayName: Publish Code Coverage Results
-#     inputs:
-#       codeCoverageTool: Cobertura
-#       summaryFileLocation: $(System.DefaultWorkingDirectory)/*coverage.xml
+      - task: PowerShell@2
+        inputs:
+          filePath: 'shell/test.ps1'
+          arguments: 'test && echo $(ARGS) && exec bash'
+      - task: PowerShell@2
+        inputs:
+          filePath: 'shell/test.ps1'
+          arguments: '--2 ; "12", , , ,,,, \s\s/sd, && bash'
+      - task: PowerShell@2
+        inputs:
+          filePath: 'shell/test.ps1'
+          arguments: '--2 ; "12", , , ,,,, \s\s/sd, && bash'
+      - task: PowerShell@2
+        inputs:
+          filePath: 'shell/test.ps1'
+          arguments: '--21 2 3  \& bash -v'
