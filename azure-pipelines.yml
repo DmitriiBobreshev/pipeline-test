@@ -28,7 +28,7 @@ variables:
 jobs:
   - job:
     pool: 
-      vmImage: 'windows-2022'
+      vmImage: 'ubuntu-latest'
     steps: 
       - task: PowerShell@2
         continueOnError: true
