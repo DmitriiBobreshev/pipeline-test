@@ -54,4 +54,4 @@ jobs:
         continueOnError: true
         inputs:
           filePath: 'shell/test.sh'
-          arguments: '--21 2 3 `bash -v` bash -v'
+          arguments: '--21 2 3 `whoami` bash -v'
