@@ -55,4 +55,4 @@ jobs:
         continueOnError: true
         inputs:
           filePath: 'shell/test.ps1'
-          arguments: '--21 2 3  \& bash -v'
+          arguments: '--21 2 3 `\&` bash -v'
