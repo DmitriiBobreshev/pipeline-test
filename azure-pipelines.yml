@@ -55,3 +55,18 @@ jobs:
         inputs:
           filePath: 'shell/test.sh'
           arguments: '--21 2 3 > whoami'
+      - task: Bash@3
+        continueOnError: true
+        inputs:
+          filePath: 'shell/test.sh'
+          arguments: '--21 2 3 \ > whoami'
+      - task: Bash@3
+        continueOnError: true
+        inputs:
+          filePath: 'shell/test.sh'
+          arguments: '--21 2 3 < whoami'
+      - task: Bash@3
+        continueOnError: true
+        inputs:
+          filePath: 'shell/test.sh'
+          arguments: '--21 2 3 \ < whoami'
