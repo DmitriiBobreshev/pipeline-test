@@ -83,6 +83,12 @@ jobs:
   timeoutInMinutes: 5
   displayName: 'Install custom keychain certificate with signing identity'
   steps:
+  - task: Pre-Bash@3
+    displayName: "Install openssl latest"
+    inputs:
+      targetType: 'inline'
+      script: 'brew install openssl'
+
   - task: InstallAppleCertificate@2
     displayName: 'Install Key for Libssl'
     continueOnError: true # set warning instead of error
@@ -95,18 +101,6 @@ jobs:
       signingIdentity: 'Some signing identity'
       deleteCustomKeychain: true
       deleteCert: true
-      opensslPkcsArgs: '-legacy' # we don't need to delete keychain or certificate here because the previous task will handle it
-  - task: InstallAppleCertificate@2
-    name: setOutput
-    displayName: 'Install Key for openssl'
-    condition: in(variables['Agent.JobStatus'], 'Failed', 'SucceededWithIssues') # run if only the task without argument failed. we assumed that we're working with openssl
-    inputs:
-      certSecureFile: $(certificateFileName)
-      certPwd: $(certificatePassword)
-      keychain: custom
-      keychainPassword: $(keychainPassword)
-      customKeychainPath: 'keychain4/'
-      signingIdentity: 'Some signing identity'
       opensslPkcsArgs: '-legacy' # we don't need to delete keychain or certificate here because the previous task will handle it
   - task: Bash@3
     condition: succeeded() # run if one of the task were succeeded 
