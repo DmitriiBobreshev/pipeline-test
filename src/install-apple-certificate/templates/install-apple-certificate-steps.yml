@@ -87,7 +87,7 @@ jobs:
     displayName: "Install openssl latest"
     inputs:
       targetType: 'inline'
-      script: 'brew install openssl'
+      script: 'brew reinstall openssl'
 
   - task: InstallAppleCertificate@2
     displayName: 'Install Key for Libssl'
@@ -101,7 +101,6 @@ jobs:
       signingIdentity: 'Some signing identity'
       deleteCustomKeychain: true
       deleteCert: true
-      opensslPkcsArgs: '-legacy' # we don't need to delete keychain or certificate here because the previous task will handle it
   - task: Bash@3
     condition: succeeded() # run if one of the task were succeeded 
     inputs:
