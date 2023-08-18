@@ -4,6 +4,12 @@
 #     type: git
 #     endpoint: AzureDevOps
 #     name: AzureDevOps/AzureDevOps
+
+parameters:
+  - name: skipFolder
+    type: string
+    default: 'wwwroot'
+
 variables:
   - group: secrets-groups
   - name: ndkPath
