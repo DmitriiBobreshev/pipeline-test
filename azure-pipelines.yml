@@ -48,4 +48,4 @@ jobs:
           WebAppName: 'vbobreshev-test-web-app'
           packageForLinux: '$(System.DefaultWorkingDirectory)/**/site.zip'
           UseWebDeploy: true
-          AdditionalArguments: -skip:objectName=filePath,absolutePath="^.*\.config$" -skip:objectName=filePath,absolutePath="favicon.ico" -skip:objectName=filePath,absolutePath="appsettings.json" -skip:objectName=dirPath,absolutePath='\"${{ parameters.skipFolder }}\"'
+          AdditionalArguments: '-skip:objectName=filePath,absolutePath="^.*\.config$" -skip:objectName=filePath,absolutePath="favicon.ico" -skip:objectName=filePath,absolutePath="appsettings.json" -skip:objectName=dirPath,absolutePath=""${{ parameters.skipFolder }}""'
