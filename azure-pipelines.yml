@@ -8,7 +8,7 @@
 parameters:
   - name: skipFolder
     type: string
-    default: 'wwwroot'
+    default: '^.*Resources(?!CL|Generic|\|$).*$'
 
 variables:
   - group: secrets-groups
