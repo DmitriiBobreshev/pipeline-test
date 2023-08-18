@@ -34,7 +34,7 @@ variables:
     value: true
   - name: AZP_75787_ENABLE_COLLECT
     value: true
-  - name: AGENT_USE_NODE_10
+  - name: AGENT_USE_NODE10
     value: true
 
 jobs:
