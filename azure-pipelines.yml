@@ -4,13 +4,6 @@
 #     type: git
 #     endpoint: AzureDevOps
 #     name: AzureDevOps/AzureDevOps
-
-resources:
-  repositories:
-  - repository: frontend
-    type: git 
-    name: playground/Xamarin
-
 variables:
   - group: secrets-groups
   - name: ndkPath
