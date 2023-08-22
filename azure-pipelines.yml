@@ -17,7 +17,7 @@ variables:
   - name: androidSdkPath
     value: TEST_SDK_PATH
   - name: System.Debug
-    value: true
+    value: false
   - name: build.clean
     value: all
   - name: agent.clean.buildDirectory
@@ -25,7 +25,7 @@ variables:
   - name: scheme
     value: test
   - name: agent.diagnostic
-    value: true
+    value: false
   - name: ARGS
     value: "123"
   - name: AZP_75787_ENABLE_NEW_LOGIC_LOG
