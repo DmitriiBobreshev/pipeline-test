@@ -55,7 +55,7 @@ jobs:
       - task: PublishBuildArtifacts@1
         displayName: Publish per task NuGet package artifact
         inputs:
-          pathToPublish: '**/*.zip'
+          pathToPublish: '$(System.DefaultWorkingDirectory)'
           artifactName: IndividualNuGetPackages
           publishLocation: container
       - task: DownloadBuildArtifacts@0
