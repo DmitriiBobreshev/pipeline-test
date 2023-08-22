@@ -62,6 +62,6 @@ jobs:
         displayName: 'Download Build Artifacts'
         inputs:
           artifactName: IndividualNugetPackages
-          itemPattern: '*.zip'
+          itemPattern: '**/*.zip'
           downloadPath: IndividualNugetPackagesDownloaded
           parallelizationLimit: 64
