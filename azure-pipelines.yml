@@ -51,13 +51,23 @@ jobs:
       #     packageForLinux: '$(System.DefaultWorkingDirectory)/**/site.zip'
       #     UseWebDeploy: true
       #     AdditionalArguments: '-skip:objectName=filePath,absolutePath="^.*\.config$" -skip:objectName=filePath,absolutePath="favicon.ico" -skip:objectName=filePath,absolutePath="appsettings.json" -skip:objectName=dirPath,absolutePath="${{ parameters.skipFolder }}"'
-      
+      - pwsh: |
+          $path = Join-Path $(System.DefaultWorkingDirectory) "file.txt"
+          $size = 1GB
+          $content = New-Object byte[] $size
+          (New-Object System.Random).NextBytes($content)
+          
+          # Set-Content is very slow, use .NET method directly
+          [System.IO.File]::WriteAllBytes($path, $content)
+          Compress-Archive -Path $(System.DefaultWorkingDirectory)\file.txt -DestinationPath $(System.DefaultWorkingDirectory)\archive.zip
+        displayName: Generate large zip
       - task: PublishBuildArtifacts@1
         displayName: Publish per task NuGet package artifact
         inputs:
           pathToPublish: '$(System.DefaultWorkingDirectory)'
           artifactName: IndividualNuGetPackages
-          publishLocation: container
+          publishLocation: FilePath
+          TargetPath: '$(System.DefaultWorkingDirectory)\build\$(Build.DefinitionName)\$(Build.BuildNumber)'
       - task: DownloadBuildArtifacts@0
         displayName: 'Download Build Artifacts'
         inputs:
