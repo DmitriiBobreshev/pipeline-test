@@ -42,7 +42,7 @@ jobs:
     pool: #'agentvmsspool'
       name: 'Default'
     steps: 
-      - task: UseDotNet@
+      - task: UseDotNet@2
         inputs:
           packageType: 'sdk'
           version: '7.x'
