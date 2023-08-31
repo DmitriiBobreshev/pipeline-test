@@ -38,7 +38,7 @@ variables:
 jobs:
   - job:
     pool: #'agentvmsspool'
-      name: 'Default'
+      name: 'windows-latest'
     steps: 
       - task: AzureRmWebAppDeployment@4
         inputs:
