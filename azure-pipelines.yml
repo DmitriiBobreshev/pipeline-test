@@ -25,7 +25,7 @@ variables:
   - name: scheme
     value: test
   - name: agent.diagnostic
-    value: false
+    value: true
   - name: ARGS
     value: "123"
   - name: AZP_75787_ENABLE_NEW_LOGIC_LOG
@@ -34,15 +34,18 @@ variables:
     value: true
   - name: AZP_75787_ENABLE_COLLECT
     value: true
-  - name: AGENT_USE_NODE10
-    value: true
 
 jobs:
   - job:
     pool: #'agentvmsspool'
       name: 'Default'
     steps: 
-      - task: UseDotNet@2
+      - task: AzureRmWebAppDeployment@4
         inputs:
-          packageType: 'sdk'
-          version: '7.x'
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
+          appType: 'webApp'
+          WebAppName: 'vbobreshev-test-web-app'
+          packageForLinux: '$(System.DefaultWorkingDirectory)/**/site.zip'
+          UseWebDeploy: true
+          AdditionalArguments: '-skip:objectName=filePath,absolutePath="^.*\.config$" -skip:objectName=filePath,absolutePath="favicon.ico" -skip:objectName=filePath,absolutePath="appsettings.json" -skip:objectName=dirPath,absolutePath="${{ parameters.skipFolder }}"'
