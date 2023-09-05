@@ -41,11 +41,11 @@ jobs:
       # name: 'Default'
       vmImage: 'windows-latest'
     steps: 
-      - task: AzureRmWebAppDeployment@4
+      - task: AzureRmWebAppDeployment@3
         inputs:
-          ConnectionType: 'AzureRM'
+          # ConnectionType: 'AzureRM'
           azureSubscription: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
-          appType: 'webApp'
+          WebAppKind: 'app'
           WebAppName: 'vbobreshev-test-web-app'
           packageForLinux: '$(System.DefaultWorkingDirectory)/**/site.zip'
           UseWebDeploy: true
