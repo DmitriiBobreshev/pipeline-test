@@ -45,7 +45,8 @@ jobs:
         inputs:
           ConnectionType: 'AzureRM'
           azureSubscription: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
-          WebAppKind: 'app'
+          # WebAppKind: 'app'
+          WebAppKind: 'webApp'
           WebAppName: 'vbobreshev-test-web-app'
           Package: '$(System.DefaultWorkingDirectory)/**/site.zip'
           UseWebDeploy: true
