@@ -1,0 +1,26 @@
+steps:
+- bash: echo "##vso[task.prependpath]$CONDA/bin"
+  displayName: Add conda to PATH
+
+- bash: sudo chown -R $USER $CONDA
+  displayName: Take ownership of conda installation
+
+- bash: |
+    cd src/conda
+    conda create --yes --quiet --name myEnvironment
+  displayName: Create Anaconda environment
+
+- bash: |
+    cd src/conda
+    source activate myEnvironment
+    sudo conda install --yes --quiet --name myEnvironment python=$PYTHON_VERSION numpy
+  displayName: Install Anaconda packages
+  retryCountOnTaskFailure: 3
+
+- bash: |
+    cd src/conda
+    source activate myEnvironment
+    sudo pip install pytest pytest-azurepipelines
+    pytest
+  displayName: pytest
+  retryCountOnTaskFailure: 3

@@ -1,0 +1,4 @@
+steps:
+  - task: OpenPolicyAgentInstaller@0
+    inputs:
+      opaVersion: '${{ parameters.opaVersion }}'
