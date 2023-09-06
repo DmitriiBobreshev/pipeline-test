@@ -8,15 +8,22 @@ steps:
     checkLatest: true
   retryCountOnTaskFailure: 3
 
-- task: NuGetCommand@2
+- task: NuGetRestore@1
   inputs:
-    command: 'restore'
-    restoreSolution: ${{ parameters.solutionPath }} 
-    feedsToUse: 'select'
+    filePath: ${{ parameters.solutionPath }} 
+    selectOrConfig: 'select'
+    includeNuGetOrg: true
   retryCountOnTaskFailure: 3
 
 - task: MSBuild@1
   displayName: 'Build simple app'
   inputs:
     solution: ${{ parameters.solutionPath }}
+    msbuildLocationMethod: 'version'
+
+- task: MSBuild@1
+  displayName: 'Build simple app with x64 arch'
+  inputs:
+    solution: ${{ parameters.solutionPath }}
+    msbuildArchitecture: 'x64'
     msbuildLocationMethod: 'version'

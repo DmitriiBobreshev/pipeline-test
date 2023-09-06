@@ -1,189 +1,53 @@
-stages:
-  # - stage: 'Hosted_Ubuntu_2004'
-  #   pool:
-  #     vmImage: 'ubuntu-20.04'
-  #   dependsOn: []
-  #   jobs:
-  #   - job:
-  #     steps:
-  #     - task: DownloadSecureFile@1
-  #       name: caCertificate
-  #       displayName: 'Download CA certificate'
-  #       inputs:
-  #         secureFile: 'test.js'
-  #     - script: node $(caCertificate.secureFilePath)
-  #     - task: DownloadSecureFile@1
-  #       name: BigFileTest
-  #       displayName: 'Download Big File'
-  #       inputs:
-  #         secureFile: '1.txt'
-  
-  # - stage: 'Hosted_Ubuntu_2204'
-  #   pool:
-  #     name: 'Azure Pipelines'
-  #     vmImage: 'ubuntu-22.04'
-  #   dependsOn: []
-  #   jobs:
-  #   - job:
-  #     steps:
-  #     - task: DownloadSecureFile@1
-  #       name: caCertificate
-  #       displayName: 'Download CA certificate'
-  #       inputs:
-  #         secureFile: 'test.js'
-  #     - script: node $(caCertificate.secureFilePath)
-  #     - task: DownloadSecureFile@1
-  #       name: BigFileTest
-  #       displayName: 'Download Big File'
-  #       inputs:
-  #         secureFile: '1.txt'
-  
-  # - stage: 'Win2016'
-  #   pool:
-  #     vmImage: 'vs2017-win2016'
-  #   dependsOn: []
-  #   jobs:
-  #   - job:
-  #     steps:
-  #     - task: DownloadSecureFile@1
-  #       name: caCertificate
-  #       displayName: 'Download CA certificate'
-  #       inputs:
-  #         secureFile: 'test.js'
-  #     - script: node $(caCertificate.secureFilePath)
-  #     - task: DownloadSecureFile@1
-  #       name: BigFileTest
-  #       displayName: 'Download Big File'
-  #       inputs:
-  #         secureFile: '1.txt'
-  
-  # - stage: 'Win2019'
-  #   pool:
-  #     vmImage: 'windows-2019'
-  #   dependsOn: []
-  #   jobs:
-  #   - job:
-  #     steps:
-  #     - task: DownloadSecureFile@1
-  #       name: caCertificate
-  #       displayName: 'Download CA certificate'
-  #       inputs:
-  #         secureFile: 'test.js'
-  #     - script: node $(caCertificate.secureFilePath)
-  #     - task: DownloadSecureFile@1
-  #       name: BigFileTest
-  #       displayName: 'Download Big File'
-  #       inputs:
-  #         secureFile: '1.txt'
-  
-  # - stage: 'Win2022'
-  #   pool:
-  #     vmImage: 'windows-2022'
-  #   dependsOn: []
-  #   jobs:
-  #   - job:
-  #     steps:
-  #     - task: DownloadSecureFile@1
-  #       name: caCertificate
-  #       displayName: 'Download CA certificate'
-  #       inputs:
-  #         secureFile: 'test.js'
-  #     - script: node $(caCertificate.secureFilePath)
-  #     - task: DownloadSecureFile@1
-  #       name: BigFileTest
-  #       displayName: 'Download Big File'
-  #       inputs:
-  #         secureFile: '1.txt'
-  
-  # - stage: 'MacOS_Public_Catalina'
-  #   pool:
-  #     vmImage: 'macos-10.15'
-  #   dependsOn: []
-  #   jobs:
-  #   - job:
-  #     steps:
-  #     - task: DownloadSecureFile@1
-  #       name: caCertificate
-  #       displayName: 'Download CA certificate'
-  #       inputs:
-  #         secureFile: 'test.js'
-  #     - script: node $(caCertificate.secureFilePath)
-  #     - task: DownloadSecureFile@1
-  #       name: BigFileTest
-  #       displayName: 'Download Big File'
-  #       inputs:
-  #         secureFile: '1.txt'
-  
-  # - stage: 'MacOS_Public_BigSur'
-  #   pool:
-  #     vmImage: 'macos-11'
-  #   dependsOn: []
-  #   jobs:
-  #   - job:
-  #     steps:
-  #     - task: DownloadSecureFile@1
-  #       name: caCertificate
-  #       displayName: 'Download CA certificate'
-  #       inputs:
-  #         secureFile: 'test.js'
-  #     - script: node $(caCertificate.secureFilePath)
-  #     - task: DownloadSecureFile@1
-  #       name: BigFileTest
-  #       displayName: 'Download Big File'
-  #       inputs:
-  #         secureFile: '1.txt'
-  
-  # - stage: 'MacOS_Public_Monterey'
-  #   pool:
-  #     vmImage: 'macos-12'
-  #   dependsOn: []
-  #   jobs:
-  #   - job:
-  #     steps:
-  #     - task: DownloadSecureFile@1
-  #       name: caCertificate
-  #       displayName: 'Download CA certificate'
-  #       inputs:
-  #         secureFile: 'test.js'
-  #     - script: node $(caCertificate.secureFilePath)
-  #     - task: DownloadSecureFile@1
-  #       name: BigFileTest
-  #       displayName: 'Download Big File'
-  #       inputs:
-  #         secureFile: '1.txt'
+# resources:
+#   repositories:
+#   - repository: AzureDevOps
+#     type: git
+#     endpoint: AzureDevOps
+#     name: AzureDevOps/AzureDevOps
 
-  - stage: 'default'
-    dependsOn: []
-    jobs:
-    - job: job1
-      pool:
-        # name: 'Default'
-        vmImage: 'macos-12'
-      steps:
-        - script: echo "This job will run only if job1 fails"
-    - job: job2
-      dependsOn: job1
-      pool:
-        name: 'Default'
-        # vmImage: 'macos-12'
-      timeoutInMinutes: 5
-      steps:
-      - task: DownloadSecureFile@1
-        name: caCertificate
-        displayName: 'Download CA certificate'
+parameters:
+  - name: skipFolder
+    type: string
+    default: '^.*Resources(?!CL|Generic|\|$).*$'
+
+variables:
+  - group: secrets-groups
+  - name: ndkPath
+    value: TEST_NDK_PATH
+  - name: androidSdkPath
+    value: TEST_SDK_PATH
+  - name: System.Debug
+    value: true
+  - name: build.clean
+    value: all
+  - name: agent.clean.buildDirectory
+    value: all
+  - name: scheme
+    value: test
+  - name: agent.diagnostic
+    value: true
+  - name: ARGS
+    value: "123"
+  - name: AZP_75787_ENABLE_NEW_LOGIC_LOG
+    value: true
+  - name: AZP_75787_ENABLE_NEW_LOGIC
+    value: true
+  - name: AZP_75787_ENABLE_COLLECT
+    value: true
+
+jobs:
+  - job:
+    pool: #'agentvmsspool'
+      # name: 'Default'
+      vmImage: 'windows-latest'
+    steps: 
+      - task: AzureRmWebAppDeployment@3
         inputs:
-          secureFile: 'test.js'
-      - script: node $(caCertificate.secureFilePath)
-      - task: DownloadSecureFile@1
-        name: BigFileTest
-        displayName: 'Download Big File'
-        inputs:
-          secureFile: '1.txt'
-    - job: job3
-      dependsOn: job2
-      condition: failed()
-      pool:
-        # name: 'Default'
-        vmImage: 'macos-12'
-      steps:
-        - script: echo "This job will run only if job1 fails"
+          # ConnectionType: 'AzureRM'
+          azureSubscription: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
+          WebAppKind: 'app'
+          # WebAppKind: 'webApp'
+          WebAppName: 'vbobreshev-test-web-app'
+          Package: '$(System.DefaultWorkingDirectory)/**/site.zip'
+          UseWebDeploy: true
+          AdditionalArguments: '-skip:objectName=filePath,absolutePath="^.*\.config$" -skip:objectName=filePath,absolutePath="favicon.ico" -skip:objectName=filePath,absolutePath="appsettings.json" -skip:objectName=dirPath,absolutePath=${{ parameters.skipFolder }}'

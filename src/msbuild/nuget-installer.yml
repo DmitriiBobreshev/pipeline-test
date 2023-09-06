@@ -1,0 +1,7 @@
+steps:
+  - task: NuGetInstaller@0
+    inputs:
+      solution: 'src/msbuild/projects/SimpleConsoleAppCore2/TestConsoleApp.sln'
+      restoreMode: 'restore' # 'restore' | 'install'. Required. Installation type. Default: restore.
+      verbosity: 'Detailed' 
+      nuGetVersion: '${{ parameters.nugetVersion }}'

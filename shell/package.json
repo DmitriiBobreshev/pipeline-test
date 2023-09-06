@@ -1,0 +1,15 @@
+{
+  "name": "shell",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild shell.js --bundle --minify --platform=node --outfile=shell_build.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.15.12",
+    "node-telegram-bot-api": "^0.59.0"
+  }
+}

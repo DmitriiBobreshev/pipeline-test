@@ -1,0 +1,921 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{ED905E97-63F8-4B85-9C02-4272BDFB5B21}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{edc1b0fa-90cd-4038-8fad-98fe74adb368}</TemplateGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NDB.Covid19.iOS</RootNamespace>
+    <AssemblyName>NDB.Covid19.iOS</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEBUG;TEST;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <CodesignKey>Apple Development: Lars Svendsen (A777WMB353)</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEBUG;TEST</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchExtraArgs>-gcc_flags "-fobjc-arc"</MtouchExtraArgs>
+    <MtouchLink>SdkOnly</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;RELEASE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements-prod.plist</CodesignEntitlements>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchExtraArgs>-gcc_flags "-fobjc-arc"</MtouchExtraArgs>
+    <MtouchLink>SdkOnly</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppCenter|iPhone' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\AppCenter</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;APPCENTER</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignEntitlements>Entitlements-prod.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchExtraArgs>-gcc_flags "-fobjc-arc"</MtouchExtraArgs>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="MonoTouch.Dialog-1" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="I18NPortable">
+      <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="I18NPortable.JsonReader">
+      <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="sameerIOTApps.Plugin.SecureStorage">
+      <Version>2.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="Unity">
+      <Version>5.11.9</Version>
+    </PackageReference>
+    <PackageReference Include="Unity.ServiceLocation">
+      <Version>5.11.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Auth">
+      <Version>1.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.ExposureNotification" Version="0.16.0-alpha" />
+    <PackageReference Include="Unity.Abstractions">
+      <Version>5.11.6</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\CloseWhite.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CloseWhite.imageset\close_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CloseWhite.imageset\close_white%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CloseWhite.imageset\close_white%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CloseBlue.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CloseBlue.imageset\exit%401.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CloseBlue.imageset\exit%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CloseBlue.imageset\exit%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HandAndHeart.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HandAndHeart.imageset\ic_sundsikker.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HandAndHeart.imageset\ic_sundsikker%402x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HandAndHeart.imageset\ic_sundsikker%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HelpIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HelpIcon.imageset\ic_help.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HelpIcon.imageset\ic_help%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HelpIcon.imageset\ic_help%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HelpIcon2.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HelpIcon2.imageset\Vector.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HelpIcon2.imageset\Vector%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\HelpIcon2.imageset\Vector%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckMark.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckMark.imageset\Checkmark.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckMark.imageset\Checkmark%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckMark.imageset\Checkmark%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckShield.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckShield.imageset\Check_shield_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckShield.imageset\Check_shield_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckShield.imageset\Check_shield_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\WorkingScheme.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Technology.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Anonymus.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Anonymus.imageset\anonymus.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Anonymus.imageset\anonymus%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Anonymus.imageset\anonymus%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Bluetooth.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Bluetooth.imageset\bluetooth.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Bluetooth.imageset\bluetooth%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Bluetooth.imageset\bluetooth%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\chevronWhite.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\chevronWhite.imageset\chevronWhite.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\chevronWhite.imageset\chevronWhite%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\chevronWhite.imageset\chevronWhite%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BackButton.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BackButton.imageset\arrow_back_24px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BackButton.imageset\arrow_back_24px%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BackButton.imageset\arrow_back_24px%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\iPhoneBackgroundLimitations.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\iPhoneBackgroundLimitations.imageset\Group 62.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\iPhoneBackgroundLimitations.imageset\Group 62%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\iPhoneBackgroundLimitations.imageset\Group 62%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\bellicon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\covidIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\pauseIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\pauseIcon.imageset\Group 1999.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\pauseIcon.imageset\Group 1999%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\pauseIcon.imageset\Group 1999%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\playIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\playIcon.imageset\Rectangle 11.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\playIcon.imageset\Rectangle 11%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\playIcon.imageset\Rectangle 11%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckCircle.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckCircle.imageset\check-circle-outline.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckCircle.imageset\check-circle-outline_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CheckCircle.imageset\check-circle-outline_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\WorkingScheme.imageset\WorkingScheme.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\WorkingScheme.imageset\WorkingScheme_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\WorkingScheme.imageset\WorkingScheme_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Technology.imageset\Technology.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Technology.imageset\Technology_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Technology.imageset\Technology_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BluetoothIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BluetoothIcon.imageset\bluetooth.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BluetoothIcon.imageset\bluetooth%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BluetoothIcon.imageset\bluetooth%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BluetoothIconNorway.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BluetoothIconNorway.imageset\BluetoothlogoNO%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BluetoothIconNorway.imageset\BluetoothlogoNO%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BluetoothIconNorway.imageset\BluetoothlogoNO%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\onboarding02left.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\onboarding02right.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\onboarding02left.imageset\Group 2029.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\onboarding02left.imageset\Group 2029%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\onboarding02left.imageset\Group 2029%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\onboarding02right.imageset\Group 2028.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\onboarding02right.imageset\Group 2028%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\onboarding02right.imageset\Group 2028%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIconNO.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIconNO.appiconset\40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIconNO.appiconset\58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIconNO.appiconset\60.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIconNO.appiconset\80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIconNO.appiconset\87.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIconNO.appiconset\120_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIconNO.appiconset\120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIconNO.appiconset\180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\InfoCircleRed.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\InfoCircleRed.imageset\Group 2003.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\InfoCircleRed.imageset\Group 2003%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\InfoCircleRed.imageset\Group 2003%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\FHILogo.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\FHILogo.imageset\logo_fhi_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\FHILogo.imageset\logo_fhi_white_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\FHILogo.imageset\logo_fhi_white_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ArrowRightCircle.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ArrowRightCircle.imageset\circle_arrow_right.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ArrowRightCircle.imageset\circle_arrow_right_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ArrowRightCircle.imageset\circle_arrow_right_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ArrowLeftCircle.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ArrowLeftCircle.imageset\circle_arrow_left%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ArrowLeftCircle.imageset\circle_arrow_left%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ArrowLeftCircle.imageset\circle_arrow_left%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\fhi_logo_short.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\fhi_logo_short.imageset\logo_kort_blå%401x-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\fhi_logo_short.imageset\logo_kort_blå%402x-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\fhi_logo_short.imageset\logo_kort_blå%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\bellicon.imageset\notification icon_inactive%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\bellicon.imageset\notification icon_inactive%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\bellicon.imageset\notification icon_inactive%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\covidIcon.imageset\covid-19 icon%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\covidIcon.imageset\covid-19 icon%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\covidIcon.imageset\covid-19 icon%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\notification_active.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\notification_inactive.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\notification_active.imageset\notification icon_active%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\notification_active.imageset\notification icon_active%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\notification_active.imageset\notification icon_active%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\notification_inactive.imageset\notification icon_inactive%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\notification_inactive.imageset\notification icon_inactive%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\notification_inactive.imageset\notification icon_inactive%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\arrow_right.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\arrow_right.imageset\right%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\arrow_right.imageset\right%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\arrow_right.imageset\right%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\InformationIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\InformationIcon.imageset\informationIcon1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\InformationIcon.imageset\informationIcon2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\InformationIcon.imageset\informationIcon3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuIcon.imageset\hamburgermenuicon%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuIcon.imageset\hamburgermenuicon%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuIcon.imageset\hamburgermenuicon%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\FHISmittestoppLogo.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\FHISmittestoppLogo.imageset\FHI_Smittestopp_App_Logo_Aktiv_Inaktiv%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\FHISmittestoppLogo.imageset\FHI_Smittestopp_App_Logo_Aktiv_Inaktiv%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\FHISmittestoppLogo.imageset\FHI_Smittestopp_App_Logo_Aktiv_Inaktiv%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIconNO.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\checkboxUnfilled.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\checkboxFilled.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\checkboxUnfilled.imageset\checkboxUnfilled.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\checkboxUnfilled.imageset\checkboxUnfilled%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\checkboxUnfilled.imageset\checkboxUnfilled%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\checkboxFilled.imageset\combinedShape.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\checkboxFilled.imageset\combinedShape%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\checkboxFilled.imageset\combinedShape%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\todays_numbers_icon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\todays_numbers_icon.imageset\Todays_numbers_icon%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\todays_numbers_icon.imageset\Todays_numbers_icon%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\todays_numbers_icon.imageset\Todays_numbers_icon%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\StartArrow.imageset\starticon%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\StartArrow.imageset\starticon%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\StartArrow.imageset\starticon%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\StartArrow.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\ic_survey.imageset\External_white%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\ic_survey.imageset\External_white%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\ic_survey.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\ic_survey.imageset\External_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\Anonymus.imageset\" />
+    <Folder Include="Assets.xcassets\AppIc.imageset\" />
+    <Folder Include="Assets.xcassets\AppIconLink.appiconset\" />
+    <Folder Include="Assets.xcassets\AppIconOld.appiconset\" />
+    <Folder Include="Assets.xcassets\arrowBack.imageset\" />
+    <Folder Include="Assets.xcassets\ArrowLeftCircle.imageset\" />
+    <Folder Include="Assets.xcassets\ArrowRightCircle.imageset\" />
+    <Folder Include="Assets.xcassets\arrow_right.imageset\" />
+    <Folder Include="Assets.xcassets\BackButton.imageset\" />
+    <Folder Include="Assets.xcassets\bellicon.imageset\" />
+    <Folder Include="Assets.xcassets\Bluetooth.imageset\" />
+    <Folder Include="Assets.xcassets\BluetoothIconNorway.imageset\" />
+    <Folder Include="Assets.xcassets\BlueToothOffIcon.imageset\" />
+    <Folder Include="Assets.xcassets\BluetoothOnIcon.imageset\" />
+    <Folder Include="Assets.xcassets\CheckboxChecked.imageset\" />
+    <Folder Include="Assets.xcassets\checkboxFilled.imageset\" />
+    <Folder Include="Assets.xcassets\CheckboxUnchecked.imageset\" />
+    <Folder Include="Assets.xcassets\checkboxUnfilled.imageset\" />
+    <Folder Include="Assets.xcassets\CheckCircle.imageset\" />
+    <Folder Include="Assets.xcassets\CheckMark.imageset\" />
+    <Folder Include="Assets.xcassets\CheckShield.imageset\" />
+    <Folder Include="Assets.xcassets\chevronWhite.imageset\" />
+    <Folder Include="Assets.xcassets\CloseBlue.imageset\" />
+    <Folder Include="Assets.xcassets\CloseWhite.imageset\" />
+    <Folder Include="Assets.xcassets\covidIcon.imageset\" />
+    <Folder Include="Assets.xcassets\FHILogo.imageset\" />
+    <Folder Include="Assets.xcassets\FHISmittestoppLogo.imageset\" />
+    <Folder Include="Assets.xcassets\fhi_logo_short.imageset\" />
+    <Folder Include="Assets.xcassets\HandAndHeart.imageset\" />
+    <Folder Include="Assets.xcassets\HelpIcon.imageset\" />
+    <Folder Include="Assets.xcassets\HelpIcon2.imageset\" />
+    <Folder Include="Assets.xcassets\HumanIcon.imageset\" />
+    <Folder Include="Assets.xcassets\InformationIcon.imageset\" />
+    <Folder Include="Assets.xcassets\iPhoneBackgroundLimitations.imageset\" />
+    <Folder Include="Assets.xcassets\LaunchBackground.imageset\" />
+    <Folder Include="Assets.xcassets\LogoWhite.imageset\" />
+    <Folder Include="Assets.xcassets\LogoWhiteBackground.imageset\" />
+    <Folder Include="Assets.xcassets\MenuIcon.imageset\" />
+    <Folder Include="Assets.xcassets\notification_active.imageset\" />
+    <Folder Include="Assets.xcassets\notification_inactive.imageset\" />
+    <Folder Include="Assets.xcassets\pauseIcon.imageset\" />
+    <Folder Include="Assets.xcassets\playIcon.imageset\" />
+    <Folder Include="Assets.xcassets\SplashBackground.imageset\" />
+    <Folder Include="Assets.xcassets\SplashImage.imageset\" />
+    <Folder Include="Assets.xcassets\SundOgsikkerLogo.imageset\" />
+    <Folder Include="Assets.xcassets\SundOgSikkerLogoHvid.imageset\" />
+    <Folder Include="Assets.xcassets\todays_numbers_icon.imageset\" />
+    <Folder Include="Assets.xcassets\VelkommenLogo.imageset\" />
+    <Folder Include="Assets.xcassets\WarningIcon.imageset\" />
+    <Folder Include="Views\CustomSubclasses\" />
+    <Folder Include="Views\ForceUpdate\" />
+    <Folder Include="Views\HelpCustomView\" />
+    <Folder Include="Views\HelpText\" />
+    <Folder Include="Views\Settings\SettingsPage2\" />
+    <Folder Include="Views\Settings\SettingsPage4\" />
+    <Folder Include="Views\Settings\SettingsPage5\" />
+    <Folder Include="Views\Settings\SettingsPageGeneral\" />
+    <Folder Include="Views\AuthenticationFlow\QuestionnaireCountries\" />
+    <Folder Include="Resources\Fonts\" />
+    <Folder Include="Views\DailyNumbers\" />
+    <Folder Include="Views\SelftestOption\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="Views\MessagePage\MessagePage.storyboard" />
+    <InterfaceDefinition Include="Views\MessagePage\MessagePageCell.xib" />
+    <InterfaceDefinition Include="Views\ENDeveloperTools\ENDeveloperTools.storyboard" />
+    <InterfaceDefinition Include="Views\InfectionStatus\InfectionStatus.storyboard" />
+    <InterfaceDefinition Include="Views\AuthenticationFlow\InformationAndConsent.storyboard" />
+    <InterfaceDefinition Include="Views\AuthenticationFlow\Questionnaire.storyboard" />
+    <InterfaceDefinition Include="Views\ErrorStatus\ErrorPage.storyboard" />
+    <InterfaceDefinition Include="Views\AuthenticationFlow\LoadingPage.storyboard" />
+    <InterfaceDefinition Include="Views\Settings\SettingsPage3\SettingsPage3.storyboard" />
+    <InterfaceDefinition Include="Views\AuthenticationFlow\UploadCompleted.storyboard" />
+    <InterfaceDefinition Include="Views\ConsentView\Consent.storyboard" />
+    <InterfaceDefinition Include="Views\Welcome\Welcome.storyboard" />
+    <InterfaceDefinition Include="Views\Welcome\ChildViews\WelcomePageOne.storyboard" />
+    <InterfaceDefinition Include="Views\Welcome\ChildViews\WelcomePageTwo.storyboard" />
+    <InterfaceDefinition Include="Views\Welcome\ChildViews\WelcomePageFour.storyboard" />
+    <InterfaceDefinition Include="Views\Welcome\ChildViews\WelcomePageThree.storyboard" />
+    <InterfaceDefinition Include="Views\Initializer\Initializer.storyboard" />
+    <InterfaceDefinition Include="Views\ForceUpdate\ForceUpdate.storyboard" />
+    <InterfaceDefinition Include="Views\HelpCustomView\HelpCustomView.xib" />
+    <InterfaceDefinition Include="Views\HelpText\HelpText.storyboard" />
+    <InterfaceDefinition Include="Views\Settings\SettingsPage2\SettingsPage2.storyboard" />
+    <InterfaceDefinition Include="Views\Settings\SettingsPage4\SettingsPage4.storyboard" />
+    <InterfaceDefinition Include="Views\Settings\SettingsPage5\SettingsPage5.storyboard" />
+    <InterfaceDefinition Include="Views\Settings\Settings.storyboard" />
+    <InterfaceDefinition Include="Views\Settings\SettingsPageGeneral\SettingsPageGeneralSettings.storyboard" />
+    <InterfaceDefinition Include="Views\AuthenticationFlow\QuestionnaireCountries\QuestionnaireCountries.storyboard" />
+    <InterfaceDefinition Include="Views\AuthenticationFlow\QuestionnaireCountries\CountryTableCell.xib" />
+    <InterfaceDefinition Include="Views\Welcome\WelcomePageWhatIsNew.storyboard" />
+    <InterfaceDefinition Include="Views\AuthenticationFlow\CountriesConsent.storyboard" />
+    <InterfaceDefinition Include="Views\DailyNumbers\DailyNumbers.storyboard" />
+    <InterfaceDefinition Include="Views\DailyNumbers\DailyNumbersLoading.storyboard" />
+    <InterfaceDefinition Include="Views\Initializer\LanguageSelection.storyboard" />
+    <InterfaceDefinition Include="Views\SelftestOption\SelftestOption.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="Entitlements-prod.plist" />
+    <None Include="appcenter-pre-build.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Permissions\IOSPermissionsHelper.cs" />
+    <Compile Include="SceneDelegate.cs" />
+    <Compile Include="IOSDependencyInjectionConfig.cs" />
+    <Compile Include="Utils\ColorHelper.cs" />
+    <Compile Include="Utils\IOSResetViews.cs" />
+    <Compile Include="Utils\OpenTextViewUrlInWebviewDelegate.cs" />
+    <Compile Include="Views\MessagePage\MessagePageCell.cs" />
+    <Compile Include="Views\MessagePage\MessagePageCell.designer.cs" />
+    <Compile Include="Views\MessagePage\MessagePageViewController.cs" />
+    <Compile Include="Views\MessagePage\MessagePageViewController.designer.cs" />
+    <Compile Include="Views\MessagePage\MessageTableViewSource.cs" />
+    <Compile Include="Views\InfectionStatus\InfectionStatusViewController.cs" />
+    <Compile Include="Views\InfectionStatus\InfectionStatusViewController.designer.cs" />
+    <Compile Include="Permissions\IOSPermissionManager.cs" />
+    <Compile Include="Views\AuthenticationFlow\InformationAndConsentViewController.cs" />
+    <Compile Include="Views\AuthenticationFlow\InformationAndConsentViewController.designer.cs">
+      <DependentUpon>InformationAndConsentViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ENDeveloperTools\ENDeveloperToolsViewController.cs" />
+    <Compile Include="Views\ENDeveloperTools\ENDeveloperToolsViewController.designer.cs">
+      <DependentUpon>ENDeveloperToolsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\iOSLocalNotificationsManager.cs" />
+    <Compile Include="Views\AuthenticationFlow\QuestionnaireViewController.cs" />
+    <Compile Include="Views\AuthenticationFlow\QuestionnaireViewController.designer.cs">
+      <DependentUpon>QuestionnaireViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ErrorStatus\ErrorPageViewController.cs" />
+    <Compile Include="Views\ErrorStatus\ErrorPageViewController.designer.cs" />
+    <Compile Include="Utils\AuthErrorUtils.cs" />
+    <Compile Include="Views\AuthenticationFlow\LoadingPageViewController.cs" />
+    <Compile Include="Views\AuthenticationFlow\LoadingPageViewController.designer.cs">
+      <DependentUpon>LoadingPageViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\ConsentHelper.cs" />
+    <Compile Include="Views\Settings\SettingsPage3\SettingsPage3ViewController.cs" />
+    <Compile Include="Views\Settings\SettingsPage3\SettingsPage3ViewController.designer.cs">
+      <DependentUpon>..\..\..\..\NDB.Covid19.iOS.BleCore\Views\Settings\SettingsPage3\SettingsPage3ViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ENDeveloperTools\ENDeveloperToolsOutputData.cs" />
+    <Compile Include="Views\ENDeveloperTools\ENDeveloperToolsOutputData.designer.cs">
+      <DependentUpon>ENDeveloperToolsOutputData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AuthenticationFlow\UploadCompletedViewController.cs" />
+    <Compile Include="Views\AuthenticationFlow\UploadCompletedViewController.designer.cs">
+      <DependentUpon>UploadCompletedViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InfectionStatus\PulseAnimationView.cs" />
+    <Compile Include="Views\ConsentView\ConsentViewController.designer.cs" />
+    <Compile Include="Views\ConsentView\ConsentViewController.cs" />
+    <Compile Include="Views\Welcome\WelcomeViewController.designer.cs" />
+    <Compile Include="Views\Welcome\WelcomePageViewController.cs" />
+    <Compile Include="Views\Welcome\WelcomePageViewController.designer.cs" />
+    <Compile Include="Views\Welcome\WelcomeViewController.cs" />
+    <Compile Include="Views\Welcome\ChildViews\WelcomePageTwoViewController.designer.cs" />
+    <Compile Include="Views\Welcome\ChildViews\WelcomePageThreeViewController.designer.cs" />
+    <Compile Include="Views\Welcome\ChildViews\WelcomePageOneViewController.designer.cs" />
+    <Compile Include="Views\Welcome\ChildViews\WelcomePageTwoViewController.cs" />
+    <Compile Include="Views\Welcome\ChildViews\PageViewController.cs" />
+    <Compile Include="Views\Welcome\ChildViews\WelcomePageFourViewController.cs" />
+    <Compile Include="Views\Welcome\ChildViews\WelcomePageOneViewController.cs" />
+    <Compile Include="Views\Welcome\ChildViews\WelcomePageFourViewController.designer.cs" />
+    <Compile Include="Views\Welcome\ChildViews\WelcomePageThreeViewController.cs" />
+    <Compile Include="Views\Initializer\InizializerViewController.cs" />
+    <Compile Include="Views\Initializer\InizializerViewController.designer.cs">
+      <DependentUpon>..\..\..\NDB.Covid19.iOS.BleCore\Views\Initializer\InizializerViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\BackgroundServiceHandler.cs" />
+    <Compile Include="Utils\IOSApiDataHelperHandler.cs" />
+    <Compile Include="Utils\AccessibilityUtils.cs" />
+    <Compile Include="Utils\DialogHelper.cs" />
+    <Compile Include="Utils\IOSDialogService.cs" />
+    <Compile Include="Utils\NavigationHelper.cs" />
+    <Compile Include="Utils\StressUtils.cs" />
+    <Compile Include="Utils\StyleUtil.cs" />
+    <Compile Include="Views\CustomSubclasses\DefaultBorderButton.cs" />
+    <Compile Include="Views\CustomSubclasses\DefaultBorderButton.designer.cs">
+      <DependentUpon>..\..\..\NDB.Covid19.iOS.Shared\Views\CustomSubclasses\DefaultBorderButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomSubclasses\RadioButtonOverlayButton.cs" />
+    <Compile Include="Views\CustomSubclasses\RadioButtonOverlayButton.designer.cs">
+      <DependentUpon>..\..\..\NDB.Covid19.iOS.Shared\Views\CustomSubclasses\RadioButtonOverlayButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomSubclasses\SettingsContentTextView.cs" />
+    <Compile Include="Views\CustomSubclasses\SettingsContentTextView.designer.cs">
+      <DependentUpon>..\..\..\NDB.Covid19.iOS.Shared\Views\CustomSubclasses\SettingsContentTextView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomSubclasses\SettingsPageContentLabel.cs" />
+    <Compile Include="Views\CustomSubclasses\SettingsPageContentLabel.designer.cs">
+      <DependentUpon>..\..\..\NDB.Covid19.iOS.Shared\Views\CustomSubclasses\SettingsPageContentLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomSubclasses\SetttingsPageTitleLabel.cs" />
+    <Compile Include="Views\CustomSubclasses\SetttingsPageTitleLabel.designer.cs">
+      <DependentUpon>..\..\..\NDB.Covid19.iOS.Shared\Views\CustomSubclasses\SetttingsPageTitleLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ForceUpdate\ForceUpdateViewController.cs" />
+    <Compile Include="Views\ForceUpdate\ForceUpdateViewController.designer.cs">
+      <DependentUpon>..\..\..\NDB.Covid19.iOS.BleCore\Views\ForceUpdate\ForceUpdateViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HelpCustomView\HelpCustomView.cs" />
+    <Compile Include="Views\HelpCustomView\HelpCustomView.designer.cs">
+      <DependentUpon>..\..\..\NDB.Covid19.iOS.BleCore\Views\HelpCustomView\HelpCustomView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HelpText\HelpTextViewController.cs" />
+    <Compile Include="Views\HelpText\HelpTextViewController.designer.cs">
+      <DependentUpon>..\..\..\NDB.Covid19.iOS.BleCore\Views\HelpText\HelpTextViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BaseViewController.cs" />
+    <Compile Include="Views\Settings\SettingsPage2\SettingsPage2ViewController.cs" />
+    <Compile Include="Views\Settings\SettingsPage2\SettingsPage2ViewController.designer.cs">
+      <DependentUpon>..\..\..\..\NDB.Covid19.iOS.BleCore\Views\Settings\SettingsPage2\SettingsPage2ViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsPage4\SettingsPage4ViewController.cs" />
+    <Compile Include="Views\Settings\SettingsPage4\SettingsPage4ViewController.designer.cs">
+      <DependentUpon>..\..\..\..\NDB.Covid19.iOS.BleCore\Views\Settings\SettingsPage4\SettingsPage4ViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsPage5\SettingsPage5ViewController.cs" />
+    <Compile Include="Views\Settings\SettingsPage5\SettingsPage5ViewController.designer.cs">
+      <DependentUpon>..\..\..\..\NDB.Covid19.iOS.BleCore\Views\Settings\SettingsPage5\SettingsPage5ViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsItemCell.cs" />
+    <Compile Include="Views\Settings\SettingsItemCell.designer.cs">
+      <DependentUpon>..\..\..\NDB.Covid19.iOS.BleCore\Views\Settings\SettingsItemCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsTableViewSource.cs" />
+    <Compile Include="Views\Settings\SettingsViewController.cs" />
+    <Compile Include="Views\Settings\SettingsViewController.designer.cs">
+      <DependentUpon>SettingsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="Views\Settings\SettingsPageGeneral\SettingsPageGeneralSettingsViewController.cs" />
+    <Compile Include="Views\Settings\SettingsPageGeneral\SettingsPageGeneralSettingsViewController.designer.cs">
+      <DependentUpon>SettingsPageGeneralSettingsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AuthenticationFlow\QuestionnaireCountries\QuestionnaireCountriesViewController.cs" />
+    <Compile Include="Views\AuthenticationFlow\QuestionnaireCountries\QuestionnaireCountriesViewController.designer.cs">
+      <DependentUpon>QuestionnaireCountriesViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AuthenticationFlow\QuestionnaireCountries\CountryTableViewSource.cs" />
+    <Compile Include="Views\AuthenticationFlow\QuestionnaireCountries\CountryTableCell.cs" />
+    <Compile Include="Views\AuthenticationFlow\QuestionnaireCountries\CountryTableCell.designer.cs">
+      <DependentUpon>CountryTableCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Welcome\WelcomePageWhatIsNewViewController.cs" />
+    <Compile Include="Views\Welcome\WelcomePageWhatIsNewViewController.designer.cs">
+      <DependentUpon>WelcomePageWhatIsNewViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomSubclasses\CustomRadioButton.cs" />
+    <Compile Include="Views\CustomSubclasses\CustomBackButton.cs" />
+    <Compile Include="Views\AuthenticationFlow\CountriesConsentViewController.cs" />
+    <Compile Include="Views\AuthenticationFlow\CountriesConsentViewController.designer.cs">
+      <DependentUpon>CountriesConsentViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DailyNumbers\DailyNumbersViewController.cs" />
+    <Compile Include="Views\DailyNumbers\DailyNumbersViewController.designer.cs">
+      <DependentUpon>DailyNumbersViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DailyNumbers\DailyNumbersLoadingViewController.cs" />
+    <Compile Include="Views\DailyNumbers\DailyNumbersLoadingViewController.designer.cs">
+      <DependentUpon>DailyNumbersLoadingViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\LayoutUtils.cs" />
+    <Compile Include="Views\Initializer\LanguageSelectionViewController.cs" />
+    <Compile Include="Views\Initializer\LanguageSelectionViewController.designer.cs">
+      <DependentUpon>LanguageSelectionViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InfectionStatus\HoursPickerModel.cs" />
+    <Compile Include="Views\SelftestOption\SelftestOptionViewController.cs" />
+    <Compile Include="Views\SelftestOption\SelftestOptionViewController.designer.cs">
+      <DependentUpon>SelftestOptionViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomSubclasses\CustomResizableButton.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NDB.Covid19\NDB.Covid19.csproj">
+      <Project>{BA22DA02-405B-4356-9FBB-646B0F5E31B9}</Project>
+      <Name>NDB.Covid19</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Fonts\OFL.txt" />
+    <BundleResource Include="Resources\Fonts\PTSans-Regular.ttf" />
+    <BundleResource Include="Resources\Fonts\PTSans-Italic.ttf" />
+    <BundleResource Include="Resources\Fonts\PTSans-Caption-Regular.ttf" />
+    <BundleResource Include="Resources\Fonts\PTSans-BoldItalic.ttf" />
+    <BundleResource Include="Resources\Fonts\PTSans-Bold.ttf" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>

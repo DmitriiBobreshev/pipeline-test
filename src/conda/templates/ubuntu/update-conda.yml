@@ -1,0 +1,7 @@
+steps:
+- bash: echo "##vso[task.prependpath]$CONDA/bin"
+  displayName: Add conda to PATH
+
+- bash: conda update -y -n base conda setuptools
+  displayName: Update conda
+  retryCountOnTaskFailure: 3

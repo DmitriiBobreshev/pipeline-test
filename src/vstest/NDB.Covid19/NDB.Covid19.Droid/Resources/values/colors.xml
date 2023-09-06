@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#32345C</color>
+    <color name="colorPrimaryMedium">#5d6280</color>
+    <color name="colorPrimaryDark">#384063</color>
+    <color name="colorAccent">#3498db</color>
+    <color name="lightPrimary">#F7F7F7</color>
+    
+    <color name="textIcon">#32345C</color>
+    <color name="primaryText">#32345C</color>
+    <color name="secondaryText">#ffffff</color>
+    
+    <color name="divider">#C6C6C8</color>
+    <color name="dividerBlue">#3498db</color>
+    <color name="dividerWhite">#FFFFFF</color>
+    <color name="shadowDividerLightest">#00ffffff</color>
+    <color name="shadowDividerDarkest">#40000000</color>
+    
+    <color name="activated_color">#E8E8E8</color>
+    <color name="colorControlActivated">#FFFFFF</color>
+    <color name="splashBackground">#E1EAED</color>
+    <color name="topbar">#E1EAED</color>
+    <color name="topbarDevicer">#334D5D </color>
+    <color name="backgroundColor">#E1EAED</color>
+    <color name="buttonOnGreen">#61D39F</color>
+    <color name="greyedOut">#334D5D</color>
+    <color name="counterExplainText">#A1ACB4</color>
+    <color name="counterLayoutBackgroundColor">#071F32</color>
+    <color name="warningColor">#FFDC3C</color>
+    <color name="errorColor">#FF8C1E</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="selectedDot">#32345C</color>
+    <color name="unselectedDot">#E1EAED</color>
+    <color name="unselectedDotBorder">#32345C</color>
+    <color name="switchSelectedTrack">#32345C</color>
+    <color name="switchUnselectedTrack">#F2F9FB</color>
+    <color name="switchSelectedThumb">#FFFFFF</color>
+    <color name="switchUnselectedThumb">#32335F</color>
+	<color name="linkColor">#086caf</color>
+    <color name="settingsUnderlineColor">#fe7668</color>
+    
+    <color name="infectionStatusButtonOnGreen">#D9F0D4</color>
+    <color name="infectionStatusButtonOffRed">#FD9085</color>
+    <color name="infectionStatusBackgroundGreen">#8056c568</color>
+    <color name="infectionStatusBackgroundRed">#80eb5757</color>
+    <!--> 33 (20%) indicates the transparency of the color<-->
+    <color name="infectionStatusLayoutButtonBackground">#33C5E2FC</color>
+    <color name="infectionStatusLayoutButtonArrowBackground">#33071F32</color>
+    <color name="lightBlueDivider">#C5E2FC</color>
+    <color name="infectionStatusButtonMark">#32071F32</color>
+    <color name="infectionStatusTileColor">#F3F9FB</color>
+
+    <color name="dailyNumbersCounterLayoutBackground">#32345C</color>
+</resources>
