@@ -34,6 +34,18 @@ variables:
     value: true
   - name: AZP_75787_ENABLE_COLLECT
     value: true
+  - name: WindowsContainerImage
+    value: 'onebranch.azurecr.io/windows/ltsc2019/vse2022:latest'
+resources:
+  containers:
+  - container: windows_build_container
+    image: $(WindowsContainerImage)
+    mountReadOnly:
+      externals: true
+    volumes:
+    - c:\obtools_host:c:\obtools_container:ro
+    env:
+      Use_Isolation: true
 
 jobs:
   - job:
@@ -45,10 +57,10 @@ jobs:
         inputs:
           command: test
           projects: >
-            $(Build.SourcesDirectory)/src/**/*.csproj
+            $(Build.SourcesDirectory)/src/**/TestConsoleApp.csproj
           publishTestResults: false
           arguments: --no-restore --logger trx --configuration release --collect "Code Coverage" --results-directory $(Build.SourcesDirectory)/src/out/logs/TestResults/
-        # target:
-        #   container: windows_build_container
-        #   commands: restricted
+        target:
+          container: windows_build_container
+          commands: restricted
         displayName: Run Authorization service unit tests (windows_build_container)
