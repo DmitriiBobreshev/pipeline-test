@@ -53,6 +53,14 @@ jobs:
       # name: 'Default'
       vmImage: 'windows-latest'
     steps: 
+      - task: UseDotNet@2
+        inputs:
+          packageType: 'sdk'
+          version: '6'
+        target:
+          container: windows_build_container
+          commands: restricted
+          
       - task: DotNetCoreCLI@2
         inputs:
           command: test
