@@ -42,8 +42,8 @@ resources:
     image: $(WindowsContainerImage)
     mountReadOnly:
       externals: true
-    volumes:
-    - c:\obtools_host:c:\obtools_container:ro
+    # volumes:
+    # - c:\obtools_host:c:\obtools_container:ro
     env:
       Use_Isolation: true
 
