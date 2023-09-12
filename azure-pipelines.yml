@@ -41,13 +41,14 @@ jobs:
       # name: 'Default'
       vmImage: 'windows-latest'
     steps: 
-      - task: AzureRmWebAppDeployment@3
+      - task: DotNetCoreCLI@2
         inputs:
-          # ConnectionType: 'AzureRM'
-          azureSubscription: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
-          WebAppKind: 'app'
-          # WebAppKind: 'webApp'
-          WebAppName: 'vbobreshev-test-web-app'
-          Package: '$(System.DefaultWorkingDirectory)/**/site.zip'
-          UseWebDeploy: true
-          AdditionalArguments: '-skip:objectName=filePath,absolutePath="^.*\.config$" -skip:objectName=filePath,absolutePath="favicon.ico" -skip:objectName=filePath,absolutePath="appsettings.json" -skip:objectName=dirPath,absolutePath=${{ parameters.skipFolder }}'
+          command: test
+          projects: >
+            $(Build.SourcesDirectory)/src/**/*.csproj
+          publishTestResults: false
+          arguments: --no-restore --logger trx --configuration release --collect "Code Coverage" --results-directory $(Build.SourcesDirectory)/src/out/logs/TestResults/
+        # target:
+        #   container: windows_build_container
+        #   commands: restricted
+        displayName: Run Authorization service unit tests (windows_build_container)
