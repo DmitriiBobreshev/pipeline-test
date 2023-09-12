@@ -56,11 +56,11 @@ jobs:
       - task: UseDotNet@2
         inputs:
           packageType: 'sdk'
-          version: '6'
+          version: '6.x'
         target:
           container: windows_build_container
           commands: restricted
-          
+
       - task: DotNetCoreCLI@2
         inputs:
           command: test
