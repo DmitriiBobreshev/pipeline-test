@@ -67,7 +67,7 @@ jobs:
           projects: >
             $(Build.SourcesDirectory)/src/**/TestConsoleApp.csproj
           publishTestResults: false
-          arguments: --no-restore --logger trx --configuration release --collect "Code Coverage" --results-directory $(Build.SourcesDirectory)/src/out/logs/TestResults/
+          arguments: --no-restore --logger trx --configuration release --collect "Code" --results-directory $(Build.SourcesDirectory)/src/out/logs/TestResults/
         target:
           container: windows_build_container
           commands: restricted
