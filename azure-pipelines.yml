@@ -54,7 +54,7 @@ jobs:
       vmImage: 'windows-latest'
     steps: 
       - powershell: |
-          echo '123'
+          echo $profile
 
       - powershell: |
           Get-Host
