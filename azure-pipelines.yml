@@ -55,9 +55,10 @@ jobs:
     steps: 
       - powershell: |
           New-item –type file –force $profile;
-          Add-Content $profile 'Write-Host "Hello World"'
-          
-          echo $profile
+          Add-Content $profile 'Write-Host "Hello World"';
+
+          cat $profile;
+          echo $profile;
 
       - powershell: |
           Get-Host
