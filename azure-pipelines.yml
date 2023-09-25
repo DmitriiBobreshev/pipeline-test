@@ -54,11 +54,6 @@ jobs:
       vmImage: 'windows-latest'
     steps: 
       - powershell: |
-          New-item –type file –force $profile;
-          Add-Content $profile 'Write-Host "Hello World"';
-
-          cat $profile;
-          echo $profile;
-
-      - powershell: |
-          Get-Host
+          node ./src/nodejs/timeoutTest.js
+        timeoutInMinutes: 10
+     
