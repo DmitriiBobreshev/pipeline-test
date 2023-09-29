@@ -40,7 +40,8 @@ variables:
 jobs:
   - job:
     pool: #'agentvmsspool'
-      name: 'Default'
+      # name: 'Default'
+      vmImage: 'windows-latest'
     steps: 
       - task: NodeTool@0
         displayName: 'Use Node 10.x'
