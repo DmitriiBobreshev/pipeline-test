@@ -28,12 +28,6 @@ variables:
     value: false
   - name: ARGS
     value: "123"
-  - name: AZP_75787_ENABLE_NEW_LOGIC_LOG
-    value: true
-  - name: AZP_75787_ENABLE_NEW_LOGIC
-    value: true
-  - name: AZP_75787_ENABLE_COLLECT
-    value: true
   - name: AGENT_USE_NODE10
     value: true
 
