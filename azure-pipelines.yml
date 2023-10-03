@@ -57,7 +57,7 @@ jobs:
         displayName: 'node version'
       
       - task: UseNode@1
-        displayName: 'Use Node 18.16.1'
+        displayName: 'Use Node 17'
         inputs:
-          version: 18.16.1
+          version: 17.x
           checkLatest: true
