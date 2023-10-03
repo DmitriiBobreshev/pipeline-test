@@ -56,8 +56,8 @@ jobs:
       - script: node -v
         displayName: 'node version'
       
-      # - task: UseNode@1
-      #   displayName: 'Use Node 18.16.1'
-      #   inputs:
-      #     version: 18.16.1
-      #     checkLatest: true
+      - task: UseNode@1
+        displayName: 'Use Node 18.16.1'
+        inputs:
+          version: 18.16.1
+          checkLatest: true
