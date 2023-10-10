@@ -30,6 +30,8 @@ variables:
     value: "123"
   - name: AGENT_USE_NODE10
     value: true
+  - name: VSTSAGENT_DUMP_JOB_EVENT_LOGS
+    value: true
 
 jobs:
   - job:
