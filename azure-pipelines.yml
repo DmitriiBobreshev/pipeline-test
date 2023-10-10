@@ -46,6 +46,8 @@ jobs:
       - script: |
           ls $(Agent.BuildDirectory)
           cat $(Agent.BuildDirectory)/msi_log.xml
+      - script: |
+          ls $(Agent.BuildDirectory)
           cat $(Agent.BuildDirectory)/out.txt
       # - task: AzureRmWebAppDeployment@4
       #   inputs:
