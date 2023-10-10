@@ -40,7 +40,7 @@ jobs:
       - task: CmdLine@2
         inputs:
           script: |
-            D:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe" "D:\Agent2_GAFVSO\_work\766\s\InsulationFoams\InsulationFoams.sln" /log “D:\Agent2_GAFVSO\_work\766\s\SetupIntugentPI\msi_log.xml" /out “D:\Agent2_GAFVSO\_work\766\s\SetupIntugentPI\out.txt" /Build "Release" /Project "D:\Agent2_GAFVSO\_work\766\s\SetupIntugentPI\SetupIntugentPI.vdproj
+            "D:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe" "D:\Agent2_GAFVSO\_work\766\s\InsulationFoams\InsulationFoams.sln" /log “D:\Agent2_GAFVSO\_work\766\s\SetupIntugentPI\msi_log.xml" /out “D:\Agent2_GAFVSO\_work\766\s\SetupIntugentPI\out.txt" /Build "Release" /Project "D:\Agent2_GAFVSO\_work\766\s\SetupIntugentPI\SetupIntugentPI.vdproj
           failOnStderr: true
       # - task: AzureRmWebAppDeployment@4
       #   inputs:
