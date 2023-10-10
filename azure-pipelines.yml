@@ -45,10 +45,10 @@ jobs:
           failOnStderr: true
       - script: |
           ls $(Agent.BuildDirectory)
-          cat $(Agent.BuildDirectory)/msi_log.xml
+          cat $(Agent.BuildDirectory)/SetupIntugentPI/msi_log.xml
       - script: |
           ls $(Agent.BuildDirectory)
-          cat $(Agent.BuildDirectory)/out.txt
+          cat $(Agent.BuildDirectory)/SetupIntugentPI/out.txt
       # - task: AzureRmWebAppDeployment@4
       #   inputs:
       #     ConnectionType: 'AzureRM'
