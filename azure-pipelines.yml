@@ -38,10 +38,15 @@ jobs:
       vmImage: 'windows-2022'
     steps: 
       - task: CmdLine@2
+        continueOnError: true
         inputs:
           script: |
-            "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.exe" "D:\Agent2_GAFVSO\_work\766\s\InsulationFoams\InsulationFoams.sln" /log “D:\Agent2_GAFVSO\_work\766\s\SetupIntugentPI\msi_log.xml" /out “D:\Agent2_GAFVSO\_work\766\s\SetupIntugentPI\out.txt" /Build "Release" /Project "D:\Agent2_GAFVSO\_work\766\s\SetupIntugentPI\SetupIntugentPI.vdproj
+            "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.exe" "D:\Agent2_GAFVSO\_work\766\s\InsulationFoams\InsulationFoams.sln" /log "$(Agent.BuildDirectory)/msi_log.xml" /out "$(Agent.BuildDirectory)/out.txt" /Build "Release" /Project "D:\Agent2_GAFVSO\_work\766\s\SetupIntugentPI\SetupIntugentPI.vdproj"
           failOnStderr: true
+      - script: |
+          ls $(Agent.BuildDirectory)
+          cat $(Agent.BuildDirectory)/msi_log.xml
+          cat $(Agent.BuildDirectory)/out.txt
       # - task: AzureRmWebAppDeployment@4
       #   inputs:
       #     ConnectionType: 'AzureRM'
