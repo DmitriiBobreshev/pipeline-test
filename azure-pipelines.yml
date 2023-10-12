@@ -39,12 +39,16 @@ jobs:
       # name: 'Default'
       vmImage: 'windows-2022'
     steps: 
-      - task: CmdLine@2
-        continueOnError: true
+      - task: BatchScript@1
         inputs:
-          script: |
-            "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.exe" "$(System.DefaultWorkingDirectory)/LegacyWindowsFormsApp\LegacyWindowsFormsApp.sln" /log "$(Agent.BuildDirectory)/msi_log.xml" /out "$(Agent.BuildDirectory)/out.txt" /Build "Release" /Project "$(System.DefaultWorkingDirectory)/LegacyWindowsFormsApp/BlastFromThePastSetup/BlastFromThePastSetup.vdproj"
-          failOnStderr: true
+          filename: 'test.cmd'
+          arguments: '$(System.DefaultWorkingDirectory) $(Agent.BuildDirectory)'
+      # - task: CmdLine@2
+      #   continueOnError: true
+      #   inputs:
+      #     script: |
+      #       "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.exe" "$(System.DefaultWorkingDirectory)/LegacyWindowsFormsApp\LegacyWindowsFormsApp.sln" /log "$(Agent.BuildDirectory)/msi_log.xml" /out "$(Agent.BuildDirectory)/out.txt" /Build "Release" /Project "$(System.DefaultWorkingDirectory)/LegacyWindowsFormsApp/BlastFromThePastSetup/BlastFromThePastSetup.vdproj"
+      #     failOnStderr: true
       - script: |
           ls $(Agent.BuildDirectory)
           cat $(Agent.BuildDirectory)/msi_log.xml
