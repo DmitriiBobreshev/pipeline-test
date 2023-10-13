@@ -39,6 +39,12 @@ jobs:
       # name: 'Default'
       vmImage: 'windows-2022'
     steps: 
+      - task: AzureKeyVault@2
+        inputs:
+          azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
+          KeyVaultName: 'Akvelon'
+          SecretsFilter: '*'
+          RunAsPreJob: false
       - task: BatchScript@1
         continueOnError: true
         inputs:
