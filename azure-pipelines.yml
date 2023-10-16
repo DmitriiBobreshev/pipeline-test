@@ -47,7 +47,7 @@ jobs:
           version: '8.x'
           includePreviewVersions: true
       - script: dotnet --info
-      - script: dotnet tool restore
+      - script: dotnet tool restore -v d
         displayName: Restore tools
       - script: dotnet coverage merge outputs/coverage/ -r -f cobertura -o $(coverageFilePath)
         displayName: Merge coverage files
