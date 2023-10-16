@@ -36,48 +36,10 @@ variables:
 jobs:
   - job:
     pool: #'agentvmsspool'
-      name: 'Default'
-      # vmImage: 'windows-2022'
+      name: #'Default'
+      vmImage: 'ubuntu-2022'
     steps: 
-      - script: echo "2123"
-      # - task: AzureKeyVault@2
-      #   inputs:
-      #     azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
-      #     KeyVaultName: 'agents-signing-cert'
-      #     SecretsFilter: '*'
-      #     RunAsPreJob: false
-      # - task: BatchScript@1
-      #   continueOnError: true
-      #   inputs:
-      #     filename: 'test.cmd'
-      #     arguments: '$(System.DefaultWorkingDirectory) $(Agent.BuildDirectory)'
-      # - script: |
-      #     ls $(Agent.BuildDirectory)
-      #     cat $(Agent.BuildDirectory)/msi_log.xml
-      # - script: |
-      #     ls $(Agent.BuildDirectory)
-      #     cat $(Agent.BuildDirectory)/out.txt
-      # - task: AzureRmWebAppDeployment@4
-      #   inputs:
-      #     ConnectionType: 'AzureRM'
-      #     azureSubscription: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
-      #     # WebAppKind: 'app'
-      #     WebAppKind: 'webApp'
-      #     WebAppName: 'vbobreshev-test-web-app'
-      #     Package: '$(System.DefaultWorkingDirectory)/**/site.zip'
-      #     UseWebDeploy: true
-      #     # AdditionalArguments: '-skip:objectName=filePath,absolutePath="^.*\.config$" -skip:objectName=filePath,absolutePath="favicon.ico" -skip:objectName=filePath,absolutePath="appsettings.json" -skip:objectName=dirPath,absolutePath=${{ parameters.skipFolder }}'
-      #     AdditionalArguments: -skip:objectName=filePath,absolutePath="^.*\.config$" -skip:objectName=filePath -skip:objectName=filePath,absolutePath="favicon.ico" -skip:objectName=filePath,absolutePath="appsettings.json" -skip:objectName=dirPath,absolutePath="^.*Resources(?!CL|Generic|\|$).*$" -skip:objectName=dirPath,absolutePath=^.*Resources(?!CL|"|Generic|\|$).*$ -skip:objectName=dirPath,absolutePath="^.*Resources(?!| \\"CL|Generic|\|$).*$" -skip:objectName=dirPath,absolutePath='^.*Resources(?!CL|"|Generic|\|$).*$' -skip:asd
-      # - task: NodeTool@0
-      #   displayName: 'Use Node 18.16.1'
-      #   inputs:
-      #     versionSpec: 18.16.1
-      #     checkLatest: true
-      # - script: node -v
-      #   displayName: 'node version'
-      
-      # - task: UseNode@1
-      #   displayName: 'Use Node 17'
-      #   inputs:
-      #     version: 17.x
-      #     checkLatest: true
+      - script: dotnet tool restore
+        displayName: Restore tools
+      - script: dotnet coverage merge outputs/coverage/ -r -f cobertura -o $(coverageFilePath)
+        displayName: Merge coverage files
