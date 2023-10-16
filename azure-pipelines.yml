@@ -46,7 +46,7 @@ jobs:
           packageType: 'sdk'
           version: '8.x'
           includePreviewVersions: true
-      - script: dotnet -v
+      - script: dotnet --info
       - script: dotnet tool restore
         displayName: Restore tools
       - script: dotnet coverage merge outputs/coverage/ -r -f cobertura -o $(coverageFilePath)
