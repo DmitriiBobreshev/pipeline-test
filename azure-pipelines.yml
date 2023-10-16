@@ -36,7 +36,7 @@ variables:
 jobs:
   - job:
     pool: #'agentvmsspool'
-      name: #'Default'
+      #name: 'Default'
       vmImage: 'ubuntu-2022'
     steps: 
       - script: dotnet tool restore
