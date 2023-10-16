@@ -32,6 +32,8 @@ variables:
     value: true
   - name: VSTSAGENT_DUMP_JOB_EVENT_LOGS
     value: true
+  - name: coverageFilePath
+    value: test
 
 jobs:
   - job:
