@@ -36,32 +36,27 @@ variables:
 jobs:
   - job:
     pool: #'agentvmsspool'
-      # name: 'Default'
-      vmImage: 'windows-2022'
+      name: 'Default'
+      # vmImage: 'windows-2022'
     steps: 
-      - task: AzureKeyVault@2
-        inputs:
-          azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
-          KeyVaultName: 'agents-signing-cert'
-          SecretsFilter: '*'
-          RunAsPreJob: false
-      - task: BatchScript@1
-        continueOnError: true
-        inputs:
-          filename: 'test.cmd'
-          arguments: '$(System.DefaultWorkingDirectory) $(Agent.BuildDirectory)'
-      # - task: CmdLine@2
+      - script: echo "2123"
+      # - task: AzureKeyVault@2
+      #   inputs:
+      #     azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
+      #     KeyVaultName: 'agents-signing-cert'
+      #     SecretsFilter: '*'
+      #     RunAsPreJob: false
+      # - task: BatchScript@1
       #   continueOnError: true
       #   inputs:
-      #     script: |
-      #       "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.exe" "$(System.DefaultWorkingDirectory)/LegacyWindowsFormsApp\LegacyWindowsFormsApp.sln" /log "$(Agent.BuildDirectory)/msi_log.xml" /out "$(Agent.BuildDirectory)/out.txt" /Build "Release" /Project "$(System.DefaultWorkingDirectory)/LegacyWindowsFormsApp/BlastFromThePastSetup/BlastFromThePastSetup.vdproj"
-      #     failOnStderr: true
-      - script: |
-          ls $(Agent.BuildDirectory)
-          cat $(Agent.BuildDirectory)/msi_log.xml
-      - script: |
-          ls $(Agent.BuildDirectory)
-          cat $(Agent.BuildDirectory)/out.txt
+      #     filename: 'test.cmd'
+      #     arguments: '$(System.DefaultWorkingDirectory) $(Agent.BuildDirectory)'
+      # - script: |
+      #     ls $(Agent.BuildDirectory)
+      #     cat $(Agent.BuildDirectory)/msi_log.xml
+      # - script: |
+      #     ls $(Agent.BuildDirectory)
+      #     cat $(Agent.BuildDirectory)/out.txt
       # - task: AzureRmWebAppDeployment@4
       #   inputs:
       #     ConnectionType: 'AzureRM'
