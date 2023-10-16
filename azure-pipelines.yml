@@ -49,5 +49,7 @@ jobs:
       - script: dotnet --info
       - script: dotnet tool restore -v d
         displayName: Restore tools
+      - script: dotnet tool list
+        displayName: Install coverlet
       - script: dotnet coverage merge outputs/coverage/ -r -f cobertura -o $(coverageFilePath)
         displayName: Merge coverage files
