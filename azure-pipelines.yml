@@ -37,7 +37,7 @@ jobs:
   - job:
     pool: #'agentvmsspool'
       #name: 'Default'
-      vmImage: 'ubuntu-2022'
+      vmImage: 'ubuntu-latest'
     steps: 
       - script: dotnet tool restore
         displayName: Restore tools
