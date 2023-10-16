@@ -41,6 +41,11 @@ jobs:
       #name: 'Default'
       vmImage: 'ubuntu-latest'
     steps: 
+      - task: UseDotNet@2
+        inputs:
+          packageType: 'sdk'
+          version: '8.x'
+          includePreviewVersions: true
       - script: dotnet tool restore
         displayName: Restore tools
       - script: dotnet coverage merge outputs/coverage/ -r -f cobertura -o $(coverageFilePath)
