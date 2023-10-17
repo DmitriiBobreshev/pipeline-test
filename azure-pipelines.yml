@@ -32,7 +32,10 @@ variables:
     value: true
   - name: VSTSAGENT_DUMP_JOB_EVENT_LOGS
     value: true
-
+  - name: devCmd
+    value: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.com'
+  - name: disableToolPath
+    value: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild'
 jobs:
   - job:
     pool: #'agentvmsspool'
@@ -41,10 +44,16 @@ jobs:
     steps: 
       - script: ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
       - task: BatchScript@1
-        continueOnError: true
+        displayName: Enable .vdproj Builds
         inputs:
-          filename: 'test.cmd'
-          arguments: '$(System.DefaultWorkingDirectory) $(Agent.BuildDirectory)'
+          filename: '"$(disableToolPath)\DisableOutOfProcBuild.exe"'
+          workingFolder: '"$(disableToolPath)"'
+      - script: $(devCmd) "$(System.DefaultWorkingDirectory)\LegacyWindowsFormsApp\LegacyWindowsFormsApp.sln" /log "$(Agent.BuildDirectory)\msi_log.xml" /out "$(Agent.BuildDirectory)/out.txt" /Build "Release" /Project "$(System.DefaultWorkingDirectory)\LegacyWindowsFormsApp/LegacyWindowsFormsApp/LegacyWindowsFormsApp.csproj"
+      # - task: BatchScript@1
+      #   continueOnError: true
+      #   inputs:
+      #     filename: 'test.cmd'
+      #     arguments: '$(System.DefaultWorkingDirectory) $(Agent.BuildDirectory)'
       - script: |
           ls $(Agent.BuildDirectory)
           cat $(Agent.BuildDirectory)/msi_log.xml
