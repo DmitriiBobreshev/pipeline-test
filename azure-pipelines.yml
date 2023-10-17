@@ -48,7 +48,7 @@ jobs:
         inputs:
           filename: '"$(disableToolPath)\DisableOutOfProcBuild.exe"'
           workingFolder: '"$(disableToolPath)"'
-      - script: $(devCmd) "$(System.DefaultWorkingDirectory)\LegacyWindowsFormsApp\LegacyWindowsFormsApp.sln" /log "$(Agent.BuildDirectory)\msi_log.xml" /out "$(Agent.BuildDirectory)/out.txt" /Build "Release" /Project "$(System.DefaultWorkingDirectory)\LegacyWindowsFormsApp/LegacyWindowsFormsApp/LegacyWindowsFormsApp.csproj"
+      - script: '"$(devCmd)"" "$(System.DefaultWorkingDirectory)\LegacyWindowsFormsApp\LegacyWindowsFormsApp.sln" /log "$(Agent.BuildDirectory)\msi_log.xml" /out "$(Agent.BuildDirectory)/out.txt" /Build "Release" /Project "$(System.DefaultWorkingDirectory)\LegacyWindowsFormsApp/LegacyWindowsFormsApp/LegacyWindowsFormsApp.csproj"'
       # - task: BatchScript@1
       #   continueOnError: true
       #   inputs:
