@@ -43,11 +43,11 @@ jobs:
       vmImage: 'windows-2022'
     steps: 
       - script: ls "C:\Program Files\Microsoft Visual Studio\2022\Enterprise"
-      - task: BatchScript@1
-        displayName: Enable .vdproj Builds
-        inputs:
-          filename: '"$(disableToolPath)\DisableOutOfProcBuild.exe"'
-          workingFolder: '"$(disableToolPath)"'
+      # - task: BatchScript@1
+      #   displayName: Enable .vdproj Builds
+      #   inputs:
+      #     filename: '"$(disableToolPath)\DisableOutOfProcBuild.exe"'
+      #     workingFolder: '"$(disableToolPath)"'
       - script: '"$(devCmd)" "$(System.DefaultWorkingDirectory)\LegacyWindowsFormsApp\LegacyWindowsFormsApp.sln" /log "$(Agent.BuildDirectory)\msi_log.xml" /out "$(Agent.BuildDirectory)/out.txt" /Build "Release" /Project "$(System.DefaultWorkingDirectory)/LegacyWindowsFormsApp/BlastFromThePastSetup/BlastFromThePastSetup.vdproj"'
       # - task: BatchScript@1
       #   continueOnError: true
