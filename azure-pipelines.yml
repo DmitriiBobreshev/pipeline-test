@@ -40,9 +40,9 @@ jobs:
   - job:
     pool: #'agentvmsspool'
       # name: 'Default'
-      vmImage: 'windows-2019'
+      vmImage: 'windows-2022'
     steps: 
-      - script: ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
+      - script: ls "C:\Program Files\Microsoft Visual Studio\2022\Enterprise"
       - task: BatchScript@1
         displayName: Enable .vdproj Builds
         inputs:
