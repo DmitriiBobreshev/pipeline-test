@@ -33,16 +33,16 @@ variables:
   - name: VSTSAGENT_DUMP_JOB_EVENT_LOGS
     value: true
   - name: devCmd
-    value: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.com'
+    value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.com'
   - name: disableToolPath
-    value: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild'
+    value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild'
 jobs:
   - job:
     pool: #'agentvmsspool'
       # name: 'Default'
-      vmImage: 'windows-2022'
+      vmImage: 'windows-2019'
     steps: 
-      - script: ls "C:\Program Files\Microsoft Visual Studio\2022\Enterprise"
+      - script: ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
       - task: BatchScript@1
         displayName: Enable .vdproj Builds
         inputs:
