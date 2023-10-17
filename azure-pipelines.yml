@@ -37,7 +37,7 @@ jobs:
   - job:
     pool: #'agentvmsspool'
       # name: 'Default'
-      vmImage: 'windows-2022'
+      vmImage: 'windows-2019'
     steps: 
       - task: BatchScript@1
         inputs:

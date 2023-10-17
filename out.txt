@@ -1,0 +1,10 @@
+Build started...
+------ Starting pre-build validation for project 'BlastFromThePastSetup' ------ 
+------ Pre-build validation for project 'BlastFromThePastSetup' completed ------
+1>------ Build started: Project: BlastFromThePastSetup, Configuration: Release ------
+Building file 'C:\Users\v-bobreshevd\akvelon\pipeline-test\LegacyWindowsFormsApp\BlastFromThePastSetup\Release\BlastFromThePastSetup.msi'...
+ERROR: Unable to build project output group 'Runtime Implementation from LegacyWindowsFormsApp (Active)'
+Build process cancelled
+========== Build: 0 succeeded, 1 failed, 1 up-to-date, 0 skipped ==========
+========== Build started at 10:35 AM and took 02.819 seconds ==========
+
