@@ -32,24 +32,20 @@ variables:
     value: true
   - name: VSTSAGENT_DUMP_JOB_EVENT_LOGS
     value: true
-  - name: coverageFilePath
-    value: test
 
 jobs:
   - job:
     pool: #'agentvmsspool'
-      #name: 'Default'
-      vmImage: 'ubuntu-latest'
+      # name: 'Default'
+      vmImage: 'windows-2022'
     steps: 
-      - task: UseDotNet@2
+      - task: BatchScript@1
         inputs:
-          packageType: 'sdk'
-          version: '8.x'
-          includePreviewVersions: true
-      - script: dotnet --info
-      - script: dotnet tool restore -v d
-        displayName: Restore tools
-      - script: dotnet tool list
-        displayName: Install coverlet
-      - script: dotnet coverage merge outputs/coverage/ -r -f cobertura -o $(coverageFilePath)
-        displayName: Merge coverage files
+          filename: 'test.cmd'
+          arguments: '$(System.DefaultWorkingDirectory) $(Agent.BuildDirectory)'
+      - script: |
+          ls $(Agent.BuildDirectory)
+          cat $(Agent.BuildDirectory)/msi_log.xml
+      - script: |
+          ls $(Agent.BuildDirectory)
+          cat $(Agent.BuildDirectory)/out.txt
