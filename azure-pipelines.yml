@@ -48,12 +48,12 @@ jobs:
       #   inputs:
       #     filename: '"$(disableToolPath)\DisableOutOfProcBuild.exe"'
       #     workingFolder: '"$(disableToolPath)"'
-      - script: '"$(devCmd)" "$(System.DefaultWorkingDirectory)\LegacyWindowsFormsApp\LegacyWindowsFormsApp.sln" /log "$(Agent.BuildDirectory)\msi_log.xml" /out "$(Agent.BuildDirectory)/out.txt" /Build "Release" /Project "$(System.DefaultWorkingDirectory)/LegacyWindowsFormsApp/BlastFromThePastSetup/BlastFromThePastSetup.vdproj"'
-      # - task: BatchScript@1
-      #   continueOnError: true
-      #   inputs:
-      #     filename: 'test.cmd'
-      #     arguments: '$(System.DefaultWorkingDirectory) $(Agent.BuildDirectory)'
+      # - script: '"$(devCmd)" "$(System.DefaultWorkingDirectory)\LegacyWindowsFormsApp\LegacyWindowsFormsApp.sln" /log "$(Agent.BuildDirectory)\msi_log.xml" /out "$(Agent.BuildDirectory)/out.txt" /Build "Release" /Project "$(System.DefaultWorkingDirectory)/LegacyWindowsFormsApp/BlastFromThePastSetup/BlastFromThePastSetup.vdproj"'
+      - task: BatchScript@1
+        continueOnError: true
+        inputs:
+          filename: 'test.cmd'
+          arguments: '$(System.DefaultWorkingDirectory) $(Agent.BuildDirectory)'
       - script: |
           ls $(Agent.BuildDirectory)
           cat $(Agent.BuildDirectory)/msi_log.xml
