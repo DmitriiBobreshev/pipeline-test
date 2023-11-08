@@ -36,27 +36,32 @@ variables:
     value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.com'
   - name: disableToolPath
     value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild'
-jobs:
-  - job:
-    pool: #'agentvmsspool'
-      # name: 'Default'
-      vmImage: 'windows-2019'
-    steps: 
-      - script: ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
-      - task: BatchScript@1
-        displayName: Enable .vdproj Builds
-        inputs:
-          filename: '"$(disableToolPath)\DisableOutOfProcBuild.exe"'
-          workingFolder: '"$(disableToolPath)"'
-      - script: '"$(devCmd)" "$(System.DefaultWorkingDirectory)\LegacyWindowsFormsApp\LegacyWindowsFormsApp.sln" /log "$(Agent.BuildDirectory)\msi_log.xml" /out "$(Agent.BuildDirectory)/out.txt" /Build "Release" /Project "$(System.DefaultWorkingDirectory)/LegacyWindowsFormsApp/BlastFromThePastSetup/BlastFromThePastSetup.vdproj"'
-      # - task: BatchScript@1
-      #   continueOnError: true
-      #   inputs:
-      #     filename: 'test.cmd'
-      #     arguments: '$(System.DefaultWorkingDirectory) $(Agent.BuildDirectory)'
-      - script: |
-          ls $(Agent.BuildDirectory)
-          cat $(Agent.BuildDirectory)/msi_log.xml
-      - script: |
-          ls $(Agent.BuildDirectory)
-          cat $(Agent.BuildDirectory)/out.txt
+  - name: solution
+    value: 'src/MAUI/*.sln'
+  - name: buildPlatform
+    value: 'Any CPU'
+  - name: buildConfiguration
+    value: 'Release'
+  
+steps:
+  - task: UseDotNet@2
+    displayName: Use .NET Core sdk 6.x
+    inputs:
+      version: 6.x
+      
+  - task: CmdLine@2
+    displayName: Install MAUI Workload
+    inputs:
+      script: 'dotnet workload install maui --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json --source https://api.nuget.org/v3/index.json'
+  
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'restore'
+      projects: '**/*.sln'
+      feedsToUse: 'select'
+  
+  - task: MSBuild@1
+    displayName: Build Solution
+    inputs:
+      solution: '**/*.sln'
+      msbuildArchitecture: 'x64'
