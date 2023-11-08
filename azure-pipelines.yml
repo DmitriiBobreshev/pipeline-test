@@ -65,9 +65,14 @@ steps:
       projects: $(solution)
       feedsToUse: 'select'
 
-  - script: ls -la C:\hostedtoolcache\windows\dotnet\packs\Microsoft.Android.Sdk.Windows\32.0.509\targets\
+  - task: UseDotNet@2
+    displayName: Use .NET Core sdk 6.x
+    inputs:
+      version: 6.x
+      vsVersion: 17.x
+
   - script: dotnet --list-runtimes
-      
+
   - task: MSBuild@1
     displayName: Build Solution
     inputs:
