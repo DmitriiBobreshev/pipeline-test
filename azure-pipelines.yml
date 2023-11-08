@@ -60,11 +60,11 @@ steps:
   - task: DotNetCoreCLI@2
     inputs:
       command: 'restore'
-      projects: '**/*.sln'
+      projects: $(solution)
       feedsToUse: 'select'
   
   - task: MSBuild@1
     displayName: Build Solution
     inputs:
-      solution: '**/*.sln'
+      solution: $(solution)
       msbuildArchitecture: 'x64'
