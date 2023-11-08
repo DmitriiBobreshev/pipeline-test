@@ -42,7 +42,10 @@ variables:
     value: 'Any CPU'
   - name: buildConfiguration
     value: 'Release'
-  
+ 
+pool:
+  vmImage: 'windows-latest'
+
 steps:
   - task: UseDotNet@2
     displayName: Use .NET Core sdk 6.x
