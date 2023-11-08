@@ -51,7 +51,6 @@ steps:
     displayName: Use .NET Core sdk 6.x
     inputs:
       version: 6.0.100
-      vsVersion: 17.x
       
   - task: CmdLine@2
     displayName: Install MAUI Workload
