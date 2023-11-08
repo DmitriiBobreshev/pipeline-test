@@ -65,6 +65,7 @@ steps:
       feedsToUse: 'select'
 
   - script: ls -la C:\hostedtoolcache\windows\dotnet\packs\Microsoft.Android.Sdk.Windows\32.0.509\targets\
+  - script: dotnet --list-runtimes
       
   - task: MSBuild@1
     displayName: Build Solution
