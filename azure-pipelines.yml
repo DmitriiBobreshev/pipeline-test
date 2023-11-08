@@ -50,7 +50,7 @@ steps:
   - task: UseDotNet@2
     displayName: Use .NET Core sdk 6.x
     inputs:
-      version: 6.x
+      version: 7.x
       vsVersion: 17.x
       
   - task: CmdLine@2
