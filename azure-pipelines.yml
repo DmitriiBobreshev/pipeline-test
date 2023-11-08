@@ -63,9 +63,12 @@ steps:
       command: 'restore'
       projects: $(solution)
       feedsToUse: 'select'
-  
+
+  - script: ls -la C:\hostedtoolcache\windows\dotnet\packs\Microsoft.Android.Sdk.Windows\32.0.509\targets\
+      
   - task: MSBuild@1
     displayName: Build Solution
     inputs:
       solution: $(solution)
       msbuildArchitecture: 'x64'
+      logFileVerbosity: 'diagnostic'
