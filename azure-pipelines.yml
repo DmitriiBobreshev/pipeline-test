@@ -52,10 +52,11 @@ steps:
     inputs:
       version: 6.x
       
-  # - task: CmdLine@2
-  #   displayName: Install MAUI Workload
-  #   inputs:
-  #     script: 'dotnet workload install maui --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json --source https://api.nuget.org/v3/index.json'
+  - task: CmdLine@2
+    displayName: Install MAUI Workload
+    inputs:
+      # script: 'dotnet workload install maui --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json --source https://api.nuget.org/v3/index.json'
+      script: 'dotnet workload install maui'
   
   - task: DotNetCoreCLI@2
     inputs:
