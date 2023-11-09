@@ -107,7 +107,7 @@ steps:
   - pwsh: echo $env:MSBuildSDKsPath
     displayName: 'MSBuildSDKsPath'
 
-  - script: maui-check --ci --verbose -m https://raw.githubusercontent.com/Redth/dotnet-maui-check/fbef5031c69f794bf06ee7cd18a791f4670a0ad3/manifests/maui.manifest.json
+  - script: maui-check --ci --verbose -f -m https://raw.githubusercontent.com/Redth/dotnet-maui-check/fbef5031c69f794bf06ee7cd18a791f4670a0ad3/manifests/maui.manifest.json
     displayName: 'Run MAUI Check tool'  
 
   - script: dotnet build $(solution) --configuration $(buildConfiguration) --no-restore --no-incremental --verbosity diagnostic
