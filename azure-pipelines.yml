@@ -70,6 +70,9 @@ steps:
   - script: dotnet workload install maui-android
   - script: dotnet workload install android
   - script: dotnet workload install wasm-tools
+
+  - script: dotnet tool install -g redth.net.MAUI.check
+  - script: maui-check
       
   - task: DotNetCoreCLI@2
     inputs:
