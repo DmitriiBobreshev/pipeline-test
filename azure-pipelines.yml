@@ -55,8 +55,8 @@ steps:
   - task: DotNetCoreCLI@2
     inputs:
       command: 'custom'
-      custom: workload install maui
-      arguments: '--from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json --source https://api.nuget.org/v3/index.json'
+      custom: workload
+      arguments: 'install maui --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json --source https://api.nuget.org/v3/index.json'
 
   # - task: CmdLine@2
   #   displayName: Install MAUI Workload
