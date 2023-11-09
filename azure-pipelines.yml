@@ -66,6 +66,7 @@ steps:
 
   - script: dotnet --list-runtimes
   - script: dotnet workload list
+  - pwsh: echo $env:MSBuildSDKsPath
 
   - task: MSBuild@1
     displayName: Build Solution
