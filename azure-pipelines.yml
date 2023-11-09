@@ -97,6 +97,8 @@ steps:
   # - script: maui-check --ci --verbose -f -m https://raw.githubusercontent.com/Redth/dotnet-maui-check/fbef5031c69f794bf06ee7cd18a791f4670a0ad3/manifests/maui.manifest.json
   #   displayName: 'Run MAUI Check tool'
   
+  - script: dotnet --info
+
   - script: dotnet workload install android ios maccatalyst tvos macos maui --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.300/c121ea3a06bc8139c061379c077cdd7e751886d1.json --source https://api.nuget.org/v3/index.json
     displayName: 'Install MAUI workload'
 
