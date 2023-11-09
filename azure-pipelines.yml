@@ -90,7 +90,7 @@ steps:
   - script: dotnet workload install wasm-tools
     displayName: 'Install WASM Tools workload'
 
-  - script: dotnet tool install -g redth.net.MAUI.check
+  - script: dotnet tool install -g redth.net.MAUI.check --version 1.0.0
     displayName: 'Install MAUI Check tool'
 
   - script: maui-check
