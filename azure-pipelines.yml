@@ -51,18 +51,24 @@ steps:
   #   displayName: Use .NET Core sdk 6.x
   #   inputs:
   #     version: 6.0.301
-      
-  - task: CmdLine@2
-    displayName: Install MAUI Workload
+
+  - task: DotNetCoreCLI@2
     inputs:
-      script: 'dotnet workload install maui --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json --source https://api.nuget.org/v3/index.json'
-      workingDirectory: src/MAUI
+      command: 'custom'
+      custom: 'workload install maui'
+      arguments: '--from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json --source https://api.nuget.org/v3/index.json'
+
+  # - task: CmdLine@2
+  #   displayName: Install MAUI Workload
+  #   inputs:
+  #     script: 'dotnet workload install maui --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json --source https://api.nuget.org/v3/index.json'
+  #     workingDirectory: src/MAUI
       
-  - script: dotnet workload install maui-android 
-    workingDirectory: src/MAUI
+  # - script: dotnet workload install maui-android 
+  #   workingDirectory: src/MAUI
     
-  - script: dotnet restore
-    workingDirectory: src/MAUI
+  # - script: dotnet restore
+  #   workingDirectory: src/MAUI
 
   # - task: DotNetCoreCLI@2
   #   inputs:
