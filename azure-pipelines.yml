@@ -84,9 +84,11 @@ steps:
   - script: dotnet workload list
   - pwsh: echo $env:MSBuildSDKsPath
 
-  - task: MSBuild@1
-    displayName: Build Solution
-    inputs:
-      solution: $(solution)
-      msbuildArchitecture: 'x64'
-      logFileVerbosity: 'diagnostic'
+  - script: dotnet build $(solution) --configuration $(buildConfiguration) --no-restore --no-incremental --verbosity diagnostic
+
+  # - task: MSBuild@1
+  #   displayName: Build Solution
+  #   inputs:
+  #     solution: $(solution)
+  #     msbuildArchitecture: 'x64'
+  #     logFileVerbosity: 'diagnostic'
