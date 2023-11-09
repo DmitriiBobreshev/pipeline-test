@@ -47,11 +47,10 @@ pool:
   vmImage: 'windows-2019'
 
 steps:
-  - script: echo "##vso[task.setvariable variable=ACR_NAME;isOutput=true]someValue"
-  - task: UseDotNet@2
-    displayName: Use .NET Core sdk 6.x
-    inputs:
-      version: 6.0.301
+  # - task: UseDotNet@2
+  #   displayName: Use .NET Core sdk 6.x
+  #   inputs:
+  #     version: 6.0.301
       
   - task: CmdLine@2
     displayName: Install MAUI Workload
