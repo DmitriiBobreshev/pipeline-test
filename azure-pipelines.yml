@@ -110,11 +110,18 @@ steps:
   - script: maui-check --ci --verbose -f -m https://raw.githubusercontent.com/Redth/dotnet-maui-check/fbef5031c69f794bf06ee7cd18a791f4670a0ad3/manifests/maui.manifest.json
     displayName: 'Run MAUI Check tool'  
 
-  - script: dotnet build $(solution) --configuration $(buildConfiguration) --no-restore --no-incremental --verbosity diagnostic
-    displayName: 'Build'
-  # - task: MSBuild@1
-  #   displayName: Build Solution
-  #   inputs:
-  #     solution: $(solution)
-  #     msbuildArchitecture: 'x64'
-  #     logFileVerbosity: 'diagnostic'
+  - script: dotnet --list-runtimes
+    displayName: 'List runtimes'
+  - script: dotnet workload list
+    displayName: 'List workloads'
+  - pwsh: echo $env:MSBuildSDKsPath
+    displayName: 'MSBuildSDKsPath'
+
+  # - script: dotnet build $(solution) --configuration $(buildConfiguration) --no-restore --no-incremental --verbosity diagnostic
+  #   displayName: 'Build'
+  - task: MSBuild@1
+    displayName: Build Solution
+    inputs:
+      solution: $(solution)
+      msbuildArchitecture: 'x64'
+      logFileVerbosity: 'diagnostic'
