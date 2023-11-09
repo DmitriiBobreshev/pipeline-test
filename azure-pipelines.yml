@@ -90,16 +90,13 @@ steps:
   # - script: dotnet workload install wasm-tools
   #   displayName: 'Install WASM Tools workload'
 
-  - task: DotNetCoreCLI@2
-    displayName: 'Restore'
-    inputs:
-      command: 'restore'
-      projects: $(solution)
-      feedsToUse: 'select'
 
   - script: dotnet tool install -g redth.net.MAUI.check --version 1.0.0
     displayName: 'Install MAUI Check tool'
 
+  - script: maui-check --ci --verbose -f -m https://raw.githubusercontent.com/Redth/dotnet-maui-check/fbef5031c69f794bf06ee7cd18a791f4670a0ad3/manifests/maui.manifest.json
+    displayName: 'Run MAUI Check tool'
+  
   - script: dotnet --list-runtimes
     displayName: 'List runtimes'
   - script: dotnet workload list
@@ -107,8 +104,12 @@ steps:
   - pwsh: echo $env:MSBuildSDKsPath
     displayName: 'MSBuildSDKsPath'
 
-  - script: maui-check --ci --verbose -f -m https://raw.githubusercontent.com/Redth/dotnet-maui-check/fbef5031c69f794bf06ee7cd18a791f4670a0ad3/manifests/maui.manifest.json
-    displayName: 'Run MAUI Check tool'  
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore'
+    inputs:
+      command: 'restore'
+      projects: $(solution)
+      feedsToUse: 'select'
 
   - script: dotnet --list-runtimes
     displayName: 'List runtimes'
