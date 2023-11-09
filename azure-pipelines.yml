@@ -63,32 +63,32 @@ steps:
   #     custom: workload
   #     arguments: 'install maui --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json --source https://api.nuget.org/v3/index.json'
 
-  - script: dotnet workload install maui
-    displayName: 'Install MAUI workload'  
+  # - script: dotnet workload install maui
+  #   displayName: 'Install MAUI workload'  
 
-  - script: dotnet workload install maui-windows
-    displayName: 'Install MAUI Windows workload'  
+  # - script: dotnet workload install maui-windows
+  #   displayName: 'Install MAUI Windows workload'  
 
-  - script: dotnet workload install maui-maccatalyst
-    displayName: 'Install MAUI MacCatalyst workload'  
+  # - script: dotnet workload install maui-maccatalyst
+  #   displayName: 'Install MAUI MacCatalyst workload'  
 
-  - script: dotnet workload install maccatalyst
-    displayName: 'Install MacCatalyst workload'
+  # - script: dotnet workload install maccatalyst
+  #   displayName: 'Install MacCatalyst workload'
 
-  - script: dotnet workload install maui-ios
-    displayName: 'Install MAUI iOS workload'
+  # - script: dotnet workload install maui-ios
+  #   displayName: 'Install MAUI iOS workload'
 
-  - script: dotnet workload install ios
-    displayName: 'Install iOS workload'
+  # - script: dotnet workload install ios
+  #   displayName: 'Install iOS workload'
 
-  - script: dotnet workload install maui-android
-    displayName: 'Install MAUI Android workload'
+  # - script: dotnet workload install maui-android
+  #   displayName: 'Install MAUI Android workload'
 
-  - script: dotnet workload install android
-    displayName: 'Install Android workload'
+  # - script: dotnet workload install android
+  #   displayName: 'Install Android workload'
 
-  - script: dotnet workload install wasm-tools
-    displayName: 'Install WASM Tools workload'
+  # - script: dotnet workload install wasm-tools
+  #   displayName: 'Install WASM Tools workload'
 
   - script: dotnet tool install -g redth.net.MAUI.check --version 1.0.0
     displayName: 'Install MAUI Check tool'
