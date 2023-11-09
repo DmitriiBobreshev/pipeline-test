@@ -93,7 +93,7 @@ steps:
   - script: dotnet tool install -g redth.net.MAUI.check --version 1.0.0
     displayName: 'Install MAUI Check tool'
 
-  - script: maui-check -n --verbose
+  - script: maui-check -n --verbose -m https://github.com/Redth/dotnet-maui-check/blob/fbef5031c69f794bf06ee7cd18a791f4670a0ad3/manifests/maui.manifest.json
     displayName: 'Run MAUI Check tool'  
   
   - task: DotNetCoreCLI@2
