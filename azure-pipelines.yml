@@ -47,15 +47,15 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-  - task: UseDotNet@2
-    displayName: Use .NET Core sdk 6.x
-    inputs:
-      version: 6.x
+  # - task: UseDotNet@2
+  #   displayName: Use .NET Core sdk 6.x
+  #   inputs:
+  #     version: 6.x
 
-  - script: dotnet --list-runtimes
-    displayName: 'List runtimes'
-  - script: dotnet workload list
-    displayName: 'List workloads'
+  # - script: dotnet --list-runtimes
+  #   displayName: 'List runtimes'
+  # - script: dotnet workload list
+  #   displayName: 'List workloads'
   
   # - task: DotNetCoreCLI@2
   #   inputs:
@@ -94,34 +94,31 @@ steps:
   # - script: dotnet tool install -g redth.net.MAUI.check --version 1.0.0
   #   displayName: 'Install MAUI Check tool'
 
-  # - script: maui-check --ci --verbose -f -m https://raw.githubusercontent.com/Redth/dotnet-maui-check/fbef5031c69f794bf06ee7cd18a791f4670a0ad3/manifests/maui.manifest.json
-  #   displayName: 'Run MAUI Check tool'
-  
-  - script: dotnet --info
+  # - script: dotnet --info
 
-  - script: dotnet workload install android ios maccatalyst tvos macos maui --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.300/c121ea3a06bc8139c061379c077cdd7e751886d1.json --source https://api.nuget.org/v3/index.json
-    displayName: 'Install MAUI workload'
+  # - script: dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://api.nuget.org/v3/index.json
+  #   displayName: 'Install MAUI workload'
 
-  - script: dotnet --list-runtimes
-    displayName: 'List runtimes'
-  - script: dotnet workload list
-    displayName: 'List workloads'
-  - pwsh: echo $env:MSBuildSDKsPath
-    displayName: 'MSBuildSDKsPath'
+  # - script: dotnet --list-runtimes
+  #   displayName: 'List runtimes'
+  # - script: dotnet workload list
+  #   displayName: 'List workloads'
+  # - pwsh: echo $env:MSBuildSDKsPath
+  #   displayName: 'MSBuildSDKsPath'
 
   - task: DotNetCoreCLI@2
     displayName: 'Restore'
     inputs:
       command: 'restore'
       projects: $(solution)
-      feedsToUse: 'select'
+  #     feedsToUse: 'select'
 
-  - script: dotnet --list-runtimes
-    displayName: 'List runtimes'
-  - script: dotnet workload list
-    displayName: 'List workloads'
-  - pwsh: echo $env:MSBuildSDKsPath
-    displayName: 'MSBuildSDKsPath'
+  # - script: dotnet --list-runtimes
+  #   displayName: 'List runtimes'
+  # - script: dotnet workload list
+  #   displayName: 'List workloads'
+  # - pwsh: echo $env:MSBuildSDKsPath
+  #   displayName: 'MSBuildSDKsPath'
 
   # - script: dotnet build $(solution) --configuration $(buildConfiguration) --no-restore --no-incremental --verbosity diagnostic
   #   displayName: 'Build'
@@ -131,3 +128,7 @@ steps:
       solution: $(solution)
       msbuildArchitecture: 'x64'
       logFileVerbosity: 'diagnostic'
+
+# "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\amd64\msbuild.exe" "C:\Users\v-bobreshevd\akvelon\pipeline-test\src\MAUI\MaiuAzureDevops.sln" /nologo /nr:false 
+
+# dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.300/c121ea3a06bc8139c061379c077cdd7e751886d1.json --source https://api.nuget.org/v3/index.json
