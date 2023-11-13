@@ -17,11 +17,18 @@ stages:
     jobs:
     - job: Build_OneBox
       steps:
-      - task: Bash@3
-        displayName: Setup Environment
+      - task: AzureCLI@2
         name: onebox_setup
         inputs:
-          filePath: create_env.sh
+          azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
+          scriptType: bash
+          scriptLocation: scriptPath
+          scriptPath: create_env.sh
+      # - task: Bash@3
+      #   displayName: Setup Environment
+      #   name: onebox_setup
+      #   inputs:
+      #     filePath: create_env.sh
       - script: |
           printenv
 
