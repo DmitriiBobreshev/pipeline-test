@@ -6,6 +6,8 @@ parameters:
 variables:
   - name: System.Debug
     value: true
+  - name: Agent.Diagnostic
+    value: true
 pool:
   vmImage: 'ubuntu-latest'
 
