@@ -1,134 +1,44 @@
-# resources:
-#   repositories:
-#   - repository: AzureDevOps
-#     type: git
-#     endpoint: AzureDevOps
-#     name: AzureDevOps/AzureDevOps
-
 parameters:
   - name: skipFolder
     type: string
     default: '^.*Resources(?!CL|Generic|\|$).*$'
 
 variables:
-  - group: secrets-groups
-  - name: ndkPath
-    value: TEST_NDK_PATH
-  - name: androidSdkPath
-    value: TEST_SDK_PATH
   - name: System.Debug
     value: true
-  - name: build.clean
-    value: all
-  - name: agent.clean.buildDirectory
-    value: all
-  - name: scheme
-    value: test
-  - name: agent.diagnostic
-    value: true
-  - name: ARGS
-    value: "123"
-  - name: AGENT_USE_NODE10
-    value: true
-  - name: VSTSAGENT_DUMP_JOB_EVENT_LOGS
-    value: true
-  - name: devCmd
-    value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.com'
-  - name: disableToolPath
-    value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild'
-  - name: solution
-    value: 'src/MAUI/*.sln'
-  - name: buildPlatform
-    value: 'Any CPU'
-  - name: buildConfiguration
-    value: 'Release'
- 
 pool:
-  vmImage: 'windows-latest'
-
-steps:
-  # - task: UseDotNet@2
-  #   displayName: Use .NET Core sdk 6.x
-  #   inputs:
-  #     version: 6.x
-
-  # - script: dotnet --list-runtimes
-  #   displayName: 'List runtimes'
-  # - script: dotnet workload list
-  #   displayName: 'List workloads'
-  
-  # - task: DotNetCoreCLI@2
-  #   inputs:
-  #     command: 'custom'
-  #     custom: workload
-  #     arguments: 'install maui --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json --source https://api.nuget.org/v3/index.json'
-
-  # - script: dotnet workload install maui
-  #   displayName: 'Install MAUI workload'  
-
-  # - script: dotnet workload install maui-windows
-  #   displayName: 'Install MAUI Windows workload'  
-
-  # - script: dotnet workload install maui-maccatalyst
-  #   displayName: 'Install MAUI MacCatalyst workload'  
-
-  # - script: dotnet workload install maccatalyst
-  #   displayName: 'Install MacCatalyst workload'
-
-  # - script: dotnet workload install maui-ios
-  #   displayName: 'Install MAUI iOS workload'
-
-  # - script: dotnet workload install ios
-  #   displayName: 'Install iOS workload'
-
-  # - script: dotnet workload install maui-android
-  #   displayName: 'Install MAUI Android workload'
-
-  # - script: dotnet workload install android
-  #   displayName: 'Install Android workload'
-
-  # - script: dotnet workload install wasm-tools
-  #   displayName: 'Install WASM Tools workload'
+  vmImage: 'ubuntu-latest'
 
 
-  # - script: dotnet tool install -g redth.net.MAUI.check --version 1.0.0
-  #   displayName: 'Install MAUI Check tool'
-
-  # - script: dotnet --info
-
-  # - script: dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.553.json --source https://api.nuget.org/v3/index.json
-  #   displayName: 'Install MAUI workload'
-
-  # - script: dotnet --list-runtimes
-  #   displayName: 'List runtimes'
-  # - script: dotnet workload list
-  #   displayName: 'List workloads'
-  # - pwsh: echo $env:MSBuildSDKsPath
-  #   displayName: 'MSBuildSDKsPath'
-
-  - task: DotNetCoreCLI@2
-    displayName: 'Restore'
-    inputs:
-      command: 'restore'
-      projects: $(solution)
-  #     feedsToUse: 'select'
-
-  # - script: dotnet --list-runtimes
-  #   displayName: 'List runtimes'
-  # - script: dotnet workload list
-  #   displayName: 'List workloads'
-  # - pwsh: echo $env:MSBuildSDKsPath
-  #   displayName: 'MSBuildSDKsPath'
-
-  # - script: dotnet build $(solution) --configuration $(buildConfiguration) --no-restore --no-incremental --verbosity diagnostic
-  #   displayName: 'Build'
-  - task: MSBuild@1
-    displayName: Build Solution
-    inputs:
-      solution: $(solution)
-      msbuildArchitecture: 'x64'
-      logFileVerbosity: 'diagnostic'
-
-# "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\amd64\msbuild.exe" "C:\Users\v-bobreshevd\akvelon\pipeline-test\src\MAUI\MaiuAzureDevops.sln" /nologo /nr:false 
-
-# dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --from-rollback-file https://maui.blob.core.windows.net/metadata/rollbacks/6.0.300/c121ea3a06bc8139c061379c077cdd7e751886d1.json --source https://api.nuget.org/v3/index.json
+  stages:
+    - stage: Build_Onebox_Environment
+      jobs:
+      - job: Build_OneBox
+        steps:
+        - task: Bash@3
+          displayName: Setup Environment
+          name: onebox_setup
+          inputs:
+            filePath: create_env.sh
+    - stage: Deploy_RP
+      dependsOn:
+      - Build_Onebox_Environment
+      jobs:
+      - job: Deploy_RP
+        variables:
+        - name: KEYVAULT_NAME
+          value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.KEYVAULT_NAME'] ]
+        - name: RESOURCE_GROUP
+          value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.RESOURCE_GROUP'] ]
+        - name: STORAGE_ACCOUNT
+          value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.STORAGE_ACCOUNT'] ]
+        - name: ACR_NAME
+          value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.ACR_NAME'] ]
+        - name: USER
+          value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.USER'] ]
+        steps:
+          - script: |
+              echo $(KEYVAULT_NAME)
+              echo $(RESOURCE_GROUP)
+              echo $(STORAGE_ACCOUNT)
+              echo $(ACR_NAME)
