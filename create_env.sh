@@ -32,7 +32,6 @@ acr_name=$(echo $acr_out | jq -r .username)
 resource_group=asconeboxrg$user
 keyvault_name=asconeboxkv$user
 storage_account=asconeboxsa$user
-ensure_region_and_env
 dogfood_keyvault=ascdevkvrpeusa
 dogfood_acr_rg=azdmss-dogfood
 dogfood_acr=serviceac
