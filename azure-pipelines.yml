@@ -41,6 +41,8 @@ stages:
         value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.ACR_NAME'] ]
       - name: USER
         value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.USER'] ]
+      - name: STORAGE_ACCOUNT1
+        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.STORAGE_ACCOUNT1'] ]
       steps:
         - script: |
             echo $(KEYVAULT_NAME)

@@ -37,6 +37,8 @@ echo "##vso[task.setvariable variable=STORAGE_ACCOUNT;isOutput=true]$storage_acc
 echo "##vso[task.setvariable variable=USER;isOutput=true]$user"
 echo "##vso[task.setvariable variable=ACR_NAME;isOutput=true]$acr_name"
 
+echo "echo '##vso[task.setvariable variable=STORAGE_ACCOUNT1;isOutput=true]$acr_name'"
+
 cat <<EOF
 ================================================================================
 "RESOURCE_GROUP": "$resource_group"
