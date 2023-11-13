@@ -13,7 +13,7 @@ service_runtime_sys_ingress_certs=(
     AzureMss-ServiceRuntime-SysIngressController-Private-Svc-Cert
     AzureMss-ServiceRuntime-SysIngressController-Private-Svc-Key
     AzureMss-ServiceRuntime-SysIngressController-Private-Test-Cert
-    AzureMss-ServiceRuntime-SysIngressController-Private-Test-Key
+    AzureMss-ServiceRuntime-SysIngressController-Private-Test-Key 
 )
 
 declare -A secret_certificate_names_map=(
