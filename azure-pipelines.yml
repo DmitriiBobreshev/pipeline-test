@@ -10,35 +10,36 @@ pool:
   vmImage: 'ubuntu-latest'
 
 
-  stages:
-    - stage: Build_Onebox_Environment
-      jobs:
-      - job: Build_OneBox
-        steps:
-        - task: Bash@3
-          displayName: Setup Environment
-          name: onebox_setup
-          inputs:
-            filePath: create_env.sh
-    - stage: Deploy_RP
-      dependsOn:
-      - Build_Onebox_Environment
-      jobs:
-      - job: Deploy_RP
-        variables:
-        - name: KEYVAULT_NAME
-          value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.KEYVAULT_NAME'] ]
-        - name: RESOURCE_GROUP
-          value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.RESOURCE_GROUP'] ]
-        - name: STORAGE_ACCOUNT
-          value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.STORAGE_ACCOUNT'] ]
-        - name: ACR_NAME
-          value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.ACR_NAME'] ]
-        - name: USER
-          value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.USER'] ]
-        steps:
-          - script: |
-              echo $(KEYVAULT_NAME)
-              echo $(RESOURCE_GROUP)
-              echo $(STORAGE_ACCOUNT)
-              echo $(ACR_NAME)
+stages:
+  - stage: Build_Onebox_Environment
+    jobs:
+    - job: Build_OneBox
+      steps:
+      - task: Bash@3
+        displayName: Setup Environment
+        name: onebox_setup
+        inputs:
+          filePath: create_env.sh
+
+  - stage: Deploy_RP
+    dependsOn:
+    - Build_Onebox_Environment
+    jobs:
+    - job: Deploy_RP
+      variables:
+      - name: KEYVAULT_NAME
+        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.KEYVAULT_NAME'] ]
+      - name: RESOURCE_GROUP
+        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.RESOURCE_GROUP'] ]
+      - name: STORAGE_ACCOUNT
+        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.STORAGE_ACCOUNT'] ]
+      - name: ACR_NAME
+        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.ACR_NAME'] ]
+      - name: USER
+        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.USER'] ]
+      steps:
+        - script: |
+            echo $(KEYVAULT_NAME)
+            echo $(RESOURCE_GROUP)
+            echo $(STORAGE_ACCOUNT)
+            echo $(ACR_NAME)
