@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-user=$(echo $RANDOM | md5sum | head -c 2; echo;)
+user="$(echo $RANDOM | md5sum | head -c 2; echo;)'"
 alias=$BUILD_QUEUEDBY
 alias=$(echo ${alias// })
 alias=$(echo ${alias:0:9})
