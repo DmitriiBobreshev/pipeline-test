@@ -6,7 +6,7 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 source "$SCRIPT_DIR/../lib/logging.sh"
 
-# set -x
+set -x
 
 declare -A runtime_cert_postfix=(
     ["Azure-DEV"]="asc-test.net"
