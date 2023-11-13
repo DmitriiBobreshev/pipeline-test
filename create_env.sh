@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+COPY_SHARED_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+log_info "setup cli to specific version"
+
 user=$(echo $RANDOM | md5sum | head -c 2; echo;)
 alias=$BUILD_QUEUEDBY
 alias=$(echo ${alias// })
