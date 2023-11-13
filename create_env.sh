@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
 COPY_SHARED_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-log_info "setup cli to specific version"
+source "./scripts/lib/sys_nginx_ingress_controller_certs.sh"
+source "./scripts/lib/common.sh"
+source "./scripts/geneva/geneva-certificates.sh"
+source "./scripts/systemcluster/runtime-certificates.sh"
+
+# log_info "setup cli to specific version"
 
 user=$(echo $RANDOM | md5sum | head -c 2; echo;)
 alias=$BUILD_QUEUEDBY
