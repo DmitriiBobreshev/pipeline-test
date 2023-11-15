@@ -19,3 +19,9 @@ steps:
       PathtoPublish: 'scripts/'
       ArtifactName: 'test'
       publishLocation: 'Container'
+  - task: DownloadBuildArtifacts@1
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'test'
+      downloadPath: '$(System.ArtifactsDirectory)'
