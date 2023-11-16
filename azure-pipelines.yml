@@ -14,90 +14,9 @@ pool:
 
 
 steps:
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '4.4.x'
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '5.4.1'
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '6.9.0'
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '7.2.1'
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '8.1.3'
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '9.2.1'
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '10.16.1'
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '11.10.1'
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '12.1.0'
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '14.21.0'
-
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '15.5.1'
-
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '16.17.1'
-
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '17.3.1'
-
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '18.14.2'
-
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '19.6.1'
-
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSource: 'spec'
-  #     versionSpec: '20.5.1'
-
-  - task: NodeTool@0
-    inputs:
-      versionSource: 'spec'
-      versionSpec: '21.2.0'
-  
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: 'scripts/'
-      ArtifactName: 'test'
-      publishLocation: 'Container'
-  - task: DownloadBuildArtifacts@1
-    inputs:
-      buildType: 'current'
-      downloadType: 'single'
-      artifactName: 'test'
-      downloadPath: '$(System.ArtifactsDirectory)'
+- task: IISWebAppDeploymentOnMachineGroup@0
+  inputs:
+    WebSiteName: 'test'
+    VirtualApplication: 'superApp'
+    Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
+    AdditionalArguments: '-skip:objectName=filePath,absolutePath=web\.\w+\.config|nlog\.\w+\.config'
