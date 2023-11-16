@@ -18,5 +18,5 @@ steps:
   inputs:
     WebSiteName: 'test'
     VirtualApplication: 'superApp'
-    Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
+    Package: '$(System.DefaultWorkingDirectory)\_packag\task.zip'
     AdditionalArguments: '-skip:objectName=filePath,absolutePath=web\.\w+\.config|nlog\.\w+\.config'
