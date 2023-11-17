@@ -27,8 +27,6 @@ stages:
       #   name: onebox_setup
       #   inputs:
       #     filePath: create_env.sh
-      - script: |
-          printenv
       - script: echo 123;
       
 
