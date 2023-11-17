@@ -16,13 +16,12 @@ stages:
     jobs:
     - job: Build_OneBox
       steps:
-      - task: AzureCLI@2
-        name: onebox_setup
-        inputs:
-          azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
-          scriptType: bash
-          scriptLocation: scriptPath
-          scriptPath: "$(Build.SourcesDirectory)/create_env.sh"
+      - pwsh: |
+          echo "##vso[task.setvariable variable=RESOURCE_GROUP;isOutput=true]RESOURCEGROUP1"
+          echo "##vso[task.setvariable variable=KEYVAULT_NAME;isOutput=true]KEYVAULTNAME1"
+          echo "##vso[task.setvariable variable=STORAGE_ACCOUNT;isOutput=true]STORAGEACCOUNT1"
+          echo "##vso[task.setvariable variable=USER;isOutput=true]USERNAME"
+          echo "##vso[task.setvariable variable=ACR_NAME;isOutput=true]ACRNAME"
       # - task: Bash@3
       #   displayName: Setup Environment
       #   name: onebox_setup
