@@ -21,8 +21,8 @@ jobs:
     pool:
       vmImage: windows-2022
     steps:
-      - script: |
-          echo '##vso[task.setvariable variable=task_pattern;isOutput=true;]somethingspecial'
+      - bash: |
+          echo "##vso[task.setvariable variable=task_pattern;isOutput=true;]somethingspecial"
         name: getTaskPattern
         displayName: setVariable getTaskPattern
     
