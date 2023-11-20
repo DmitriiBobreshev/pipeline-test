@@ -16,30 +16,13 @@ pool: #Default
   vmImage: 'windows-latest'
 
 steps:
-  - task: TokenizeInArchiveTask@1
-    displayName: 'ReplaceToken #[]# in appsettings.test.json'
-    inputs:
-      PathToArchives: archs\*.zip
-      Packages: '*.zip'
-      FilesToTokenize: appsettings.test.json
-      Prefix: '#['
-      Suffix: ']#'
-      ReplaceWithEmpty: true
-  - task: AzureRmWebAppDeployment@4
-    displayName: Webhooks-Legacy
-    inputs:
-      azureSubscription: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
-      appType: webApp
-      WebAppName: vbobreshev-test-web-app
-      deployToSlotOrASE: true
-      ResourceGroupName: v-bobreshev-rg
-      packageForLinux: archs\*.zip
-      xmlVariableSubstitution: True
-      enableCustomDeployment: true
-      removeAdditionalFilesFlag: True
-      takeAppOfflineFlag: True
-      appOffline: True
-      connectionType: AzureRM
-      slotName: production
-    env: 
-      ADO_FORCE_USE_PSUNZIP: true
+  - script: |
+        echo "##vso[task.setvariable variable=task_pattern;isOutput=true;]somethingspecial"
+    name: getTaskPattern
+    displayName: setVariable getTaskPattern
+  
+  - script: |
+      exho "getTaskPattern.task_pattern"
+      echo $(getTaskPattern.task_pattern)
+      echo "task_pattern"
+      echo $(task_pattern)
