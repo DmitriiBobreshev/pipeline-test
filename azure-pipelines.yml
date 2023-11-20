@@ -21,6 +21,7 @@ steps:
       Prefix: '#['
       Suffix: ']#'
       ReplaceWithEmpty: false
+      sometextprobably: 'asfad\nasd\ws'
   - task: AzureRmWebAppDeployment@4
     displayName: Webhooks-Legacy
     inputs:
