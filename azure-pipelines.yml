@@ -9,7 +9,7 @@ variables:
   - name: Agent.Diagnostic
     value: true
   - name: sometextprobably 
-    value: '\nasd\\df\r\n\w'
+    value: 'fear'
   - name: ADO_FORCE_USE_PSUNZIP
     value: true
 pool: #Default
