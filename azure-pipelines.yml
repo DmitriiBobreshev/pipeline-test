@@ -22,7 +22,7 @@ steps:
     displayName: setVariable getTaskPattern
   
   - script: |
-      exho "getTaskPattern.task_pattern"
+      echo "getTaskPattern.task_pattern"
       echo $(getTaskPattern.task_pattern)
       echo "task_pattern"
       echo $(task_pattern)
