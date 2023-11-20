@@ -41,7 +41,9 @@ jobs:
   
   - job: last_job
     displayName: Middle job
-    dependsOn: middle_job
+    dependsOn: 
+      - build_all_windows
+      - middle_job
     pool:
       vmImage: windows-2022
     variables:
