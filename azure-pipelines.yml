@@ -8,6 +8,8 @@ variables:
     value: true
   - name: Agent.Diagnostic
     value: true
+  - name: sometextprobably 
+    value: '\nasd\\df\r\n\w'
 pool: #Default
   vmImage: 'windows-latest'
 
@@ -21,7 +23,6 @@ steps:
       Prefix: '#['
       Suffix: ']#'
       ReplaceWithEmpty: false
-      sometextprobably: 'asfad\nasd\ws'
   - task: AzureRmWebAppDeployment@4
     displayName: Webhooks-Legacy
     inputs:
