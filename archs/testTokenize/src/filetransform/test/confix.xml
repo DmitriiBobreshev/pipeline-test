@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <connectionStrings>
+    <add name="DefaultConnection"
+         connectionString="Data Source=(LocalDb)\\MSDB;DbFilename=aspcore-local.mdf;" />
+  </connectionStrings>
+  <appSettings>
+    <add key="webpages:Version" value="3.0.0.0" />
+    <add key="webpages:Enabled" value="false" />
+  </appSettings>
+  <system.web>
+    <authentication mode="None" />
+    <compilation targetFramework="4.5" debug="true" />
+  </system.web>
+</configuration>

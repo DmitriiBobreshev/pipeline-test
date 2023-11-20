@@ -1,0 +1,17 @@
+steps:
+- bash: echo "##vso[task.prependpath]$CONDA/bin"
+  displayName: Add conda to PATH
+
+- script: |
+    cd src/conda
+    conda env create --quiet --file environment.yml
+  displayName: Create Anaconda environment
+  retryCountOnTaskFailure: 3
+
+- bash: |
+    cd src/conda
+    source activate env-from-yaml
+    pip install pytest pytest-azurepipelines
+    pytest
+  displayName: pytest
+  retryCountOnTaskFailure: 3

@@ -1,0 +1,45 @@
+parameters:
+  - name: pool
+    type: object
+  - name: secureSteps
+    type: string
+jobs:
+
+- job: 'TaskTestViaContainer'
+  pool: ${{ parameters.pool }}
+  steps:
+    - template: ${{ parameters.secureSteps }}
+    - task: DownloadSecureFile@1
+      name: caCertificate
+      displayName: 'Download CA certificate'
+      inputs:
+        secureFile: 'test.js'
+    - task: DownloadSecureFile@1
+      name: BigFileTest
+      displayName: 'Download Big File'
+      inputs:
+        secureFile: '1.txt'
+    - task: CmdLine@2
+      displayName: 'Run a one-line script'
+      inputs:
+        script: echo Hello, world!
+    - task: CmdLine@2
+      displayName: 'Run a multi-line script'
+      inputs:
+        script: |
+          echo Add other tasks to build, test, and deploy your project.
+          echo See https://aka.ms/yaml
+    - script: echo null > test.txt
+      displayName: 'Creating file'
+    - task: CopyFiles@2
+      inputs:
+        Contents: test.txt
+        TargetFolder: 'testFolder'
+      displayName: 'Try to run commund under node10'
+    - script: dir
+    - task: NodeTool@0
+      inputs:
+        versionSpec: 'v14.17.1'
+      displayName: 'Install Node.js v14.17.1'
+    - script: 'npm -v'
+      displayName: Show npm version

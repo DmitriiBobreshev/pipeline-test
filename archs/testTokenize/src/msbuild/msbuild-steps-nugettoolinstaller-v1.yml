@@ -1,0 +1,25 @@
+parameters:
+  - name: "solutionPath"
+    type: "string"
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: Nuget Tool Install version 1
+  inputs:
+    checkLatest: true
+    versionSpec: '*'
+  retryCountOnTaskFailure: 3
+
+- task: NuGetCommand@2
+  displayName: Restore Nuget Packages
+  inputs:
+    command: 'restore'
+    restoreSolution: ${{ parameters.solutionPath }} 
+    feedsToUse: 'select'
+  retryCountOnTaskFailure: 3
+
+- task: MSBuild@1
+  displayName: 'Build simple app'
+  inputs:
+    solution: ${{ parameters.solutionPath }}
+    msbuildLocationMethod: 'version'

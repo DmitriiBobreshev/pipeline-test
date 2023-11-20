@@ -1,0 +1,32 @@
+{
+  "name": "npm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "validate-npm-package-name": "^5.0.0"
+  },
+  "devDependencies": {
+    "adm-zip": "0.4.13",
+    "azure-devops-node-api": "^10.2.2",
+    "js-yaml": "^3.13.1",
+    "minimatch": "3.0.2",
+    "minimist": "^1.2.6",
+    "mocha": "^6.2.3",
+    "node-fetch": "2.6.11",
+    "node-uuid": "1.4.6",
+    "nyc": "^15.1.0",
+    "q": "1.4.1",
+    "semver": "4.3.3",
+    "shelljs": "^0.8.5",
+    "sync-request": "4.1.0",
+    "typed-rest-client": "^1.8.9",
+    "typescript": "2.3.4",
+    "validator": "^13.7.0"
+  }
+}
