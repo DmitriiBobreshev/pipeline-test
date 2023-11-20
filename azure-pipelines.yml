@@ -24,7 +24,7 @@ steps:
       FilesToTokenize: appsettings.test.json
       Prefix: '#['
       Suffix: ']#'
-      ReplaceWithEmpty: false
+      ReplaceWithEmpty: true
   - task: AzureRmWebAppDeployment@4
     displayName: Webhooks-Legacy
     inputs:
