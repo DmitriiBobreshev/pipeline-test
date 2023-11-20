@@ -1,0 +1,448 @@
+{
+  "aue": {
+    "fullName": "Australia East",
+    "subscriptions": [
+      "b234b267-c976-437b-9b0d-22df42d924ef",
+      "8111b2e6-2c95-4d01-a7c5-42d4efd63511",
+      "5284b30a-5a5b-4fcf-9e54-d0a6bb0feec4",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "ase": {
+    "fullName": "Australia Southeast",
+    "subscriptions": [
+      "5d5f7dd0-8c44-41ba-afed-f86184f34610",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "cac": {
+    "fullName": "Canada Central",
+    "subscriptions": [
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "cae": {
+    "fullName": "Canada East",
+    "subscriptions": [],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "cus": {
+    "fullName": "Central US",
+    "subscriptions": [
+      "b234b267-c976-437b-9b0d-22df42d924ef",
+      "8111b2e6-2c95-4d01-a7c5-42d4efd63511",
+      "5284b30a-5a5b-4fcf-9e54-d0a6bb0feec4",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "07e987fa-813e-4b4b-9d23-8aebd8061a0a",
+      "63902b53-865d-4fa7-b1b0-b6b208b07bbc"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "cuseuap": {
+    "fullName": "Central US EUAP",
+    "subscriptions": [],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "eus": {
+    "fullName": "East US",
+    "subscriptions": [
+      "b234b267-c976-437b-9b0d-22df42d924ef",
+      "8111b2e6-2c95-4d01-a7c5-42d4efd63511",
+      "5284b30a-5a5b-4fcf-9e54-d0a6bb0feec4",
+      "07e987fa-813e-4b4b-9d23-8aebd8061a0a",
+      "d51a8e29-155f-4a8b-a9d6-c16a669c52af",
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "63902b53-865d-4fa7-b1b0-b6b208b07bbc",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "5d5f7dd0-8c44-41ba-afed-f86184f34610",
+      "e2906ef3-dac0-48c7-8efe-c3d117492d89"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "eus2": {
+    "fullName": "East US 2",
+    "subscriptions": [
+      "b234b267-c976-437b-9b0d-22df42d924ef",
+      "8111b2e6-2c95-4d01-a7c5-42d4efd63511",
+      "5284b30a-5a5b-4fcf-9e54-d0a6bb0feec4",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "07e987fa-813e-4b4b-9d23-8aebd8061a0a",
+      "d51a8e29-155f-4a8b-a9d6-c16a669c52af",
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "63902b53-865d-4fa7-b1b0-b6b208b07bbc"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "eus2euap": {
+    "fullName": "East US 2 EUAP",
+    "subscriptions": [
+      "b234b267-c976-437b-9b0d-22df42d924ef",
+      "8111b2e6-2c95-4d01-a7c5-42d4efd63511"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 4,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "jpe": {
+    "fullName": "Japan East",
+    "subscriptions": [
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "neu": {
+    "fullName": "North Europe",
+    "subscriptions": [
+      "b234b267-c976-437b-9b0d-22df42d924ef",
+      "8111b2e6-2c95-4d01-a7c5-42d4efd63511",
+      "5284b30a-5a5b-4fcf-9e54-d0a6bb0feec4",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "scus": {
+    "fullName": "South Central US",
+    "subscriptions": [
+      "b234b267-c976-437b-9b0d-22df42d924ef",
+      "8111b2e6-2c95-4d01-a7c5-42d4efd63511",
+      "5284b30a-5a5b-4fcf-9e54-d0a6bb0feec4",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "ncus": {
+    "fullName": "North Central US",
+    "subscriptions": [
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "sea": {
+    "fullName": "Southeast Asia",
+    "subscriptions": [
+      "b234b267-c976-437b-9b0d-22df42d924ef",
+      "8111b2e6-2c95-4d01-a7c5-42d4efd63511",
+      "5284b30a-5a5b-4fcf-9e54-d0a6bb0feec4",
+      "07e987fa-813e-4b4b-9d23-8aebd8061a0a",
+      "d51a8e29-155f-4a8b-a9d6-c16a669c52af",
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "63902b53-865d-4fa7-b1b0-b6b208b07bbc"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "uks": {
+    "fullName": "UK South",
+    "subscriptions": [
+      "b234b267-c976-437b-9b0d-22df42d924ef",
+      "8111b2e6-2c95-4d01-a7c5-42d4efd63511",
+      "5284b30a-5a5b-4fcf-9e54-d0a6bb0feec4",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "cw": {
+    "fullName": "UK West",
+    "subscriptions": [
+      "5d5f7dd0-8c44-41ba-afed-f86184f34610",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "wcus": {
+    "fullName": "West Central US",
+    "subscriptions": [
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 4,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "weu": {
+    "fullName": "West Europe",
+    "subscriptions": [
+      "b234b267-c976-437b-9b0d-22df42d924ef",
+      "5284b30a-5a5b-4fcf-9e54-d0a6bb0feec4",
+      "07e987fa-813e-4b4b-9d23-8aebd8061a0a",
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "63902b53-865d-4fa7-b1b0-b6b208b07bbc",
+      "d51a8e29-155f-4a8b-a9d6-c16a669c52af",
+      "8111b2e6-2c95-4d01-a7c5-42d4efd63511",
+      "e2906ef3-dac0-48c7-8efe-c3d117492d89",
+      "93c5ab92-3a66-46ee-97e5-0ffc16b9bc2e",
+      "5d915aeb-e534-48cb-9d45-92eaec5ee9ad",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "wus": {
+    "fullName": "West US",
+    "subscriptions": [
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "wus2": {
+    "fullName": "West US 2",
+    "subscriptions": [
+      "b234b267-c976-437b-9b0d-22df42d924ef",
+      "8111b2e6-2c95-4d01-a7c5-42d4efd63511",
+      "5284b30a-5a5b-4fcf-9e54-d0a6bb0feec4",
+      "07e987fa-813e-4b4b-9d23-8aebd8061a0a",
+      "d51a8e29-155f-4a8b-a9d6-c16a669c52af",
+      "63902b53-865d-4fa7-b1b0-b6b208b07bbc"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "aen": {
+    "fullName": "UAE North",
+    "subscriptions": [
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "inc": {
+    "fullName": "Central India",
+    "subscriptions": [
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "krs": {
+    "fullName": "Korea South",
+    "subscriptions": [
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "krc": {
+    "fullName": "Korea Central",
+    "subscriptions": [
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "zan": {
+    "fullName": "South Africa North",
+    "subscriptions": [
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "ae": {
+    "fullName": "East Asia",
+    "subscriptions": [
+      "ae9e55f5-9887-4266-b00f-59043358ecb3",
+      "a7162d62-912c-4030-8405-4f4898299dd2",
+      "27d33ea7-b3d9-433b-9fca-36612ee0b41b",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "wus3": {
+    "fullName": "West US 3",
+    "subscriptions": [
+      "63902b53-865d-4fa7-b1b0-b6b208b07bbc",
+      "07e987fa-813e-4b4b-9d23-8aebd8061a0a"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "brs": {
+    "fullName": "Brazil South",
+    "subscriptions": [
+      "63902b53-865d-4fa7-b1b0-b6b208b07bbc",
+      "07e987fa-813e-4b4b-9d23-8aebd8061a0a"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "frc": {
+    "fullName": "France Central",
+    "subscriptions": [
+      "63902b53-865d-4fa7-b1b0-b6b208b07bbc",
+      "07e987fa-813e-4b4b-9d23-8aebd8061a0a"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "dewc": {
+    "fullName": "Germany West Central",
+    "subscriptions": [
+      "63902b53-865d-4fa7-b1b0-b6b208b07bbc",
+      "5d5f7dd0-8c44-41ba-afed-f86184f34610",
+      "e2906ef3-dac0-48c7-8efe-c3d117492d89"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "chw": {
+    "fullName": "Switzerland West",
+    "subscriptions": [
+      "5d5f7dd0-8c44-41ba-afed-f86184f34610"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "cne2": {
+    "fullName": "China East 2",
+    "subscriptions": [
+      "44cf1486-f8e8-4194-94e1-612f3b08e9b3"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "cne3": {
+    "fullName": "China East 3",
+    "subscriptions": [
+      "44cf1486-f8e8-4194-94e1-612f3b08e9b3"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "cnn2": {
+    "fullName": "China North 2",
+    "subscriptions": [
+      "44cf1486-f8e8-4194-94e1-612f3b08e9b3"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "cnn3": {
+    "fullName": "China North 3",
+    "subscriptions": [
+      "44cf1486-f8e8-4194-94e1-612f3b08e9b3"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "chn": {
+    "fullName": "Switzerland North",
+    "subscriptions": [
+      "e2906ef3-dac0-48c7-8efe-c3d117492d89"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "bn": {
+    "fullName": "USGov Virginia",
+    "subscriptions": [
+      "62ef1df1-0553-4664-8925-52c3b6f3322d",
+      "41b891fb-e96f-4db7-a632-3a48b853f669"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "phx": {
+    "fullName": "USGov Arizona",
+    "subscriptions": [
+      "62ef1df1-0553-4664-8925-52c3b6f3322d",
+      "41b891fb-e96f-4db7-a632-3a48b853f669"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  },
+  "sec": {
+    "fullName": "Sweden Central",
+    "subscriptions": [
+      "5d5f7dd0-8c44-41ba-afed-f86184f34610",
+      "b22ab1cc-6d05-49bb-8108-4e715a359dfe"
+    ],
+    "vmSize" : "Standard_D8s_v3",
+    "vmCount" : 6,
+    "vmFamily" : "Standard DSv3 Family vCPUs"
+  }
+}
