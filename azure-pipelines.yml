@@ -15,14 +15,41 @@ variables:
 pool: #Default
   vmImage: 'windows-latest'
 
-steps:
-  - script: |
-        echo "##vso[task.setvariable variable=task_pattern;isOutput=true;]somethingspecial"
-    name: getTaskPattern
-    displayName: setVariable getTaskPattern
+jobs: 
+  - job: build_all_windows
+    displayName: Build all tasks (Windows)
+    pool:
+      vmImage: windows-2022
+    steps:
+      - script: |
+          echo "##vso[task.setvariable variable=task_pattern;isOutput=true;]somethingspecial"
+        name: getTaskPattern
+        displayName: setVariable getTaskPattern
+    
+      - script: |
+          echo "getTaskPattern.task_pattern"
+          echo $(getTaskPattern.task_pattern)
+          echo "task_pattern"
+          echo $(task_pattern)
+  - job: middle_job
+    displayName: Middle job
+    dependsOn: build_all_windows
+    pool:
+      vmImage: windows-2022
+    steps: 
+      - script: echo "some stupid script's output"
   
-  - script: |
-      echo "getTaskPattern.task_pattern"
-      echo $(getTaskPattern.task_pattern)
-      echo "task_pattern"
-      echo $(task_pattern)
+  - job: last_job
+    displayName: Middle job
+    dependsOn: middle_job
+    pool:
+      vmImage: windows-2022
+    variables:
+      task_pattern: $[dependencies.build_all_windows.outputs['getTaskPattern.task_pattern']]
+    steps: 
+      - script: |
+          echo "getTaskPattern.task_pattern"
+          echo $(getTaskPattern.task_pattern)
+          echo "task_pattern"
+          echo $(task_pattern)
+        displayName: Show passed vars
