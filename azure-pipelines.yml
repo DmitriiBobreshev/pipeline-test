@@ -10,6 +10,8 @@ variables:
     value: true
   - name: sometextprobably 
     value: '\nasd\\df\r\n\w'
+  - name: ADO_FORCE_USE_PSUNZIP
+    value: true
 pool: #Default
   vmImage: 'windows-latest'
 
