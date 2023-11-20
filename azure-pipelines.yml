@@ -8,57 +8,32 @@ variables:
     value: true
   - name: Agent.Diagnostic
     value: true
-pool: Default
-  # vmImage: 'ubuntu-latest'
+pool: #Default
+  vmImage: 'windows-latest'
 
-stages:
-  - stage: Build_Onebox_Environment
-    jobs:
-    - job: Build_OneBox
-      steps:
-      - pwsh: |
-          echo "##vso[task.setvariable variable=RESOURCE_GROUP;isOutput=true]RESOURCEGROUP1"
-          echo "##vso[task.setvariable variable=KEYVAULT_NAME;isOutput=true]KEYVAULTNAME1"
-          echo "##vso[task.setvariable variable=STORAGE_ACCOUNT;isOutput=true]STORAGEACCOUNT1"
-          echo "##vso[task.setvariable variable=USER;isOutput=true]USERNAME"
-          echo "##vso[task.setvariable variable=ACR_NAME;isOutput=true]ACRNAME"
-      # - task: Bash@3
-      #   displayName: Setup Environment
-      #   name: onebox_setup
-      #   inputs:
-      #     filePath: create_env.sh
-      - script: echo 123;
-      
-
-  - stage: Deploy_RP
-    dependsOn:
-    - Build_Onebox_Environment
-    jobs:
-    - job: Deploy_RP
-      variables:
-      - name: KEYVAULT_NAME
-        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.KEYVAULT_NAME'] ]
-      - name: RESOURCE_GROUP
-        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.RESOURCE_GROUP'] ]
-      - name: STORAGE_ACCOUNT
-        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.STORAGE_ACCOUNT'] ]
-      - name: ACR_NAME
-        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.ACR_NAME'] ]
-      - name: USER
-        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.USER'] ]
-      - name: STORAGE_ACCOUNT1
-        value: $[ stageDependencies.Build_Onebox_Environment.Build_OneBox.outputs['onebox_setup.STORAGE_ACCOUNT1'] ]
-      steps:
-        - script: |
-            echo $(KEYVAULT_NAME)
-            echo $(RESOURCE_GROUP)
-            echo $(STORAGE_ACCOUNT)
-            echo $(ACR_NAME)
-        - task: NodeTool@0
-          inputs:
-            versionSource: 'spec'
-            versionSpec: '12.x'
-        - task: UseDotNet@2
-          inputs:
-            packageType: 'runtime'
-            version: '6.x'
+steps:
+  - task: TokenizeInArchiveTask@1
+    displayName: 'ReplaceToken #[]# in appsettings.test.json'
+    inputs:
+      PathToArchives: archs\*.zip
+      Packages: '*.zip'
+      FilesToTokenize: appsettings.test.json
+      Prefix: '#['
+      Suffix: ']#'
+      ReplaceWithEmpty: false
+  - task: AzureRmWebAppDeployment@4
+    displayName: Webhooks-Legacy
+    inputs:
+      azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
+      appType: webApp
+      WebAppName: vbobreshev-test-web-app
+      deployToSlotOrASE: true
+      ResourceGroupName: vbobreshev
+      packageForLinux: archs\*.zip
+      xmlVariableSubstitution: True
+      enableCustomDeployment: true
+      removeAdditionalFilesFlag: True
+      takeAppOfflineFlag: True
+      appOffline: True
+      connectionType: AzureRM
+      slotName: production
