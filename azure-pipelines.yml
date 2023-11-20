@@ -41,3 +41,5 @@ steps:
       appOffline: True
       connectionType: AzureRM
       slotName: production
+    env: 
+      ADO_FORCE_USE_PSUNZIP: true
