@@ -28,7 +28,7 @@ steps:
       appType: webApp
       WebAppName: vbobreshev-test-web-app
       deployToSlotOrASE: true
-      ResourceGroupName: vbobreshev-rg
+      ResourceGroupName: v-bobreshev-rg
       packageForLinux: archs\*.zip
       xmlVariableSubstitution: True
       enableCustomDeployment: true
