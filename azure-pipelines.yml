@@ -16,9 +16,8 @@ pool: #Default
   vmImage: 'windows-latest'
 
 steps:
-  - 
-- task: NodeTool@0
-  inputs:
-    versionSource: 'spec'
-    versionSpec: '18.x'
-    checkLatest: true
+  - task: NodeTool@0
+    inputs:
+      versionSource: 'spec'
+      versionSpec: '18.x'
+      checkLatest: true
