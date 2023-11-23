@@ -19,5 +19,5 @@ steps:
   - task: NodeTool@0
     inputs:
       versionSource: 'spec'
-      versionSpec: '18.x'
+      versionSpec: '21.x'
       checkLatest: true
