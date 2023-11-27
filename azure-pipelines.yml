@@ -25,4 +25,4 @@ steps:
       Write-Output "====== Filler ======"
       Write-Host "##[endgroup]"
       Write-Host "##vso[task.logissue type=error]The fourth thing went wrong."
-      displayName: Log Issue After Group
+    displayName: Log Issue After Group
