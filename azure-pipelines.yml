@@ -16,7 +16,6 @@ pool: #Default
   vmImage: 'ubuntu-latest'
 
 steps:
-  steps:
   - pwsh: |
       Write-Host "##[group]Group"
       Write-Output "====== Filler ======"
