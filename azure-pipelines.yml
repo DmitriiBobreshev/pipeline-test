@@ -15,14 +15,28 @@ variables:
 pool: #Default
   vmImage: 'ubuntu-latest'
 
-steps:
-  - pwsh: |
-      Write-Host "##[group]Group"
-      Write-Output "====== Filler ======"
-      Write-Output "====== Filler ======"
-      Write-Output "====== Filler ======"
-      Write-Output "====== Filler ======"
-      Write-Output "====== Filler ======"
-      Write-Host "##[endgroup]"
-      Write-Host "##vso[task.logissue type=error]The fourth thing went wrong."
-    displayName: Log Issue After Group
+jobs:
+- job: fine
+  steps:
+    - pwsh: |
+        Write-Host "##vso[task.logissue type=error]The fourth thing went wrong."
+        Write-Host "##[group]Group"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Host "##[endgroup]"
+      displayName: Log Issue After Group
+- job: broken
+  steps:
+    - pwsh: |
+        Write-Host "##[group]Group"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Host "##[endgroup]"
+        Write-Host "##vso[task.logissue type=error]The fourth thing went wrong."
+      displayName: Log Issue After Group
