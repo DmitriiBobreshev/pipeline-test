@@ -16,10 +16,14 @@ pool: #Default
   vmImage: 'ubuntu-latest'
 
 steps:
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: |
-        # Write your commands here
-        
-        echo 'Hello world'
+  steps:
+  - pwsh: |
+      Write-Host "##[group]Group"
+      Write-Output "====== Filler ======"
+      Write-Output "====== Filler ======"
+      Write-Output "====== Filler ======"
+      Write-Output "====== Filler ======"
+      Write-Output "====== Filler ======"
+      Write-Host "##[endgroup]"
+      Write-Host "##vso[task.logissue type=error]The fourth thing went wrong."
+      displayName: Log Issue After Group
