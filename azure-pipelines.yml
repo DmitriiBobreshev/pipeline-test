@@ -16,7 +16,7 @@ pool: Default
   # vmImage: 'ubuntu-latest'
 
 steps: 
-  - script: echo "test"
+  - script: timeout 20 > null
 
 # stages:
 # - stage: first_stage
