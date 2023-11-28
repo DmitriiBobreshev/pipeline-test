@@ -12,50 +12,50 @@ variables:
     value: 'fear'
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: #Default
-  vmImage: 'ubuntu-latest'
+pool: Default
+  # vmImage: 'ubuntu-latest'
 
-stages:
-- stage: first_stage
-  jobs:
-  - job: first_job
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - pwsh: Write-Host "##vso[task.logissue type=error]The first thing went wrong."
-      displayName: Log Issue Without Group
-    - pwsh: |
-        Write-Host "##vso[task.logissue type=error]The second thing went wrong."
-        Write-Host "##[group]Group"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Host "##[endgroup]"
-      displayName: Log Before Inside Group
-    - pwsh: |
-        Write-Host "##[group]Group"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Host "##vso[task.logissue type=error]The third thing went wrong."
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Host "##[endgroup]"
-      displayName: Log Issue Inside Group
-    - pwsh: |
-        Write-Host "##[group]Group"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Host "##[endgroup]"
-        Write-Host "##vso[task.logissue type=error]The fourth thing went wrong."
-      displayName: Log Issue After Group
+# stages:
+# - stage: first_stage
+#   jobs:
+#   - job: first_job
+#     pool:
+#       vmImage: ubuntu-latest
+#     steps:
+#     - pwsh: Write-Host "##vso[task.logissue type=error]The first thing went wrong."
+#       displayName: Log Issue Without Group
+#     - pwsh: |
+#         Write-Host "##vso[task.logissue type=error]The second thing went wrong."
+#         Write-Host "##[group]Group"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Host "##[endgroup]"
+#       displayName: Log Before Inside Group
+#     - pwsh: |
+#         Write-Host "##[group]Group"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Host "##vso[task.logissue type=error]The third thing went wrong."
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Host "##[endgroup]"
+#       displayName: Log Issue Inside Group
+#     - pwsh: |
+#         Write-Host "##[group]Group"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Output "====== Filler ======"
+#         Write-Host "##[endgroup]"
+#         Write-Host "##vso[task.logissue type=error]The fourth thing went wrong."
+#       displayName: Log Issue After Group
