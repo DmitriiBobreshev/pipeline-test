@@ -15,6 +15,9 @@ variables:
 pool: Default
   # vmImage: 'ubuntu-latest'
 
+steps: 
+  - script: echo "test"
+
 # stages:
 # - stage: first_stage
 #   jobs:
