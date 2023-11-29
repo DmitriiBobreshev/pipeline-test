@@ -19,7 +19,8 @@ stages:
 - stage: first_stage
   jobs:
   - job: first_job
-    pool: Default
+    pool: #Default
+      vmImage: windows-latest
     steps:
     # - pwsh: Write-Host "##vso[task.logissue type=error]The first thing went wrong."
     #   displayName: Log Issue Without Group
