@@ -5,9 +5,9 @@ parameters:
 
 variables:
   - name: System.Debug
-    value: false
+    value: true
   - name: Agent.Diagnostic
-    value: false
+    value: true
   - name: sometextprobably 
     value: 'fear'
   # - name: ADO_FORCE_USE_PSUNZIP
