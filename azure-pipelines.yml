@@ -71,6 +71,8 @@ stages:
         Write-Output "====== Filler ======"
         Write-Host "##[endgroup]"
         Write-Host "##vso[task.logissue type=error]Log Issue After Multiple Groups second thing went wrong."
+        Write-Host "TestInfo"
+        Write-Host "##vso[task.logissue type=error]Log Issue After some line went wrong."
         Write-Host "##[group]Group"
         Write-Output "====== Filler ======"
         Write-Output "====== Filler ======"
