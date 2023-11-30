@@ -62,7 +62,7 @@ stages:
         Write-Host "##vso[task.logissue type=error] Log Issue After Group went wrong."
       displayName: Log Issue After Group
     - pwsh: |
-        # Write-Host "##[group]Group"
+        Write-Host "##[group]Group"
         Write-Output "====== Filler ======"
         Write-Output "====== Filler ======"
         Write-Host "##[endgroup]"
