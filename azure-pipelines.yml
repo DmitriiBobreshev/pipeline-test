@@ -10,6 +10,8 @@ variables:
     value: false
   - name: sometextprobably 
     value: 'fear'
+  - name: currentDate
+    value:  $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
 pool: Default
@@ -22,6 +24,12 @@ stages:
     pool: Default
       # vmImage: windows-latest
     steps:
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Build.SourcesDirectory)/azure-pipelines.yml'
+        artifact: 'CSV Report $(currentDate)'
+        publishLocation: 'pipeline'
+      displayName: Upload CSV report artifact
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: 'src'
