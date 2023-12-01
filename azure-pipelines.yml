@@ -62,6 +62,7 @@ stages:
         Write-Host "##vso[task.logissue type=error] Log Issue After Group went wrong."
       displayName: Log Issue After Group
     - pwsh: |
+        Write-Host "##[group]sage\nmessagemessagemessagemessage\n##[endgroup]"
         Write-Host "##[group]Group"
         Write-Output "====== Filler ======"
         Write-Output "====== Filler ======"
