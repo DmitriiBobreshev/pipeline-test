@@ -2,6 +2,10 @@ parameters:
   - name: skipFolder
     type: string
     default: '^.*Resources(?!CL|Generic|\|$).*$'
+  - name: deploy_all_tasks
+    displayName: Build all tasks for deployment
+    type: boolean
+    default: false
 
 variables:
   - name: System.Debug
@@ -35,23 +39,10 @@ stages:
         Write-Output "====== Filler ======"
         Write-Output "====== Filler ======"
         Write-Host "##[endgroup]"
-      displayName: Log Before Inside Group
+      displayName: deploy_all_tasks_false
+      condition: and(succeeded(), eq('${{ parameters.deploy_all_tasks }}', false))
     - pwsh: |
-        Write-Host "##[group]Group"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Host "##vso[task.logissue type=error]Log Issue Inside Group went wrong."
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Host "##[endgroup]"
-      displayName: Log Issue Inside Group
-    - pwsh: |
+        Write-Host "##vso[task.logissue type=error] Log Before Inside Group thing went wrong."
         Write-Host "##[group]Group"
         Write-Output "====== Filler ======"
         Write-Output "====== Filler ======"
@@ -59,40 +50,5 @@ stages:
         Write-Output "====== Filler ======"
         Write-Output "====== Filler ======"
         Write-Host "##[endgroup]"
-        Write-Host "##vso[task.logissue type=error] Log Issue After Group went wrong."
-      displayName: Log Issue After Group
-    - pwsh: |
-        Write-Host "##[group]sage\nmessagemessagemessagemessage\n##[endgroup]"
-        Write-Host "##[group]Group"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Host "##[endgroup]"
-        Write-Host "##vso[task.logissue type=error]Issue after first group.(line 15 in logs, l=15 in url)"
-        Write-Host "##[group]Group"  
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Host "##[endgroup]"
-        Write-Host "##vso[task.logissue type=error]Issue after second group.(line 20 in logs, l=18 in url)"
-        Write-Host "TestInfo(l=16 and 19 in url??)"
-        Write-Host "##vso[task.logissue type=error]Issue in the middle of the job.(line 22 in logs, l=20 in url)"
-        Write-Host "##[group]Group"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Host "##[endgroup]"
-        Write-Host "##vso[task.logissue type=error]ssue after third group.(line 28 in logs)"
-        Write-Host "##[group]Group"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Host "##vso[task.logissue type=error]Issue in the middle of the forth froup.(line 34 in logs)"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Output "====== Filler ======"
-        Write-Host "##[endgroup]"
-      displayName: Sample broken lines
+      displayName: deploy_all_tasks_true
+      condition: and(succeeded(), eq('${{ parameters.deploy_all_tasks }}', true))    
