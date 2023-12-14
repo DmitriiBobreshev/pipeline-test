@@ -100,6 +100,7 @@ jobs:
       customKeychainPath: 'keychain4/'
       signingIdentity: 'Some signing identity'
       deleteCustomKeychain: true
+      opensslPkcsArgs: '-legacy'
       deleteCert: true
   - task: Bash@3
     condition: succeeded() # run if one of the task were succeeded 
