@@ -1,17 +1,4 @@
-# resources:
-#   repositories:
-#   - repository: AzureDevOps
-#     type: git
-#     endpoint: AzureDevOps
-#     name: AzureDevOps/AzureDevOps
-
-parameters:
-  - name: skipFolder
-    type: string
-    default: '^.*Resources(?!CL|Generic|\|$).*$'
-
 variables:
-  - group: secrets-groups
   - name: ndkPath
     value: TEST_NDK_PATH
   - name: androidSdkPath
@@ -22,32 +9,18 @@ variables:
     value: all
   - name: agent.clean.buildDirectory
     value: all
-  - name: scheme
-    value: test
-  - name: agent.diagnostic
-    value: true
-  - name: ARGS
-    value: "123"
-  - name: AZP_75787_ENABLE_NEW_LOGIC_LOG
-    value: true
-  - name: AZP_75787_ENABLE_NEW_LOGIC
-    value: true
-  - name: AZP_75787_ENABLE_COLLECT
-    value: true
+  - name: certificateFileName
+    value: CanaryTestCertificateCommonName.p12
+  - name: certificatePassword
+    value: 4eba4y
+  - name: keychainPassword
+    value: keychainPassword
 
-jobs:
-  - job:
-    pool: #'agentvmsspool'
-      # name: 'Default'
-      vmImage: 'windows-latest'
-    steps: 
-      - task: AzureRmWebAppDeployment@3
-        inputs:
-          # ConnectionType: 'AzureRM'
-          azureSubscription: 'CIX_Eng (371d9573-3b58-46e5-8489-aac909ffc94c)'
-          WebAppKind: 'app'
-          # WebAppKind: 'webApp'
-          WebAppName: 'vbobreshev-test-web-app'
-          Package: '$(System.DefaultWorkingDirectory)/**/site.zip'
-          UseWebDeploy: true
-          AdditionalArguments: '-skip:objectName=filePath,absolutePath="^.*\.config$" -skip:objectName=filePath,absolutePath="favicon.ico" -skip:objectName=filePath,absolutePath="appsettings.json" -skip:objectName=dirPath,absolutePath=${{ parameters.skipFolder }}'
+stages:
+- stage: 'MacOS_Public_Catalina'
+  dependsOn: []
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'macos-latest'
+  jobs:
+  - template: src/install-apple-certificate/templates/install-apple-certificate-steps.yml
