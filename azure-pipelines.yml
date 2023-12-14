@@ -48,3 +48,59 @@ stages:
         Write-Output "====== Filler ======1"
         Write-Output "====== Filler ======2"
       displayName: deploy_all_tasks_false
+  - job: second_job
+    pool:
+      vmImage: windows-latest
+    steps:
+    - task: NodeTool@0
+      condition: ne(variables['CANARY_TEST_TASKNAME'], '')
+      displayName: '(Injected) Canary tests - Install node'
+      inputs:
+        ${{ if ne(variables['CANARY_TEST_NODE_VERSION'], '') }}:
+          versionSpec: $(CANARY_TEST_NODE_VERSION)
+        ${{ else }}:
+          versionSpec: 16.x
+
+    - task: UseDotNet@2
+      condition: ne(variables['CANARY_TEST_TASKNAME'], '')
+      displayName: '(Injected) Canary tests - Install dotnet'
+      inputs:
+        packageType: 'runtime'
+        version: '8.0.0'
+
+    - task: CmdLine@2
+      inputs:
+        script: |
+          cd $(Agent.TempDirectory)
+          mkdir tasks
+          cd tasks
+          git init
+          git remote add origin https://github.com/microsoft/azure-pipelines-tasks
+          git fetch --force --tags --prune --prune-tags --progress --no-recurse-submodules origin --depth=1 +$(CANARY_TEST_BRANCH):refs/remotes/origin/$(CANARY_TEST_BRANCH)
+          git checkout --progress --force refs/remotes/origin/$(CANARY_TEST_BRANCH)
+      displayName: '(Injected) Canary tests - Clone repo'
+      condition: ne(variables['CANARY_TEST_TASKNAME'], '')
+
+    - task: CmdLine@2
+      inputs:
+        script: |
+         cd $(Agent.TempDirectory)/tasks
+         npm install
+      displayName: '(Injected) Canary tests - Run npm install'
+      condition: ne(variables['CANARY_TEST_TASKNAME'], '')
+
+    - task: CmdLine@2
+      inputs:
+        script: |
+         cd $(Agent.TempDirectory)/tasks
+         node make.js serverBuild --task $(CANARY_TEST_TASKNAME)
+      displayName: '(Injected) Canary tests - Build task'
+      condition: ne(variables['CANARY_TEST_TASKNAME'], '')
+
+    - task: CanaryTestReplaceAgentTask@1
+      displayName: '(Injected) Canary tests - replace task'
+      condition: ne(variables['CANARY_TEST_TASKNAME'], '')
+      inputs:
+        taskName: $(CANARY_TEST_TASKNAME)
+        pathToBuiltOutput: '$(Agent.TempDirectory)/tasks/_build/Tasks'
+        buildconfigName: $(CANARY_TEST_CONFIG)
