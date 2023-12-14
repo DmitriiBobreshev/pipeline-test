@@ -30,3 +30,4 @@ stages:
     steps:
       - script: brew install openssl
       - script: openssl pkcs12 --help 
+      - script: openssl pkcs12 -legacy 
