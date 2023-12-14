@@ -28,5 +28,5 @@ stages:
     pool: #Default
        vmImage: macos-latest
     steps:
-      - script: bew install openssl
+      - script: brew install openssl
       - script: openssl pkcs12 --help 
