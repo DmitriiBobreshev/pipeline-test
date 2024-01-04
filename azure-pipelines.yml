@@ -1,33 +1,76 @@
-parameters:
-  - name: skipFolder
-    type: string
-    default: '^.*Resources(?!CL|Generic|\|$).*$'
-  - name: deploy_all_tasks
-    displayName: Build all tasks for deployment
-    type: boolean
-    default: false
+# parameters:
+#   - name: skipFolder
+#     type: string
+#     default: '^.*Resources(?!CL|Generic|\|$).*$'
+#   - name: deploy_all_tasks
+#     displayName: Build all tasks for deployment
+#     type: boolean
+#     default: false
 
-variables:
-  - name: System.Debug
-    value: true
-  - name: Agent.Diagnostic
-    value: true
-  - name: sometextprobably 
-    value: 'fear'
-  - name: currentDate
-    value:  $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
-  # - name: ADO_FORCE_USE_PSUNZIP
-  #   value: true
-pool: #Default
-  vmImage: 'ubuntu-latest'
+# variables:
+#   - name: System.Debug
+#     value: true
+#   - name: Agent.Diagnostic
+#     value: true
+#   - name: sometextprobably 
+#     value: 'fear'
+#   - name: currentDate
+#     value:  $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
+#   # - name: ADO_FORCE_USE_PSUNZIP
+#   #   value: true
+# pool: #Default
+#   vmImage: 'ubuntu-latest'
+
+# stages:
+# - stage: first_stage
+#   jobs:
+#   - job: first_job
+#     pool: #Default
+#        vmImage: macos-latest
+#     steps:
+#       - script: brew install openssl
+#       - script: openssl pkcs12 --help 
+#       - script: openssl pkcs12 -legacy 
+
 
 stages:
 - stage: first_stage
   jobs:
   - job: first_job
-    pool: #Default
-       vmImage: macos-latest
+    pool:
+      vmImage: windows-latest
     steps:
-      - script: brew install openssl
-      - script: openssl pkcs12 --help 
-      - script: openssl pkcs12 -legacy 
+    - pwsh: |
+        Write-Host "##[group]Group"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Host "##[endgroup]"
+        Write-Host "##vso[task.logissue type=error]Issue after first group.(line 15 in logs, l=15 in url)"
+        Write-Host "##[group]Group"  
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Host "##[endgroup]"
+        Write-Host "##vso[task.logissue type=error]Issue after second group.(line 20 in logs, l=18 in url)"
+        Write-Host "TestInfo(l=16 and 19 in url??)"
+        Write-Host "##vso[task.logissue type=error]Issue in the middle of the job.(line 22 in logs, l=20 in url)"
+        Write-Host "##[group]Group"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Host "##[endgroup]"
+        Write-Host "##vso[task.logissue type=error]ssue after third group.(line 28 in logs, can't reach in URL)"
+        Write-Host "##[group]Group"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Host "##vso[task.logissue type=error]Issue in the middle of the forth froup.(line 34 in logs, cant reach in URL)"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Output "====== Filler ======"
+        Write-Host "##[endgroup]"
+      displayName: Sample broken lines
