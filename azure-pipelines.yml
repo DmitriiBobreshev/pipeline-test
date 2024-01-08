@@ -18,15 +18,15 @@ variables:
     value:  $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: Default
-  #vmImage: 'windows-latest'
+pool: #Default
+  vmImage: 'windows-latest'
 
 stages:
 - stage: first_stage
   jobs:
   - job:
     timeoutInMinutes: 2
-    cancelTimeoutInMinutes: 1
+    #cancelTimeoutInMinutes: 1
     steps:
     - powershell: sleep 180
     - powershell: sleep 360
