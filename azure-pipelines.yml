@@ -30,4 +30,4 @@ stages:
     steps:
     - powershell: sleep 180
     - powershell: sleep 360
-      condition: always()
+      // condition: always()
