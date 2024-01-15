@@ -28,6 +28,7 @@ stages:
     timeoutInMinutes: 2
     #cancelTimeoutInMinutes: 1
     steps:
-    - powershell: sleep 180
-    - powershell: sleep 360
-      condition: always()
+    - task: IpaResign@1
+      inputs:
+        ipaPath: 'rs'
+        entitlementsPath: 's'
