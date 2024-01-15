@@ -28,6 +28,10 @@ stages:
     timeoutInMinutes: 2
     #cancelTimeoutInMinutes: 1
     steps:
+    - task: Go@0
+      inputs:
+        command: 'get'
+        arguments: 'sda'
     - task: IpaResign@1
       inputs:
         ipaPath: 'rs'
