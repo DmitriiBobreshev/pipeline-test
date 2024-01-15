@@ -28,11 +28,7 @@ stages:
     timeoutInMinutes: 2
     #cancelTimeoutInMinutes: 1
     steps:
-    - task: UseDotNet@2
+    - task: IpaResign@1
       inputs:
-        packageType: 'sdk'
-        version: '6'
-    # - task: IpaResign@1
-    #   inputs:
-    #     ipaPath: 'rs'
-    #     entitlementsPath: 's'
+        ipaPath: 'rs'
+        entitlementsPath: 's'
