@@ -30,5 +30,5 @@ stages:
     steps:
     - task: IpaResign@1
       inputs:
-        ipaPath: 'rs'
+        ipaPath: 'rss'
         entitlementsPath: 's'
