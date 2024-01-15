@@ -28,7 +28,11 @@ stages:
     timeoutInMinutes: 2
     #cancelTimeoutInMinutes: 1
     steps:
-    - task: Go@0
+    - task: UseDotNet@2
       inputs:
-        command: 'get'
-        arguments: 'sda'
+        packageType: 'sdk'
+        version: '6'
+    # - task: IpaResign@1
+    #   inputs:
+    #     ipaPath: 'rs'
+    #     entitlementsPath: 's'
