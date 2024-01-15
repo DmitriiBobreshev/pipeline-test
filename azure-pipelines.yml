@@ -32,7 +32,3 @@ stages:
       inputs:
         command: 'get'
         arguments: 'sda'
-    - task: IpaResign@1
-      inputs:
-        ipaPath: 'rs'
-        entitlementsPath: 's'
