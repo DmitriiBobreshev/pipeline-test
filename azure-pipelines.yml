@@ -33,24 +33,24 @@ stages:
       #     signFileP12Path: 'asdads'
       #     signFileP12Password: 'asdasd'
       #     provFileProfilePath: 'asdasd'
-      # - task: AppStoreRelease@1
-      #   inputs:
-      #     authType: 'ApiKey'
-      #     apiKeyId: 'asd'
-      #     apiKeyIssuerId: 'asdasd'
-      #     apitoken: 'asdasdasd'
-      #     apiKeyInHouse: true
-      #     releaseTrack: 'TestFlight'
-      #     distributeOnly: true
-      #     appIdentifier: '123'
-      #     appBuildNumber: '321'
-      #     externalTestersGroups: 'asdf'
-      - task: AppStorePromote@1
+      - task: AppStoreRelease@1
         inputs:
-          authType: 'UserAndPass'
-          username: 'bobresh95@gmail.com'
-          password: '1234123132'
-          isTwoFactorAuth: true
-          appSpecificPassword: '123414'
-          fastlaneSession: 'asdffas'
-          appIdentifier: 's123dasqweqweqw'
+          authType: 'ApiKey'
+          apiKeyId: 'asd'
+          apiKeyIssuerId: 'asdasd'
+          apitoken: 'asdasdasd'
+          apiKeyInHouse: true
+          releaseTrack: 'TestFlight'
+          distributeOnly: true
+          appIdentifier: '123'
+          appBuildNumber: '321'
+          externalTestersGroups: 'asdf'
+      # - task: AppStorePromote@1
+      #   inputs:
+      #     authType: 'UserAndPass'
+      #     username: 'bobresh95@gmail.com'
+      #     password: '1234123132'
+      #     isTwoFactorAuth: true
+      #     appSpecificPassword: '123414'
+      #     fastlaneSession: 'asdffas'
+      #     appIdentifier: 's123dasqweqweqw'
