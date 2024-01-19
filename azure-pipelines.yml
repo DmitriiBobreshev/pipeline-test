@@ -25,8 +25,6 @@ stages:
 - stage: first_stage
   jobs:
   - job:
-    timeoutInMinutes: 2
-    #cancelTimeoutInMinutes: 1
     steps:
       # - task: IpaResign@1
       #   inputs:
