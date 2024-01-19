@@ -30,5 +30,5 @@ stages:
     steps:
     - task: IpaResign@1
       inputs:
-        ipaPath: 'rss'
+        ipaPath: 'azure-pipelines.yml'
         entitlementsPath: 's'
