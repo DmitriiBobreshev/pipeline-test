@@ -28,10 +28,7 @@ stages:
     timeoutInMinutes: 2
     #cancelTimeoutInMinutes: 1
     steps:
-    - task: CmdLine@2
+    - task: IpaResign@1
       inputs:
-        script: 'timeout 10'
-    # - task: IpaResign@1
-    #   inputs:
-    #     ipaPath: 'rss'
-    #     entitlementsPath: 's'
+        ipaPath: 'rss'
+        entitlementsPath: 's'
