@@ -28,7 +28,15 @@ stages:
     timeoutInMinutes: 2
     #cancelTimeoutInMinutes: 1
     steps:
-    - task: IpaResign@1
-      inputs:
-        ipaPath: 'azure-pipelines.yml'
-        entitlementsPath: 's'
+      - task: AppStoreRelease@1
+        inputs:
+          authType: 'ApiKey'
+          apiKeyId: 'asd'
+          apiKeyIssuerId: 'asdasd'
+          apitoken: 'asdasdasd'
+          apiKeyInHouse: true
+          releaseTrack: 'TestFlight'
+          distributeOnly: true
+          appIdentifier: '123'
+          appBuildNumber: '321'
+          externalTestersGroups: 'asdf'
