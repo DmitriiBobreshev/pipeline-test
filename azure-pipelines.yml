@@ -26,25 +26,25 @@ stages:
   jobs:
   - job:
     steps:
-      - task: IpaResign@1
-        inputs:
-          ipaPath: 'asdasd'
-          entitlementsPath: 'ddsasd'
-          signFileP12Path: 'asdads'
-          signFileP12Password: 'asdasd'
-          provFileProfilePath: 'asdasd'
-      # - task: AppStoreRelease@1
+      # - task: IpaResign@1
       #   inputs:
-      #     authType: 'ApiKey'
-      #     apiKeyId: 'asd'
-      #     apiKeyIssuerId: 'asdasd'
-      #     apitoken: 'asdasdasd'
-      #     apiKeyInHouse: true
-      #     releaseTrack: 'TestFlight'
-      #     distributeOnly: true
-      #     appIdentifier: '123'
-      #     appBuildNumber: '321'
-      #     externalTestersGroups: 'asdf'
+      #     ipaPath: 'asdasd'
+      #     entitlementsPath: 'ddsasd'
+      #     signFileP12Path: 'asdads'
+      #     signFileP12Password: 'asdasd'
+      #     provFileProfilePath: 'asdasd'
+      - task: AppStoreRelease@1
+        inputs:
+          authType: 'ApiKey'
+          apiKeyId: 'asd'
+          apiKeyIssuerId: 'asdasd'
+          apitoken: 'asdasdasd'
+          apiKeyInHouse: true
+          releaseTrack: 'TestFlight'
+          distributeOnly: true
+          appIdentifier: '123'
+          appBuildNumber: '321'
+          externalTestersGroups: 'asdf'
       # - task: AppStorePromote@1
       #   inputs:
       #     authType: 'UserAndPass'
