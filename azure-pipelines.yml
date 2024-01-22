@@ -18,8 +18,8 @@ variables:
     value:  $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: #Default
-  vmImage: 'macos-latest'
+pool: Default
+  # vmImage: 'macos-latest'
 
 stages:
 - stage: first_stage
