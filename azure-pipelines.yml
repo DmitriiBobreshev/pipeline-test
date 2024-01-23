@@ -28,6 +28,6 @@ stages:
     timeoutInMinutes: 2
     cancelTimeoutInMinutes: 1
     steps:
-    - powershell: sleep 180
-    - powershell: sleep 360
+    - script: sleep 180
+    - script: sleep 360
       condition: always()
