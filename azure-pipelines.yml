@@ -28,6 +28,6 @@ stages:
     timeoutInMinutes: 2
     cancelTimeoutInMinutes: 1
     steps:
-    - script: sleep 180
-    - script: sleep 360
+    - script: echo 123
+    - script: echo 321
       condition: always()
