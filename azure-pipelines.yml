@@ -9,9 +9,9 @@ parameters:
 
 variables:
   - name: System.Debug
-    value: true
+    value: false
   - name: Agent.Diagnostic
-    value: true
+    value: false
   - name: sometextprobably 
     value: 'fear'
   - name: currentDate
