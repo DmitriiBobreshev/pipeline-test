@@ -18,13 +18,14 @@ variables:
     value:  $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: Default
-  # vmImage: 'windows-latest'
+pool: #Default
+  vmImage: 'ubuntu-latest'
 
 steps:
   - script: echo "123232323"
-  - script: echo "3214455"
-
+  - script: echo $RETIRE_AZURERM_POWERSHELL_MODULE  
+    env: 
+      RETIRE_AZURERM_POWERSHELL_MODULE: true
 # stages:
 # - stage: first_stage
 #   jobs:
