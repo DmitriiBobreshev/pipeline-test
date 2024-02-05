@@ -1,4 +1,4 @@
-name: '<span/onmouseover=confirm(1)>X</span><img src="https://cdn.vsassets.io/ext/ms.vss-build-web/common-library/Nav-Launch.3tiJhd.png">\"</span>as'
+name: '</span>test<a></a></span>'
 
 parameters:
   - name: skipFolder
