@@ -1,4 +1,4 @@
-name: '</span>test<a></a></span>'
+name: '</span>test<a></a></span>{'
 
 parameters:
   - name: skipFolder
