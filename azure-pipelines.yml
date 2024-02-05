@@ -1,4 +1,4 @@
-name: '<img src="https://cdn.vsassets.io/ext/ms.vss-build-web/common-library/Nav-Launch.3tiJhd.png">'
+name: '\"<img src="https://cdn.vsassets.io/ext/ms.vss-build-web/common-library/Nav-Launch.3tiJhd.png">\"'
 
 parameters:
   - name: skipFolder
