@@ -34,5 +34,5 @@ pool: #Default
 steps:
 - ${{ each image in parameters.imageList }}:
   - ${{ each nodeVersion in parameters.nodeVersionList }}:
-    - script: echo "Node_os_${{ nodeVersion }}_${{ replace(image,'-','_') }}"
-      displayName: Node.js ${{ nodeVersion }} on ${{ image }}
+    - script: echo "Node_os_${{ nodeVersion }} {{ image }}"
+      displayName: Node.js ${{ nodeVersion }}
