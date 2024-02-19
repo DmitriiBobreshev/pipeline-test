@@ -5459,7 +5459,7 @@ LINK : warning LNK4199: /DELAYLOAD:libSceGnm_debug.dll ignored; no imports found
   Win64_Tool_Shared_Extension.MeshDefinition.Pipeline.vcxproj -> F:\dev\TnT\Local\Bin\Win64-Dll\release\Extension.MeshDefinition.Pipeline.dll
   Extension.Battlefield.Destruction.Common_master01.cpp
      Creating library F:\dev\TnT\Local\Build\DicePersistence\flattened\pc64-vc-dll-release\lib\Extension.DicePersistence.Pipeline.lib and object F:\dev\TnT\Local\Build\DicePersistence\flattened\pc64-vc-dll-release\lib\Extension.DicePersistence.Pipeline.exp
-##[error]UtilityNodeFunctions.ddf.obj : error LNK2005: "void __cdecl fb::debugUiRankedPlayerStats(class fb::ArrayReader<struct fb::dicePersistence::RankedPlayerStats>,class fb::String const &)" (?debugUiRankedPlayerStats@fb@@YAXV?$ArrayReader@URankedPlayerStats@dicePersistence@fb@@@1@AEBVString@1@@Z) already defined in DebugUiNodes.ddf.obj [F:\dev\TnT\Local\Build\DicePersistence\flattened\Win64_Tool_Shared_Extension.DicePersistence.Kingston.vcxproj]
+##[ERROR]UtilityNodeFunctions.ddf.obj : error LNK2005: "void __cdecl fb::debugUiRankedPlayerStats(class fb::ArrayReader<struct fb::dicePersistence::RankedPlayerStats>,class fb::String const &)" (?debugUiRankedPlayerStats@fb@@YAXV?$ArrayReader@URankedPlayerStats@dicePersistence@fb@@@1@AEBVString@1@@Z) already defined in DebugUiNodes.ddf.obj [F:\dev\TnT\Local\Build\DicePersistence\flattened\Win64_Tool_Shared_Extension.DicePersistence.Kingston.vcxproj]
 
 An error occurred. Stopping build now!
 
