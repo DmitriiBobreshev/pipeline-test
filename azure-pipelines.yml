@@ -32,7 +32,5 @@ pool: #Default
   vmImage: 'ubuntu-latest'
 
 steps:
-- ${{ each image in parameters.imageList }}:
-  - ${{ each nodeVersion in parameters.nodeVersionList }}:
-    - script: echo "Node_os_${{ nodeVersion }} ${{ image.key }} ${{ image.value }}"
-      displayName: Node.js ${{ nodeVersion }}
+  - script: cat $(Agent.SourceDirectory)/grouptest.log
+    displayName: 'check err'
