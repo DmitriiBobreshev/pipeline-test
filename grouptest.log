@@ -13,6 +13,7 @@ info: Pitee.LineProcessorFactory[0]
       Looking up processor with name: console
 warn: Pitee.PiteeCommand[0]
       Configuration search paths: C:\1\s\BCT-Staging\config\pitee
+##[DEBUG]Processed: SOME TEST DEBUG OUTPUT
 ##[command][pitee] Running command: pitee.exe -v "F:\dev/tnt/bin/fbcli/cli.bat x64 && C:\1\s/elipy-setup/setup-elipy-env.bat elipy_bct.yml && elipy --location skybuild --use-fbenv-core codepreflight ssl:1318.p4one.ea.com:1999 BCT_Preflight_trunk-code-dev_bct-pctr-ss-ekjt_8-data-disk tool release 19716374 --data-directory bfdata --not-warmup --user DICE\*** --framework-args -D:ondemandp4proxymapfile=C:\1\s\BCT-Staging\config\fb\P4ProtocolOptimalProxyMap.xml --framework-args -D:eaconfig.optimization.ltcg=off --licensee BattlefieldGame --email ***@ea.com --password ***"
 info: Pitee.PiteeCommand[0]
       Starting Pitee v1.15.0.0
