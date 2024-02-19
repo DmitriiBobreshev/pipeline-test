@@ -32,5 +32,7 @@ pool: #Default
   vmImage: 'ubuntu-latest'
 
 steps:
-  - script: cat $(Build.SourcesDirectory)/grouptest.log
+  - script: |
+      cat $(Build.SourcesDirectory)/grouptest.log
+      exit 1
     displayName: 'check err'
