@@ -46,7 +46,7 @@ Skipping clink init for automation build.
 ##[WARNING]06:53:47 Got python\virtual\Lib\site-packages\dice_elipy_scripts\yml\elipy_bct.yml for ELIPY_CONFIG, relative paths must be from %GAME_ROOT%.
 ##[INFO]06:53:47 Found ELIPY config file at F:\dev\python\virtual\Lib\site-packages\dice_elipy_scripts\yml\elipy_bct.yml 
 ##[INFO]06:53:47 Initializing ELIPY2 using config file: F:\dev\python\virtual\Lib\site-packages\dice_elipy_scripts\yml\elipy_bct.yml
-##[ENDGROUP]06:53:47 
+##[endgroup]06:53:47 
 ##[INFO]06:53:48 elipy2 version: 17.2.7410
 ##[INFO]06:53:48 dice_elipy_scripts version: 10.0.10706
 ##[group]06:53:48 Setup build environment
@@ -91,7 +91,7 @@ Skipping clink init for automation build.
 ##[INFO]06:53:51 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]06:53:52 Confirmed enabled licensee is: BattlefieldGame
 ##[INFO]06:53:52 Skipping setting licensee as ['BattlefieldGame'] already enabled
-##[ENDGROUP]06:53:52 
+##[endgroup]06:53:52 
 ##[INFO]06:53:52 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[group]06:53:52 Run external command: F:\dev\TnT\Build\Framework\bin\eapm.exe credstore -user:***@ea.com -password:%EAPM_PASSWORD% https://packages.ea.com/api/v2/ --use-package-server
 ##[COMMAND]06:53:52 Running external command: F:\dev\TnT\Build\Framework\bin\eapm.exe credstore -user:***@ea.com -password:%EAPM_PASSWORD% https://packages.ea.com/api/v2/ --use-package-server
@@ -104,7 +104,7 @@ Credential for https://packages.ea.com/api/v2/ added.
 ##[INFO]06:53:55 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]06:53:55 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]06:53:56 External command finished with exit code: 0
-##[ENDGROUP]06:53:56 
+##[endgroup]06:53:56 
 ##[INFO]06:53:56 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]06:53:56 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]06:53:56 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
@@ -1064,7 +1064,7 @@ Arguments: -loglevel:Minimal -usestderr -p4pathfirst -sanitizefbconfigs -cachedi
     [nant 9.01.00 (.NET 6.0.14)] BUILD SUCCEEDED (00:07:59)
 ##[INFO]07:02:00 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]07:02:00 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
-##[ENDGROUP]07:02:00 
+##[endgroup]07:02:00 
 ##[INFO]07:02:00 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]07:02:00 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]07:02:01 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
@@ -5545,7 +5545,7 @@ C:\ProgramData\chocolatey\bin\handle.exe
 
 ##[INFO]08:23:33 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]08:23:33 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
-##[ENDGROUP]08:23:34 
+##[endgroup]08:23:34 
 ##[INFO]08:23:34 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]08:23:34 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]08:23:35 "C:\Program Files\Perforce\p4.exe" -G -p ssl:1318.p4one.ea.com:1999 -u DICE\*** -c BCT_Preflight_trunk-code-dev_bct-pctr-ss-ekjt_8-data-disk revert -c default -w //...
