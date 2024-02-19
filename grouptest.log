@@ -42,14 +42,14 @@ Skipping clink init for automation build.
 [INFO] [Mon 02/12/2024,  6:53:45.63] Calling `F:\dev\Python\virtual\Scripts\activate`...
 
 [INFO] [Mon 02/12/2024,  6:53:45.65] Done!
-##[GROUP]06:53:47 Load ELIPY config file
+##[group]06:53:47 Load ELIPY config file
 ##[WARNING]06:53:47 Got python\virtual\Lib\site-packages\dice_elipy_scripts\yml\elipy_bct.yml for ELIPY_CONFIG, relative paths must be from %GAME_ROOT%.
 ##[INFO]06:53:47 Found ELIPY config file at F:\dev\python\virtual\Lib\site-packages\dice_elipy_scripts\yml\elipy_bct.yml 
 ##[INFO]06:53:47 Initializing ELIPY2 using config file: F:\dev\python\virtual\Lib\site-packages\dice_elipy_scripts\yml\elipy_bct.yml
 ##[ENDGROUP]06:53:47 
 ##[INFO]06:53:48 elipy2 version: 17.2.7410
 ##[INFO]06:53:48 dice_elipy_scripts version: 10.0.10706
-##[GROUP]06:53:48 Setup build environment
+##[group]06:53:48 Setup build environment
 ##[INFO]06:53:48 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]06:53:48 F:\dev\Python\virtual\Lib\site-packages\elipy2\running_processes.py: Will now see if any process of ['AvalancheCLI.exe', 'msbuild.exe', 'cl.exe', 'FrostyIsoTool.exe', 'Icepick.Service.exe', 'mspdbsrv.exe', 'nant.exe', 'orbis-clang.exe', 'orbis-ctrl.exe', 'orbis-pub-cmd.exe', 'orbis-symupload.exe', 'snowcacheserver.exe', 'Tool.Pipeline_Win64_release_Dll.exe', 'vctip.exe', 'animationapp.exe', 'Icepick.exe', 'fbenvcore.exe', 'eapm.exe'] are running and an attempt to kill them will be done.
 ##[INFO]06:53:48 F:\dev\Python\virtual\Lib\site-packages\elipy2\running_processes.py: Done iterating all running process for tasks to kill.
@@ -93,7 +93,7 @@ Skipping clink init for automation build.
 ##[INFO]06:53:52 Skipping setting licensee as ['BattlefieldGame'] already enabled
 ##[ENDGROUP]06:53:52 
 ##[INFO]06:53:52 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
-##[GROUP]06:53:52 Run external command: F:\dev\TnT\Build\Framework\bin\eapm.exe credstore -user:***@ea.com -password:%EAPM_PASSWORD% https://packages.ea.com/api/v2/ --use-package-server
+##[group]06:53:52 Run external command: F:\dev\TnT\Build\Framework\bin\eapm.exe credstore -user:***@ea.com -password:%EAPM_PASSWORD% https://packages.ea.com/api/v2/ --use-package-server
 ##[COMMAND]06:53:52 Running external command: F:\dev\TnT\Build\Framework\bin\eapm.exe credstore -user:***@ea.com -password:%EAPM_PASSWORD% https://packages.ea.com/api/v2/ --use-package-server
 ##[INFO]06:53:52 Waiting for process to finish...
  [warning] Command line option '-use-package-server' is being used, the server argument (https://packages.ea.com/api/v2/) on command line will be ignored!
@@ -108,7 +108,7 @@ Credential for https://packages.ea.com/api/v2/ added.
 ##[INFO]06:53:56 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]06:53:56 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]06:53:56 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
-##[GROUP]06:53:56 Generate solution for tool release
+##[group]06:53:56 Generate solution for tool release
 ##[INFO]06:53:56 Generate solution for tool release
 ##[INFO]06:53:56 framework_args: ['-D:ondemandp4proxymapfile=C:\\1\\s\\BCT-Staging\\config\\fb\\P4ProtocolOptimalProxyMap.xml', '-D:eaconfig.optimization.ltcg=off']
 Executing: F:\dev\TnT\Build\Framework\bin\nant.exe
@@ -1068,7 +1068,7 @@ Arguments: -loglevel:Minimal -usestderr -p4pathfirst -sanitizefbconfigs -cachedi
 ##[INFO]07:02:00 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]07:02:00 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
 ##[INFO]07:02:01 FB version read from F:\dev\TnT\bin\FrostbiteRelease.txt is 2023-2.Alpha
-##[GROUP]07:02:01 Build solution for tool release
+##[group]07:02:01 Build solution for tool release
 ##[INFO]07:02:01 Build solution for tool release
 Executing: F:\dev\TnT\Build\Framework\bin\nant.exe
 
