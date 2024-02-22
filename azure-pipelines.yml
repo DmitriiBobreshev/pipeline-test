@@ -28,11 +28,13 @@ variables:
     value:  $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: Default
-  # vmImage: 'ubuntu-latest'
+pool: #Default
+  vmImage: 'windows-latest'
 
 steps:
   - powershell: |
       cat $(Build.SourcesDirectory)/grouptest.log
       exit 1
     displayName: 'check err'
+  - powershell: echo 123
+    condition: and( succeeded(), always() ) 
