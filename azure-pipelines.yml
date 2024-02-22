@@ -16,6 +16,10 @@ parameters:
     default: 
       windows: 'windows-latest'
       ubuntu: 'ubuntu-latest'
+  - name: disableNotifications
+    type: boolean
+    default: false
+    displayName: Disable Teams Notifications
 
 variables:
   - name: System.Debug
@@ -37,4 +41,4 @@ steps:
       exit 1
     displayName: 'check err'
   - powershell: echo 123
-    condition: and( succeeded(), always() ) 
+    condition: not(${{ parameters.disableNotifications }})
