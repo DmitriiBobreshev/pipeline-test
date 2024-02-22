@@ -37,8 +37,7 @@ pool: #Default
 
 steps:
   - powershell: |
-      cat $(Build.SourcesDirectory)/grouptest.log
-      exit 1
+      echo 123
     displayName: 'check err'
   - powershell: echo 123
     condition: not(${{ parameters.disableNotifications }})
