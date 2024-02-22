@@ -30,6 +30,8 @@ variables:
     value: 'fear'
   - name: currentDate
     value:  $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
+  - name: skipScanDir
+    value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
 pool: #Default
@@ -37,7 +39,6 @@ pool: #Default
 
 steps:
   - powershell: |
-      echo 123
+      echo $env:SKIPSCANDIR
     displayName: 'check err'
   - powershell: echo 123
-    condition: not(${{ parameters.disableNotifications }})
