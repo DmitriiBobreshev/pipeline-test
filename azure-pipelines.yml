@@ -35,10 +35,7 @@ variables:
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
 pool: #Default
-  vmImage: 'windows-latest'
+  vmImage: 'macos-latest'
 
 steps:
-  - powershell: |
-      echo $env:SKIPSCANDIR
-    displayName: 'check err'
-  - powershell: echo 123
+  - script: openssl --version
