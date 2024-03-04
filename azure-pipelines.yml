@@ -38,4 +38,4 @@ pool: #Default
   vmImage: 'macos-latest'
 
 steps:
-  - script: openssl --version
+  - script: openssl -v
