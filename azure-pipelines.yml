@@ -35,7 +35,7 @@ variables:
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
 pool: #Default
-  vmImage: 'macos-14'
+  vmImage: 'macos-13'
 
 steps:
   - script: xcodebuild -version
