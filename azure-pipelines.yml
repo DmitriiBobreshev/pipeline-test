@@ -34,8 +34,8 @@ variables:
     value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: #Default 
-  vmImage: 'macos-13'
+pool: vmsstest #Default 
+  #vmImage: 'macos-13'
 
 steps:
   - task: UsePythonVersion@0
