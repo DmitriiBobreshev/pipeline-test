@@ -34,11 +34,31 @@ variables:
     value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: vmsstest #Default 
-  #vmImage: 'macos-13'
+pool: #Default 
+  vmImage: 'windows-latest'
 
 steps:
-  - task: UsePythonVersion@0
-    displayName: Use Python 3.11
+  - task: PowerShell@2
+    displayName: LogDoesntScrollToError
     inputs:
-      versionSpec: 3.11
+      targetType: 'inline'
+      script: |
+        $open = 0;
+        for (($i = 0); $i -lt 30000; $i++)
+        {
+          $ran = Get-Random -Maximum 1000;
+          if($ran -lt 333)
+          {
+            if($open -eq 0)
+            {
+              $open = 1;
+              Write-Host "##[group]Beginning of a group "$i;
+            } else { $open = 0; Write-Host "##[endgroup]"; }
+          }
+          Write-Host "Hello World "$i;
+        }
+        if($open -eq 1) { Write-Host "##[endgroup]"; }
+        
+        throw "BIG ERROR"
+      failOnStderr: true
+      pwsh: true
