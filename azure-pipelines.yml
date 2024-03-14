@@ -44,6 +44,9 @@ steps:
       targetType: 'inline'
       script: |
         $open = 0;
+        Write-Host "##[group]Beginning of a group "$i;
+        Write-Host "Hello World ";
+        Write-Host "##[endgroup]";
         for (($i = 0); $i -lt 30000; $i++)
         {
           # $ran = Get-Random -Maximum 1000;
