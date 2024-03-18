@@ -25,7 +25,7 @@ resources:
   repositories:
   - repository: AzureDevOps
     type: git
-    endpoint: AzureDevOps
+    endpoint: AzureDevOps_TEST
     name: AzureDevOps/AzureDevOps
 
 variables:
