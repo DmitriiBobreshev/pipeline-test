@@ -21,13 +21,6 @@ parameters:
     default: false
     displayName: Disable Teams Notifications
 
-resources:
-  repositories:
-  - repository: AzureDevOps
-    type: git
-    endpoint: AzureDevOps_TEST
-    name: AzureDevOps/AzureDevOps
-
 variables:
   - name: System.Debug
     value: true
