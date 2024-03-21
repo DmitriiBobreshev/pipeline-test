@@ -41,7 +41,7 @@ steps:
   - powershell: mkdir testssh
   - powershell: |
       cd testssh
-      $rootDir = pwd;
+      $rootDir = Get-Location
       $baseFile = $rootDir + "base.txt"
       $desiredFileSize = 2*1KB
       $fileCount = 50000
