@@ -23,7 +23,7 @@ parameters:
 
 variables:
   - name: System.Debug
-    value: true
+    value: false
   - name: Agent.Diagnostic
     value: true
   - name: sometextprobably 
@@ -44,7 +44,7 @@ steps:
       $rootDir = Get-Location
       $baseFile = $rootDir.Path + "base.txt"
       $desiredFileSize = 2*1KB
-      $fileCount = 5000
+      $fileCount = 2000
       "start" | Out-File -Filepath $baseFile
       While ($(Get-ChildItem -path $baseFile).Length -lt $desiredFileSize)
       {
