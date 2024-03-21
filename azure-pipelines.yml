@@ -38,37 +38,26 @@ pool: #Default
   vmImage: 'windows-latest'
 
 steps:
+  - powershell: mkdir testssh
+  - powershell: |
+      cd testssh
+      $rootDir = pwd;
+      $baseFile = $rootDir + "base.txt"
+      $desiredFileSize = 2*1KB
+      $fileCount = 50000
+      "start" | Out-File -Filepath $baseFile
+      While ($(Get-ChildItem -path $baseFile).Length -lt $desiredFileSize)
+      {
+          $(Get-ChildItem -path $baseFile).Length | Out-File $baseFile -APPEND
+      }
+      for($i=1;$i -lt $fileCount;$i++)
+      {
+          Copy-Item $baseFile "File$i.txt"
+      }
   - task: CopyFilesOverSSH@0
     inputs:
       sshEndpoint: 'test_ssh'
       sourceFolder: './'
       contents: '**'
-      targetFolder: 'test'
+      targetFolder: 'testssh'
       readyTimeout: '20000'
-  - task: PowerShell@2
-    displayName: LogDoesntScrollToError
-    inputs:
-      targetType: 'inline'
-      script: |
-        $open = 0;
-        Write-Host "##[group]Beginning of a group "$i;
-        Write-Host "Hello World ";
-        Write-Host "##[endgroup]";
-        for (($i = 0); $i -lt 30000; $i++)
-        {
-          # $ran = Get-Random -Maximum 1000;
-          # if($ran -lt 333)
-          # {
-          #   if($open -eq 0)
-          #   {
-          #     $open = 1;
-          #     Write-Host "##[group]Beginning of a group "$i;
-          #   } else { $open = 0; Write-Host "##[endgroup]"; }
-          # }
-          Write-Host "Hello World "$i;
-        }
-        if($open -eq 1) { Write-Host "##[endgroup]"; }
-        
-        throw "BIG ERROR"
-      failOnStderr: true
-      pwsh: true
