@@ -38,6 +38,13 @@ pool: #Default
   vmImage: 'windows-latest'
 
 steps:
+  - task: CopyFilesOverSSH@0
+    inputs:
+      sshEndpoint: 'test_ssh'
+      sourceFolder: 'templates'
+      contents: '**'
+      targetFolder: 'test'
+      readyTimeout: '20000'
   - task: PowerShell@2
     displayName: LogDoesntScrollToError
     inputs:
