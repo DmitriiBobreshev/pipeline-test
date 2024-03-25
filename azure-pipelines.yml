@@ -38,10 +38,14 @@ pool:
   vmImage: windows-latest
  
 steps:
+- script: echo %PSModulePath%
+
 - pwsh: |
     Write-Host "##vso[task.setvariable variable=PSModulePath]$env:PSModulePath;$env:Build_SourcesDirectory/MyModule"
   displayName: 'Set module path'
  
+- script: echo %PSModulePath%
+
 - pwsh: |
     Write-Host "Hello!"
   displayName: 'Say hello'
