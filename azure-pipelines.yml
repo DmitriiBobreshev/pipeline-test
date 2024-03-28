@@ -23,7 +23,7 @@ parameters:
 
 variables:
   - name: System.Debug
-    value: false
+    value: true
   - name: Agent.Diagnostic
     value: true
   - name: sometextprobably 
@@ -38,14 +38,10 @@ pool:
   vmImage: windows-latest
  
 steps:
-- script: echo %PSModulePath%
-
-- pwsh: |
-    Write-Host "##vso[task.setvariable variable=PSModulePath]$env:PSModulePath;$env:Build_SourcesDirectory/MyModule"
-  displayName: 'Set module path'
- 
-- script: echo %PSModulePath%
-
-- pwsh: |
-    Write-Host "Hello!"
-  displayName: 'Say hello'
+- task: NodeTool@0
+  displayName: Install Node version using 'x' in place of minor version
+  inputs:
+    versionSpec: 20.11.1
+    nodejsMirror: https://nodejs.org/dist
+    checkLatest: False
+    force32bit: $[ and(True, eq(variables['Agent.OS'], 'Windows_NT')) ]
