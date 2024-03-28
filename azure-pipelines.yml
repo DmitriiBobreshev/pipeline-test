@@ -44,4 +44,4 @@ steps:
     versionSpec: 20.11.1
     nodejsMirror: https://nodejs.org/dist
     checkLatest: False
-    force32bit: $[ and(True, eq(variables['Agent.OS'], 'Windows_NT')) ]
+    force32bit: and(True, eq(variables['Agent.OS'], 'Windows_NT'))
