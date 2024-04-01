@@ -38,10 +38,8 @@ pool:
   vmImage: windows-latest
  
 steps:
-- task: NodeTool@0
-  displayName: Install Node version using 'x' in place of minor version
+- task: HelmInstaller@0
   inputs:
-    versionSpec: 20.11.1
-    nodejsMirror: https://nodejs.org/dist
-    checkLatest: False
-    force32bit: and(True, eq(variables['Agent.OS'], 'Windows_NT'))
+    helmVersion: '2.14.1'
+    installKubectl: true
+- script: helm -h
