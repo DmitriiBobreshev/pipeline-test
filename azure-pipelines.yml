@@ -42,4 +42,4 @@ steps:
   inputs:
     helmVersion: '2.14.1'
     installKubectl: true
-- script: helm -h
+- script: helm version
