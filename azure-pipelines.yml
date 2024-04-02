@@ -40,7 +40,7 @@ pool:
 steps:
 - task: AzureKeyVault@2
   inputs:
-    azureSubscription: 'build_eng_akvelon'
+    azureSubscription: 'build_eng_spnKey'
     KeyVaultName: 'Akvelon'
     SecretsFilter: '*'
     RunAsPreJob: false
