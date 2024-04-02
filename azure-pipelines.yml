@@ -43,4 +43,4 @@ steps:
     azureSubscription: 'build_eng_akvelon'
     KeyVaultName: 'Akvelon'
     SecretsFilter: '*'
-    RunAsPreJob: true
+    RunAsPreJob: false
