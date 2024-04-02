@@ -38,8 +38,9 @@ pool:
   vmImage: windows-latest
  
 steps:
-- task: HelmInstaller@0
+- task: AzureKeyVault@2
   inputs:
-    helmVersion: '3.13.x'
-    installKubectl: true
-- powershell: helm version  --template="{{.Version}}"
+    azureSubscription: 'build_eng_akvelon'
+    KeyVaultName: 'Akvelon'
+    SecretsFilter: '*'
+    RunAsPreJob: true
