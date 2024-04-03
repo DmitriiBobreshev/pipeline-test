@@ -38,9 +38,9 @@ pool:
   vmImage: windows-latest
  
 steps:
-- task: AzureKeyVault@2
+- task: AzurePowerShell@4
   inputs:
-    azureSubscription: 'build_eng_spnKey'
-    KeyVaultName: 'Akvelon'
-    SecretsFilter: '*'
-    RunAsPreJob: false
+    azureSubscription: 'build_eng_akvelon'
+    ScriptType: 'InlineScript'
+    Inline: 'echo "test"'
+    azurePowerShellVersion: 'LatestVersion'
