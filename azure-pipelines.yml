@@ -38,9 +38,10 @@ pool:
   vmImage: windows-latest
  
 steps:
-- task: AzurePowerShell@4
+- task: AzureFileCopy@5
   inputs:
+    SourcePath: './test.cmd'
     azureSubscription: 'build_eng_akvelon'
-    ScriptType: 'InlineScript'
-    Inline: 'echo "test"'
-    azurePowerShellVersion: 'LatestVersion'
+    Destination: 'AzureBlob'
+    storage: 'bobreshevd'
+    ContainerName: 'test'
