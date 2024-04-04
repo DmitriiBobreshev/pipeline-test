@@ -38,13 +38,13 @@ pool:
   vmImage: windows-latest
  
 steps:
-- task: AzureFileCopy@5
-  inputs:
-    SourcePath: './test.cmd'
-    azureSubscription: 'build_eng_akvelon_spn'
-    Destination: 'AzureBlob'
-    storage: 'bobreshevd'
-    ContainerName: 'test'
+# - task: AzureFileCopy@5
+#   inputs:
+#     SourcePath: './test.cmd'
+#     azureSubscription: 'build_eng_akvelon_spn'
+#     Destination: 'AzureBlob'
+#     storage: 'bobreshevd'
+#     ContainerName: 'test'
 
 - task: AzureWebAppContainer@1
   inputs:
