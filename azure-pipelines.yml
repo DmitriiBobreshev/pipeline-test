@@ -45,3 +45,8 @@ steps:
     Destination: 'AzureBlob'
     storage: 'bobreshevd'
     ContainerName: 'test'
+
+- task: AzureWebAppContainer@1
+  inputs:
+    azureSubscription: 'build_eng_akvelon_spn'
+    appName: "test"
