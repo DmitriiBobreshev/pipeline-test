@@ -1,25 +1,25 @@
 name: '##%C0%BCscript%C0%BEalert(1)%C0%BC/script%C0%BE##1'
 
-parameters:
-  - name: skipFolder
-    type: string
-    default: '^.*Resources(?!CL|Generic|\|$).*$'
-  - name: deploy_all_tasks
-    displayName: Build all tasks for deployment
-    type: boolean
-    default: false
-  - name: nodeVersionList
-    type: object
-    default: [6, 8, 10, 12, 14, 16]
-  - name: imageList
-    type: object
-    default: 
-      windows: 'windows-latest'
-      ubuntu: 'ubuntu-latest'
-  - name: disableNotifications
-    type: boolean
-    default: false
-    displayName: Disable Teams Notifications
+# parameters:
+#   - name: skipFolder
+#     type: string
+#     default: '^.*Resources(?!CL|Generic|\|$).*$'
+#   - name: deploy_all_tasks
+#     displayName: Build all tasks for deployment
+#     type: boolean
+#     default: false
+#   - name: nodeVersionList
+#     type: object
+#     default: [6, 8, 10, 12, 14, 16]
+#   - name: imageList
+#     type: object
+#     default: 
+#       windows: 'windows-latest'
+#       ubuntu: 'ubuntu-latest'
+#   - name: disableNotifications
+#     type: boolean
+#     default: false
+#     displayName: Disable Teams Notifications
 
 variables:
   - name: System.Debug
