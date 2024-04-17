@@ -48,6 +48,14 @@ steps:
 
 - pwsh: |
     $debugPreference = "Continue"
+    $azureRmModules = Get-Module -ListAvailable -Name AzureRM.* | Select-Object Name,Version
+    if ($azureRmModules -and $azureRmModules.Count -gt 0) {
+        Foreach ($azureRmModule in $azureRmModules) {
+            $azureRmModuleName = $azureRmModule.Name
+            Write-Verbose "$azureRmModuleName"
+        }
+    }
+    
     Uninstall-Module -Name Az.Accounts -AllVersions -Force
     Install-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Force -AllowClobber
     Import-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Global -PassThru -Force
