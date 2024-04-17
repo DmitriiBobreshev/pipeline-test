@@ -48,7 +48,8 @@ steps:
 
 - pwsh: |
     $debugPreference = "Continue"
-    Install-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Force -AllowClobber -ErrorAction Stop
+    Install-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Force -AllowClobber
+    Import-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Global -PassThru -Force
 - task: AzurePowerShell@5
   inputs:
     azureSubscription: 'build_eng_spnKey'
