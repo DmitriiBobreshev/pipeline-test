@@ -52,10 +52,10 @@ steps:
     if ($azureRmModules -and $azureRmModules.Count -gt 0) {
         Foreach ($azureRmModule in $azureRmModules) {
             $azureRmModuleName = $azureRmModule.Name
-            Write-Verbose "$azureRmModuleName"
+            echo "$azureRmModuleName"
         }
     }
-    
+
     Uninstall-Module -Name Az.Accounts -AllVersions -Force
     Install-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Force -AllowClobber
     Import-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Global -PassThru -Force
