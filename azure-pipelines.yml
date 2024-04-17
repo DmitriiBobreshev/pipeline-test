@@ -46,7 +46,11 @@ steps:
 #     storage: 'bobreshevd'
 #     ContainerName: 'test'
 
-- task: AzureWebAppContainer@1
+- pwsh: |
+    Install-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Force -AllowClobber -ErrorAction Stop
+- task: AzurePowerShell@5
   inputs:
-    azureSubscription: 'build_eng_akvelon_spn'
-    appName: "test"
+    azureSubscription: 'build_eng_spnKey'
+    ScriptType: 'InlineScript'
+    Inline: 'echo "123"'
+    FailOnStandardError: true
