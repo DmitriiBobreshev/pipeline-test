@@ -57,3 +57,4 @@ steps:
     Inline: 'echo "123"'
     azurePowerShellVersion: 'LatestVersion'
     FailOnStandardError: true
+    pwsh: true
