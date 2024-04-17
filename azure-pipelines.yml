@@ -53,4 +53,5 @@ steps:
     azureSubscription: 'build_eng_spnKey'
     ScriptType: 'InlineScript'
     Inline: 'echo "123"'
+    azurePowerShellVersion: 'LatestVersion'
     FailOnStandardError: true
