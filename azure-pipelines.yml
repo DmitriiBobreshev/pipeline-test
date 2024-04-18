@@ -48,7 +48,7 @@ steps:
 
 - pwsh: |
     $debugPreference = "Continue"
-    echo Get-Module -ListAvailable -Name Az.Accounts 
+    Get-Module -ListAvailable -Name Az.Accounts 
 - task: AzurePowerShell@5
   inputs:
     azureSubscription: 'build_eng_spnKey'
