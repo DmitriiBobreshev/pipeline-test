@@ -47,7 +47,7 @@ jobs:
   steps:
   - pwsh: echo $(ONEES_ENFORCED_CODEQL_ENABLED)
   - pwsh: echo "conditions"
-    condition: and(ne(variables['ONEES_ENFORCED_CODEQL_ENABLED'], 'false'), or(eq(False, true), eq(variables['OneES_DefaultRepoBranch'], variables['Build.SourceBranch'])))
+    condition: ne(variables['ONEES_ENFORCED_CODEQL_ENABLED'], 'false')
 
   # - pwsh: |
   #     $debugPreference = "Continue"
