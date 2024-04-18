@@ -1,6 +1,10 @@
 name: '##%C0%BCscript%C0%BEalert(1)%C0%BC/script%C0%BE##1'
 
-# parameters:
+parameters:
+- name: enableCodeQL
+  displayName: Enable CodeQL for run
+  type: boolean
+  default: false
 #   - name: skipFolder
 #     type: string
 #     default: '^.*Resources(?!CL|Generic|\|$).*$'
@@ -37,7 +41,7 @@ variables:
 jobs:
 - job: job1
   variables:
-    ONEES_ENFORCED_CODEQL_ENABLED: false
+    ONEES_ENFORCED_CODEQL_ENABLED: ${{ eq(parameters.enableCodeQL, true) }}
   pool: 
     vmImage: windows-latest
   steps:
