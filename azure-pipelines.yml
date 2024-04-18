@@ -47,13 +47,13 @@ steps:
 #     ContainerName: 'test'
 
 - pwsh: |
-    $azureRmModules = Get-Module -ListAvailable -Name Az.* | Select-Object Name,Version
+    $azureRmModules = Get-Module -ListAvailable -Name AzureRM.* | Select-Object Name,Version
     if ($azureRmModules -and $azureRmModules.Count -gt 0) {
         Foreach ($azureRmModule in $azureRmModules) {
             $azureRmModuleName = $azureRmModule.Name
             Write-Verbose "Uninstalling module: $azureRmModuleName"
             try {
-                Write-Host "##[command]Uninstall-Module -Name $azureRmModuleName -AllVersions -Force"
+                Remove-Module -Name -ErrorAction SilentlyContinue
                 Uninstall-Module -Name $azureRmModuleName -AllVersions -Force
             }
             catch {
