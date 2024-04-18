@@ -47,7 +47,10 @@ steps:
 #     ContainerName: 'test'
 
 - pwsh: |
-    $azureRmModules = Get-Module -ListAvailable -Name Az.* | Select-Object Name,Version
+    $debugPreference = "Continue"
+    $azureRmModules = Get-Module -ListAvailable -Name Az* | Select-Object Name,Version
+    echo $azureRmModules
+    
     if ($azureRmModules -and $azureRmModules.Count -gt 0) {
         Foreach ($azureRmModule in $azureRmModules) {
             $azureRmModuleName = $azureRmModule.Name
