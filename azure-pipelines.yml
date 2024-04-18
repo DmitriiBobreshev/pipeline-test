@@ -34,21 +34,16 @@ variables:
     value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: #Default
-  vmImage: windows-latest
+pool: Default
+  # vmImage: windows-latest
  
 steps:
-# - task: AzureFileCopy@5
-#   inputs:
-#     SourcePath: './test.cmd'
-#     azureSubscription: 'build_eng_akvelon_spn'
-#     Destination: 'AzureBlob'
-#     storage: 'bobreshevd'
-#     ContainerName: 'test'
-
 - pwsh: |
     $debugPreference = "Continue"
-    Get-Module -ListAvailable -Name Az.Accounts 
+    echo Get-Module -ListAvailable -Name Az.Accounts 
+    # Install-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Force -AllowClobber
+    # Import-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Global -PassThru -Force
+    # Uninstall-AzureRm
 - task: AzurePowerShell@5
   inputs:
     azureSubscription: 'build_eng_spnKey'
