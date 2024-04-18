@@ -34,8 +34,8 @@ variables:
     value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool:
-  vmImage: windows-latest
+pool: Default
+  # vmImage: windows-latest
  
 steps:
 # - task: AzureFileCopy@5
@@ -48,26 +48,7 @@ steps:
 
 - pwsh: |
     $debugPreference = "Continue"
-    $azureRmModules = Get-Module -ListAvailable -Name Az* | Select-Object Name,Version
-    echo $azureRmModules
-    
-    if ($azureRmModules -and $azureRmModules.Count -gt 0) {
-        Foreach ($azureRmModule in $azureRmModules) {
-            $azureRmModuleName = $azureRmModule.Name
-            Write-Verbose "Uninstalling module: $azureRmModuleName"
-            try {
-                Remove-Module -Name -ErrorAction SilentlyContinue
-                Uninstall-Module -Name $azureRmModuleName -AllVersions -Force
-            }
-            catch {
-                Write-Verbose "Failed to uninstall module: $azureRmModuleName"
-            }
-        }
-    }
-
-    Install-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Force -AllowClobber
-    Import-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Global -PassThru -Force
-    Uninstall-AzureRm
+    echo Get-Module -ListAvailable -Name Az.Accounts 
 - task: AzurePowerShell@5
   inputs:
     azureSubscription: 'build_eng_spnKey'
