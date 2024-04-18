@@ -34,21 +34,28 @@ variables:
     value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: Default
-  # vmImage: windows-latest
- 
-steps:
-- pwsh: |
-    $debugPreference = "Continue"
-    echo Get-Module -ListAvailable -Name Az.Accounts 
-    # Install-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Force -AllowClobber
-    # Import-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Global -PassThru -Force
-    # Uninstall-AzureRm
-- task: AzurePowerShell@5
-  inputs:
-    azureSubscription: 'build_eng_spnKey'
-    ScriptType: 'InlineScript'
-    Inline: 'echo "123"'
-    azurePowerShellVersion: 'LatestVersion'
-    FailOnStandardError: true
-    pwsh: true
+jobs:
+- job: job1
+  variables:
+    ONEES_ENFORCED_CODEQL_ENABLED: false
+  pool: 
+    vmImage: windows-latest
+  steps:
+  - pwsh: echo $(ONEES_ENFORCED_CODEQL_ENABLED)
+  - pwsh: echo "conditions"
+    condition: and(ne(variables['ONEES_ENFORCED_CODEQL_ENABLED'], 'false'), or(eq(False, true), eq(variables['OneES_DefaultRepoBranch'], variables['Build.SourceBranch'])))
+
+  # - pwsh: |
+  #     $debugPreference = "Continue"
+  #     echo Get-Module -ListAvailable -Name Az.Accounts 
+  #     # Install-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Force -AllowClobber
+  #     # Import-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Global -PassThru -Force
+  #     # Uninstall-AzureRm
+  # - task: AzurePowerShell@5
+  #   inputs:
+  #     azureSubscription: 'build_eng_spnKey'
+  #     ScriptType: 'InlineScript'
+  #     Inline: 'echo "123"'
+  #     azurePowerShellVersion: 'LatestVersion'
+  #     FailOnStandardError: true
+  #     pwsh: true
