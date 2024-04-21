@@ -38,28 +38,13 @@ variables:
     value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-jobs:
-- job: job1
-  variables:
-    ONEES_ENFORCED_CODEQL_ENABLED: ${{ eq(parameters.enableCodeQL, true) }}
-  pool: 
-    vmImage: windows-latest
-  steps:
-  - pwsh: echo $(ONEES_ENFORCED_CODEQL_ENABLED)
-  - pwsh: echo "conditions"
-    condition: ne(variables['ONEES_ENFORCED_CODEQL_ENABLED'], 'false')
 
-  # - pwsh: |
-  #     $debugPreference = "Continue"
-  #     echo Get-Module -ListAvailable -Name Az.Accounts 
-  #     # Install-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Force -AllowClobber
-  #     # Import-Module -Name Az.Accounts -RequiredVersion 2.9.1 -Global -PassThru -Force
-  #     # Uninstall-AzureRm
-  # - task: AzurePowerShell@5
-  #   inputs:
-  #     azureSubscription: 'build_eng_spnKey'
-  #     ScriptType: 'InlineScript'
-  #     Inline: 'echo "123"'
-  #     azurePowerShellVersion: 'LatestVersion'
-  #     FailOnStandardError: true
-  #     pwsh: true
+steps:
+  - task: AzurePowerShell@5
+    inputs:
+      azureSubscription: 'build_eng_akvelon'
+      ScriptType: 'InlineScript'
+      Inline: 'echo "123"'
+      azurePowerShellVersion: 'LatestVersion'
+      FailOnStandardError: true
+      pwsh: true
