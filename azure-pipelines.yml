@@ -42,6 +42,8 @@ variables:
 pool: Default
 
 steps:
+  - pwsh: echo $env:RETIRE_AZURERM_POWERSHELL_MODULE 
+
   - task: AzurePowerShell@5
     inputs:
       azureSubscription: 'build_eng_akvelon'
