@@ -39,16 +39,64 @@ variables:
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
 
-pool: Default
+jobs:
+- job: DefaultPool 
+  pool: Default
+  steps:
+    - pwsh: echo $env:RETIRE_AZURERM_POWERSHELL_MODULE 
 
-steps:
-  - pwsh: echo $env:RETIRE_AZURERM_POWERSHELL_MODULE 
+    - task: AzurePowerShell@5
+      continueOnError: true
+      inputs:
+        azureSubscription: 'build_eng_akvelon'
+        ScriptType: 'InlineScript'
+        Inline: 'echo "123"'
+        azurePowerShellVersion: 'LatestVersion'
+        FailOnStandardError: true
+        pwsh: true
+    - task: AzurePowerShell@5
+      continueOnError: true
+      inputs:
+        azureSubscription: 'build_eng_akvelon'
+        ScriptType: 'InlineScript'
+        Inline: 'echo "123"'
+        azurePowerShellVersion: 'LatestVersion'
+        FailOnStandardError: true
+- job: UbuntuPool 
+  pool: 
+    vmImage: ubuntu-latest
+  steps:
+    - pwsh: echo $env:RETIRE_AZURERM_POWERSHELL_MODULE 
 
-  - task: AzurePowerShell@5
-    inputs:
-      azureSubscription: 'build_eng_akvelon'
-      ScriptType: 'InlineScript'
-      Inline: 'echo "123"'
-      azurePowerShellVersion: 'LatestVersion'
-      FailOnStandardError: true
-      pwsh: true
+    - task: AzurePowerShell@5
+      continueOnError: true
+      inputs:
+        azureSubscription: 'build_eng_akvelon'
+        ScriptType: 'InlineScript'
+        Inline: 'echo "123"'
+        azurePowerShellVersion: 'LatestVersion'
+        FailOnStandardError: true
+        pwsh: true
+- job: WindowsPool 
+  pool: 
+    vmImage: windows-latest
+  steps:
+    - pwsh: echo $env:RETIRE_AZURERM_POWERSHELL_MODULE 
+    - task: AzurePowerShell@5
+      continueOnError: true
+      inputs:
+        azureSubscription: 'build_eng_akvelon'
+        ScriptType: 'InlineScript'
+        Inline: 'echo "123"'
+        azurePowerShellVersion: 'LatestVersion'
+        FailOnStandardError: true
+        pwsh: true
+    - task: AzurePowerShell@5
+      continueOnError: true
+      inputs:
+        azureSubscription: 'build_eng_akvelon'
+        ScriptType: 'InlineScript'
+        Inline: 'echo "123"'
+        azurePowerShellVersion: 'LatestVersion'
+        FailOnStandardError: true
+    
