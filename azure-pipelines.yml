@@ -39,6 +39,8 @@ variables:
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
 
+pool: Default
+
 steps:
   - task: AzurePowerShell@5
     inputs:
