@@ -44,7 +44,7 @@ jobs:
   pool: 
     vmImage: windows-latest
   steps:
-    - pwsh: ls C:\\Modules | ForEach-Object { rm -r $_.FullName }
+    - pwsh: ls C:\\Modules | ForEach-Object { Remove-Item $_.FullName -Recurse -Force }
     - pwsh: |
         $powershellBack = $env:PSModulePath
         $modules = $env:PSModulePath -split ";"
