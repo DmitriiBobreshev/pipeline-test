@@ -49,6 +49,7 @@ jobs:
         $modules = $env:PSModulePath -split ";"
         
         foreach ($p in $modules) {
+          $env:PSModulePath = $p
           Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
 
           $AzModules |
@@ -84,6 +85,7 @@ jobs:
         $modules = $env:PSModulePath -split ";"
         
         foreach ($p in $modules) {
+          $env:PSModulePath = $p
           Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
 
           $AzModules |
