@@ -46,10 +46,6 @@ jobs:
   steps:
     - pwsh: |
         Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
-        ($AzVersions |
-          ForEach-Object {
-            Import-Clixml -Path (Join-Path -Path $_.InstalledLocation -ChildPath PSGetModuleInfo.xml)
-          }).Dependencies.Name | Sort-Object -Descending -Unique -OutVariable AzModules
 
         $AzModules |
           ForEach-Object {
@@ -58,9 +54,6 @@ jobs:
             Uninstall-Module -Name $_ -AllVersions
           }
         
-        Remove-Module -Name Az -ErrorAction SilentlyContinue
-        Uninstall-Module -Name Az -AllVersions
-
         $AzVersion = '3.8.0'
         $AzManagedServiceIdentityVersion = '0.7.3'
 
