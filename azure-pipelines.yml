@@ -45,7 +45,7 @@ jobs:
     vmImage: windows-latest
   steps:
     - pwsh: |
-        Get-InstalledModule -Name Az -AllVersions -OutVariable AzVersions
+        Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
         ($AzVersions |
           ForEach-Object {
             Import-Clixml -Path (Join-Path -Path $_.InstalledLocation -ChildPath PSGetModuleInfo.xml)
