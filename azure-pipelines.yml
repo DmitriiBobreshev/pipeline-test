@@ -45,9 +45,9 @@ jobs:
     vmImage: windows-latest
   steps:
     - powershell: |
-        echo $env:PSModulePat
+        echo $env:PSModulePath
     - pwsh: |
-        echo $env:PSModulePat
+        echo $env:PSModulePath
 
     # - pwsh: |
     #     echo $env:PSModulePat
