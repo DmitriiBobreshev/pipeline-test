@@ -40,28 +40,6 @@ variables:
   #   value: true
 
 jobs:
-- job: DefaultPool 
-  pool: Default
-  steps:
-    - pwsh: echo $env:RETIRE_AZURERM_POWERSHELL_MODULE 
-
-    - task: AzurePowerShell@5
-      continueOnError: true
-      inputs:
-        azureSubscription: 'cix_eng'
-        ScriptType: 'InlineScript'
-        Inline: 'echo "123"'
-        azurePowerShellVersion: 'LatestVersion'
-        FailOnStandardError: true
-        pwsh: true
-    - task: AzurePowerShell@5
-      continueOnError: true
-      inputs:
-        azureSubscription: 'cix_eng'
-        ScriptType: 'InlineScript'
-        Inline: 'echo "123"'
-        azurePowerShellVersion: 'LatestVersion'
-        FailOnStandardError: true
 - job: WindowsPool 
   pool: 
     vmImage: windows-latest
