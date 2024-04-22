@@ -44,55 +44,91 @@ jobs:
   pool: 
     vmImage: windows-latest
   steps:
-    - powershell: |
-        echo $env:PSModulePath
     - pwsh: |
-        echo $env:PSModulePath
-
-    # - pwsh: |
-    #     echo $env:PSModulePat
-
-    #     Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
-
-    #     $AzModules |
-    #       ForEach-Object {
-    #         Remove-Module -Name $_ -ErrorAction SilentlyContinue
-    #         Write-Output "Attempting to uninstall module: $_"
-    #         Uninstall-Module -Name $_ -AllVersions
-    #       }
+        $powershellBack = $env:PSModulePath
+        $modules = $env:PSModulePath -split ";"
         
-    #     $AzVersion = '3.8.0'
-    #     $AzManagedServiceIdentityVersion = '0.7.3'
+        foreach ($p in $modules) {
+          Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
 
-    #     $AzAccountsVersion = '2.9.1'
+          $AzModules |
+            ForEach-Object {
+              Remove-Module -Name $_ -ErrorAction SilentlyContinue
+              Write-Output "Attempting to uninstall module: $_"
+              Uninstall-Module -Name $_ -AllVersions
+            }
+          
+          $AzVersion = '3.8.0'
+          $AzManagedServiceIdentityVersion = '0.7.3'
 
-    #     Install-Module -Name Az -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzVersion
+          $AzAccountsVersion = '2.9.1'
 
-    #     Install-Module -Name Az.ManagedServiceIdentity -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzManagedServiceIdentityVersion
+          Install-Module -Name Az -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzVersion
 
-    #     # Ensure Az.Accounts is installed at the correct version.
-    #     Get-Module -Name Az.Accounts -ListAvailable | Uninstall-Module -Force
-    #     Write-Host "Installing Az.Accounts module $AzAccountsVersion for $PSHOME"
-    #     Install-Module -Name Az.Accounts -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzAccountsVersion
+          Install-Module -Name Az.ManagedServiceIdentity -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzManagedServiceIdentityVersion
 
-    #     # List all Az.* modules installed for debugging purposes
-    #     Write-Host "'Az.*' modules installed:"
-    #     Get-Module -Name 'Az.*' -ListAvailable | Sort-Object -Property 'Name' | Format-Table -Property 'Name', 'PowerShellVersion', 'Version'
-    # - task: AzurePowerShell@5
-    #   continueOnError: true
-    #   inputs:
-    #     azureSubscription: 'cix_eng'
-    #     ScriptType: 'InlineScript'
-    #     Inline: 'echo "123"'
-    #     azurePowerShellVersion: 'LatestVersion'
-    #     FailOnStandardError: true
-    #     pwsh: true
-    # - task: AzurePowerShell@5
-    #   continueOnError: true
-    #   inputs:
-    #     azureSubscription: 'cix_eng'
-    #     ScriptType: 'InlineScript'
-    #     Inline: 'echo "123"'
-    #     azurePowerShellVersion: 'LatestVersion'
-    #     FailOnStandardError: true
+          # Ensure Az.Accounts is installed at the correct version.
+          Get-Module -Name Az.Accounts -ListAvailable | Uninstall-Module -Force
+          Write-Host "Installing Az.Accounts module $AzAccountsVersion for $PSHOME"
+          Install-Module -Name Az.Accounts -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzAccountsVersion
+
+          # List all Az.* modules installed for debugging purposes
+          Write-Host "'Az.*' modules installed:"
+          Get-Module -Name 'Az.*' -ListAvailable | Sort-Object -Property 'Name' | Format-Table -Property 'Name', 'PowerShellVersion', 'Version'
+        }
+
+        $env:PSModulePath = $powershellBack
+
+    - powershell: |
+        $powershellBack = $env:PSModulePath
+        $modules = $env:PSModulePath -split ";"
+        
+        foreach ($p in $modules) {
+          Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
+
+          $AzModules |
+            ForEach-Object {
+              Remove-Module -Name $_ -ErrorAction SilentlyContinue
+              Write-Output "Attempting to uninstall module: $_"
+              Uninstall-Module -Name $_ -AllVersions
+            }
+          
+          $AzVersion = '3.8.0'
+          $AzManagedServiceIdentityVersion = '0.7.3'
+
+          $AzAccountsVersion = '2.9.1'
+
+          Install-Module -Name Az -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzVersion
+
+          Install-Module -Name Az.ManagedServiceIdentity -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzManagedServiceIdentityVersion
+
+          # Ensure Az.Accounts is installed at the correct version.
+          Get-Module -Name Az.Accounts -ListAvailable | Uninstall-Module -Force
+          Write-Host "Installing Az.Accounts module $AzAccountsVersion for $PSHOME"
+          Install-Module -Name Az.Accounts -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzAccountsVersion
+
+          # List all Az.* modules installed for debugging purposes
+          Write-Host "'Az.*' modules installed:"
+          Get-Module -Name 'Az.*' -ListAvailable | Sort-Object -Property 'Name' | Format-Table -Property 'Name', 'PowerShellVersion', 'Version'
+        }
+
+        $env:PSModulePath = $powershellBack
+
+    - task: AzurePowerShell@5
+      continueOnError: true
+      inputs:
+        azureSubscription: 'cix_eng'
+        ScriptType: 'InlineScript'
+        Inline: 'echo "123"'
+        azurePowerShellVersion: 'LatestVersion'
+        FailOnStandardError: true
+        pwsh: true
+    - task: AzurePowerShell@5
+      continueOnError: true
+      inputs:
+        azureSubscription: 'cix_eng'
+        ScriptType: 'InlineScript'
+        Inline: 'echo "123"'
+        azurePowerShellVersion: 'LatestVersion'
+        FailOnStandardError: true
     
