@@ -44,7 +44,7 @@ pool:
 
 steps:
   - powershell: |
-      $rootDir = $(Agent.TempDirectory)/test
+      $rootDir = "$(Agent.TempDirectory)\test"
       New-Item -ItemType "directory" -Path $rootDir
 
       $baseFile = $rootDir + "base.txt"
@@ -68,7 +68,7 @@ steps:
       readyTimeout: '20000'
 
   - powershell: |
-      $rootDir = $(Agent.TempDirectory)/test
+      $rootDir = "$(Agent.TempDirectory)\test"
       New-Item -ItemType "directory" -Path $rootDir
       
       $baseFile = $rootDir + "base.txt"
