@@ -39,97 +39,149 @@ variables:
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
 
-jobs:
-- job: WindowsPool 
-  pool: 
-    vmImage: windows-latest
-  steps:
-    - pwsh: ls C:\\Modules | ForEach-Object { Remove-Item $_.FullName -Recurse -Force }
-    - pwsh: |
-        $powershellBack = $env:PSModulePath
-        $modules = $env:PSModulePath -split ";"
+pool: 
+  vmImage: windows-latest
+
+steps:
+  - powershell: |
+      $rootDir = $(Agent.TempDirectory)/test
+      New-Item -ItemType "directory" -Path $rootDir
+
+      $baseFile = $rootDir + "base.txt"
+      $desiredFileSize = 2*1KB
+      $fileCount = 50000
+      "start" | Out-File -Filepath $baseFile
+      While ($(Get-ChildItem -path $baseFile).Length -lt $desiredFileSize)
+      {
+          $(Get-ChildItem -path $baseFile).Length | Out-File $baseFile -APPEND
+      }
+      for($i=1;$i -lt $fileCount;$i++)
+      {
+          Copy-Item $baseFile "File$i.txt"
+      }
+  - task: CopyFilesOverSSH@0
+    inputs:
+      sshEndpoint: 'test_ssh'
+      sourceFolder: 'test'
+      contents: '**'
+      targetFolder: 'test'
+      readyTimeout: '20000'
+
+  - powershell: |
+      $rootDir = $(Agent.TempDirectory)/test
+      New-Item -ItemType "directory" -Path $rootDir
+      
+      $baseFile = $rootDir + "base.txt"
+      $desiredFileSize = 2*1KB
+      $fileCount = 50000
+      "start" | Out-File -Filepath $baseFile
+      While ($(Get-ChildItem -path $baseFile).Length -lt $desiredFileSize)
+      {
+          $(Get-ChildItem -path $baseFile).Length | Out-File $baseFile -APPEND
+      }
+      for($i=1;$i -lt $fileCount;$i++)
+      {
+          Copy-Item $baseFile "File$i_results.txt"
+      }
+  - task: CopyFilesOverSSH@0
+    inputs:
+      sshEndpoint: 'test_ssh'
+      sourceFolder: 'test2'
+      contents: '*_results.txt'
+      targetFolder: 'test2'
+      readyTimeout: '20000'
+
+# jobs:
+# - job: WindowsPool 
+#   pool: 
+#     vmImage: windows-latest
+#   steps:
+#     - pwsh: ls C:\\Modules | ForEach-Object { Remove-Item $_.FullName -Recurse -Force }
+#     - pwsh: |
+#         $powershellBack = $env:PSModulePath
+#         $modules = $env:PSModulePath -split ";"
         
-        foreach ($p in $modules) {
-          $env:PSModulePath = $p
-          Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
+#         foreach ($p in $modules) {
+#           $env:PSModulePath = $p
+#           Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
 
-          $AzModules |
-            ForEach-Object {
-              Remove-Module -Name $_ -ErrorAction SilentlyContinue
-              Write-Output "Attempting to uninstall module: $_"
-              Uninstall-Module -Name $_ -AllVersions
-            }
-        }
+#           $AzModules |
+#             ForEach-Object {
+#               Remove-Module -Name $_ -ErrorAction SilentlyContinue
+#               Write-Output "Attempting to uninstall module: $_"
+#               Uninstall-Module -Name $_ -AllVersions
+#             }
+#         }
 
-        $env:PSModulePath = $powershellBack
-        $AzVersion = '3.8.0'
-        $AzManagedServiceIdentityVersion = '0.7.3'
+#         $env:PSModulePath = $powershellBack
+#         $AzVersion = '3.8.0'
+#         $AzManagedServiceIdentityVersion = '0.7.3'
 
-        $AzAccountsVersion = '2.9.1'
+#         $AzAccountsVersion = '2.9.1'
 
-        Install-Module -Name Az -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzVersion
+#         Install-Module -Name Az -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzVersion
 
-        Install-Module -Name Az.ManagedServiceIdentity -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzManagedServiceIdentityVersion
+#         Install-Module -Name Az.ManagedServiceIdentity -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzManagedServiceIdentityVersion
 
-        # Ensure Az.Accounts is installed at the correct version.
-        Get-Module -Name Az.Accounts -ListAvailable | Uninstall-Module -Force
-        Write-Host "Installing Az.Accounts module $AzAccountsVersion for $PSHOME"
-        Install-Module -Name Az.Accounts -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzAccountsVersion
+#         # Ensure Az.Accounts is installed at the correct version.
+#         Get-Module -Name Az.Accounts -ListAvailable | Uninstall-Module -Force
+#         Write-Host "Installing Az.Accounts module $AzAccountsVersion for $PSHOME"
+#         Install-Module -Name Az.Accounts -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzAccountsVersion
 
-        # List all Az.* modules installed for debugging purposes
-        Write-Host "'Az.*' modules installed:"
-        Get-Module -Name 'Az.*' -ListAvailable | Sort-Object -Property 'Name' | Format-Table -Property 'Name', 'PowerShellVersion', 'Version'
+#         # List all Az.* modules installed for debugging purposes
+#         Write-Host "'Az.*' modules installed:"
+#         Get-Module -Name 'Az.*' -ListAvailable | Sort-Object -Property 'Name' | Format-Table -Property 'Name', 'PowerShellVersion', 'Version'
 
-    - powershell: |
-        $powershellBack = $env:PSModulePath
-        $modules = $env:PSModulePath -split ";"
+#     - powershell: |
+#         $powershellBack = $env:PSModulePath
+#         $modules = $env:PSModulePath -split ";"
         
-        foreach ($p in $modules) {
-          $env:PSModulePath = $p
-          Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
+#         foreach ($p in $modules) {
+#           $env:PSModulePath = $p
+#           Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
 
-          $AzModules |
-            ForEach-Object {
-              Remove-Module -Name $_ -ErrorAction SilentlyContinue
-              Write-Output "Attempting to uninstall module: $_"
-              Uninstall-Module -Name $_ -AllVersions
-            }
-        }
+#           $AzModules |
+#             ForEach-Object {
+#               Remove-Module -Name $_ -ErrorAction SilentlyContinue
+#               Write-Output "Attempting to uninstall module: $_"
+#               Uninstall-Module -Name $_ -AllVersions
+#             }
+#         }
 
-        $env:PSModulePath = $powershellBack
-        $AzVersion = '3.8.0'
-        $AzManagedServiceIdentityVersion = '0.7.3'
+#         $env:PSModulePath = $powershellBack
+#         $AzVersion = '3.8.0'
+#         $AzManagedServiceIdentityVersion = '0.7.3'
 
-        $AzAccountsVersion = '2.9.1'
+#         $AzAccountsVersion = '2.9.1'
 
-        Install-Module -Name Az -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzVersion
+#         Install-Module -Name Az -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzVersion
 
-        Install-Module -Name Az.ManagedServiceIdentity -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzManagedServiceIdentityVersion
+#         Install-Module -Name Az.ManagedServiceIdentity -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzManagedServiceIdentityVersion
 
-        # Ensure Az.Accounts is installed at the correct version.
-        Get-Module -Name Az.Accounts -ListAvailable | Uninstall-Module -Force
-        Write-Host "Installing Az.Accounts module $AzAccountsVersion for $PSHOME"
-        Install-Module -Name Az.Accounts -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzAccountsVersion
+#         # Ensure Az.Accounts is installed at the correct version.
+#         Get-Module -Name Az.Accounts -ListAvailable | Uninstall-Module -Force
+#         Write-Host "Installing Az.Accounts module $AzAccountsVersion for $PSHOME"
+#         Install-Module -Name Az.Accounts -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzAccountsVersion
 
-        # List all Az.* modules installed for debugging purposes
-        Write-Host "'Az.*' modules installed:"
-        Get-Module -Name 'Az.*' -ListAvailable | Sort-Object -Property 'Name' | Format-Table -Property 'Name', 'PowerShellVersion', 'Version'
+#         # List all Az.* modules installed for debugging purposes
+#         Write-Host "'Az.*' modules installed:"
+#         Get-Module -Name 'Az.*' -ListAvailable | Sort-Object -Property 'Name' | Format-Table -Property 'Name', 'PowerShellVersion', 'Version'
 
-    - task: AzurePowerShell@5
-      continueOnError: true
-      inputs:
-        azureSubscription: 'cix_eng'
-        ScriptType: 'InlineScript'
-        Inline: 'echo "123"'
-        azurePowerShellVersion: 'LatestVersion'
-        FailOnStandardError: true
-        pwsh: true
-    - task: AzurePowerShell@5
-      continueOnError: true
-      inputs:
-        azureSubscription: 'cix_eng'
-        ScriptType: 'InlineScript'
-        Inline: 'echo "123"'
-        azurePowerShellVersion: 'LatestVersion'
-        FailOnStandardError: true
+#     - task: AzurePowerShell@5
+#       continueOnError: true
+#       inputs:
+#         azureSubscription: 'cix_eng'
+#         ScriptType: 'InlineScript'
+#         Inline: 'echo "123"'
+#         azurePowerShellVersion: 'LatestVersion'
+#         FailOnStandardError: true
+#         pwsh: true
+#     - task: AzurePowerShell@5
+#       continueOnError: true
+#       inputs:
+#         azureSubscription: 'cix_eng'
+#         ScriptType: 'InlineScript'
+#         Inline: 'echo "123"'
+#         azurePowerShellVersion: 'LatestVersion'
+#         FailOnStandardError: true
     
