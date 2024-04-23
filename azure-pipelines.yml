@@ -44,50 +44,97 @@ pool:
 
 steps:
   - powershell: |
-      $rootDir = "$(Agent.TempDirectory)\test"
-      New-Item -ItemType "directory" -Path $rootDir
+      function New-TestData {
+          [CmdletBinding()]
+          param (
+              [Parameter(Mandatory)]
+              [ValidateScript({Test-Path $_})]
+              [String]$RootFolder,
 
-      $baseFile = $rootDir + "base.txt"
-      $desiredFileSize = 2*1KB
-      $fileCount = 50000
-      "start" | Out-File -Filepath $baseFile
-      While ($(Get-ChildItem -path $baseFile).Length -lt $desiredFileSize)
-      {
-          $(Get-ChildItem -path $baseFile).Length | Out-File $baseFile -APPEND
+              # How many subfolders should be created
+              [Parameter(Mandatory=$false)]
+              [int]
+              $Level = 3,
+
+              # Root Elements
+              [Parameter(Mandatory=$false)]
+              [String[]]
+              $FolderNameArr = @("Dep1","Dep2","Dep3"),
+
+              # File Count per folder
+              [Parameter(Mandatory=$false)]
+              [int]
+              $FileCount = 32,
+
+              # File Extension List
+              [Parameter(Mandatory=$false)]
+              [String[]]
+              $FileExtensionArr = @("txt","csv"),
+
+              # String Length
+              [Parameter(Mandatory=$false)]
+              [int]
+              $StringLength = 16
+          )
+          
+          begin {
+              function Get-RandomString {
+                  param (
+                      # String Length
+                      [Parameter(Mandatory=$false)]
+                      [int]
+                      $StringLength = 16
+                  )
+                  $arr = 97..122
+                  $str = ""
+                  1..$StringLength | ForEach-Object {
+                      $str += [char](Get-Random $arr)
+                  }
+                  return $str
+              }
+          }
+          
+          process {
+              foreach ($folder in $FolderNameArr) {
+                  $newElement = Join-Path -Path $RootFolder -ChildPath $folder
+                  1..$Level | ForEach-Object {
+                      $folderName = Get-RandomString -StringLength $StringLength
+                      $newElement = Join-Path -Path $newElement -ChildPath $folderName
+                      
+                      if ($_ -eq $Level) {
+                          1..$FileCount | ForEach-Object {
+                              $newFileName = "$(Get-RandomString)" + "." + "$($FileExtensionArr | Get-Random)"
+                              $newFilePath = Join-Path $newElement -ChildPath $newFileName
+                              #$newFilePath = ($newFilePath -replace 'E:','\\?\E:\\')
+                              #Write-Host $newFilePath
+                              New-Item (split-path -Path $newFilePath -Parent) -ItemType Directory -Force
+                              fsutil file createNew $newFilePath 26214400
+                          }
+                      }
+                  }
+              }
+          }
+          
+          end {
+          }
       }
-      for($i=1;$i -lt $fileCount;$i++)
-      {
-          Copy-Item $baseFile "File$i.txt"
-      }
+      New-TestData -RootFolder $(Agent.TempDirectory)\test -Level 5 -FileCount 320 -StringLength 25 -FolderNameArr @("Dev","Prod")
+      New-TestData -RootFolder $(Agent.TempDirectory)\test2 -Level 5 -FileCount 320 -StringLength 25 -FolderNameArr @("Dev2","Prod2")
+
+
   - task: CopyFilesOverSSH@0
     inputs:
       sshEndpoint: 'test_ssh'
-      sourceFolder: 'test'
+      sourceFolder: '$(Agent.TempDirectory)\test'
       contents: '**'
       targetFolder: 'test'
       readyTimeout: '20000'
 
-  - powershell: |
-      $rootDir = "$(Agent.TempDirectory)\test2"
-      New-Item -ItemType "directory" -Path $rootDir
-      
-      $baseFile = $rootDir + "base.txt"
-      $desiredFileSize = 2*1KB
-      $fileCount = 50000
-      "start" | Out-File -Filepath $baseFile
-      While ($(Get-ChildItem -path $baseFile).Length -lt $desiredFileSize)
-      {
-          $(Get-ChildItem -path $baseFile).Length | Out-File $baseFile -APPEND
-      }
-      for($i=1;$i -lt $fileCount;$i++)
-      {
-          Copy-Item $baseFile "File$i_results.txt"
-      }
   - task: CopyFilesOverSSH@0
     inputs:
       sshEndpoint: 'test_ssh'
-      sourceFolder: 'test2'
-      contents: '*_results.txt'
+      sourceFolder: '$(Agent.TempDirectory)\test2'
+      contents: '*.csv'
       targetFolder: 'test2'
       readyTimeout: '20000'
 
