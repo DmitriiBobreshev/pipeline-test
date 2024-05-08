@@ -46,7 +46,7 @@ steps:
   - task: AzurePowerShell@5
     continueOnError: true
     inputs:
-      azureSubscription: 'cix_eng'
+      azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
       ScriptType: 'InlineScript'
       Inline: 'echo "123"'
       azurePowerShellVersion: 'LatestVersion'
@@ -55,7 +55,7 @@ steps:
   - task: AzurePowerShell@5
     continueOnError: true
     inputs:
-      azureSubscription: 'cix_eng'
+      azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
       ScriptType: 'InlineScript'
       Inline: 'echo "123"'
       azurePowerShellVersion: 'LatestVersion'
