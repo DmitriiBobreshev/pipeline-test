@@ -43,193 +43,21 @@ pool:
   vmImage: windows-latest
 
 steps:
-  - powershell: |
-      function New-TestData {
-          [CmdletBinding()]
-          param (
-              [Parameter(Mandatory)]
-              [ValidateScript({Test-Path $_})]
-              [String]$RootFolder,
-
-              # How many subfolders should be created
-              [Parameter(Mandatory=$false)]
-              [int]
-              $Level = 3,
-
-              # Root Elements
-              [Parameter(Mandatory=$false)]
-              [String[]]
-              $FolderNameArr = @("Dep1","Dep2","Dep3"),
-
-              # File Count per folder
-              [Parameter(Mandatory=$false)]
-              [int]
-              $FileCount = 32,
-
-              # File Extension List
-              [Parameter(Mandatory=$false)]
-              [String[]]
-              $FileExtensionArr = @("txt","csv"),
-
-              # String Length
-              [Parameter(Mandatory=$false)]
-              [int]
-              $StringLength = 16
-          )
-          
-          begin {
-              function Get-RandomString {
-                  param (
-                      # String Length
-                      [Parameter(Mandatory=$false)]
-                      [int]
-                      $StringLength = 16
-                  )
-                  $arr = 97..122
-                  $str = ""
-                  1..$StringLength | ForEach-Object {
-                      $str += [char](Get-Random $arr)
-                  }
-                  return $str
-              }
-          }
-          
-          process {
-              foreach ($folder in $FolderNameArr) {
-                  $newElement = Join-Path -Path $RootFolder -ChildPath $folder
-                  1..$Level | ForEach-Object {
-                      $folderName = Get-RandomString -StringLength $StringLength
-                      $newElement = Join-Path -Path $newElement -ChildPath $folderName
-                      
-                      1..$FileCount | ForEach-Object {
-                          $newFileName = "$(Get-RandomString)" + "." + "$($FileExtensionArr | Get-Random)"
-                          $newFilePath = Join-Path $newElement -ChildPath $newFileName
-                          #$newFilePath = ($newFilePath -replace 'E:','\\?\E:\\')
-                          #Write-Host $newFilePath
-                          New-Item (split-path -Path $newFilePath -Parent) -ItemType Directory -Force
-                          fsutil file createNew $newFilePath 1024
-                      }
-                  }
-              }
-          }
-          
-          end {
-          }
-      }
-      New-Item -ItemType "directory" -Path "$(Agent.TempDirectory)\test"
-      New-Item -ItemType "directory" -Path "$(Agent.TempDirectory)\test2"
-
-      New-TestData -RootFolder "$(Agent.TempDirectory)\test" -Level 2 -FileCount 256 -StringLength 25 -FolderNameArr @("Dev","Prod")
-      New-TestData -RootFolder "$(Agent.TempDirectory)\test2" -Level 2 -FileCount 256 -StringLength 25 -FolderNameArr @("Dev2","Prod2")
-
-
-  - task: CopyFilesOverSSH@0
+  - task: AzurePowerShell@5
+    continueOnError: true
     inputs:
-      sshEndpoint: 'test_ssh'
-      sourceFolder: '$(Agent.TempDirectory)\test'
-      contents: '**'
-      targetFolder: 'test'
-      readyTimeout: '20000'
-
-  - task: CopyFilesOverSSH@0
+      azureSubscription: 'cix_eng'
+      ScriptType: 'InlineScript'
+      Inline: 'echo "123"'
+      azurePowerShellVersion: 'LatestVersion'
+      FailOnStandardError: true
+      pwsh: true
+  - task: AzurePowerShell@5
+    continueOnError: true
     inputs:
-      sshEndpoint: 'test_ssh'
-      sourceFolder: '$(Agent.TempDirectory)\test2'
-      contents: '**/*.csv'
-      targetFolder: 'test2'
-      readyTimeout: '20000'
-
-# jobs:
-# - job: WindowsPool 
-#   pool: 
-#     vmImage: windows-latest
-#   steps:
-#     - pwsh: ls C:\\Modules | ForEach-Object { Remove-Item $_.FullName -Recurse -Force }
-#     - pwsh: |
-#         $powershellBack = $env:PSModulePath
-#         $modules = $env:PSModulePath -split ";"
-        
-#         foreach ($p in $modules) {
-#           $env:PSModulePath = $p
-#           Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
-
-#           $AzModules |
-#             ForEach-Object {
-#               Remove-Module -Name $_ -ErrorAction SilentlyContinue
-#               Write-Output "Attempting to uninstall module: $_"
-#               Uninstall-Module -Name $_ -AllVersions
-#             }
-#         }
-
-#         $env:PSModulePath = $powershellBack
-#         $AzVersion = '3.8.0'
-#         $AzManagedServiceIdentityVersion = '0.7.3'
-
-#         $AzAccountsVersion = '2.9.1'
-
-#         Install-Module -Name Az -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzVersion
-
-#         Install-Module -Name Az.ManagedServiceIdentity -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzManagedServiceIdentityVersion
-
-#         # Ensure Az.Accounts is installed at the correct version.
-#         Get-Module -Name Az.Accounts -ListAvailable | Uninstall-Module -Force
-#         Write-Host "Installing Az.Accounts module $AzAccountsVersion for $PSHOME"
-#         Install-Module -Name Az.Accounts -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzAccountsVersion
-
-#         # List all Az.* modules installed for debugging purposes
-#         Write-Host "'Az.*' modules installed:"
-#         Get-Module -Name 'Az.*' -ListAvailable | Sort-Object -Property 'Name' | Format-Table -Property 'Name', 'PowerShellVersion', 'Version'
-
-#     - powershell: |
-#         $powershellBack = $env:PSModulePath
-#         $modules = $env:PSModulePath -split ";"
-        
-#         foreach ($p in $modules) {
-#           $env:PSModulePath = $p
-#           Get-Module -Name Az.* -ListAvailable -OutVariable AzModules
-
-#           $AzModules |
-#             ForEach-Object {
-#               Remove-Module -Name $_ -ErrorAction SilentlyContinue
-#               Write-Output "Attempting to uninstall module: $_"
-#               Uninstall-Module -Name $_ -AllVersions
-#             }
-#         }
-
-#         $env:PSModulePath = $powershellBack
-#         $AzVersion = '3.8.0'
-#         $AzManagedServiceIdentityVersion = '0.7.3'
-
-#         $AzAccountsVersion = '2.9.1'
-
-#         Install-Module -Name Az -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzVersion
-
-#         Install-Module -Name Az.ManagedServiceIdentity -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzManagedServiceIdentityVersion
-
-#         # Ensure Az.Accounts is installed at the correct version.
-#         Get-Module -Name Az.Accounts -ListAvailable | Uninstall-Module -Force
-#         Write-Host "Installing Az.Accounts module $AzAccountsVersion for $PSHOME"
-#         Install-Module -Name Az.Accounts -Scope AllUsers -AllowClobber -Force -SkipPublisherCheck -RequiredVersion $AzAccountsVersion
-
-#         # List all Az.* modules installed for debugging purposes
-#         Write-Host "'Az.*' modules installed:"
-#         Get-Module -Name 'Az.*' -ListAvailable | Sort-Object -Property 'Name' | Format-Table -Property 'Name', 'PowerShellVersion', 'Version'
-
-#     - task: AzurePowerShell@5
-#       continueOnError: true
-#       inputs:
-#         azureSubscription: 'cix_eng'
-#         ScriptType: 'InlineScript'
-#         Inline: 'echo "123"'
-#         azurePowerShellVersion: 'LatestVersion'
-#         FailOnStandardError: true
-#         pwsh: true
-#     - task: AzurePowerShell@5
-#       continueOnError: true
-#       inputs:
-#         azureSubscription: 'cix_eng'
-#         ScriptType: 'InlineScript'
-#         Inline: 'echo "123"'
-#         azurePowerShellVersion: 'LatestVersion'
-#         FailOnStandardError: true
+      azureSubscription: 'cix_eng'
+      ScriptType: 'InlineScript'
+      Inline: 'echo "123"'
+      azurePowerShellVersion: 'LatestVersion'
+      FailOnStandardError: true
     
