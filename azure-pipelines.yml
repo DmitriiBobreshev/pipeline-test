@@ -126,17 +126,17 @@ steps:
   - task: CopyFilesOverSSH@0
     inputs:
       sshEndpoint: 'test_ssh'
-      sourceFolder: '$(Agent.TempDirectory)\test'
-      contents: '**'
-      targetFolder: 'test'
+      sourceFolder: '$(Agent.TempDirectory)\test2'
+      contents: '**/*.csv'
+      targetFolder: 'test2'
       readyTimeout: '20000'
 
   - task: CopyFilesOverSSH@0
     inputs:
       sshEndpoint: 'test_ssh'
-      sourceFolder: '$(Agent.TempDirectory)\test2'
-      contents: '**/*.csv'
-      targetFolder: 'test2'
+      sourceFolder: '$(Agent.TempDirectory)\test'
+      contents: '**'
+      targetFolder: 'test'
       readyTimeout: '20000'
 
 # jobs:
