@@ -119,8 +119,8 @@ steps:
       New-Item -ItemType "directory" -Path "$(Agent.TempDirectory)\test"
       New-Item -ItemType "directory" -Path "$(Agent.TempDirectory)\test2"
 
-      New-TestData -RootFolder "$(Agent.TempDirectory)\test" -Level 2 -FileCount 30 -StringLength 25 -FolderNameArr @("Dev","Prod")
-      New-TestData -RootFolder "$(Agent.TempDirectory)\test2" -Level 2 -FileCount 30 -StringLength 25 -FolderNameArr @("Dev2","Prod2")
+      New-TestData -RootFolder "$(Agent.TempDirectory)\test" -Level 2 -FileCount 1024 -StringLength 25 -FolderNameArr @("Dev","Prod")
+      New-TestData -RootFolder "$(Agent.TempDirectory)\test2" -Level 2 -FileCount 1024 -StringLength 25 -FolderNameArr @("Dev2","Prod2")
 
 
   - task: CopyFilesOverSSH@0
