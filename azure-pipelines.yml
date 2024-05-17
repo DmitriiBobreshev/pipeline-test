@@ -136,7 +136,7 @@ steps:
       sshEndpoint: 'test_ssh'
       sourceFolder: '$(Agent.TempDirectory)\test'
       contents: '**'
-      #  cleanTargetFolder: true
+      cleanTargetFolder: true
       overwrite: true
       targetFolder: 'test'
       readyTimeout: '20000'
