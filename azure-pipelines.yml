@@ -68,7 +68,6 @@ variables:
           }
         ]
       }
-    readonly: true
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
 
