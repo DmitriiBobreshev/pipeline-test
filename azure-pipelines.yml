@@ -83,7 +83,8 @@ jobs:
           $cleanGdnCbTemplate = $cleanGdnCbTemplate + "$cleanGdnCbTemplate##vso[task.debug]Exit code 0 received from tool 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\\\powershell.exe";
           Write-Host "##vso[task.setvariable variable=GDN_CB_TEMPLATE;isOutput=true]$cleanGdnCbTemplate"
           
-          Write-Host "GDN_CB_TEMPLATE = $cleanGdnCbTemplate"
+          echo "GDN_CB_TEMPLATE = $cleanGdnCbTemplate"
+
         name: SetGuardianArgs
         displayName: SetGuardianArgs
 
@@ -93,7 +94,7 @@ jobs:
     - name: GDN_CB_TEMPLATE
       value: $[ dependencies.job1.outputs['SetGuardianArgs.GDN_CB_TEMPLATE'] ]
     steps: 
-      - pwsh: Write-Host "GDN_CB_TEMPLATE = $(GDN_CB_TEMPLATE)"
+      - pwsh: echo "GDN_CB_TEMPLATE = $(GDN_CB_TEMPLATE)"
 
 # steps:
 #   - powershell: |
