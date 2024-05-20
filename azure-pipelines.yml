@@ -83,12 +83,10 @@ jobs:
           $cleanGdnCbTemplate = $cleanGdnCbTemplate + "##vso[task.debug]Exit code 0 received from tool 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\\\powershell.exe";
           Write-Host "##vso[task.setvariable variable=GDN_CB_TEMPLATE;isOutput=true]$cleanGdnCbTemplate"
           echo "================================="
-          Write-Output "GDN_CB_TEMPLATE = $cleanGdnCbTemplate"
-          echo "GDN_CB_TEMPLATE = $cleanGdnCbTemplate"
-          Write-Output "GDN_CB_TEMPLATE = $(GDN_CB_TEMPLATE)"
-          echo "GDN_CB_TEMPLATE = $(GDN_CB_TEMPLATE)"
-          Write-Output "GDN_CB_TEMPLATE = $(cleanGdnCbTemplate)"
-          echo "GDN_CB_TEMPLATE = $(cleanGdnCbTemplate)"
+          Write-Output "GDN_CB_TEMPLATE1 = $cleanGdnCbTemplate"
+          echo "GDN_CB_TEMPLATE2 = $cleanGdnCbTemplate"
+          Write-Output "GDN_CB_TEMPLATE3 = $(GDN_CB_TEMPLATE)"
+          echo "GDN_CB_TEMPLATE4 = $(GDN_CB_TEMPLATE)"
           
           echo "================================="
 
