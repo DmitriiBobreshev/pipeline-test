@@ -80,7 +80,7 @@ jobs:
     steps:
       - pwsh: |
           $cleanGdnCbTemplate = $env:GDN_CB_TEMPLATE -replace '\r','' -replace '\n',''
-          $cleanGdnCbTemplate = $cleanGdnCbTemplate + "Exit code 0 received from tool 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\\\powershell.exe";
+          $cleanGdnCbTemplate = $cleanGdnCbTemplate + "\n\r##vso[task.debug]Exit code 0 received from tool 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\\\powershell.exe";
           Write-Host "##vso[task.setvariable variable=GDN_CB_TEMPLATE;isOutput=true]newvariableset$cleanGdnCbTemplate"
           echo "================================="
           Write-Output "GDN_CB_TEMPLATE1 = $cleanGdnCbTemplate"
