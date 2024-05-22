@@ -43,23 +43,17 @@ pool:
   vmImage: ubuntu-20.04
 
 steps:
-- task: AzureCLI@2
+- task: DownloadSecureFile@1
+  displayName: "Download key file from secure store"
+  name: googleCertificate
   inputs:
-    azureSubscription: 'CIX_Eng(371d9573-3b58-46e5-8489-aac909ffc94c)'
-    scriptType: 'pscore'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-     Connect-AzAccount
-      Write-Host $subscription_id
-        Write-Host $rg_groupname
-        Write-Host $rg_location
-        Write-Host $aad_group
-      
-      az account set --subscription $subscription_id
-      az account show
-      
-      Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-      # Install-Module -Name Az.Resources -Force -AllowClobber
-      # Install-Module Az -AllowClobber
-      
-      Get-AzADGroup
+    secureFile: 'gmail-385515-59dd21539bdc.json'
+    
+- task: GooglePlayRelease@4
+  inputs:
+    authType: 'JsonFile'
+    serviceAccountKey: '$(googleCertificate.secureFilePath)'
+    applicationId: 'is-app-com'
+    action: 'OnlyStoreListing'
+    track: 'internal'
+    changeLogFile: '*.txt'
