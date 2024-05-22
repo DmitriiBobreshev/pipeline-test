@@ -58,7 +58,7 @@ steps:
       az account show
       
       Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-      Install-Module -Name Az.Resources -Force -AllowClobber
-      Install-Module Az -AllowClobber
+      # Install-Module -Name Az.Resources -Force -AllowClobber
+      # Install-Module Az -AllowClobber
       
       Get-AzADGroup
