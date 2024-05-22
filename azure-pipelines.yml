@@ -49,6 +49,7 @@ steps:
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
+     Connect-AzAccount
       Write-Host $subscription_id
         Write-Host $rg_groupname
         Write-Host $rg_location
