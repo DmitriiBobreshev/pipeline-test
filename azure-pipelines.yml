@@ -40,25 +40,25 @@ variables:
   #   value: true
 
 pool: 
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 
 steps:
-  - task: PowerShell@2
-    displayName: Check installed Helm version
-    inputs:
-      targetType: 'inline'
-      script: |
-        $installedHelmVersion = @( helm version --template="{{.Version}}" )
-        echo $installedHelmVersion
-
-  - task: HelmInstaller@1
-    inputs: 
-      helmVersionToInstall: latest
-  
-  - task: PowerShell@2
-    displayName: Check installed Helm version
-    inputs:
-      targetType: 'inline'
-      script: |
-        $installedHelmVersion = @( helm version --template="{{.Version}}" )
-        echo $installedHelmVersion
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'cix_eng'
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      Write-Host $subscription_id
+        Write-Host $rg_groupname
+        Write-Host $rg_location
+        Write-Host $aad_group
+      
+      az account set --subscription $subscription_id
+      az account show
+      
+      Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+      Install-Module -Name Az.Resources -Force -AllowClobber
+      Install-Module Az -AllowClobber
+      
+      $group = Get-AzADGroup -DisplayName $aad_group
