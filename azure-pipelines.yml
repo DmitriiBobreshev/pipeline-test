@@ -61,4 +61,4 @@ steps:
       Install-Module -Name Az.Resources -Force -AllowClobber
       Install-Module Az -AllowClobber
       
-      $group = Get-AzADGroup -DisplayName $aad_group
+      Get-AzADGroup
