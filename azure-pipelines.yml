@@ -51,8 +51,7 @@ steps:
     
 - task: GooglePlayRelease@4
   inputs:
-    authType: 'JsonFile'
-    serviceAccountKey: '$(googleCertificate.secureFilePath)'
+    serviceConnection: 'google-play-test'
     applicationId: 'is-app-com'
     action: 'OnlyStoreListing'
     track: 'internal'
