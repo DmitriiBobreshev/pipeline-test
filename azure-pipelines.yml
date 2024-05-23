@@ -40,7 +40,7 @@ variables:
   #   value: true
 
 pool: 
-  vmImage: windwos-latest
+  vmImage: windows-latest
 
 steps:
 - powershell: |
