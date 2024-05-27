@@ -43,6 +43,25 @@ pool:
   vmImage: windows-latest
 
 steps:
+
+- task: AzurePowerShell@5
+  continueOnError: true
+  inputs:
+    azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
+    ScriptType: 'InlineScript'
+    Inline: 'echo "123"'
+    azurePowerShellVersion: 'LatestVersion'
+    FailOnStandardError: true
+    pwsh: true
+- task: AzurePowerShell@5
+  continueOnError: true
+  inputs:
+    azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
+    ScriptType: 'InlineScript'
+    Inline: 'echo "123"'
+    azurePowerShellVersion: 'LatestVersion'
+    FailOnStandardError: true
+    
 - task: AzureCloudPowerShellDeployment@1
   inputs:
     azureClassicSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)' 
