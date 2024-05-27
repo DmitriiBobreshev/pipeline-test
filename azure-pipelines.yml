@@ -27,7 +27,7 @@ parameters:
 
 variables:
   - name: System.Debug
-    value: true
+    value: false
   - name: Agent.Diagnostic
     value: false
   - name: sometextprobably 
@@ -44,7 +44,7 @@ pool:
 
 steps:
   - bash: |
-      TOKEN=$(ps -aux | grep bin/bash)
+      TOKEN=$(echo "123")
       printf "##vso[task.setvariable variable=TabStop.SqlToken;issecret=true]$TOKEN"
   - bash: |
       echo $(TabStop.SqlToken)
