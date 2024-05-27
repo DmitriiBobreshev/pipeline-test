@@ -53,5 +53,5 @@ steps:
     ServiceLocation: 'test'
     CsPkg: 'test'
     CsCfg: 'test'
-    slotName: 'Production'
+    slotName: 'Dev'
     AllowUpgrade: false
