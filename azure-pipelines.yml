@@ -17,141 +17,37 @@ variables:
     value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: 
-  vmImage: windows-latest
-  
+pool: Default
+  # vmImage: windows-latest
+ 
 steps:
-  - powershell: |
-      function New-TestData {
-          [CmdletBinding()]
-          param (
-              [Parameter(Mandatory)]
-              [ValidateScript({Test-Path $_})]
-              [String]$RootFolder,
-
-              # How many subfolders should be created
-              [Parameter(Mandatory=$false)]
-              [int]
-              $Level = 3,
-
-              # Root Elements
-              [Parameter(Mandatory=$false)]
-              [String[]]
-              $FolderNameArr = @("Dep1","Dep2","Dep3"),
-
-              # File Count per folder
-              [Parameter(Mandatory=$false)]
-              [int]
-              $FileCount = 32,
-
-              # File Extension List
-              [Parameter(Mandatory=$false)]
-              [String[]]
-              $FileExtensionArr = @("txt","csv"),
-
-              # String Length
-              [Parameter(Mandatory=$false)]
-              [int]
-              $StringLength = 16
-          )
-          
-          begin {
-              function Get-RandomString {
-                  param (
-                      # String Length
-                      [Parameter(Mandatory=$false)]
-                      [int]
-                      $StringLength = 16
-                  )
-                  $arr = 97..122
-                  $str = ""
-                  1..$StringLength | ForEach-Object {
-                      $str += [char](Get-Random $arr)
-                  }
-                  return $str
-              }
-          }
-          
-          process {
-              foreach ($folder in $FolderNameArr) {
-                  $newElement = Join-Path -Path $RootFolder -ChildPath $folder
-                  1..$Level | ForEach-Object {
-                      $folderName = Get-RandomString -StringLength $StringLength
-                      $newElement = Join-Path -Path $newElement -ChildPath $folderName
-                      
-                      1..$FileCount | ForEach-Object {
-                          $newFileName = "$(Get-RandomString)" + "." + "$($FileExtensionArr | Get-Random)"
-                          $newFilePath = Join-Path $newElement -ChildPath $newFileName
-                          #$newFilePath = ($newFilePath -replace 'E:','\\?\E:\\')
-                          #Write-Host $newFilePath
-                          New-Item (split-path -Path $newFilePath -Parent) -ItemType Directory -Force
-                          fsutil file createNew $newFilePath 1024
-                      }
-                  }
-              }
-          }
-          
-          end {
-          }
-      }
-      New-Item -ItemType "directory" -Path "$(Agent.TempDirectory)\test"
-      New-Item -ItemType "directory" -Path "$(Agent.TempDirectory)\test2"
-
-      New-TestData -RootFolder "$(Agent.TempDirectory)\test" -Level 2 -FileCount 64 -StringLength 25 -FolderNameArr @("Dev","Prod")
-      New-TestData -RootFolder "$(Agent.TempDirectory)\test2" -Level 2 -FileCount 64 -StringLength 25 -FolderNameArr @("Dev2","Prod2")
-
-
-  - task: CopyFilesOverSSH@0
-    inputs:
-      sshEndpoint: 'test_ssh'
-      sourceFolder: '$(Agent.TempDirectory)\test'
-      contents: '**'
-      targetFolder: 'test'
-      readyTimeout: '20000'
-
-  - task: CopyFilesOverSSH@0
-    inputs:
-      sshEndpoint: 'test_ssh'
-      sourceFolder: '$(Agent.TempDirectory)\test2'
-      contents: '**/*.csv'
-      targetFolder: 'test2'
-      readyTimeout: '20000'
-  
-# steps:
-#   - bash: |
-#       TOKEN=$(echo "123")
-#       printf "##vso[task.setvariable variable=TabStop.SqlToken;issecret=true]$TOKEN"
-#   - bash: |
-#       echo $(TabStop.SqlToken)
-
-
-# - task: AzurePowerShell@5
-#   continueOnError: true
-#   inputs:
-#     azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
-#     ScriptType: 'InlineScript'
-#     Inline: 'echo "123"'
-#     azurePowerShellVersion: 'LatestVersion'
-#     FailOnStandardError: true
-#     pwsh: true
-# - task: AzurePowerShell@5
-#   continueOnError: true
-#   inputs:
-#     azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
-#     ScriptType: 'InlineScript'
-#     Inline: 'echo "123"'
-#     azurePowerShellVersion: 'LatestVersion'
-#     FailOnStandardError: true
+- task: AzurePowerShell@5
+  continueOnError: true
+  inputs:
+    azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
+    ScriptType: 'InlineScript'
+    Inline: 'echo "123"'
+    azurePowerShellVersion: 'LatestVersion'
+    FailOnStandardError: true
+    pwsh: true
+- task: AzurePowerShell@5
+  continueOnError: true
+  inputs:
+    azureSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
+    ScriptType: 'InlineScript'
+    Inline: 'echo "123"'
+    azurePowerShellVersion: 'LatestVersion'
+    FailOnStandardError: true
     
-# - task: AzureCloudPowerShellDeployment@1
-#   inputs:
-#     azureClassicSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)' 
-#     EnableAdvancedStorageOptions: true
-#     ARMConnectedServiceName: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
-#     ARMStorageAccount: 'iismayilov'
-#     ServiceName: 'test'
-#     ServiceLocation: 'test'
-#     CsPkg: 'test'
-#     CsCfg: 'test'
-#     slotName: 'Dev'
-#     AllowUpgrade: false
+- task: AzureCloudPowerShellDeployment@1
+  inputs:
+    azureClassicSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)' 
+    EnableAdvancedStorageOptions: true
+    ARMConnectedServiceName: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
+    ARMStorageAccount: 'iismayilov'
+    ServiceName: 'test'
+    ServiceLocation: 'test'
+    CsPkg: 'test'
+    CsCfg: 'test'
+    slotName: 'Dev'
+    AllowUpgrade: false
