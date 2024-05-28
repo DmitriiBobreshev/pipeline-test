@@ -39,15 +39,15 @@ steps:
     azurePowerShellVersion: 'LatestVersion'
     FailOnStandardError: true
     
-- task: AzureCloudPowerShellDeployment@1
-  inputs:
-    azureClassicSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)' 
-    EnableAdvancedStorageOptions: true
-    ARMConnectedServiceName: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
-    ARMStorageAccount: 'iismayilov'
-    ServiceName: 'test'
-    ServiceLocation: 'test'
-    CsPkg: 'test'
-    CsCfg: 'test'
-    slotName: 'Dev'
-    AllowUpgrade: false
+# - task: AzureCloudPowerShellDeployment@1
+#   inputs:
+#     azureClassicSubscription: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)' 
+#     EnableAdvancedStorageOptions: true
+#     ARMConnectedServiceName: 'Build_Eng(3f56da7f-5953-4018-8ca8-e20dbfa0a7e2)'
+#     ARMStorageAccount: 'iismayilov'
+#     ServiceName: 'test'
+#     ServiceLocation: 'test'
+#     CsPkg: 'test'
+#     CsCfg: 'test'
+#     slotName: 'Dev'
+#     AllowUpgrade: false
