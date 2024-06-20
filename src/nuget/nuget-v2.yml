@@ -1,0 +1,11 @@
+name: $(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)00
+
+jobs:
+- job: 'Nuget_Win2022'
+  displayName: Windows2022
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'windows-2022'
+  condition: and(succeeded(),  contains(variables.targetPools, 'Windows Server 2022'))
+  steps:
+  - template: nuget-v2-steps.yml

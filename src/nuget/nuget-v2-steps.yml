@@ -1,0 +1,230 @@
+steps:
+- task: NuGetCommand@2
+  displayName: 'Show NuGet Version (i.e. nuget help)'
+  inputs:
+    command: custom
+    arguments: help
+
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet Latest'
+  inputs:
+    versionSpec: '*'
+    checkLatest: true
+
+- task: NuGetCommand@2
+  displayName: 'NuGet locals all -clear'
+  inputs:
+    command: custom
+    arguments: 'locals all -clear -verbosity Detailed'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore |Internal Feed selected + NuGet.org|'
+  inputs:
+    restoreSolution: 'InternalDependency/**/*.sln'
+    vstsFeed: PipelineTasks/PipelineTasks
+    noCache: true
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore |internal public feed selected|'
+  inputs:
+    restoreSolution: 'src/packaging/nuget/nugetv2/Public/packages.BuildCanary-PublicCanary-PublicCanary.config'
+    vstsFeed: PipelineTasks/PipelineTasks
+    includeNuGetOrg: false
+    noCache: true
+    disableParallelProcessing: true
+    restoreDirectory: src/packaging/nuget/nugetv2/Public/packages
+
+- task: NuGetCommand@2
+  displayName: 'NuGet locals all -clear '
+  inputs:
+    command: custom
+    arguments: 'locals all -clear -verbosity Detailed'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore |NuGet.org|'
+  inputs:
+    restoreSolution: 'src/packaging/nuget/nugetv2/Simple/**/*.sln'
+    noCache: true
+
+- task: MSBuild@1
+  displayName: 'Build solution Simple/**/*.sln'
+  inputs:
+    solution: 'src/packaging/nuget/nugetv2/Simple/**/*.sln'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore |NuGet.config internal feed|'
+  inputs:
+    restoreSolution: 'src/packaging/nuget/nugetv2/InternalDependency/**/*.sln'
+    feedsToUse: config
+    nugetConfigPath: src/packaging/nuget/nugetv2/InternalDependency/nuget.config
+    noCache: true
+  continueOnError: true
+
+- task: MSBuild@1
+  displayName: 'Build solution InternalDependency/**/*.sln'
+  inputs:
+    solution: 'src/packaging/nuget/nugetv2/InternalDependency/**/*.sln'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore |NuGet.config external feed|'
+  inputs:
+    restoreSolution: 'src/packaging/nuget/nugetv2/ExternalDependency/**/*.sln'
+    feedsToUse: config
+    nugetConfigPath: src/packaging/nuget/nugetv2/ExternalDependency/nuget.config
+    externalFeedCredentials: 'ABTTestOrg@Private'
+    noCache: true
+  continueOnError: true
+
+- task: MSBuild@1
+  displayName: 'Build solution ExternalDependency/**/*.sln'
+  inputs:
+    solution: 'src/packaging/nuget/nugetv2/ExternalDependency/**/*.sln'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet pack |DateTime|'
+  inputs:
+    command: pack
+    packagesToPack: 'src/packaging/nuget/nugetv2/**/*.nuspec'
+    packDestination: '$(Build.ArtifactStagingDirectory)/Date'
+    versioningScheme: byPrereleaseNumber
+    includeSymbols: true
+    configuration: src/packaging/nuget/NuGetV2/InternalDependency/nuget.config
+    buildProperties: 'CustomPackageName=CustomPackageName$(Agent.JobName)'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push no packages'
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Fake/*.nupkg'
+    publishVstsFeed: PipelineTasks/PipelineTasks
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push |Internal|'
+  inputs:
+    command: push
+    nuGetFeedType: external
+    publishFeedCredentials: 'ABTTestOrg@Private'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Date/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push |public|'
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Date/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    publishVstsFeed: PipelineTasks/PipelineTasks
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push |ABTTestOrg@Public|'
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Date/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: external
+    publishFeedCredentials: 'ABTTestOrg@Public'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push |Internal + SkipDuplicates|'
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Date/*.nupkg'
+    publishVstsFeed: PipelineTasks/PipelineTasks
+    allowPackageConflicts: true
+
+- task: NuGetCommand@2
+  displayName: 'NuGet pack |BuildNumber|'
+  inputs:
+    command: pack
+    packagesToPack: 'src/packaging/nuget/nugetv2/**/*.nuspec'
+    versioningScheme: byBuildNumber
+    includeSymbols: true
+    buildProperties: 'CustomPackageName=CustomPackageName$(Agent.JobName)'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push |External ABTTestOrg@Private|'
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg;!$(Build.ArtifactStagingDirectory)/*.symbols.nupkg'
+    nuGetFeedType: external
+    publishFeedCredentials: 'ABTTestOrg@Private'
+
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 4.3.0'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore |Feed selected + NuGet.org| NuGet 4.3.0'
+  inputs:
+    restoreSolution: 'src/packaging/nuget/nugetv2/Simple/**/*.sln'
+    verbosityRestore: 'Quiet'
+    noCache: true
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore |NuGet.config internal feed| NuGet 4.3.0'
+  inputs:
+    restoreSolution: 'src/packaging/nuget/nugetv2/InternalDependency/**/*.sln'
+    feedsToUse: config
+    nugetConfigPath: src/packaging/nuget/nugetv2/InternalDependency/nuget.config
+    noCache: true
+
+- task: NuGetCommand@2
+  displayName: 'NuGet pack |DateTime| NuGet 4.3.0'
+  inputs:
+    command: pack
+    packagesToPack: '**/*.nuspec'
+    packDestination: '$(Build.ArtifactStagingDirectory)/Date'
+    versioningScheme: byPrereleaseNumber
+    includeSymbols: true
+    requestedMajorVersion: 2
+    requestedMinorVersion: 3
+    requestedPatchVersion: 4
+    buildProperties: 'CustomPackageName=CustomPackageName$(Agent.JobName)'
+    verbosityPack: 'Normal'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push no packages NuGet 4.3.0'
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Fake/*.nupkg'
+    publishVstsFeed: PipelineTasks/PipelineTasks
+    verbosityPush: 'Normal'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push |Internal| NuGet 4.3.0'
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Date/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    publishVstsFeed: PipelineTasks/PipelineTasks
+  enabled: false
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push |Internal + SkipDuplicates| NuGet 4.3.0'
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Date/*.nupkg'
+    publishVstsFeed: PipelineTasks/PipelineTasks
+    allowPackageConflicts: true
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push |External ABTTestOrg@Private | NuGet 4.3.0'
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Date/*.nupkg'
+    nuGetFeedType: external
+    publishFeedCredentials: 'ABTTestOrg@Private'
+  enabled: false
+
+- task: NuGetCommand@2
+  displayName: 'NuGet pack |BuildNumber| NuGet 4.3.0'
+  inputs:
+    command: pack
+    packagesToPack: '**/*.nuspec'
+    versioningScheme: byBuildNumber
+    includeSymbols: true
+    buildProperties: 'CustomPackageName=CustomPackageName$(Agent.JobName)'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push |External ABTTestOrg@Public | NuGet 4.3.0'
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg;!$(Build.ArtifactStagingDirectory)/*.symbols.nupkg'
+    nuGetFeedType: external
+    publishFeedCredentials: 'ABTTestOrg@Public'
+  enabled: false

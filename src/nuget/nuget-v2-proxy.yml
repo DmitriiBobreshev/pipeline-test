@@ -1,0 +1,15 @@
+name: $(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)00
+trigger: none
+
+jobs:
+- job: Nuget_V2Proxy
+  displayName: nugetv2proxy
+  pool: 
+      name: jotaylo
+      demands:
+      - DotNetFramework
+      - msbuild
+      - visualstudio
+      - Cmd
+  steps:
+  - template: nuget-v2-steps.yml
