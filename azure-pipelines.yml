@@ -24,9 +24,9 @@ steps:
   - task: DotNetCoreCLI@2
     displayName: 'NuGet restore |NuGet.config external feed|'
     inputs:
-      projects: 'src/packaging/nuget/nugetv2/ExternalDependency/**/*.sln'
+      projects: 'src/nuget/nugetv2/ExternalDependency/**/*.sln'
       feedsToUse: config
-      nugetConfigPath: src/packaging/nuget/nugetv2/ExternalDependency/nuget.config
+      nugetConfigPath: src/nuget/nugetv2/ExternalDependency/nuget.config
       externalFeedCredentials: 'ABTTestOrg@Private'
       noCache: true
     continueOnError: true
