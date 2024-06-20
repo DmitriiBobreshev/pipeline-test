@@ -22,11 +22,18 @@ pool: # Default
  
 steps:
   - task: DotNetCoreCLI@2
+    inputs:
+      command: 'restore'
+      projects: 'src/nuget/nugetv2/ExternalDependency/**/*.sln'
+      feedsToUse: 'select'
+      vstsFeed: '917e7969-c65a-47e6-a8e8-22958014172d'
+
+  - task: DotNetCoreCLI@2
     displayName: 'NuGet restore |NuGet.config external feed|'
+    continueOnError: true
     inputs:
       projects: 'src/nuget/nugetv2/ExternalDependency/**/*.sln'
       feedsToUse: config
       nugetConfigPath: src/nuget/nugetv2/ExternalDependency/nuget.config
       externalFeedCredentials: 'ABTTestOrg@Private'
       noCache: true
-    continueOnError: true
