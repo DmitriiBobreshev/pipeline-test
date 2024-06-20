@@ -32,6 +32,7 @@ steps:
     displayName: 'NuGet restore |NuGet.config external feed|'
     continueOnError: true
     inputs:
+      command: 'restore'
       projects: 'src/nuget/nugetv2/ExternalDependency/**/*.sln'
       feedsToUse: config
       nugetConfigPath: src/nuget/nugetv2/ExternalDependency/nuget.config
