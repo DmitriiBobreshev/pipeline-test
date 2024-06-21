@@ -1,0 +1,79 @@
+
+#testResultsFormat: 'JUnit' # 'JUnit' | 'NUnit' | 'VSTest' | 'XUnit' | 'CTest'. Alias: testRunner. Required. Test result format. Default: JUnit.
+
+#buildPlatform: # string. Alias: platform. Build Platform. 
+#buildConfiguration: # string. Alias: configuration. Build Configuration. 
+
+steps:
+  - task: PublishTestResults@2
+    displayName: 'JUnit Base results'
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'junit-basic.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      testRunTitle: 'JUnit results'
+  
+  - task: PublishTestResults@2
+    displayName: 'JUnit Merge results'
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'junit-*.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      mergeTestResults: true
+      testRunTitle: 'JUnit Merge results'
+  
+  - task: PublishTestResults@2
+    displayName: 'NUnit Base results'
+    inputs:
+      testResultsFormat: 'NUnit'
+      testResultsFiles: 'nunit-basic.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      testRunTitle: 'NUnit results'
+  
+  - task: PublishTestResults@2
+    displayName: 'XUnit Base results'
+    inputs:
+      testResultsFormat: 'XUnit'
+      testResultsFiles: 'xunit-basic.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      testRunTitle: 'XUnit results'
+  
+  - task: PublishTestResults@2
+    displayName: 'VSTest Base results'
+    inputs:
+      testResultsFormat: 'VSTest'
+      testResultsFiles: 'vstest-basic.trx'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      testRunTitle: 'VSTest results'
+
+  - task: PublishTestResults@2
+    displayName: 'Check failed task on failed test'
+    continueOnError: true 
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'junit-basic.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      failTaskOnFailedTests: true
+      publishRunAttachments: false
+      testRunTitle: 'JUnit results'
+
+  - powershell: |
+      Write-Host "##vso[task.logissue type=error;]Previous task should failed, but it didn't."
+    condition: succeeded()
+    displayName: 'Fail if the previous task succeeded'
+
+  - task: PublishTestResults@2
+    displayName: 'Check failed task when test files not found'
+    continueOnError: true 
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'junit.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      failTaskOnMissingResultsFile: true
+      failTaskOnFailureToPublishResults: true
+      testRunTitle: 'JUnit results'
+
+  - powershell: |
+      Write-Host "##vso[task.logissue type=error;]Previous task should failed, but it didn't."
+    condition: succeeded()
+    displayName: 'Fail if the previous task succeeded'

@@ -17,8 +17,8 @@ variables:
     value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: Default
-  #vmImage: windows-latest
+pool: #Default
+  vmImage: windows-latest
  
 steps:
   # - task: DotNetCoreCLI@2
@@ -28,13 +28,18 @@ steps:
   #     feedsToUse: 'select'
   #     vstsFeed: '917e7969-c65a-47e6-a8e8-22958014172d'
 
-  - task: DotNetCoreCLI@2
-    displayName: 'NuGet restore |NuGet.config external feed|'
-    continueOnError: true
+  - task: PublishTestResults@2
+    displayName: 'JUnit Base results'
     inputs:
-      command: 'restore'
-      projects: 'src/nuget/nugetv2/ExternalDependency/**/*.sln'
-      feedsToUse: config
-      nugetConfigPath: src/nuget/nugetv2/ExternalDependency/nuget.config
-      externalFeedCredentials: 'ABTTestOrg@Private'
-      noCache: true
+      testResultsFormat: 'NUnit'
+      testResultsFiles: 'nunit-basic.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/'
+      testRunTitle: 'JUnit results'
+
+  - task: PublishTestResults@2
+    displayName: 'JUnit Base results'
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'junit-basic.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults❤️'
+      testRunTitle: 'JUnit results'
