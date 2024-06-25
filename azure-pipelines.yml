@@ -18,12 +18,11 @@ variables:
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
 pool: #Default
-  vmImage: windows-latest
- 
+  vmImage: ubuntu-latest
+
+container:
+  image: dmybor/test:latest
+  endpoint: private_dockerhub_connection
+
 steps:
-  - task: AzurePowerShell@5
-    inputs:
-      azureSubscription: 'AzureDevOps_test'
-      ScriptType: 'InlineScript'
-      Inline: 'Set-AzKeyVaultAccessPolicy'
-      azurePowerShellVersion: 'LatestVersion'
+  - script: echo "123"
