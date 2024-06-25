@@ -17,12 +17,18 @@ variables:
     value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: Default
-  #vmImage: windows-latest
+pool: #Default
+  vmImage: windows-latest
 
-container:
-  image: alpine:latest
-  endpoint: private_dockerhub_connection
+# container:
+#   image: alpine:latest
+#   endpoint: private_dockerhub_connection
 
 steps:
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'private_dockerhub_connection'
+      command: 'buildAndPush'
+      repository: 'https://registry.hub.docker.com/'
+      Dockerfile: 'Dockerfile'
   - script: echo "123"
