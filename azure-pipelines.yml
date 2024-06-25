@@ -26,3 +26,4 @@ steps:
       azureSubscription: 'AzureDevOps_test'
       ScriptType: 'InlineScript'
       Inline: 'Set-AzKeyVaultAccessPolicy'
+      azurePowerShellVersion: 'LatestVersion'
