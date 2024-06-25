@@ -18,7 +18,7 @@ variables:
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
 pool: #Default
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 container:
   image: dmybor/test:latest
