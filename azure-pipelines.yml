@@ -17,8 +17,8 @@ variables:
     value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: #Default
-  vmImage: windows-latest
+pool: Default
+  #vmImage: windows-latest
 
 container:
   image: alpine:latest
