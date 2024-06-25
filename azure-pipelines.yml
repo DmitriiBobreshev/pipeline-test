@@ -21,7 +21,7 @@ pool: #Default
   vmImage: windows-latest
 
 container:
-  image: dmybor/test:latest
+  image: alpine:latest
   endpoint: private_dockerhub_connection
 
 steps:
