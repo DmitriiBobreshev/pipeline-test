@@ -18,7 +18,7 @@ variables:
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
 pool: #Default
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 # container:
 #   image: alpine:latest
@@ -37,8 +37,8 @@ jobs:
   - task: AzurePowerShell@5
     inputs:
       azureSubscription: 'AzureDevOps_test'
-      ScriptType: 'FilePath'
-      ScriptPath: 'test.ps1'
+      ScriptType: 'InlineScript'
+      Inline: 'echo hello'
       azurePowerShellVersion: 'OtherVersion'
       preferredAzurePowerShellVersion: '11.3.0'
       pwsh: true
@@ -46,8 +46,8 @@ jobs:
   - task: AzurePowerShell@5
     inputs:
       azureSubscription: 'AzureDevOps_test'
-      ScriptType: 'FilePath'
-      ScriptPath: 'test.ps1'
+      ScriptType: 'InlineScript'
+      Inline: 'echo hello 2'
       azurePowerShellVersion: 'OtherVersion'
       preferredAzurePowerShellVersion: '9.6.0'
       pwsh: true
