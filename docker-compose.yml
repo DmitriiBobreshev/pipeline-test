@@ -1,0 +1,3 @@
+services:
+  hello-server:
+    image: hello-world:linux

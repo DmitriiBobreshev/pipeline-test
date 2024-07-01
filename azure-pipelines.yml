@@ -25,10 +25,8 @@ pool: #Default
 #   endpoint: private_dockerhub_connection
 
 steps:
-  - task: Docker@2
+  - task: DockerCompose@0
     inputs:
-      containerRegistry: 'private_dockerhub_connection'
-      command: 'buildAndPush'
-      repository: 'https://registry.hub.docker.com/'
-      Dockerfile: 'Dockerfile'
-  - script: echo "123"
+      containerregistrytype: 'Azure Container Registry'
+      dockerComposeFile: '**/docker-compose.yml'
+      action: 'Run a Docker Compose command'
