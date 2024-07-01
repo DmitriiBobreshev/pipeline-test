@@ -24,10 +24,30 @@ pool: #Default
 #   image: alpine:latest
 #   endpoint: private_dockerhub_connection
 
-steps:
-  # - script: alias docker="null"
-  - task: DockerCompose@1
+jobs:
+- job: 
+  steps:
+  - task: AzurePowerShell@5
     inputs:
-      containerregistrytype: 'Azure Container Registry'
-      dockerComposeFile: '**/docker-compose.yml'
-      action: 'Run a Docker Compose command'
+      azureSubscription: 'AzureDevOps_test'
+      ScriptType: 'InlineScript'
+      Inline: 'Install-Module -Name Az.Resources -force'
+      preferredAzurePowerShellVersion: '11.3.0'
+      pwsh: true
+  - task: AzurePowerShell@5
+    inputs:
+      azureSubscription: 'AzureDevOps_test'
+      ScriptType: 'FilePath'
+      ScriptPath: 'test.ps1'
+      azurePowerShellVersion: 'OtherVersion'
+      preferredAzurePowerShellVersion: '11.3.0'
+      pwsh: true
+
+  - task: AzurePowerShell@5
+    inputs:
+      azureSubscription: 'AzureDevOps_test'
+      ScriptType: 'FilePath'
+      ScriptPath: 'test.ps1'
+      azurePowerShellVersion: 'OtherVersion'
+      preferredAzurePowerShellVersion: '9.6.0'
+      pwsh: true
