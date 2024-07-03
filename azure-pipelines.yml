@@ -27,27 +27,11 @@ pool: #Default
 jobs:
 - job: 
   steps:
-  - task: AzurePowerShell@5
-    inputs:
-      azureSubscription: 'AzureDevOps_test'
-      ScriptType: 'InlineScript'
-      Inline: 'Install-Module -Name Az.Resources -force'
-      preferredAzurePowerShellVersion: '11.3.0'
-      pwsh: true
-  - task: AzurePowerShell@5
-    inputs:
-      azureSubscription: 'AzureDevOps_test'
-      ScriptType: 'InlineScript'
-      Inline: 'echo hello'
-      azurePowerShellVersion: 'OtherVersion'
-      preferredAzurePowerShellVersion: '11.3.0'
-      pwsh: true
-
-  - task: AzurePowerShell@5
-    inputs:
-      azureSubscription: 'AzureDevOps_test'
-      ScriptType: 'InlineScript'
-      Inline: 'echo hello 2'
-      azurePowerShellVersion: 'OtherVersion'
-      preferredAzurePowerShellVersion: '9.6.0'
-      pwsh: true
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'None'
+        namespace: 'd'
+        command: 'apply'
+        arguments: 'fd'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'
