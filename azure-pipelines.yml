@@ -27,6 +27,7 @@ pool: #Default
 jobs:
 - job: 
   steps:
+    - pwsh: Remove-Item -Recurse -Force $env:SystemDrive + "\Modules"
     - task: AzurePowerShell@5
       inputs:
         azureSubscription: 'AzureDevOps_test'
