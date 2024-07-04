@@ -27,11 +27,10 @@ pool: #Default
 jobs:
 - job: 
   steps:
-    - task: Kubernetes@1
+    - task: AzurePowerShell@5
       inputs:
-        connectionType: 'None'
-        namespace: 'd'
-        command: 'apply'
-        arguments: 'fd'
-        secretType: 'dockerRegistry'
-        containerRegistryType: 'Azure Container Registry'
+        azureSubscription: 'AzureDevOps_test'
+        ScriptType: 'InlineScript'
+        Inline: 'echo "123"'
+        preferredAzurePowerShellVersion: 'LatestVersion'
+        pwsh: true
