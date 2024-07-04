@@ -27,7 +27,9 @@ pool: #Default
 jobs:
 - job: 
   steps:
-    - pwsh: Remove-Item -Recurse -Force $env:SystemDrive + "\Modules"
+    - pwsh: |
+        $mpath = $env:SystemDrive + "\Modules"
+        Remove-Item -Recurse -Force $mpath
     - task: AzurePowerShell@5
       inputs:
         azureSubscription: 'AzureDevOps_test'
