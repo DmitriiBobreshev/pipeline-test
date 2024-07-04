@@ -27,20 +27,20 @@ pool: #Default
 jobs:
 - job: 
   steps:
-    - pwsh: |
-        $mpath = $env:SystemDrive + "\Modules"
-        Remove-Item -Recurse -Force $mpath
-      displayName: Remove Powershell
+    # - pwsh: |
+    #     $mpath = $env:SystemDrive + "\Modules"
+    #     Remove-Item -Recurse -Force $mpath
+    #   displayName: Remove Powershell
     
-    - task: AzurePowerShell@5
-      displayName: Test with Removed powershell
-      continueOnError: true
-      inputs:
-        azureSubscription: 'AzureDevOps_test'
-        ScriptType: 'InlineScript'
-        Inline: 'echo "123"'
-        preferredAzurePowerShellVersion: 'LatestVersion'
-        pwsh: true
+    # - task: AzurePowerShell@5
+    #   displayName: Test with Removed powershell
+    #   continueOnError: true
+    #   inputs:
+    #     azureSubscription: 'AzureDevOps_test'
+    #     ScriptType: 'InlineScript'
+    #     Inline: 'echo "123"'
+    #     preferredAzurePowerShellVersion: 'LatestVersion'
+    #     pwsh: true
 
     - pwsh: Install-Module -Name Az -Force -AllowClobber -ErrorAction Stop -SkipPublisherCheck
       displayName: Install Powershell
