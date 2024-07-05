@@ -43,13 +43,13 @@ while (true)
         while (true) {
             var str = StringGen.GenerateString(1024);
             var key = StringGen.GenerateString(32);
-            messages.Add(str);
+            // messages.Add(str);
 
             var encrMess = AesOperation.EncryptString(key, str);
-            messages.Add(encrMess);
+            // messages.Add(encrMess);
             
             var decrMess = AesOperation.DecryptString(key, encrMess);
-            messages.Add(decrMess);
+            // messages.Add(decrMess);
         }
     }));
 }
