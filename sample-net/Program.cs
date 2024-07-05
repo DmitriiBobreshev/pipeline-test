@@ -9,36 +9,20 @@ var sigintReceived = false;
 
 Console.WriteLine("Waiting for SIGINT/SIGTERM");
 
-Console.CancelKeyPress += (_, ea) =>
+var lists = new List<Task>();
+var messages = new List<string>();
+
+Console.CancelKeyPress += async (_, ea) =>
 {
     // Tell .NET to not terminate the process
     ea.Cancel = true;
     Console.WriteLine("Received SIGINT (Ctrl+C)");
     tcs.SetResult();
     sigintReceived = true;
-    
-    var lists = new List<Thread>();
-    var messages = new List<string>();
-    while (true)
-    {
-        Thread thread1 = new Thread(() => {
-            var str = StringGen.GenerateString(1024);
-            var key = StringGen.GenerateString(32);
-            messages.Add(str);
-
-            var encrMess = AesOperation.EncryptString(key, str);
-            messages.Add(encrMess);
-            
-            var decrMess = AesOperation.DecryptString(key, encrMess);
-            messages.Add(decrMess);
-        });
-
-        lists.Add(thread1);
-        thread1.Start();
-    }
+    await Task.WhenAll(lists);
 };
 
-AppDomain.CurrentDomain.ProcessExit += (_, _) =>
+AppDomain.CurrentDomain.ProcessExit += async (_, _) =>
 {
     if (!sigintReceived)
     {
@@ -49,12 +33,14 @@ AppDomain.CurrentDomain.ProcessExit += (_, _) =>
     {
         Console.WriteLine("Received SIGTERM, ignoring it because already processed SIGINT");
     }
-    
-    var lists = new List<Thread>();
-    var messages = new List<string>();
-    while (true)
-    {
-        Thread thread1 = new Thread(() => {
+    await Task.WhenAll(lists);
+};
+
+
+while (true)
+{
+    lists.Add(Task.Run(() => {
+        while (true) {
             var str = StringGen.GenerateString(1024);
             var key = StringGen.GenerateString(32);
             messages.Add(str);
@@ -64,30 +50,6 @@ AppDomain.CurrentDomain.ProcessExit += (_, _) =>
             
             var decrMess = AesOperation.DecryptString(key, encrMess);
             messages.Add(decrMess);
-        });
-
-        lists.Add(thread1);
-        thread1.Start();
-    }
-};
-
-var lists = new List<Thread>();
-var messages = new List<string>();
-
-while (true)
-{
-    Thread thread1 = new Thread(() => {
-        var str = StringGen.GenerateString(1024);
-        var key = StringGen.GenerateString(32);
-        messages.Add(str);
-
-        var encrMess = AesOperation.EncryptString(key, str);
-        messages.Add(encrMess);
-        
-        var decrMess = AesOperation.DecryptString(key, encrMess);
-        messages.Add(decrMess);
-    });
-
-    lists.Add(thread1);
-    thread1.Start();
+        }
+    }));
 }
