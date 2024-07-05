@@ -13,7 +13,6 @@ public class AesOperation
 
     using (Aes aes = Aes.Create())
     {
-      Console.WriteLine(Encoding.UTF8.GetBytes(key).Length);
       aes.Key = Encoding.UTF8.GetBytes(key);
       aes.IV = iv;
 

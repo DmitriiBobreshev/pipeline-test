@@ -16,6 +16,26 @@ Console.CancelKeyPress += (_, ea) =>
     Console.WriteLine("Received SIGINT (Ctrl+C)");
     tcs.SetResult();
     sigintReceived = true;
+    
+    var lists = new List<Thread>();
+    var messages = new List<string>();
+    while (true)
+    {
+        Thread thread1 = new Thread(() => {
+            var str = StringGen.GenerateString(1024);
+            var key = StringGen.GenerateString(32);
+            messages.Add(str);
+
+            var encrMess = AesOperation.EncryptString(key, str);
+            messages.Add(encrMess);
+            
+            var decrMess = AesOperation.DecryptString(key, encrMess);
+            messages.Add(decrMess);
+        });
+
+        lists.Add(thread1);
+        thread1.Start();
+    }
 };
 
 AppDomain.CurrentDomain.ProcessExit += (_, _) =>
@@ -28,6 +48,26 @@ AppDomain.CurrentDomain.ProcessExit += (_, _) =>
     else
     {
         Console.WriteLine("Received SIGTERM, ignoring it because already processed SIGINT");
+    }
+    
+    var lists = new List<Thread>();
+    var messages = new List<string>();
+    while (true)
+    {
+        Thread thread1 = new Thread(() => {
+            var str = StringGen.GenerateString(1024);
+            var key = StringGen.GenerateString(32);
+            messages.Add(str);
+
+            var encrMess = AesOperation.EncryptString(key, str);
+            messages.Add(encrMess);
+            
+            var decrMess = AesOperation.DecryptString(key, encrMess);
+            messages.Add(decrMess);
+        });
+
+        lists.Add(thread1);
+        thread1.Start();
     }
 };
 
@@ -46,7 +86,6 @@ while (true)
         
         var decrMess = AesOperation.DecryptString(key, encrMess);
         messages.Add(decrMess);
-
     });
 
     lists.Add(thread1);
