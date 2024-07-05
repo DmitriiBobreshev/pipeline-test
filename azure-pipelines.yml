@@ -26,6 +26,7 @@ pool: #Default
 
 jobs:
 - job: 
+  timeoutInMinutes: 10
   steps:
     - powershell: |
         cd sample-net
@@ -33,4 +34,5 @@ jobs:
         ls 
         ls bin
         ls bin/Debug
-        ls bin/Debug/net6.0
+        sudo chmod +x bin/Debug/net6.0/sample-net
+        ./bin/Debug/net6.0/sample-net
