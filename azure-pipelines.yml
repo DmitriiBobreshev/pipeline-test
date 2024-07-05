@@ -27,8 +27,10 @@ pool: #Default
 jobs:
 - job: 
   steps:
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        customCommand: 'clean-install'
-      displayName: "\U0001F4E6 Install npm packages"
+    - powershell: |
+        cd sample-net
+        dotnet build
+        ls 
+        ls bin
+        ls bin/Debug
+        ls bin/Debug/net6.0
