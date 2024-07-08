@@ -17,8 +17,8 @@ variables:
     value: true 
   # - name: ADO_FORCE_USE_PSUNZIP
   #   value: true
-pool: #Default
-  vmImage: ubuntu-latest
+pool: Default
+  #vmImage: ubuntu-latest
 
 # container:
 #   image: alpine:latest
@@ -28,11 +28,4 @@ jobs:
 - job: 
   timeoutInMinutes: 20
   steps:
-    - powershell: |
-        cd sample-net
-        dotnet build
-        ls 
-        ls bin
-        ls bin/Debug
-        sudo chmod +x bin/Debug/net6.0/sample-net
-        ./bin/Debug/net6.0/sample-net
+    - powershell: echo "123"
