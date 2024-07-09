@@ -15,7 +15,7 @@ variables:
     value:  $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
   - name: skipScanDir
     value: true 
-  - name: AGENT_TOOLSDIRECTORY_TEST
+  - name: AGENT_TOOLSDIRECTORY
     value: test1
 pool: Default
   #vmImage: ubuntu-latest
@@ -27,9 +27,9 @@ pool: Default
 jobs:
 - job: 
   variables:
-    - name: AGENT_TOOLSDIRECTORY_TEST
+    - name: AGENT_TOOLSDIRECTORY
       value: test2
   steps:
     - powershell: echo "$env:AGENT_TOOLSDIRECTORY"
       env: 
-        AGENT_TOOLSDIRECTORY_TEST: test3
+        AGENT_TOOLSDIRECTORY: test3
