@@ -17,6 +17,8 @@ variables:
     value: true 
   - name: AGENT_TOOLSDIRECTORY
     value: test1
+  - name: VSTSAGENT_TRACE
+    value: true
 pool: Default
   #vmImage: windows-latest
 
