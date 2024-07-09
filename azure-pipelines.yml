@@ -19,8 +19,8 @@ variables:
     value: test1
   - name: VSTSAGENT_TRACE
     value: true
-pool: Default
-  #vmImage: windows-latest
+pool: #Default
+  vmImage: windows-latest
 
 # container:
 #   image: alpine:latest
