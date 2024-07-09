@@ -15,8 +15,8 @@ variables:
     value:  $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
   - name: skipScanDir
     value: true 
-  # - name: ADO_FORCE_USE_PSUNZIP
-  #   value: true
+  - name: AGENT_TOOLSDIRECTORY_TEST
+    value: test1
 pool: Default
   #vmImage: ubuntu-latest
 
@@ -26,7 +26,10 @@ pool: Default
 
 jobs:
 - job: 
+  variables:
+    - name: AGENT_TOOLSDIRECTORY_TEST
+      value: test2
   steps:
     - powershell: echo "$env:AGENT_TOOLSDIRECTORY"
       env: 
-        AGENT_TOOLSDIRECTORY: /opt/hostedtoolscache
+        AGENT_TOOLSDIRECTORY_TEST: test3
