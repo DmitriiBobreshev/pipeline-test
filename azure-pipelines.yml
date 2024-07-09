@@ -26,6 +26,7 @@ pool: Default
 
 jobs:
 - job: 
-  timeoutInMinutes: 20
   steps:
-    - powershell: echo "123"
+    - powershell: echo "$env:TEST_VAR"
+      env: 
+        TEST_VAR: "testvar"
