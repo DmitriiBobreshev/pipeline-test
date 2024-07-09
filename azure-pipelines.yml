@@ -27,6 +27,6 @@ pool: Default
 jobs:
 - job: 
   steps:
-    - powershell: echo "$env:TEST_VAR"
+    - powershell: echo "$env:AGENT_TOOLSDIRECTORY"
       env: 
-        TEST_VAR: "testvar"
+        AGENT_TOOLSDIRECTORY: /opt/hostedtoolscache
