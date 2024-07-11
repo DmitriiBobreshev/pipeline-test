@@ -20,7 +20,7 @@ variables:
   - name: VSTSAGENT_TRACE
     value: true
 pool: #Default
-  vmImage: macos-latest
+  vmImage: macos-14
 
 # container:
 #   image: alpine:latest
