@@ -20,7 +20,7 @@ variables:
   - name: VSTSAGENT_TRACE
     value: true
 pool: #Default
-  vmImage: macos-14
+  vmImage: windows-latest
 
 # container:
 #   image: alpine:latest
@@ -28,10 +28,5 @@ pool: #Default
 
 jobs:
 - job: 
-  variables:
-    - name: AGENT_TOOLSDIRECTORY
-      value: test2
   steps:
-    - powershell: echo "$env:AGENT_TOOLSDIRECTORY"
-      env: 
-        AGENT_TOOLSDIRECTORY: test3
+    - powershell: echo "##vso[task.logissue type=section]Start findNonUniqueTaskLib"
