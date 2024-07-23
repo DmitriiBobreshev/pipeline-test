@@ -29,4 +29,4 @@ pool: #Default
 jobs:
 - job: 
   steps:
-    - powershell: echo "##vso[task.logissue type=section]Start findNonUniqueTaskLib"
+    - powershell: echo "##section Start findNonUniqueTaskLib"
