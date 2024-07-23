@@ -29,4 +29,8 @@ pool: #Default
 jobs:
 - job: 
   steps:
-    - powershell: echo "##[section] Start findNonUniqueTaskLib"
+    - powershell: |
+        echo "##[section] Start findNonUniqueTaskLib"
+        echo '123142'
+        echo 'asdasdaf'
+        echo '242cacsdas'
