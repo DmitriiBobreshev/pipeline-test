@@ -36,4 +36,4 @@ jobs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'drop'
         publishLocation: 'FilePath'
-        TargetPath: $(TEST)
+        TargetPath: ' \\1\2'
