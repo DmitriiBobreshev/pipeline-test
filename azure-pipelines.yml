@@ -19,6 +19,8 @@ variables:
     value: test1
   - name: VSTSAGENT_TRACE
     value: true
+  - name: TEST
+    value: ' \\1\2'
 pool: #Default
   vmImage: windows-latest
 
@@ -29,8 +31,9 @@ pool: #Default
 jobs:
 - job: 
   steps:
-    - powershell: |
-        echo "##[section] Start findNonUniqueTaskLib"
-        echo '123142'
-        echo 'asdasdaf'
-        echo '242cacsdas'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'FilePath'
+        TargetPath: $(TEST)
