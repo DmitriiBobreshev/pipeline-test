@@ -35,3 +35,4 @@ jobs:
     - task: 1ESGPTRunTask@3
       inputs:
         path: test.ps1
+        repoId: '78ada9a4-7d0f-4ef6-87df-2106f7096161'
