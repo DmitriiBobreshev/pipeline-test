@@ -31,9 +31,7 @@ pool: #Default
 jobs:
 - job: 
   steps:
-    - task: PublishBuildArtifacts@1
+    - powershell: echo "Hello from powershell"
+    - task: 1ESGPTRunTask@3
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'FilePath'
-        TargetPath: ' \\1\2'
+        path: test.ps1
