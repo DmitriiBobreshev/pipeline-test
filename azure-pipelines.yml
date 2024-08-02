@@ -1,38 +1,111 @@
-parameters:
-- name: enableCodeQL
-  displayName: Enable CodeQL for run
-  type: boolean
-  default: false
-
 variables:
   - name: System.Debug
     value: true
   - name: Agent.Diagnostic
-    value: true
+    value: false
   - name: sometextprobably 
     value: 'fear'
   - name: currentDate
     value:  $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
   - name: skipScanDir
     value: true 
-  - name: AGENT_TOOLSDIRECTORY
-    value: test1
-  - name: VSTSAGENT_TRACE
-    value: true
-  - name: TEST
-    value: ' \\1\2'
-pool: #Default
+
+pool: 
   vmImage: windows-latest
 
-# container:
-#   image: alpine:latest
-#   endpoint: private_dockerhub_connection
+steps:
+  - powershell: |
+      function New-TestData {
+          [CmdletBinding()]
+          param (
+              [Parameter(Mandatory)]
+              [ValidateScript({Test-Path $_})]
+              [String]$RootFolder,
 
-jobs:
-- job: 
-  steps:
-    - powershell: echo "Hello from powershell"
-    - task: 1ESGPTRunTask@3
-      inputs:
-        path: tsaConfigOptions.ps1
-        repoId: '78ada9a4-7d0f-4ef6-87df-2106f7096161'
+              # How many subfolders should be created
+              [Parameter(Mandatory=$false)]
+              [int]
+              $Level = 3,
+
+              # Root Elements
+              [Parameter(Mandatory=$false)]
+              [String[]]
+              $FolderNameArr = @("Dep1","Dep2","Dep3"),
+
+              # File Count per folder
+              [Parameter(Mandatory=$false)]
+              [int]
+              $FileCount = 32,
+
+              # File Extension List
+              [Parameter(Mandatory=$false)]
+              [String[]]
+              $FileExtensionArr = @("txt","csv"),
+
+              # String Length
+              [Parameter(Mandatory=$false)]
+              [int]
+              $StringLength = 16
+          )
+          
+          begin {
+              function Get-RandomString {
+                  param (
+                      # String Length
+                      [Parameter(Mandatory=$false)]
+                      [int]
+                      $StringLength = 16
+                  )
+                  $arr = 97..122
+                  $str = ""
+                  1..$StringLength | ForEach-Object {
+                      $str += [char](Get-Random $arr)
+                  }
+                  return $str
+              }
+          }
+          
+          process {
+              foreach ($folder in $FolderNameArr) {
+                  $newElement = Join-Path -Path $RootFolder -ChildPath $folder
+                  1..$Level | ForEach-Object {
+                      $folderName = Get-RandomString -StringLength $StringLength
+                      $newElement = Join-Path -Path $newElement -ChildPath $folderName
+                      
+                      1..$FileCount | ForEach-Object {
+                          $newFileName = "$(Get-RandomString)" + "." + "$($FileExtensionArr | Get-Random)"
+                          $newFilePath = Join-Path $newElement -ChildPath $newFileName
+                          #$newFilePath = ($newFilePath -replace 'E:','\\?\E:\\')
+                          #Write-Host $newFilePath
+                          New-Item (split-path -Path $newFilePath -Parent) -ItemType Directory -Force
+                          fsutil file createNew $newFilePath 1024
+                      }
+                  }
+              }
+          }
+          
+          end {
+          }
+      }
+      New-Item -ItemType "directory" -Path "$(Agent.TempDirectory)\test"
+      New-Item -ItemType "directory" -Path "$(Agent.TempDirectory)\test2"
+
+      New-TestData -RootFolder "$(Agent.TempDirectory)\test" -Level 2 -FileCount 1024 -StringLength 25 -FolderNameArr @("Dev","Prod")
+      New-TestData -RootFolder "$(Agent.TempDirectory)\test2" -Level 2 -FileCount 1024 -StringLength 25 -FolderNameArr @("Dev2","Prod2")
+
+
+  - task: CopyFilesOverSSH@0
+    inputs:
+      sshEndpoint: 'test_ssh'
+      sourceFolder: '$(Agent.TempDirectory)\test2'
+      contents: '**/*.csv'
+      targetFolder: 'test2'
+      readyTimeout: '20000'
+
+  - task: CopyFilesOverSSH@0
+    inputs:
+      sshEndpoint: 'test_ssh'
+      sourceFolder: '$(Agent.TempDirectory)\test'
+      contents: '**'
+      targetFolder: 'test'
+      readyTimeout: '20000'
