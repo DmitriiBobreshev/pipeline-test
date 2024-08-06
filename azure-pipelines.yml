@@ -14,98 +14,19 @@ pool:
   vmImage: windows-latest
 
 steps:
-  - powershell: |
-      function New-TestData {
-          [CmdletBinding()]
-          param (
-              [Parameter(Mandatory)]
-              [ValidateScript({Test-Path $_})]
-              [String]$RootFolder,
-
-              # How many subfolders should be created
-              [Parameter(Mandatory=$false)]
-              [int]
-              $Level = 3,
-
-              # Root Elements
-              [Parameter(Mandatory=$false)]
-              [String[]]
-              $FolderNameArr = @("Dep1","Dep2","Dep3"),
-
-              # File Count per folder
-              [Parameter(Mandatory=$false)]
-              [int]
-              $FileCount = 32,
-
-              # File Extension List
-              [Parameter(Mandatory=$false)]
-              [String[]]
-              $FileExtensionArr = @("txt","csv"),
-
-              # String Length
-              [Parameter(Mandatory=$false)]
-              [int]
-              $StringLength = 16
-          )
-          
-          begin {
-              function Get-RandomString {
-                  param (
-                      # String Length
-                      [Parameter(Mandatory=$false)]
-                      [int]
-                      $StringLength = 16
-                  )
-                  $arr = 97..122
-                  $str = ""
-                  1..$StringLength | ForEach-Object {
-                      $str += [char](Get-Random $arr)
-                  }
-                  return $str
-              }
-          }
-          
-          process {
-              foreach ($folder in $FolderNameArr) {
-                  $newElement = Join-Path -Path $RootFolder -ChildPath $folder
-                  1..$Level | ForEach-Object {
-                      $folderName = Get-RandomString -StringLength $StringLength
-                      $newElement = Join-Path -Path $newElement -ChildPath $folderName
-                      
-                      1..$FileCount | ForEach-Object {
-                          $newFileName = "$(Get-RandomString)" + "." + "$($FileExtensionArr | Get-Random)"
-                          $newFilePath = Join-Path $newElement -ChildPath $newFileName
-                          #$newFilePath = ($newFilePath -replace 'E:','\\?\E:\\')
-                          #Write-Host $newFilePath
-                          New-Item (split-path -Path $newFilePath -Parent) -ItemType Directory -Force
-                          fsutil file createNew $newFilePath 1024
-                      }
-                  }
-              }
-          }
-          
-          end {
-          }
-      }
-      New-Item -ItemType "directory" -Path "$(Agent.TempDirectory)\test"
-      New-Item -ItemType "directory" -Path "$(Agent.TempDirectory)\test2"
-
-      New-TestData -RootFolder "$(Agent.TempDirectory)\test" -Level 2 -FileCount 1024 -StringLength 25 -FolderNameArr @("Dev","Prod")
-      New-TestData -RootFolder "$(Agent.TempDirectory)\test2" -Level 2 -FileCount 1024 -StringLength 25 -FolderNameArr @("Dev2","Prod2")
-
-
-  - task: CopyFilesOverSSH@0
+  - task: NodeTool@0
+    displayName: Use Node ^18.16.1
     inputs:
-      sshEndpoint: 'test_ssh'
-      sourceFolder: '$(Agent.TempDirectory)\test2'
-      contents: '**/*.csv'
-      targetFolder: 'test2'
-      readyTimeout: '20000'
-
-  - task: CopyFilesOverSSH@0
+      versionSpec: '^18.16.1'
+  - task: Npm@1
+    displayName: Install packages
     inputs:
-      sshEndpoint: 'test_ssh'
-      sourceFolder: '$(Agent.TempDirectory)\test'
-      contents: '**'
-      targetFolder: 'test'
-      readyTimeout: '20000'
+      command: 'custom'
+      workingDir: './react-test'
+      customCommand: 'install --legacy-peer-deps'
+  - task: Npm@1
+    displayName: Run tests
+    inputs:
+      command: 'custom'
+      workingDir: './react-test'
+      customCommand: 'run itest:ci'
