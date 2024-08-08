@@ -14,9 +14,25 @@ pool:
   vmImage: windows-latest
 
 steps:
-  - task: AzureCLI@2
+  - task: NodeTool@0
+    displayName: Use Node ^18.16.1
     inputs:
-      azureSubscription: 'AzureDevOps_test'
-      scriptType: 'ps'
-      scriptLocation: 'inlineScript'
-      inlineScript: 'echo "123"'
+      versionSpec: '^18.16.1'
+  - task: Npm@1
+    displayName: Install packages
+    inputs:
+      command: 'custom'
+      workingDir: './react-test'
+      customCommand: 'install --legacy-peer-deps'
+  - task: Npm@1
+    displayName: Run tests
+    inputs:
+      command: 'custom'
+      workingDir: './react-test'
+      customCommand: 'run itest:start-ci'
+  # - task: AzureCLI@2
+  #   inputs:
+  #     azureSubscription: 'AzureDevOps_test'
+  #     scriptType: 'ps'
+  #     scriptLocation: 'inlineScript'
+  #     inlineScript: 'echo "123"'

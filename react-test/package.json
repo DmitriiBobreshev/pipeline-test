@@ -14,7 +14,8 @@
     "itest:start": "webpack serve --mode development --open",
     "itest:backend": "start-test mockservers http-get://localhost:8085 itest:start",
     "itest:tests": "echo 'Running tests...'",
-    "itest:ci": "cross-env START_SERVER_AND_TEST_INSECURE=1 debug=start-server-and-test start-test itest:backend https-get://localhost:8080 itest:tests"
+    "itest:ci": "cross-env START_SERVER_AND_TEST_INSECURE=1 debug=start-server-and-test start-test itest:backend https-get://localhost:8080 itest:tests",
+    "itest:start-ci": "cross-env START_SERVER_AND_TEST_INSECURE=1 debug=start-server-and-test start-test itest:start https-get://localhost:8080 itest:tests"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
