@@ -30,6 +30,19 @@ steps:
       command: 'custom'
       workingDir: './react-test'
       customCommand: 'run itest:ci'
+  - task: Npm@1
+    displayName: Run tests
+    inputs:
+      command: 'custom'
+      workingDir: './react-test'
+      customCommand: 'run itest:ci'
+  - task: Bash@3
+    displayName: 'Bash@3: Run pipeline script'
+    continueOnError: true
+    inputs:
+        targetType: 'inline'
+        script: npm run itest:ci
+        workingDirectory: './react-test'
   # - task: AzureCLI@2
   #   inputs:
   #     azureSubscription: 'AzureDevOps_test'
