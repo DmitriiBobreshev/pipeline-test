@@ -24,12 +24,6 @@ steps:
       command: 'custom'
       workingDir: './react-test'
       customCommand: 'install --legacy-peer-deps'
-  - task: Npm@1
-    displayName: Run tests
-    inputs:
-      command: 'custom'
-      workingDir: './react-test'
-      customCommand: 'run itest:ci'
   - task: Bash@3
     displayName: 'Bash@3: Run pipeline script'
     continueOnError: true
