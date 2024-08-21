@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "mockservers": "json-server --port 8085 --watch db.json",
-    "itest:start": "webpack serve --mode development --open --hot --port 8080",
+    "itest:start": "cross-env audienceServiceApiBaseUrl=\"http://localhost:8085\" catalogServiceApiBaseUrl=\"http://localhost:8085\" targetingServiceApiBaseUrl=\"http://localhost:8085\" learningPathsServiceApiBaseUrl=\"http://localhost:8085\" contentServiceApiBaseUrl=\"http://localhost:8085\" learnerAdminOperationServiceBaseUrl=\"http://localhost:8085\" learnerServiceApiBaseUrl=\"http://localhost:8085\" assistantApiBaseUrl=\"http://localhost:8085\" isIntegrationTesting=\"true\" baseUrl=\"https://localhost:8080\" webpack serve --mode development --open --hot --port 8080",
     "itest:backend": "start-test mockservers http-get://localhost:8085 itest:start",
     "itest:ci": "cross-env START_SERVER_AND_TEST_INSECURE=1 debug=start-server-and-test start-test itest:backend https-get://localhost:8080 pipeline-complete",
     "pipeline-complete": "echo ✅ Pipeline complete"
