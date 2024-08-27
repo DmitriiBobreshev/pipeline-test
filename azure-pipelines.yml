@@ -32,8 +32,9 @@ steps:
   #       script: npm run itest:ci
   #       workingDirectory: './react-test'
   - pwsh: |
-      $env:HTTP_PROXY="$(VSTS_HTTP_PROXY)"
-      $env:HTTPS_PROXY="$(VSTS_HTTP_PROXY)"
+      $proxy = Get-WebProxy;
+      $env:HTTP_PROXY="$proxy.proxyUrl"
+      $env:HTTPS_PROXY="$proxy.proxyUrl"
       echo "proxy:$env:HTTPS_PROXY"
       az version --debug
       az cloud set -n AzureCloud --debug
