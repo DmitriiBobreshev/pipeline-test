@@ -10,8 +10,8 @@ variables:
   - name: skipScanDir
     value: true 
 
-pool: 
-  vmImage: windows-latest
+pool: Default 
+  # vmImage: windows-latest
 
 steps:
   # - task: NodeTool@0
@@ -36,4 +36,4 @@ steps:
       azureSubscription: 'AzureDevOps_test'
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
-      inlineScript: 'echo "123"'
+      inlineScript: az keyvault secret list
