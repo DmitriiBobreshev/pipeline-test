@@ -36,4 +36,4 @@ steps:
       azureSubscription: 'AzureDevOps_test'
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
-      inlineScript: az keyvault secret list
+      inlineScript: az keyvault create --location westus2 --name TestKeyVault --resource-group edergachev-agent-and-tasks --debug
