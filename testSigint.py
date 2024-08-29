@@ -13,6 +13,6 @@ signal.signal(signal.SIGQUIT, cancelJob)
 signal.signal(signal.SIGTERM, cancelJob)
 
 for i in range(1000):
-    time.sleep(500)
+    time.sleep(1)
     print(i, "job started")
 time.sleep(600)
