@@ -32,6 +32,8 @@ steps:
   #       script: npm run itest:ci
   #       workingDirectory: './react-test'
   - pwsh: |
+      $env:ADAL_PYTHON_SSL_NO_VERIFY = '1'
+      $env:AZURE_CLI_DISABLE_CONNECTION_VERIFICATION = '1'
       $env:HTTP_PROXY="$env:AGENT_PROXYURL"
       $env:HTTPS_PROXY="$env:AGENT_PROXYURL"
       echo "proxy:$env:HTTPS_PROXY"
