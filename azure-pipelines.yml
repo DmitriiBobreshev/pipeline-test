@@ -35,7 +35,7 @@ steps:
 
   - task: UsePythonVersion@0
     inputs:
-      versionSpec: "3.13.0-rc.2"
+      versionSpec: "^3.13.0-0"
       architecture: "x64"
       allowUnstable: true
     displayName: "Use Python 3.13.0-rc.2 x64"
