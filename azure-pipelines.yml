@@ -1,6 +1,6 @@
 variables:
   - name: System.Debug
-    value: true
+    value: false
   - name: Agent.Diagnostic
     value: false
   - name: sometextprobably 
