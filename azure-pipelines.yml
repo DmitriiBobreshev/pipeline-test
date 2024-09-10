@@ -33,9 +33,9 @@ steps:
   #     scriptLocation: 'inlineScript'
   #     inlineScript: az keyvault create --location westus2 --name TestKeyVault --resource-group edergachev-agent-and-tasks --debug
 
-  - task: PythonScript@0
-    displayName: 'Build'
+  - task: UsePythonVersion@0
     inputs:
-      scriptSource: 'filePath'
-      scriptPath: 'testSigint.py'
-      pythonInterpreter: '/usr/bin/python3'
+      versionSpec: "3.13.0-rc.2"
+      architecture: "x64"
+      allowUnstable: true
+    displayName: "Use Python 3.13.0-rc.2 x64"
