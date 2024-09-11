@@ -38,7 +38,7 @@ steps:
       sshEndpoint: 'test_ssh'
       runOptions: 'inline'
       inline: |
-        num = 1
+        num=1
         echo $num
       readyTimeout: '20000'
   - task: UsePythonVersion@0
