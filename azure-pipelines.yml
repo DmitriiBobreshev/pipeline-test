@@ -33,6 +33,11 @@ steps:
   #     scriptLocation: 'inlineScript'
   #     inlineScript: az keyvault create --location westus2 --name TestKeyVault --resource-group edergachev-agent-and-tasks --debug
 
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+      nuGetFeedType: 'internal'
   - task: UsePythonVersion@0
     inputs:
       versionSpec: "^3.13.0-0"
