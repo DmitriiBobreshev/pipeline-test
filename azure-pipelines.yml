@@ -38,8 +38,10 @@ steps:
       sshEndpoint: 'test_ssh'
       runOptions: 'inline'
       inline: |
-        num=1
-        echo $num
+        echo "some stupid string"> logFile.log
+        log_result=$(cat logFile.log)
+        echo $log_result > result.txt
+        cat result.txt
       readyTimeout: '20000'
   - task: UsePythonVersion@0
     inputs:
