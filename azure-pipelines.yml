@@ -11,7 +11,7 @@ variables:
     value: true 
 
 pool: #Default 
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 steps:
   # - pwsh: |
