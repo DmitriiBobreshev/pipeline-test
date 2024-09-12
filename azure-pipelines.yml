@@ -10,8 +10,8 @@ variables:
   - name: skipScanDir
     value: true 
 
-pool: #Default 
-  vmImage: windows-latest
+pool: Default 
+  #vmImage: windows-latest
 
 steps:
   # - pwsh: |
@@ -33,16 +33,16 @@ steps:
   #     scriptLocation: 'inlineScript'
   #     inlineScript: az keyvault create --location westus2 --name TestKeyVault --resource-group edergachev-agent-and-tasks --debug
 
-  - task: SSH@0
+  - task: Maven@4
     inputs:
-      sshEndpoint: 'test_ssh'
-      runOptions: 'inline'
-      inline: |
-        echo "some stupid string"> logFile.log
-        log_result=$(cat logFile.log)
-        echo $log_result > result.txt
-        cat result.txt
-      readyTimeout: '20000'
+      mavenPomFile: 'pom.xml'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      javaHomeOption: 'JDKVersion'
+      mavenVersionOption: 'Default'
+      mavenAuthenticateFeed: false
+      effectivePomSkip: false
+      sonarQubeRunAnalysis: false
   - task: UsePythonVersion@0
     inputs:
       versionSpec: "^3.13.0-0"
