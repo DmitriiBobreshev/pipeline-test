@@ -10,8 +10,8 @@ variables:
   - name: skipScanDir
     value: true 
 
-pool: Default 
-  #vmImage: windows-latest
+pool: #Default 
+  vmImage: windows-latest
 
 steps:
   - task: DotNetCoreCLI@2
