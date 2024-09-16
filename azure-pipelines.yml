@@ -14,35 +14,12 @@ pool: Default
   #vmImage: windows-latest
 
 steps:
-  # - pwsh: |
-  #     $env:ADAL_PYTHON_SSL_NO_VERIFY = '1'
-  #     $env:AZURE_CLI_DISABLE_CONNECTION_VERIFICATION = '1'
-  #     $env:HTTP_PROXY="$env:AGENT_PROXYURL"
-  #     $env:HTTPS_PROXY="$env:AGENT_PROXYURL"
-  #     echo "proxy:$env:HTTPS_PROXY"
-  #     az version --debug
-  #     az cloud set -n AzureCloud --debug
-  #     az login --debug --service-principal -u "eee80ba7-06ed-423d-911f-bf9ca5cb8ad2" --tenant "771d663d-da6c-44bd-bc0a-e9a46bc4bfb6" --allow-no-subscriptions --federated-token "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjdSd2F5dmlYRHFoZnN6MTZSNmxPbXNXWWxTQSIsImtpZCI6IkVEMUMxQUNBRjg5NzBFQTg1RkIzM0Q3QTQ3QTk0RTlBQzU5ODk1MjAifQ.eyJqdGkiOiIxMTYxMjg3Ny02MTIyLTRlOWEtYmUyNS04NjM1ZjdhMWM5NzQiLCJzdWIiOiJzYzovL3YtYm9icmVzaGV2ZC9wbGF5Z3JvdW5kL0F6dXJlRGV2T3BzX3Rlc3QiLCJhdWQiOiJhcGk6Ly9BenVyZUFEVG9rZW5FeGNoYW5nZSIsImlzcyI6Imh0dHBzOi8vdnN0b2tlbi5kZXYuYXp1cmUuY29tLzhlODVmZmRiLWI4N2QtNDMxOS1hODY3LTI1N2Y2ZjU3NzU1NiIsIm5iZiI6MTcyNDc1NzkxOCwiZXhwIjoxNzI0NzU5MTE3LCJpYXQiOjE3MjQ3NTg1MTh9.CElTcyZxV63d3flOWZL7A9vLXSZ_ivF4JZbQDcyENMyIzjH5uA1ptbVwxrt0tbWrAVe1B16ysBQhHhEicQcvvY2TNss6J1jh93qLkmqI1I_S8pgohq7-RLnJo1Eys02FEsQ14rYma_xJvgnVjOcgZtQnsIXw7IBWF9fiZfNplaWuL1q8boeIEwGIw1RhykO8ULc2z2KmDUD6dACfC5vbwKwkVNs2LVZgsNmKOCsGyp-QHeS0PLTVgqeO8G77P2eLoFUtlNbmrKsPQUgjWVKwUgs_N89K7SN-HuyyQKbjf8su4fbI-wiW9AOYTR6iy7if0bDC-YQZPb_fl0uAdCiZsQ"
-  #     az account set --debug --subscription b3d51cea-81f7-426f-90bf-950adeec4e3a
-  #     az keyvault create --location westus2 --name TestKeyVault --resource-group edergachev-agent-and-tasks --debug
-    
-  # - task: AzureCLI@2
-  #   inputs:
-  #     azureSubscription: 'AzureDevOps_test'
-  #     scriptType: 'ps'
-  #     scriptLocation: 'inlineScript'
-  #     inlineScript: az keyvault create --location westus2 --name TestKeyVault --resource-group edergachev-agent-and-tasks --debug
-
-  - task: Maven@4
+  - task: DotNetCoreCLI@2
     inputs:
-      mavenPomFile: 'pom.xml'
-      publishJUnitResults: true
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      javaHomeOption: 'JDKVersion'
-      mavenVersionOption: 'Default'
-      mavenAuthenticateFeed: false
-      effectivePomSkip: false
-      sonarQubeRunAnalysis: false
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+      nuGetFeedType: 'internal'
+
   - task: UsePythonVersion@0
     inputs:
       versionSpec: "^3.13.0-0"
