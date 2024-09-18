@@ -35,5 +35,6 @@ jobs:
     steps: 
       - checkout: self
         clean: true
+        persistCredentials: true
 
       - script: eho "123" 
