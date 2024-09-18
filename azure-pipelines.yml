@@ -13,18 +13,27 @@ variables:
 pool: #Default 
   vmImage: windows-latest
 
-steps:
-  - checkout: self
-    clean: true
-  # - task: DotNetCoreCLI@2
-  #   inputs:
-  #     command: 'push'
-  #     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-  #     nuGetFeedType: 'internal'
+jobs: 
+  - job: Job1
+    steps:
+      - checkout: self
+        clean: true
+      # - task: DotNetCoreCLI@2
+      #   inputs:
+      #     command: 'push'
+      #     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+      #     nuGetFeedType: 'internal'
 
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: "^3.13.0-0"
-      architecture: "x64"
-      allowUnstable: true
-    displayName: "Use Python 3.13.0-rc.2 x64"
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: "^3.13.0-0"
+          architecture: "x64"
+          allowUnstable: true
+        displayName: "Use Python 3.13.0-rc.2 x64"
+  - job: Job2
+    dependsOn: Job1
+    steps: 
+      - checkout: self
+        clean: true
+
+      - script: eho "123" 
