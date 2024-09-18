@@ -1,8 +1,8 @@
 variables:
   - name: System.Debug
-    value: false
+    value: true
   - name: Agent.Diagnostic
-    value: false
+    value: true
   - name: sometextprobably 
     value: 'fear'
   - name: currentDate
@@ -14,11 +14,13 @@ pool: #Default
   vmImage: windows-latest
 
 steps:
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-      nuGetFeedType: 'internal'
+  - checkout: self
+    clean: true
+  # - task: DotNetCoreCLI@2
+  #   inputs:
+  #     command: 'push'
+  #     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+  #     nuGetFeedType: 'internal'
 
   - task: UsePythonVersion@0
     inputs:
