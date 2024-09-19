@@ -22,7 +22,7 @@ jobs:
           runOptions: 'inline'
           interactiveSession: true
           inline: |
-            sudo su - dmybor
+            sudo su - dmybor <<EOF
             echo "example String"> logFile.log
             log_result=$(cat logFile.log)
             echo $log_result > result.txt
