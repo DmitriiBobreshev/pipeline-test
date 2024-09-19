@@ -23,10 +23,9 @@ jobs:
           interactiveSession: true
           inline: |
             sudo su - dmybor <<EOF
-            echo "example String"> logFile.log
-            log_result=$(cat logFile.log)
-            echo $log_result > result.txt
-            cat result.txt
+            test=1
+            echo $test
+            EOF
           readyTimeout: '20000'
 
       - task: UsePythonVersion@0
