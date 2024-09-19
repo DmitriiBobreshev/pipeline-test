@@ -16,13 +16,18 @@ pool: #Default
 jobs: 
   - job: Job1
     steps:
-      - checkout: self
-        clean: true
-      # - task: DotNetCoreCLI@2
-      #   inputs:
-      #     command: 'push'
-      #     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-      #     nuGetFeedType: 'internal'
+      - task: SSH@0
+        inputs:
+          sshEndpoint: 'test_ssh'
+          runOptions: 'inline'
+          interactiveSession: true
+          inline: |
+            sudo su -
+            echo "some stupid string"> logFile.log
+            log_result=$(cat logFile.log)
+            echo $log_result > result.txt
+            cat result.txt
+          readyTimeout: '20000'
 
       - task: UsePythonVersion@0
         inputs:
@@ -30,11 +35,3 @@ jobs:
           architecture: "x64"
           allowUnstable: true
         displayName: "Use Python 3.13.0-rc.2 x64"
-  - job: Job2
-    dependsOn: Job1
-    steps: 
-      - checkout: self
-        clean: true
-        persistCredentials: true
-
-      - script: echo "123" 
