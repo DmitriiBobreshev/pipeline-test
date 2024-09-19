@@ -23,7 +23,7 @@ jobs:
           interactiveSession: true
           inline: |
             sudo su -
-            echo "some stupid string"> logFile.log
+            echo "example String"> logFile.log
             log_result=$(cat logFile.log)
             echo $log_result > result.txt
             cat result.txt
