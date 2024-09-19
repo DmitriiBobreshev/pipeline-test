@@ -23,6 +23,7 @@ jobs:
           interactiveSession: true
           inline: |
             sudo su - dmybor <<EOF
+            whoami
             test=1
             echo $test
             EOF
