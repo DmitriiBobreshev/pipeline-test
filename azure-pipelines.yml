@@ -33,3 +33,4 @@ jobs:
       - pwsh: |
           ls ../..
           ls ..
+          ls ../s
