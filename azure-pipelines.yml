@@ -10,28 +10,23 @@ variables:
   - name: skipScanDir
     value: true 
 
+resources:
+  repositories:
+  - repository: tgBot
+    type: git
+    name: 'test-gh'
+    ref: 'refs/heads/master'
+
 pool: #Default 
   vmImage: windows-latest
 
 jobs: 
   - job: Job1
     steps:
-      - task: SSH@0
-        inputs:
-          sshEndpoint: 'test_ssh'
-          runOptions: 'inline'
-          interactiveSession: true
-          inline: |
-            sudo su - dmybor <<EOF
-            whoami
-            test=1
-            echo $test
-            EOF
-          readyTimeout: '20000'
+    - checkout: self
+      retryCountOnTaskFailure: 3
+      fetchDepth: 1
 
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: "^3.13.0-0"
-          architecture: "x64"
-          allowUnstable: true
-        displayName: "Use Python 3.13.0-rc.2 x64"
+    - checkout: tgBot
+      retryCountOnTaskFailure: 3
+
