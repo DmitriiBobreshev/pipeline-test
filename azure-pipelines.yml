@@ -30,5 +30,6 @@ jobs:
       - checkout: tgBot
         retryCountOnTaskFailure: 1
 
-      - pwsh: ls ../..
-
+      - pwsh: |
+          ls ../..
+          ls ..
