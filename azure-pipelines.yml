@@ -13,9 +13,9 @@ variables:
 resources:
   repositories:
   - repository: tgBot
-    type: git
-    name: 'test-gh'
-    ref: 'refs/heads/master'
+    type: github
+    name: DmyBor/tgBot
+    endpoint: test-gh
 
 pool: #Default 
   vmImage: windows-latest
@@ -23,10 +23,12 @@ pool: #Default
 jobs: 
   - job: Job1
     steps:
-    - checkout: self
-      retryCountOnTaskFailure: 3
-      fetchDepth: 1
+      - checkout: self
+        retryCountOnTaskFailure: 3
+        fetchDepth: 1
 
-    - checkout: tgBot
-      retryCountOnTaskFailure: 3
+      - checkout: tgBot
+        retryCountOnTaskFailure: 1
+
+      - pwsh: ls ../..
 
