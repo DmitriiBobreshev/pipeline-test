@@ -34,22 +34,22 @@ steps:
   - checkout: self
     retryCountOnTaskFailure: 3
     fetchDepth: 1
-  displayName: "Checkout self"
+    displayName: "Checkout self"
 
   #Check that Git functions works Ensure that user will be able to checkout sources to build it with ADO from Git repos (GitHub, private git repos)
   - checkout: tgBot
     retryCountOnTaskFailure: 1
-  displayName: "Checkout github"
+    displayName: "Checkout github"
 
   #Check that the TFS functions work Ensure that user will be able to checkout sources to build it with ADO from TFS repos
   - checkout: playground
     retryCountOnTaskFailure: 1
-  displayName: "Checkout azure"
+    displayName: "Checkout azure"
   
   #Check BitBucket integration Ensure that user will be able to checkout sources from BitBucket server
   - checkout: bitbucket
     retryCountOnTaskFailure: 1
-  displayName: "Checkout bitbucket"
+    displayName: "Checkout bitbucket"
 
   #Run pipeline which executes PowerShell script Ensure that commands will be executed on the target ADO machine
   - pwsh: echo "Test PowerShell from host"
