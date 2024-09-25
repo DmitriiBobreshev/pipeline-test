@@ -1,0 +1,41 @@
+steps:
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish cobertura report'
+  inputs:
+    codeCoverageTool: 'cobertura'
+    summaryFileLocation: 'src/publish-code-coverage-results/coberturaReport/coverage.xml'
+    failIfCoverageEmpty: true
+  retryCountOnTaskFailure: 3
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish cobertura report with path with spaces'
+  inputs:
+    codeCoverageTool: 'cobertura'
+    summaryFileLocation: 'src/publish-code-coverage-results/cobertura report/coverage.xml'
+    failIfCoverageEmpty: true
+  retryCountOnTaskFailure: 3
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish jacoco report'
+  inputs:
+    codeCoverageTool: 'jacoco'
+    summaryFileLocation: 'src/publish-code-coverage-results/jacocoReport/jacoco.xml'
+    failIfCoverageEmpty: true
+  retryCountOnTaskFailure: 3
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish jacoco report with wildcard in path'
+  inputs:
+    codeCoverageTool: 'jacoco'
+    summaryFileLocation: 'src/publish-code-coverage-results/**/jacoco.xml'
+    failIfCoverageEmpty: true
+  retryCountOnTaskFailure: 3
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish jacoco report; autogenerate HTML'
+  inputs:
+    codeCoverageTool: 'jacoco'
+    summaryFileLocation: 'src/publish-code-coverage-results/jacocoReport/jacoco.xml'
+    pathToSources: 'src/publish-code-coverage-results/src/main/java'
+    failIfCoverageEmpty: true
+  retryCountOnTaskFailure: 3

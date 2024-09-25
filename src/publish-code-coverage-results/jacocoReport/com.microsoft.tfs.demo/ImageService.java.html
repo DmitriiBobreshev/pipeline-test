@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Deep Space Bootcamp Sample App</a> &gt; <a href="index.source.html" class="el_package">com.microsoft.tfs.demo</a> &gt; <span class="el_source">ImageService.java</span></div><h1>ImageService.java</h1><pre class="source lang-java linenums">/**
+ * ------------------------------------------ START OF LICENSE -----------------------------------------
+ *
+ * Deep-Space
+ *
+ * Copyright (c) Microsoft Corporation
+ *
+ * All rights reserved.
+ *
+ * MIT License
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the &quot;&quot;Software&quot;&quot;), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+ * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * ----------------------------------------------- END OF LICENSE ------------------------------------------
+ */
+package com.microsoft.tfs.demo;
+
+import com.microsoft.applicationinsights.TelemetryClient;
+//import com.microsoft.applicationinsights.internal.schemav2.MetricData;
+import com.microsoft.applicationinsights.telemetry.RequestTelemetry;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import java.io.File;
+import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
+
+@Path(&quot;/images&quot;)
+<span class="fc" id="L46">public class ImageService {</span>
+
+    private final static List&lt;Image&gt; PLANETARY;
+<span class="fc" id="L49">    private final static TelemetryClient TELEMETRY_CLIENT = new TelemetryClient();</span>
+    static {
+<span class="fc" id="L51">        Date begin = new Date();</span>
+<span class="fc" id="L52">        PLANETARY = new ArrayList&lt;Image&gt;();</span>
+
+        //http://www.solarsystemscope.com/nexus/resources/planet_images/
+        //Content distributed under CC Attribution license
+        //http://creativecommons.org/licenses/by/3.0/
+
+<span class="fc" id="L58">        Image sun = new Image();</span>
+<span class="fc" id="L59">        sun.setSrc(&quot;./images/sun.png&quot;);</span>
+<span class="fc" id="L60">        sun.setWidth(660);</span>
+<span class="fc" id="L61">        sun.setHeight(660);</span>
+<span class="fc" id="L62">        PLANETARY.add(sun);</span>
+
+        // Uncomment the following section of code so Earth appears
+        // and remember to update the unit tests in &quot;ImageServiceTest.java&quot;
+/*
+        final Image earth = new Image();
+        earth.setSrc(&quot;./images/earth.png&quot;);
+        earth.setWidth(512);
+        earth.setHeight(512);
+        PLANETARY.add(earth);
+*/
+
+<span class="fc" id="L74">        final Image jupiter = new Image();</span>
+<span class="fc" id="L75">        jupiter.setSrc(&quot;./images/jupiter.png&quot;);</span>
+<span class="fc" id="L76">        jupiter.setWidth(512);</span>
+<span class="fc" id="L77">        jupiter.setHeight(512);</span>
+<span class="fc" id="L78">        PLANETARY.add(jupiter);</span>
+
+<span class="fc" id="L80">        final Image saturn = new Image();</span>
+<span class="fc" id="L81">        saturn.setSrc(&quot;./images/saturn.png&quot;);</span>
+<span class="fc" id="L82">        saturn.setWidth(1206);</span>
+<span class="fc" id="L83">        saturn.setHeight(690);</span>
+<span class="fc" id="L84">        PLANETARY.add(saturn);</span>
+
+<span class="fc" id="L86">        final Date now = new Date();</span>
+<span class="fc" id="L87">        final double duration = now.getTime() - begin.getTime();</span>
+<span class="fc" id="L88">        TELEMETRY_CLIENT.trackMetric(&quot;imageService_initialization&quot;, duration);</span>
+<span class="fc" id="L89">    }</span>
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;Image&gt; getImages() {
+<span class="fc" id="L94">        final Date begin = new Date();</span>
+
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        for (final Image i : PLANETARY) {</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">            if (!new File(i.getSrc()).exists()) {</span>
+<span class="fc" id="L98">                TELEMETRY_CLIENT.trackException(new RuntimeException(&quot;Did not find any images for &quot; + i.getSrc()));</span>
+            }
+<span class="fc" id="L100">        }</span>
+
+<span class="fc" id="L102">        final Date now = new Date();</span>
+<span class="fc" id="L103">        final long duration = now.getTime() - begin.getTime();</span>
+<span class="fc" id="L104">        final RequestTelemetry telemetryData = new RequestTelemetry(&quot;/images&quot;, new Date(), duration, &quot;200&quot;, true);</span>
+<span class="fc" id="L105">        TELEMETRY_CLIENT.trackRequest(telemetryData);</span>
+
+<span class="fc" id="L107">        return PLANETARY;</span>
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path(&quot;{name}&quot;)
+    public Image getByName(@PathParam(&quot;name&quot;) final String name) {
+<span class="fc" id="L114">        final Date begin = new Date();</span>
+
+<span class="fc" id="L116">        final String imageSrc = String.format(&quot;/%s.png&quot;, name.toLowerCase());</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        for (final Image i : PLANETARY) {</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">            if (i.getSrc().endsWith(imageSrc)) {</span>
+<span class="fc" id="L119">                final Date now = new Date();</span>
+<span class="fc" id="L120">                final long duration = now.getTime() - begin.getTime();</span>
+<span class="fc" id="L121">                final RequestTelemetry telemetryData = new RequestTelemetry(&quot;/images/{name}&quot;, new Date(), duration, &quot;200&quot;, true);</span>
+<span class="fc" id="L122">                TELEMETRY_CLIENT.trackRequest(telemetryData);</span>
+<span class="fc" id="L123">                return i;</span>
+            }
+<span class="fc" id="L125">        }</span>
+<span class="fc" id="L126">        TELEMETRY_CLIENT.trackException(new RuntimeException(&quot;Did not find any images matching the name.&quot;));</span>
+<span class="fc" id="L127">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -16,21 +16,64 @@ resources:
     type: github
     name: DmyBor/tgBot
     endpoint: test-gh
+  - repository: playground
+    type: git
+    name: playground
+  - repository: bitbucket
+    type: bitbucket
+    name: bobreshevd/test
+
 
 pool: #Default 
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 
-jobs: 
-  - job: Job1
-    steps:
-      - checkout: self
-        retryCountOnTaskFailure: 3
-        fetchDepth: 1
+#Run pipelines that use docker containers to build Ensure that Agent works with containers in the right way
+container: ubuntu:18.04
 
-      - checkout: tgBot
-        retryCountOnTaskFailure: 1
+steps:
+  - checkout: self
+    retryCountOnTaskFailure: 3
+    fetchDepth: 1
+  displayName: "Checkout self"
 
-      - pwsh: |
-          ls ../..
-          ls ..
-          ls ../s
+  #Check that Git functions works Ensure that user will be able to checkout sources to build it with ADO from Git repos (GitHub, private git repos)
+  - checkout: tgBot
+    retryCountOnTaskFailure: 1
+  displayName: "Checkout github"
+
+  #Check that the TFS functions work Ensure that user will be able to checkout sources to build it with ADO from TFS repos
+  - checkout: playground
+    retryCountOnTaskFailure: 1
+  displayName: "Checkout azure"
+  
+  #Check BitBucket integration Ensure that user will be able to checkout sources from BitBucket server
+  - checkout: bitbucket
+    retryCountOnTaskFailure: 1
+  displayName: "Checkout bitbucket"
+
+  #Run pipeline which executes PowerShell script Ensure that commands will be executed on the target ADO machine
+  - pwsh: echo "Test PowerShell from host"
+    displayName: "PowerShell script from host"
+    target: host
+
+  #Run pipeline which executes a shell script Ensure that shell will be executed on the target ADO machine
+  - script: echo "Hello from script"
+    displayName: "Shell script"
+
+  #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
+  - task: PublishCodeCoverageResults@2
+    displayName: Publish cobertura report
+    inputs:
+      summaryFileLocation: src/publish-code-coverage-results/coberturaReport/coverage.xml
+      failIfCoverageEmpty: true
+    env:
+      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
+    target: container
+
+  #Run pipeline and check that artifacts are published Ensure that as a result, users will be able to publish artifacts
+  - task: PublishPipelineArtifact@1
+    displayName: Publish pipeline artifact
+    inputs:
+      targetPath: templates
+      artifact: nested-folders-1
+      publishLocation: pipeline

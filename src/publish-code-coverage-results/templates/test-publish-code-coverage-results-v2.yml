@@ -1,0 +1,15 @@
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: sdk
+    version: 8.x
+  target: container
+
+- task: PublishCodeCoverageResults@2
+  displayName: Publish cobertura report
+  inputs:
+    summaryFileLocation: src/publish-code-coverage-results/coberturaReport/coverage.xml
+    failIfCoverageEmpty: true
+  env:
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
+  target: container
