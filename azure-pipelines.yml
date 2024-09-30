@@ -65,7 +65,7 @@ steps:
   - task: PublishCodeCoverageResults@2
     displayName: Publish cobertura report
     inputs:
-      summaryFileLocation: src/publish-code-coverage-results/coberturaReport/coverage.xml
+      summaryFileLocation: $(Build.Repository.LocalPath)/src/publish-code-coverage-results/coberturaReport/coverage.xml
       failIfCoverageEmpty: true
     env:
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
