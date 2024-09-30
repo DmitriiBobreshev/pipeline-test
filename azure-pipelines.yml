@@ -62,6 +62,9 @@ steps:
     displayName: "Shell script"
 
   - script: |
+      ls $(Build.Repository.LocalPath)
+      ls $(Build.Repository.LocalPath)/src
+      ls $(Build.Repository.LocalPath)/src/publish-code-coverage-results
       ls $(Build.Repository.LocalPath)/src/publish-code-coverage-results/coberturaReport
 
   #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
