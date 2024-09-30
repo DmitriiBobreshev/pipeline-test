@@ -63,15 +63,15 @@ steps:
 
   - script: |
       ls $(Build.Repository.LocalPath)
-      ls $(Build.Repository.LocalPath)/src
-      ls $(Build.Repository.LocalPath)/src/publish-code-coverage-results
-      ls $(Build.Repository.LocalPath)/src/publish-code-coverage-results/coberturaReport
+      ls $(Build.Repository.LocalPath)/pipeline-test/src
+      ls $(Build.Repository.LocalPath)/pipeline-test/src/publish-code-coverage-results
+      ls $(Build.Repository.LocalPath)/pipeline-test/src/publish-code-coverage-results/coberturaReport
 
   #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
   - task: PublishCodeCoverageResults@2
     displayName: Publish cobertura report
     inputs:
-      summaryFileLocation: coberturaReport/coverage.xml
+      summaryFileLocation: $(Build.Repository.LocalPath)/pipeline-test/src/publish-code-coverage-results/coberturaReport/coverage.xml
       failIfCoverageEmpty: true
     env:
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
@@ -80,6 +80,6 @@ steps:
   - task: PublishPipelineArtifact@1
     displayName: Publish pipeline artifact
     inputs:
-      targetPath: templates
+      targetPath: $(Build.Repository.LocalPath)/pipeline-test/templates
       artifact: nested-folders-1
       publishLocation: pipeline
