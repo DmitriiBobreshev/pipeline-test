@@ -61,11 +61,14 @@ steps:
   - script: echo "Hello from script"
     displayName: "Shell script"
 
+  - script: |
+      ls $(Build.Repository.LocalPath)/src/publish-code-coverage-results/coberturaReport
+
   #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
   - task: PublishCodeCoverageResults@2
     displayName: Publish cobertura report
     inputs:
-      summaryFileLocation: $(Build.Repository.LocalPath)/src/publish-code-coverage-results/coberturaReport/coverage.xml
+      summaryFileLocation: coberturaReport/coverage.xml
       failIfCoverageEmpty: true
     env:
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
