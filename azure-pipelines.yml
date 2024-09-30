@@ -18,6 +18,7 @@ resources:
     endpoint: test-gh
   - repository: playground
     type: git
+    name: playground/playground
   - repository: bitbucket
     type: bitbucket
     name: bobreshevd/test
