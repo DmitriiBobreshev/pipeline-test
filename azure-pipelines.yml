@@ -61,12 +61,6 @@ steps:
   - script: echo "Hello from script"
     displayName: "Shell script"
 
-  - script: |
-      ls $(Build.Repository.LocalPath)
-      ls $(Build.Repository.LocalPath)/pipeline-test/src
-      ls $(Build.Repository.LocalPath)/pipeline-test/src/publish-code-coverage-results
-      ls $(Build.Repository.LocalPath)/pipeline-test/src/publish-code-coverage-results/coberturaReport
-
   #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
   - task: PublishCodeCoverageResults@2
     displayName: Publish cobertura report
