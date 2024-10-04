@@ -47,7 +47,7 @@ steps:
       chmod +x $script_path
       # Execute the script to install the specified version and installation directory
       $script_path --version $version --install-dir $install_dir
-      echo "$version" > "$(Agent.ToolsDirectory)/dotnet/sdk/${version}.completed"
+      echo "$version" > "$(Agent.ToolsDirectory)/dotnet/sdk/${version}.complete"
       # Optionally, verify the installation
       ls $install_dir
       echo '======'
