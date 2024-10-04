@@ -51,7 +51,7 @@ steps:
       # Optionally, verify the installation
       ls $install_dir
       echo '======'
-      ls "$(Agent.ToolsDirectory)/dotnet/sdk/
+      ls "$(Agent.ToolsDirectory)/dotnet/sdk/"
 
       dotnet --list-sdks
   - task: UseDotNet@2
