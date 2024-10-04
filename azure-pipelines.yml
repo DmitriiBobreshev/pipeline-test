@@ -32,12 +32,32 @@ pool: #Default
 # container: ubuntu:20.04
 
 steps:
+
+  - bash: |
+      #!/bin/bash
+      # Default values
+      version="8.0.107"   # Default .NET version
+      install_dir="$(Agent.ToolsDirectory)/dotnet"  # Default installation directory
+      # URL for the dotnet-install.sh script
+      script_url="https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh"
+      script_path="$(Agent.TempDirectory)/dotnet-install.sh"
+      # Download dotnet-install.sh
+      curl -o $script_path $script_url
+      # Make the script executable
+      chmod +x $script_path
+      # Execute the script to install the specified version and installation directory
+      $script_path --version $version --install-dir $install_dir
+      echo "$version" > "$(Agent.ToolsDirectory)/dotnet/sdk/${version}.completed"
+      # Optionally, verify the installation
+      ls $install_dir
+      echo '======'
+      ls "$(Agent.ToolsDirectory)/dotnet/sdk/
+
+      dotnet --list-sdks
   - task: UseDotNet@2
     inputs:
       packageType: 'sdk'
-      version: '3.1.426'
-    env:
-      AGENT_USE_NODE10: true
+      version: "8.0.107"
   # - checkout: self
   #   retryCountOnTaskFailure: 3
   #   fetchDepth: 1
