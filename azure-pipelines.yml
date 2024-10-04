@@ -25,8 +25,8 @@ variables:
 #     endpoint: DmyBor
 
 
-pool: Default 
-  # vmImage: ubuntu-latest
+pool: #Default 
+  vmImage: ubuntu-latest
 
 #Run pipelines that use docker containers to build Ensure that Agent works with containers in the right way
 # container: ubuntu:20.04
