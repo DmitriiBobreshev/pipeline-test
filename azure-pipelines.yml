@@ -69,6 +69,7 @@ steps:
       testResultsFiles: 'nunit-basic.xml'
       searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
       testRunTitle: 'NUnit results'
+    target: host
 
   #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
   - task: PublishCodeCoverageResults@2
@@ -79,7 +80,8 @@ steps:
       failIfCoverageEmpty: true
       reportDirectory: '$(Build.Repository.LocalPath)/pipeline-test/src/publish-code-coverage-results/coberturaReport/'
     retryCountOnTaskFailure: 3
-
+  target: host
+  
   #Run pipeline and check that artifacts are published Ensure that as a result, users will be able to publish artifacts
   - task: PublishPipelineArtifact@1
     displayName: Publish pipeline artifact
