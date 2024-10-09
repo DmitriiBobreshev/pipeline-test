@@ -62,13 +62,25 @@ steps:
     displayName: "Shell script"
 
   #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
-  - task: PublishCodeCoverageResults@2
-    displayName: Publish cobertura report
+  - task: PublishTestResults@2
+    displayName: 'Check failed task when test files not found'
+    continueOnError: true 
     inputs:
-      summaryFileLocation: $(Build.Repository.LocalPath)/pipeline-test/src/publish-code-coverage-results/coberturaReport/coverage.xml
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'junit.xml'
+      searchFolder: '$(Build.Repository.LocalPath)/pipeline-test/src/publishtestresults/testresults🧑🏽‍💻'
+      failTaskOnMissingResultsFile: true
+      failTaskOnFailureToPublishResults: true
+      testRunTitle: 'JUnit results'
+
+  #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish cobertura report'
+    inputs:
+      codeCoverageTool: 'cobertura'
+      summaryFileLocation: '$(Build.Repository.LocalPath)/pipeline-test/src/publish-code-coverage-results/coberturaReport/coverage.xml'
       failIfCoverageEmpty: true
-    env:
-      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
+    retryCountOnTaskFailure: 3
 
   #Run pipeline and check that artifacts are published Ensure that as a result, users will be able to publish artifacts
   - task: PublishPipelineArtifact@1
