@@ -10,7 +10,7 @@ steps:
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: 'junit-basic.xml'
-      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults🧑🏽‍💻'
       testRunTitle: 'JUnit results'
   
   - task: PublishTestResults@2
@@ -18,7 +18,7 @@ steps:
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: 'junit-*.xml'
-      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults🧑🏽‍💻'
       mergeTestResults: true
       testRunTitle: 'JUnit Merge results'
   
@@ -27,7 +27,7 @@ steps:
     inputs:
       testResultsFormat: 'NUnit'
       testResultsFiles: 'nunit-basic.xml'
-      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults🧑🏽‍💻'
       testRunTitle: 'NUnit results'
   
   - task: PublishTestResults@2
@@ -35,7 +35,7 @@ steps:
     inputs:
       testResultsFormat: 'XUnit'
       testResultsFiles: 'xunit-basic.xml'
-      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults🧑🏽‍💻'
       testRunTitle: 'XUnit results'
   
   - task: PublishTestResults@2
@@ -43,8 +43,10 @@ steps:
     inputs:
       testResultsFormat: 'VSTest'
       testResultsFiles: 'vstest-basic.trx'
-      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults🧑🏽‍💻'
       testRunTitle: 'VSTest results'
+      buildPlatform: 'x64'
+      buildConfiguration: debug
 
   - task: PublishTestResults@2
     displayName: 'Check failed task on failed test'
@@ -52,14 +54,15 @@ steps:
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: 'junit-basic.xml'
-      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults🧑🏽‍💻'
       failTaskOnFailedTests: true
       publishRunAttachments: false
       testRunTitle: 'JUnit results'
 
   - powershell: |
       Write-Host "##vso[task.logissue type=error;]Previous task should failed, but it didn't."
-    condition: succeeded()
+      exit 1;
+    condition: ne(variables['Agent.JobStatus'], 'SucceededWithIssues')
     displayName: 'Fail if the previous task succeeded'
 
   - task: PublishTestResults@2
@@ -68,12 +71,13 @@ steps:
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: 'junit.xml'
-      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults🧑🏽‍💻'
       failTaskOnMissingResultsFile: true
       failTaskOnFailureToPublishResults: true
       testRunTitle: 'JUnit results'
 
   - powershell: |
       Write-Host "##vso[task.logissue type=error;]Previous task should failed, but it didn't."
-    condition: succeeded()
+      exit 1;
+    condition: ne(variables['Agent.JobStatus'], 'SucceededWithIssues')
     displayName: 'Fail if the previous task succeeded'
