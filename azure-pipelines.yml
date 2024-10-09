@@ -63,12 +63,12 @@ steps:
 
   #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
   - task: PublishTestResults@2
-    displayName: 'XUnit Base results'
+    displayName: 'NUnit Base results'
     inputs:
-      testResultsFormat: 'XUnit'
-      testResultsFiles: 'xunit-basic.xml'
-      searchFolder: '$(Build.Repository.LocalPath)/pipeline-test/src/publishtestresults/testresults'
-      testRunTitle: 'XUnit results'
+      testResultsFormat: 'NUnit'
+      testResultsFiles: 'nunit-basic.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      testRunTitle: 'NUnit results'
 
   #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
   - task: PublishCodeCoverageResults@2
