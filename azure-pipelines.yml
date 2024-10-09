@@ -67,7 +67,7 @@ steps:
     inputs:
       testResultsFormat: 'NUnit'
       testResultsFiles: 'nunit-basic.xml'
-      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults'
+      searchFolder: '$(Build.Repository.LocalPath)/pipeline-test/src/publishtestresults/testresults'
       testRunTitle: 'NUnit results'
     target: host
 
