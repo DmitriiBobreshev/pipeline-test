@@ -63,15 +63,14 @@ steps:
 
   #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
   - task: PublishTestResults@2
-    displayName: 'Check failed task when test files not found'
-    continueOnError: true 
+    displayName: 'VSTest Base results'
     inputs:
-      testResultsFormat: 'JUnit'
-      testResultsFiles: 'junit.xml'
-      searchFolder: '$(Build.Repository.LocalPath)/pipeline-test/src/publishtestresults/testresults🧑🏽‍💻'
-      failTaskOnMissingResultsFile: true
-      failTaskOnFailureToPublishResults: true
-      testRunTitle: 'JUnit results'
+      testResultsFormat: 'VSTest'
+      testResultsFiles: 'vstest-basic.trx'
+      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults🧑🏽‍💻'
+      testRunTitle: 'VSTest results'
+      buildPlatform: 'x64'
+      buildConfiguration: debug
 
   #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
   - task: PublishCodeCoverageResults@1
@@ -80,6 +79,7 @@ steps:
       codeCoverageTool: 'cobertura'
       summaryFileLocation: '$(Build.Repository.LocalPath)/pipeline-test/src/publish-code-coverage-results/coberturaReport/coverage.xml'
       failIfCoverageEmpty: true
+      reportDirectory: '$(Build.Repository.LocalPath)/pipeline-test/src/publish-code-coverage-results/coberturaReport/'
     retryCountOnTaskFailure: 3
 
   #Run pipeline and check that artifacts are published Ensure that as a result, users will be able to publish artifacts
