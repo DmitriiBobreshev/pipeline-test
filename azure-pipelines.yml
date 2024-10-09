@@ -67,7 +67,7 @@ steps:
     inputs:
       testResultsFormat: 'XUnit'
       testResultsFiles: 'xunit-basic.xml'
-      searchFolder: '$(System.DefaultWorkingDirectory)/src/publishtestresults/testresults🧑🏽‍💻'
+      searchFolder: '$(Build.Repository.LocalPath)/pipeline-test/src/publishtestresults/testresults🧑🏽‍💻'
       testRunTitle: 'XUnit results'
 
   #Run pipeline which publishes test results Ensure that test results & coverage data are visible in the ADO portal
