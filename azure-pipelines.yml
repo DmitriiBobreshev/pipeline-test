@@ -10,19 +10,19 @@ variables:
   - name: skipScanDir
     value: true 
 
-resources:
-  repositories:
-  - repository: tgBot
-    type: github
-    name: DmyBor/tgBot
-    endpoint: test-gh
-  - repository: playground
-    type: git
-    name: playground/playground
-  - repository: bitbucket
-    type: bitbucket
-    name: bobreshevd/test
-    endpoint: DmyBor
+# resources:
+#   repositories:
+#   - repository: tgBot
+#     type: github
+#     name: DmyBor/tgBot
+#     endpoint: test-gh
+#   - repository: playground
+#     type: git
+#     name: playground/playground
+#   - repository: bitbucket
+#     type: bitbucket
+#     name: bobreshevd/test
+#     endpoint: DmyBor
 
 
 pool: #Default 
@@ -32,7 +32,18 @@ pool: #Default
 # container: ubuntu:20.04
 
 steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'
+      addToPath: true
+      architecture: 'x64'
+      suppressGitHubTokenWarning: true
   
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '2.x'
+      addToPath: true
+      architecture: 'x64'
   # - checkout: self
   #   retryCountOnTaskFailure: 3
   #   fetchDepth: 1
