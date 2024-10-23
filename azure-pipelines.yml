@@ -29,16 +29,14 @@ pool: #Default
   vmImage: ubuntu-latest
 
 #Run pipelines that use docker containers to build Ensure that Agent works with containers in the right way
-container: ubuntu@sha256:2e863c44b718727c860746568e1d54afd13b2fa71b160f5cd9058fc436217b30
+# container: ubuntu@sha256:2e863c44b718727c860746568e1d54afd13b2fa71b160f5cd9058fc436217b30
 
 steps:
-  - task: AzurePowerShell@5
+  - task: NuGetCommand@2
     inputs:
-      azureSubscription: 'AzureDevOps_test'
-      ScriptType: 'InlineScript'
-      Inline: 'echo ''123'''
-      errorActionPreference: 'continue'
-      azurePowerShellVersion: 'LatestVersion'
+      command: 'restore'
+      restoreSolution: '**/*.sln'
+      feedsToUse: 'select'
   # - checkout: self
   #   retryCountOnTaskFailure: 3
   #   fetchDepth: 1
